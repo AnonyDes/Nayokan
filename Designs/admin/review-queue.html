@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Review queue · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .rq-card {
+    background: var(--panel); border: 1px solid var(--line-2);
+    border-radius: var(--radius-lg); padding: 20px 22px;
+    margin-bottom: 12px;
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
+    transition: all var(--dur-fast);
+  }
+  .rq-card:hover { border-color: var(--line-strong); transform: translateY(-1px); }
+  .rq-card__type {
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.14em;
+    color: var(--text-3); text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px;
+  }
+  .rq-card__title { font-family: var(--f-head); font-weight: 700; font-size: 18px; letter-spacing: -0.015em; line-height: 1.25; }
+  .rq-card__excerpt { color: var(--text-2); font-size: 13.5px; margin-top: 6px; line-height: 1.5; max-width: 78ch; }
+  .rq-card__meta { display: flex; gap: 20px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; flex-wrap: wrap; }
+  .rq-card__meta strong { color: var(--ink); font-family: var(--f-sans); font-size: 12px; letter-spacing: 0; font-weight: 600; }
+  .rq-card__actions { display: flex; flex-direction: column; gap: 6px; align-items: stretch; min-width: 160px; }
+  .rq-card__aging { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--warn-ink); text-transform: uppercase; text-align: right; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ H · 01 · Governance · Review queue</div>
+          <h1 class="ax-page__title">Review queue</h1>
+          <p class="ax-page__lede">Content awaiting your review. Only items assigned to you or flagged as leadership-review appear here. Older items are highlighted.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Sort · oldest first</button>
+          <button class="ax-btn ax-btn--soft">My queue</button>
+        </div>
+      </div>
+
+      <div class="ax-notice ax-notice--warn" style="margin-bottom: 20px;">
+        <svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg>
+        <div>
+          <div class="ax-notice__title">4 items assigned to you · 2 older than 72h</div>
+          Items in review for more than 72 hours are surfaced to leadership. Please review or reassign to avoid blocking authors.
+        </div>
+      </div>
+
+      <div class="rq-card">
+        <div>
+          <div class="rq-card__type"><span class="ax-pill ax-pill--dark">Article</span> Submitted by <strong style="color: var(--ink);">John Bekolo</strong> · assigned to you</div>
+          <div class="rq-card__title">Building productive capability: why Cameroon needs a vocational renaissance</div>
+          <div class="rq-card__excerpt">A field-note on how vocational training becomes the backbone of a productive economy — and what happens when we treat it as strategic infrastructure.</div>
+          <div class="rq-card__meta">
+            <span>World <strong>VTI</strong></span>
+            <span>Words <strong>1,024</strong></span>
+            <span>Waiting <strong>22h</strong></span>
+            <span>SEO <strong style="color: var(--warn-ink);">Needs work</strong></span>
+          </div>
+        </div>
+        <div class="rq-card__actions">
+          <div class="rq-card__aging">22h · normal</div>
+          <a href="article-editor.html" class="ax-btn ax-btn--primary" style="justify-content: center;">Open for review</a>
+          <button class="ax-btn ax-btn--soft" style="justify-content: center;">Reassign</button>
+        </div>
+      </div>
+
+      <div class="rq-card">
+        <div>
+          <div class="rq-card__type"><span class="ax-pill ax-pill--dark">Impact metric</span> Submitted by <strong style="color: var(--ink);">Maria Ndongo</strong></div>
+          <div class="rq-card__title">People trained · 2025</div>
+          <div class="rq-card__excerpt">Value 240 · Missing evidence. Verification chain incomplete — cannot be approved until source documentation is attached.</div>
+          <div class="rq-card__meta">
+            <span>World <strong>VTI</strong></span>
+            <span>Value <strong>240 people</strong></span>
+            <span>Waiting <strong>4 days</strong></span>
+            <span>Evidence <strong style="color: var(--danger-ink);">Missing</strong></span>
+          </div>
+        </div>
+        <div class="rq-card__actions">
+          <div class="rq-card__aging" style="color: var(--danger-ink);">4 days · stale</div>
+          <a href="metric-editor.html" class="ax-btn ax-btn--primary" style="justify-content: center;">Open for review</a>
+          <button class="ax-btn ax-btn--soft" style="justify-content: center;">Request evidence</button>
+        </div>
+      </div>
+
+      <div class="rq-card">
+        <div>
+          <div class="rq-card__type"><span class="ax-pill ax-pill--dark">Programme</span> Submitted by <strong style="color: var(--ink);">John Bekolo</strong></div>
+          <div class="rq-card__title">Agri-processing Cluster · Cohort 4</div>
+          <div class="rq-card__excerpt">Programme draft ready for review. Application deadline still missing — programme cannot open publicly until this is set.</div>
+          <div class="rq-card__meta">
+            <span>World <strong>VTI</strong></span>
+            <span>Duration <strong>18 months</strong></span>
+            <span>Waiting <strong>3 days</strong></span>
+            <span>Fields <strong style="color: var(--warn-ink);">1 missing</strong></span>
+          </div>
+        </div>
+        <div class="rq-card__actions">
+          <div class="rq-card__aging" style="color: var(--danger-ink);">3 days · stale</div>
+          <a href="programme-editor.html" class="ax-btn ax-btn--primary" style="justify-content: center;">Open for review</a>
+          <button class="ax-btn ax-btn--soft" style="justify-content: center;">Request changes</button>
+        </div>
+      </div>
+
+      <div class="rq-card">
+        <div>
+          <div class="rq-card__type"><span class="ax-pill ax-pill--dark">Story</span> Submitted by <strong style="color: var(--ink);">Aïssa Tchoumi</strong></div>
+          <div class="rq-card__title">Cohort 4 — welcoming our newest learners</div>
+          <div class="rq-card__excerpt">A photo essay following the first two weeks of Cohort 4. Ready for approval — scheduled to publish Friday 26 Sept.</div>
+          <div class="rq-card__meta">
+            <span>World <strong>VTI</strong></span>
+            <span>Media <strong>12 images</strong></span>
+            <span>Waiting <strong>1h</strong></span>
+            <span>Publishing <strong>Scheduled</strong></span>
+          </div>
+        </div>
+        <div class="rq-card__actions">
+          <div class="rq-card__aging" style="color: var(--success-ink);">1h · fresh</div>
+          <a href="content-review.html" class="ax-btn ax-btn--primary" style="justify-content: center;">Open for review</a>
+          <button class="ax-btn ax-btn--accent" style="justify-content: center;">Approve now</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'review-queue',crumbs:[{label:'Governance'},{label:'Review queue'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

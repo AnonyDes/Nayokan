@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UX States & Components — Nayokan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Reusable UX state library — forms, content, interactive UI, navigation, listings and modals for the Nayokan digital ecosystem.">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/worlds.css">
+<link rel="stylesheet" href="styles/corporate.css">
+<link rel="stylesheet" href="styles/phase3b.css">
+</head>
+<body data-screen-label="States & Components">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link">What we do</a>
+      <a href="vti.html" class="nav-link">VTI</a>
+      <a href="startup-centre.html" class="nav-link">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link">Hospitality</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="sub-hero">
+  <div class="sub-hero-inner">
+    <div class="sub-hero-meta">
+      <div class="crumbs">
+        <a href="index.html">Nayokan</a><span class="sep">/</span>
+        <a href="handoff.html">Handoff</a><span class="sep">/</span>
+        <span class="current">States & Components</span>
+      </div>
+      <span class="sec">§ Design system · Phase 3B</span>
+      <span class="ref">/design-system/states</span>
+    </div>
+    <div class="sub-hero-body">
+      <h1>A reusable <em>state</em> library.</h1>
+      <p class="lede">
+        Not a component catalogue for its own sake — the states below are the working
+        vocabulary Nayokan uses across every screen. Forms, content, interactive UI,
+        navigation, listings and modals.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <!-- BUTTONS -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 01 — Buttons</span>
+          <h3>Three primary variants.<br>Five state overlays.</h3>
+          <p>Ink-primary, accent-green, ghost-outline. Each button has default, hover, active, disabled and keyboard-focus states.</p>
+        </div>
+        <div>
+          <div class="state-showcase two-col">
+            <div>
+              <div class="ss-label">Primary — default</div>
+              <div class="state-block"><button class="btn btn-primary">Primary action <span class="arrow">→</span></button></div>
+            </div>
+            <div>
+              <div class="ss-label">Primary — hover / focus</div>
+              <div class="state-block"><button class="btn btn-primary" style="background:var(--green-deep);transform:translateY(-1px);box-shadow:0 0 0 3px rgba(18,184,42,0.25)">Primary action <span class="arrow" style="transform:translateX(4px)">→</span></button></div>
+            </div>
+            <div>
+              <div class="ss-label">Accent — default</div>
+              <div class="state-block"><button class="btn btn-accent">Accent action <span class="arrow">→</span></button></div>
+            </div>
+            <div>
+              <div class="ss-label">Accent — hover</div>
+              <div class="state-block"><button class="btn btn-accent" style="background:var(--green-deep);color:var(--paper)">Accent action <span class="arrow">→</span></button></div>
+            </div>
+            <div>
+              <div class="ss-label">Ghost — default</div>
+              <div class="state-block"><button class="btn btn-ghost">Ghost action</button></div>
+            </div>
+            <div>
+              <div class="ss-label">Ghost — disabled</div>
+              <div class="state-block"><button class="btn btn-ghost" disabled style="opacity:0.5;cursor:not-allowed">Ghost action</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM FIELDS -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 02 — Form fields</span>
+          <h3>Eight states.<br>One field vocabulary.</h3>
+          <p>Every input in the Nayokan system uses the same underlying state model: default, focused, filled, error, disabled, plus submitting / success / failure at form level.</p>
+        </div>
+        <div>
+          <div class="state-showcase two-col">
+            <div>
+              <div class="ss-label">Default</div>
+              <div class="ff"><label>Full name</label><input type="text" placeholder="Your name"></div>
+            </div>
+            <div>
+              <div class="ss-label">Focused</div>
+              <div class="ff"><label>Full name</label><input type="text" placeholder="Your name" style="border-color:var(--green-deep);box-shadow:0 0 0 3px rgba(18,184,42,0.15);outline:none"></div>
+            </div>
+            <div>
+              <div class="ss-label">Filled</div>
+              <div class="ff"><label>Full name</label><input type="text" value="Aïcha Nkomo"></div>
+            </div>
+            <div>
+              <div class="ss-label">Validation error</div>
+              <div class="ff err"><label>Email</label><input type="text" value="not-an-email"><span class="err-msg">Enter a valid email address.</span></div>
+            </div>
+            <div>
+              <div class="ss-label">Disabled</div>
+              <div class="ff"><label>Organisation</label><input type="text" placeholder="Locked while agreement pending" disabled></div>
+            </div>
+            <div>
+              <div class="ss-label">Textarea — filled</div>
+              <div class="ff"><label>Message</label><textarea>A short brief on our mandate and interest.</textarea></div>
+            </div>
+            <div>
+              <div class="ss-label">Select — default</div>
+              <div class="ff"><label>Sector</label><select><option>Agri-food</option><option>Digital</option></select></div>
+            </div>
+            <div>
+              <div class="ss-label">Checkbox rows</div>
+              <div style="background:var(--paper);padding:12px 16px;border:1px solid var(--line)">
+                <div class="check-row"><input type="checkbox" id="s1" checked><label for="s1">I agree Nayokan may review this.</label></div>
+                <div class="check-row"><input type="checkbox" id="s2"><label for="s2">I agree to be contacted.</label></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM SUBMISSION FLOW -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 03 — Form submission flow</span>
+          <h3>Submitting.<br>Success.<br>Failure.</h3>
+          <p>Every form uses the same three post-submit surfaces. See a live example in the Startup Centre application flow.</p>
+        </div>
+        <div>
+          <div class="state-showcase">
+            <div class="ss-label">Submitting</div>
+            <div class="state-block" style="padding:32px">
+              <div class="status-block" style="padding:0;text-align:left">
+                <div class="status-mark loading" style="margin-bottom:16px" aria-hidden="true"></div>
+                <h1 style="font-size:1.6rem">Submitting your enquiry…</h1>
+                <p style="font-size:0.95rem">Please keep this tab open. This usually takes 3–8 seconds.</p>
+              </div>
+            </div>
+            <div class="ss-label">Success</div>
+            <div class="state-block" style="padding:32px">
+              <div class="status-block" style="padding:0;text-align:left">
+                <div class="status-mark ok" style="margin-bottom:16px">✓</div>
+                <h1 style="font-size:1.6rem">Received.</h1>
+                <p style="font-size:0.95rem">Your enquiry has been logged. Reference REF · ENQ/2026/0247.</p>
+              </div>
+            </div>
+            <div class="ss-label">Failure</div>
+            <div class="state-block" style="padding:32px">
+              <div class="status-block" style="padding:0;text-align:left">
+                <div class="status-mark fail" style="margin-bottom:16px">!</div>
+                <h1 style="font-size:1.6rem">Something went wrong.</h1>
+                <p style="font-size:0.95rem">Your draft was preserved. Try again in a few minutes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT STATES -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 04 — Content states</span>
+          <h3>Loading.<br>Empty.<br>Error.<br>Populated.</h3>
+        </div>
+        <div>
+          <div class="state-showcase two-col">
+            <div>
+              <div class="ss-label">Loading — skeleton</div>
+              <div class="state-block">
+                <div class="skeleton" style="height:16px;width:60%;margin-bottom:12px"></div>
+                <div class="skeleton" style="height:12px;width:90%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:12px;width:80%;margin-bottom:8px"></div>
+                <div class="skeleton" style="height:12px;width:70%;margin-bottom:20px"></div>
+                <div class="skeleton" style="height:44px;width:180px"></div>
+              </div>
+            </div>
+            <div>
+              <div class="ss-label">Empty</div>
+              <div class="state-empty" style="margin:0">
+                <div class="state-icon">Ø</div>
+                <h4>No results yet.</h4>
+                <p>Try clearing your filters or check back next month — new content is published regularly.</p>
+              </div>
+            </div>
+            <div>
+              <div class="ss-label">Error</div>
+              <div class="state-error" style="margin:0">
+                <div class="state-icon">!</div>
+                <h4>Could not load this content.</h4>
+                <p>Check your connection and try again. If the issue persists, contact us.</p>
+                <button class="btn btn-ghost" style="margin-top:8px">Retry</button>
+              </div>
+            </div>
+            <div>
+              <div class="ss-label">Populated (example — programme card)</div>
+              <div class="state-block" style="padding:0">
+                <article class="pcard" style="min-height:auto">
+                  <div class="pcard-head"><span class="pcard-ref">P/001</span><span class="pcard-status">● Open</span></div>
+                  <h3>Professional Growth Engineering</h3>
+                  <p class="pcard-desc">Practical technical skills combined with entrepreneurial cluster onboarding.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE UI -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 05 — Interactive UI</span>
+          <h3>Hover.<br>Active. Selected.<br>Focus. Disabled.</h3>
+          <p>Chips (filter tokens), tabs, and cards each carry a full state overlay.</p>
+        </div>
+        <div>
+          <div class="state-showcase">
+            <div class="ss-label">Chips</div>
+            <div class="state-block" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <button class="chip">Default</button>
+              <button class="chip" style="border-color:var(--ink)">Hover</button>
+              <button class="chip on">Selected</button>
+              <button class="chip" style="outline:2px solid var(--green-deep);outline-offset:2px">Focused</button>
+              <button class="chip" disabled style="opacity:0.4;cursor:not-allowed">Disabled</button>
+            </div>
+            <div class="ss-label">Keyboard focus ring (all interactive elements)</div>
+            <div class="state-block" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+              <a href="#" class="btn btn-primary" style="outline:2px solid var(--green-deep);outline-offset:3px">Focus visible</a>
+              <a href="#" class="link-inline" style="outline:2px solid var(--green-deep);outline-offset:3px;padding:2px 4px">Inline link with focus</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 06 — Navigation</span>
+          <h3>Desktop.<br>Mobile.<br>Menu open.</h3>
+          <p>The primary nav collapses at 960px into a burger + off-canvas panel. Language toggle mirrors between the two.</p>
+        </div>
+        <div>
+          <div class="state-showcase">
+            <div class="ss-label">Desktop — top bar (real, at top of this page)</div>
+            <div class="state-block"><p style="color:var(--muted);font-size:0.9rem;margin:0">The header at the top of this page is the desktop primary nav. Scroll to see the scrolled state (subtle divider line appears).</p></div>
+            <div class="ss-label">Mobile — closed (burger only)</div>
+            <div class="state-block" style="max-width:400px">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border:1px solid var(--line);background:var(--paper)">
+                <div style="display:flex;align-items:center;gap:8px"><img src="assets/logo-mark.svg" width="24" height="24" alt=""><span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:-0.02em">NAYOKAN</span></div>
+                <div style="display:flex;flex-direction:column;gap:5px"><span style="display:block;width:22px;height:1.5px;background:var(--ink)"></span><span style="display:block;width:22px;height:1.5px;background:var(--ink)"></span><span style="display:block;width:22px;height:1.5px;background:var(--ink)"></span></div>
+              </div>
+            </div>
+            <div class="ss-label">Mobile — menu open (click the burger at top-right of this page to try live)</div>
+            <div class="state-block" style="max-width:400px;padding:0">
+              <div style="padding:24px;background:var(--paper);border:1px solid var(--line)">
+                <div style="border-top:1px solid var(--line)">
+                  ${['What we do','VTI','Startup Centre','Venture Capital','Hospitality','Impact'].map((l,i) => `
+                    <a href="#" style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line);font-family:'Manrope',sans-serif;font-weight:600;font-size:1.15rem;letter-spacing:-0.02em">
+                      <span>${l}</span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;color:var(--muted)">${String(i+1).padStart(2,'0')}</span>
+                    </a>`).join('')}
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top:20px;width:100%;justify-content:center">Contact <span class="arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTINGS -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 07 — Listings</span>
+          <h3>Filter open.<br>Selected.<br>No results.<br>Pagination.</h3>
+        </div>
+        <div>
+          <div class="state-showcase">
+            <div class="ss-label">Filter bar — default & selected</div>
+            <div class="state-block" style="padding:0">
+              <div class="filter-bar" style="margin:0">
+                <span class="fb-label">Sector</span>
+                <button class="chip on">Agri-food <span class="count">4</span></button>
+                <button class="chip">Digital <span class="count">3</span></button>
+                <button class="chip">Health <span class="count">2</span></button>
+                <button class="chip">Fintech <span class="count">1</span></button>
+                <button class="chip-clear">Reset</button>
+              </div>
+            </div>
+            <div class="ss-label">No results</div>
+            <div class="state-block" style="padding:0">
+              <div class="state-empty" style="margin:0"><div class="state-icon">Ø</div><h4>No programmes match those filters.</h4><p>Clear filters or check upcoming cohorts.</p></div>
+            </div>
+            <div class="ss-label">Pagination</div>
+            <div class="state-block" style="padding:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+              <span class="meta">Showing 6 of 18</span>
+              <div style="display:flex;gap:8px">
+                <button class="chip">← Prev</button>
+                <button class="chip on">1</button>
+                <button class="chip">2</button>
+                <button class="chip">3</button>
+                <button class="chip">Next →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODALS -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 08 — Modals</span>
+          <h3>Default.<br>Confirmation.<br>Close.</h3>
+          <p>Modals are used sparingly — for destructive confirmations, consent flows, and brief in-context information.</p>
+        </div>
+        <div>
+          <div class="state-showcase two-col">
+            <div>
+              <div class="ss-label">Default</div>
+              <div class="state-block" style="padding:0;background:rgba(10,10,10,0.72);position:relative;overflow:hidden">
+                <div style="padding:40px 24px">
+                  <div class="modal" style="max-width:none;position:relative">
+                    <button class="modal-close" aria-label="Close">✕</button>
+                    <h3>A short institutional prompt.</h3>
+                    <p>Modals carry a single primary action. Content is short and specific.</p>
+                    <div class="modal-actions">
+                      <button class="btn btn-ghost">Cancel</button>
+                      <button class="btn btn-primary">Confirm <span class="arrow">→</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="ss-label">Confirmation</div>
+              <div class="state-block" style="padding:0;background:rgba(10,10,10,0.72);position:relative;overflow:hidden">
+                <div style="padding:40px 24px">
+                  <div class="modal" style="max-width:none;position:relative;border-color:#C11616">
+                    <button class="modal-close" aria-label="Close">✕</button>
+                    <h3 style="color:#C11616">Discard draft?</h3>
+                    <p>You have unsaved changes to your application. Discarding will lose everything not autosaved.</p>
+                    <div class="modal-actions">
+                      <button class="btn btn-ghost">Keep editing</button>
+                      <button class="btn" style="background:#C11616;color:#fff">Discard</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCESSIBILITY -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 09 — Accessibility rules</span>
+          <h3>WCAG 2.2 AA.<br>No motion-dependent info.</h3>
+          <p>These are non-negotiable rules that apply to every screen. Documented for developer handoff.</p>
+        </div>
+        <div>
+          ${[
+            ['A/01','Visible keyboard focus ring','2px solid var(--green-deep), 2–3px offset. Applies to every focusable element (buttons, links, chips, inputs, custom widgets).'],
+            ['A/02','Contrast — text','All body text ≥ 4.5:1 against its background. All large text (≥18px bold or ≥24px regular) ≥ 3:1.'],
+            ['A/03','Contrast — non-text UI','Buttons, focus rings, form borders and status indicators meet ≥ 3:1 in default state.'],
+            ['A/04','Touch targets','Minimum 44×44px hit area for every tappable element. Chips and small controls are padded appropriately.'],
+            ['A/05','Reduced motion','Respect prefers-reduced-motion. Reveal-on-scroll and long transitions are disabled. Layout-critical UI remains readable.'],
+            ['A/06','Semantic headings','Only one H1 per page. H2–H4 in strict outline order. No visual-only headings.'],
+            ['A/07','Form labels','Every input has a visible, associated label (for/id). Placeholders never used as labels.'],
+            ['A/08','Error messaging','Errors described in prose alongside the field, colour + icon (never colour alone).'],
+            ['A/09','Language','Every page declares lang. Language switch updates the html lang attribute.'],
+            ['A/10','No motion-dependent information','Nothing communicated by motion alone. Scroll-progression content also readable in static state.']
+          ].map(r => `
+            <div style="display:grid;grid-template-columns:80px 1fr;gap:20px;padding:18px 0;border-top:1px solid var(--line)">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">${r[0]}</span>
+              <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">${r[1]}</div><p style="color:var(--muted);font-size:0.92rem;margin-top:2px">${r[2]}</p></div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- CMS -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ 10 — CMS vs static</span>
+          <h3>Which parts of<br>the site are editable.</h3>
+          <p>Every component carries a badge in the developer handoff indicating whether it is CMS-driven or system-static.</p>
+        </div>
+        <div>
+          <div class="state-showcase">
+            <div class="ss-label">Badge examples</div>
+            <div class="state-block" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <span class="cms-badge">CMS · Programmes</span>
+              <span class="cms-badge">CMS · Articles</span>
+              <span class="cms-badge">CMS · Mentors</span>
+              <span class="cms-badge">CMS · Portfolio</span>
+              <span class="cms-badge">CMS · Properties</span>
+              <span class="cms-badge">CMS · Partners</span>
+              <span class="cms-badge">CMS · Impact metrics</span>
+              <span class="cms-badge static">Static · Nayokan System</span>
+              <span class="cms-badge static">Static · Nav & footer</span>
+              <span class="cms-badge static">Static · Forms schema</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">Vocational Training Institute</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="impact.html">Impact</a></li><li><a href="insights.html">Insights</a></li><li><a href="sitemap.html">Sitemap</a></li><li><a href="handoff.html">Handoff</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="programmes.html">Programmes</a></li><li><a href="application.html">Apply</a></li><li><a href="partners.html">Partners</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.1 · Phase 3B</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script src="scripts/system.js"></script>
+<script src="scripts/mobile-nav.js"></script>
+</body>
+</html>

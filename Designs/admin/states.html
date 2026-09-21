@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>State library · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .st-sec { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
+  .st-sec__head { padding: 16px 20px; border-bottom: 1px solid var(--line-2); display: flex; justify-content: space-between; align-items: center; }
+  .st-sec__title { font-family: var(--f-head); font-weight: 700; font-size: 15px; }
+  .st-sec__num { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase; }
+  .st-sec__body { padding: 24px; background: var(--ws); }
+  .st-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .st-grid { grid-template-columns: 1fr; } }
+  .st-card { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius); overflow: hidden; }
+  .st-card__lb { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--text-3); text-transform: uppercase; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--ws); }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ Z · 02 · System · State library</div>
+          <h1 class="ax-page__title">State library</h1>
+          <p class="ax-page__lede">Every non-happy-path state the admin exposes: empty, loading, error, permission denied, confirmation, validation. Design for these first, not last.</p>
+        </div>
+      </div>
+
+      <section class="st-sec">
+        <div class="st-sec__head"><div class="st-sec__title">Empty states</div><div class="st-sec__num">§ 45 · brief</div></div>
+        <div class="st-sec__body">
+          <div class="st-grid">
+            <div class="st-card">
+              <div class="st-card__lb">No articles</div>
+              <div class="ax-empty">
+                <div class="ax-empty__icon"><svg viewBox="0 0 24 24"><path d="M4 3h13a2 2 0 0 1 2 2v15l-4-3H6a2 2 0 0 1-2-2z"/><path d="M8 8h9M8 12h9M8 16h6"/></svg></div>
+                <div class="ax-empty__title">No articles yet</div>
+                <div class="ax-empty__lede">Editorial content will appear here once your first article is created.</div>
+                <button class="ax-btn ax-btn--primary" style="margin-top: 8px;">Create article</button>
+              </div>
+            </div>
+            <div class="st-card">
+              <div class="st-card__lb">No applications</div>
+              <div class="ax-empty">
+                <div class="ax-empty__icon"><svg viewBox="0 0 24 24"><path d="M4 12h4l2 3h4l2-3h4"/><path d="M4 12V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6"/><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></div>
+                <div class="ax-empty__title">No applications received yet</div>
+                <div class="ax-empty__lede">Once programmes open, applications will appear here for review.</div>
+              </div>
+            </div>
+            <div class="st-card">
+              <div class="st-card__lb">No partners</div>
+              <div class="ax-empty">
+                <div class="ax-empty__icon"><svg viewBox="0 0 24 24"><path d="M11 17 8 20a2 2 0 0 1-3-3l4-4"/><path d="m13 15 4 4a2 2 0 0 0 3-3l-6-6a2 2 0 0 0-3 0l-2 2a2 2 0 0 1-3 0L4 10"/></svg></div>
+                <div class="ax-empty__title">No partners added yet</div>
+                <div class="ax-empty__lede">Add partners as relationships are formally confirmed. Never fabricate.</div>
+                <button class="ax-btn ax-btn--primary" style="margin-top: 8px;">Add partner</button>
+              </div>
+            </div>
+            <div class="st-card">
+              <div class="st-card__lb">No impact metrics</div>
+              <div class="ax-empty">
+                <div class="ax-empty__icon"><svg viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="m8 16 3-4 3 2 5-7"/></svg></div>
+                <div class="ax-empty__title">Start building Nayokan's verified impact record</div>
+                <div class="ax-empty__lede">Every metric requires evidence and verification before it can appear publicly.</div>
+                <button class="ax-btn ax-btn--primary" style="margin-top: 8px;">Add first metric</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="st-sec">
+        <div class="st-sec__head"><div class="st-sec__title">Loading &amp; skeleton states</div><div class="st-sec__num">§ 46 · brief</div></div>
+        <div class="st-sec__body">
+          <div class="st-grid">
+            <div class="st-card">
+              <div class="st-card__lb">Table skeleton</div>
+              <div style="padding: 20px;">
+                <div style="display: grid; grid-template-columns: 22px 1.5fr 1fr 80px; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line);"><div class="ax-skeleton" style="width: 14px;"></div><div class="ax-skeleton" style="width: 80%;"></div><div class="ax-skeleton" style="width: 60%;"></div><div class="ax-skeleton" style="width: 60%;"></div></div>
+                <div style="display: grid; grid-template-columns: 22px 1.5fr 1fr 80px; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line);"><div class="ax-skeleton" style="width: 14px;"></div><div class="ax-skeleton" style="width: 90%;"></div><div class="ax-skeleton" style="width: 40%;"></div><div class="ax-skeleton" style="width: 80%;"></div></div>
+                <div style="display: grid; grid-template-columns: 22px 1.5fr 1fr 80px; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line);"><div class="ax-skeleton" style="width: 14px;"></div><div class="ax-skeleton" style="width: 70%;"></div><div class="ax-skeleton" style="width: 65%;"></div><div class="ax-skeleton" style="width: 50%;"></div></div>
+                <div style="display: grid; grid-template-columns: 22px 1.5fr 1fr 80px; gap: 12px; padding: 8px 0;"><div class="ax-skeleton" style="width: 14px;"></div><div class="ax-skeleton" style="width: 85%;"></div><div class="ax-skeleton" style="width: 50%;"></div><div class="ax-skeleton" style="width: 70%;"></div></div>
+              </div>
+            </div>
+            <div class="st-card">
+              <div class="st-card__lb">Article editor skeleton</div>
+              <div style="padding: 20px;">
+                <div class="ax-skeleton ax-skeleton--xl" style="width: 80%;"></div>
+                <div style="height: 8px;"></div>
+                <div class="ax-skeleton" style="width: 40%;"></div>
+                <div style="height: 20px;"></div>
+                <div class="ax-skeleton" style="width: 100%;"></div>
+                <div style="height: 6px;"></div>
+                <div class="ax-skeleton" style="width: 90%;"></div>
+                <div style="height: 6px;"></div>
+                <div class="ax-skeleton" style="width: 70%;"></div>
+                <div style="height: 20px;"></div>
+                <div class="ax-skeleton ax-skeleton--block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="st-sec">
+        <div class="st-sec__head"><div class="st-sec__title">Error states</div><div class="st-sec__num">§ 47 · brief</div></div>
+        <div class="st-sec__body">
+          <div class="st-grid">
+            <div class="st-card">
+              <div class="st-card__lb">Network error</div>
+              <div style="padding: 40px 24px; text-align: center;">
+                <div class="ax-empty__icon" style="border-color: var(--danger); color: var(--danger); margin: 0 auto 12px;"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg></div>
+                <div class="ax-empty__title">Could not reach Nayokan Admin</div>
+                <div class="ax-empty__lede">Your connection may be unstable. Nothing has been lost — try again.</div>
+                <button class="ax-btn ax-btn--primary" style="margin-top: 10px;">Retry</button>
+              </div>
+            </div>
+            <div class="st-card">
+              <div class="st-card__lb">Permission denied</div>
+              <div style="padding: 40px 24px; text-align: center;">
+                <div class="ax-empty__icon" style="border-color: var(--warn); color: var(--warn-ink); margin: 0 auto 12px;"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="ax-empty__title">You don't have access to this area</div>
+                <div class="ax-empty__lede">This section is limited to Super Admins. Speak to Maria if you believe this is an error.</div>
+                <button class="ax-btn ax-btn--soft" style="margin-top: 10px;">Return to dashboard</button>
+              </div>
+            </div>
+            <div class="st-card">
+              <div class="st-card__lb">Content not found</div>
+              <div style="padding: 40px 24px; text-align: center;">
+                <div class="ax-empty__icon" style="margin: 0 auto 12px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 15.5v.5"/></svg></div>
+                <div class="ax-empty__title">This record no longer exists</div>
+                <div class="ax-empty__lede">It may have been archived or deleted. Check the audit log for recent activity.</div>
+                <div style="display: flex; gap: 8px; justify-content: center; margin-top: 10px;"><a href="audit-log.html" class="ax-btn ax-btn--soft">Audit log</a><a href="dashboard.html" class="ax-btn ax-btn--primary">Dashboard</a></div>
+              </div>
+            </div>
+            <div class="st-card">
+              <div class="st-card__lb">Session expired</div>
+              <div style="padding: 40px 24px; text-align: center;">
+                <div class="ax-empty__icon" style="margin: 0 auto 12px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+                <div class="ax-empty__title">Session expired for security</div>
+                <div class="ax-empty__lede">You have been signed out after 60 minutes of inactivity. Your work is autosaved.</div>
+                <button class="ax-btn ax-btn--primary" style="margin-top: 10px;">Sign in again</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="st-sec">
+        <div class="st-sec__head"><div class="st-sec__title">Confirmation modals</div><div class="st-sec__num">§ 48 · brief</div></div>
+        <div class="st-sec__body">
+          <div class="st-grid">
+            <div class="st-card">
+              <div class="st-card__lb">Archive programme</div>
+              <div style="padding: 20px;">
+                <div class="ax-modal" style="max-width: none; box-shadow: none; border: 1px solid var(--line-2);">
+                  <div class="ax-modal__head">
+                    <div class="ax-modal__icon ax-modal__icon--warn"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg></div>
+                    <div class="ax-modal__title">Archive this programme?</div>
+                  </div>
+                  <div class="ax-modal__body">This will remove <strong>Welding · Cohort 4</strong> from public listings and prevent new applications, but preserve its records. You can restore it from the archive.</div>
+                  <div class="ax-modal__foot"><button class="ax-btn ax-btn--soft">Cancel</button><button class="ax-btn ax-btn--primary">Archive programme</button></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="st-card">
+              <div class="st-card__lb">Reject application</div>
+              <div style="padding: 20px;">
+                <div class="ax-modal" style="max-width: none; box-shadow: none; border: 1px solid var(--line-2);">
+                  <div class="ax-modal__head">
+                    <div class="ax-modal__icon"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div>
+                    <div class="ax-modal__title">Reject application #A-2026-0138?</div>
+                  </div>
+                  <div class="ax-modal__body">The applicant will be notified by email. You must include a rejection reason. This action cannot be reversed from this screen — use the audit log for corrections.</div>
+                  <div style="padding: 0 20px 12px;">
+                    <textarea class="ax-textarea" placeholder="Reason for rejection · required" rows="2"></textarea>
+                  </div>
+                  <div class="ax-modal__foot"><button class="ax-btn ax-btn--soft">Cancel</button><button class="ax-btn ax-btn--danger">Reject application</button></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="st-card">
+              <div class="st-card__lb">Unpublish content</div>
+              <div style="padding: 20px;">
+                <div class="ax-modal" style="max-width: none; box-shadow: none; border: 1px solid var(--line-2);">
+                  <div class="ax-modal__head">
+                    <div class="ax-modal__icon ax-modal__icon--warn"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg></div>
+                    <div class="ax-modal__title">Unpublish this article?</div>
+                  </div>
+                  <div class="ax-modal__body">The article will be removed from the public site immediately but kept in the admin. Anyone with a direct URL will see a 404.</div>
+                  <div class="ax-modal__foot"><button class="ax-btn ax-btn--soft">Cancel</button><button class="ax-btn ax-btn--danger">Unpublish</button></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="st-card">
+              <div class="st-card__lb">Disable user</div>
+              <div style="padding: 20px;">
+                <div class="ax-modal" style="max-width: none; box-shadow: none; border: 1px solid var(--line-2);">
+                  <div class="ax-modal__head">
+                    <div class="ax-modal__icon"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+                    <div class="ax-modal__title">Disable this user account?</div>
+                  </div>
+                  <div class="ax-modal__body">This is a <strong>dangerous action</strong>. It requires dual approval from a second Super Admin before it takes effect. The user's content will be preserved.</div>
+                  <div class="ax-modal__foot"><button class="ax-btn ax-btn--soft">Cancel</button><button class="ax-btn ax-btn--danger">Request approval</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="st-sec">
+        <div class="st-sec__head"><div class="st-sec__title">Content-safety warnings</div><div class="st-sec__num">§ 55 · brief</div></div>
+        <div class="st-sec__body">
+          <div class="st-grid">
+            <div class="st-card"><div class="st-card__lb">Unverified metric</div>
+              <div style="padding: 16px;"><div class="ax-notice ax-notice--warn"><svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg><div><div class="ax-notice__title">This figure has not been verified.</div>It is currently hidden from the public Nayokan website. Attach evidence and request verification to publish.</div></div></div>
+            </div>
+            <div class="st-card"><div class="st-card__lb">Missing source</div>
+              <div style="padding: 16px;"><div class="ax-notice ax-notice--warn"><svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg><div><div class="ax-notice__title">Add a source before publishing this impact metric.</div>Nayokan does not publish figures without a documented, retrievable source.</div></div></div>
+            </div>
+            <div class="st-card"><div class="st-card__lb">Missing alt text</div>
+              <div style="padding: 16px;"><div class="ax-notice ax-notice--warn"><svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg><div><div class="ax-notice__title">Add alternative text before publishing this image.</div>Accessibility is not optional. All published images require alt text.</div></div></div>
+            </div>
+            <div class="st-card"><div class="st-card__lb">Unapproved partner</div>
+              <div style="padding: 16px;"><div class="ax-notice ax-notice--warn"><svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg><div><div class="ax-notice__title">This partner record requires approval before publication.</div>A Super Admin must confirm the partnership and consent status.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'design-system',crumbs:[{label:'System'},{label:'State library'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

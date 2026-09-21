@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content review · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .cr-hero {
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--radius-lg); padding: 24px 28px;
+    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+    margin-bottom: 20px;
+  }
+  .cr-hero__eb { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.18em; color: rgba(255,255,255,0.5); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .cr-hero__eb::before { content: ''; width: 5px; height: 5px; background: var(--green); }
+  .cr-hero__title { font-family: var(--f-head); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin-top: 10px; }
+  .cr-hero__meta { color: rgba(255,255,255,0.65); font-size: 13px; margin-top: 6px; }
+  .cr-hero__actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+  .cr-split { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+  @media (max-width: 1200px) { .cr-split { grid-template-columns: 1fr; } }
+
+  .cr-preview { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); overflow: hidden; }
+  .cr-preview__frame {
+    background: repeating-linear-gradient(135deg, var(--ws-2) 0 10px, var(--ws) 10px 20px);
+    padding: 40px;
+    color: var(--ink);
+  }
+  .cr-preview__wrap { max-width: 640px; margin: 0 auto; background: var(--paper); padding: 44px 48px; border: 1px solid var(--line-2); }
+  .cr-preview__eb { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.18em; color: var(--text-3); text-transform: uppercase; }
+  .cr-preview__title { font-family: var(--f-head); font-weight: 700; font-size: 26px; letter-spacing: -0.025em; line-height: 1.1; margin: 12px 0 8px; }
+  .cr-preview__sub { color: var(--text-2); font-style: italic; font-size: 15px; line-height: 1.55; margin-bottom: 20px; }
+  .cr-preview__p { font-size: 15px; line-height: 1.68; margin: 12px 0; }
+  .cr-preview__q { border-left: 2px solid var(--green); padding: 12px 0 12px 16px; font-family: var(--f-head); font-weight: 600; font-size: 17px; line-height: 1.4; margin: 20px 0; }
+
+  .cr-panel { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); overflow: hidden; position: sticky; top: 76px; display: flex; flex-direction: column; gap: 0; }
+  .cr-panel__section { padding: 16px 18px; border-bottom: 1px solid var(--line-2); }
+  .cr-panel__section:last-child { border-bottom: none; }
+  .cr-panel__title { font-family: var(--f-head); font-weight: 700; font-size: 13.5px; margin-bottom: 10px; }
+
+  .cr-diff { font-family: var(--f-mono); font-size: 11px; line-height: 1.5; color: var(--text-2); }
+  .cr-diff__added { background: var(--success-bg); color: var(--success-ink); padding: 1px 3px; border-radius: 2px; }
+  .cr-diff__removed { background: var(--danger-bg); color: var(--danger-ink); text-decoration: line-through; padding: 1px 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ H · 02 · Governance · Reviewing</div>
+          <h1 class="ax-page__title">Content review</h1>
+          <p class="ax-page__lede">Reviewing an article submitted by <strong>John Bekolo</strong>. Approve to unlock scheduling. Request changes to send back to the author with comments.</p>
+        </div>
+        <div class="ax-page__actions">
+          <a href="review-queue.html" class="ax-btn ax-btn--soft"><svg viewBox="0 0 24 24"><path d="M11 6 5 12l6 6M5 12h14"/></svg>Back to queue</a>
+        </div>
+      </div>
+
+      <!-- Review hero -->
+      <div class="cr-hero">
+        <div>
+          <div class="cr-hero__eb">Content ready for review · Article #ART-2026-024</div>
+          <div class="cr-hero__title">Building productive capability: why Cameroon needs a vocational renaissance</div>
+          <div class="cr-hero__meta">Submitted by John Bekolo · 22h ago · v4 (3 revisions since first draft)</div>
+        </div>
+        <div class="cr-hero__actions">
+          <button class="ax-btn ax-btn--danger">Reject</button>
+          <button class="ax-btn ax-btn--ghost" style="border-color: rgba(255,255,255,0.3); color: white;">Request changes</button>
+          <button class="ax-btn ax-btn--accent">Approve</button>
+        </div>
+      </div>
+
+      <div class="cr-split">
+
+        <!-- Preview -->
+        <div class="cr-preview">
+          <div class="cr-preview__frame">
+            <div class="cr-preview__wrap">
+              <div class="cr-preview__eb">Field notes · Vocational Training Institute</div>
+              <h2 class="cr-preview__title">Building productive capability: why Cameroon needs a vocational renaissance</h2>
+              <p class="cr-preview__sub">A field-note from Nayokan on how vocational training becomes the backbone of a productive economy — and what happens when we treat it as strategic infrastructure.</p>
+              <p class="cr-preview__p">Cameroon does not lack ambition. Across cities and villages, young people build things — repair engines, run enterprises out of small workshops, coax value out of raw agricultural output. What Cameroon lacks, structurally, is a formal recognition of that capability. Vocational training is where recognition begins.</p>
+              <blockquote class="cr-preview__q">
+                We are not training people to leave Cameroon. We are training people to build it.
+              </blockquote>
+              <p class="cr-preview__p">The Nayokan Vocational Training Institute exists to make one thing explicit: skill is infrastructure. When a welder can prove their skill against a national standard, when an agri-processor can join a productive cluster with peer accountability, when a small enterprise can hire against a recognisable qualification — that country becomes measurably more productive.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="cr-panel">
+          <div class="cr-panel__section">
+            <div class="cr-panel__title">Author &amp; submission</div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <span class="ax-avatar ax-avatar--md">JB</span>
+              <div>
+                <div style="font-weight: 600; font-size: 13px;">John Bekolo</div>
+                <div class="ax-mono ax-mute" style="font-size: 10.5px;">Programme Manager · VTI</div>
+              </div>
+            </div>
+            <div style="font-family: var(--f-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.04em; line-height: 1.7;">
+              Submitted · 20 Sep · 16:42<br>
+              Assigned to · Maria Ndongo<br>
+              Version · v4<br>
+              Words · 1,024
+            </div>
+          </div>
+
+          <div class="cr-panel__section">
+            <div class="cr-panel__title">Preflight checks</div>
+            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span>Cover image</span><span class="ax-pill ax-pill--verified">Present</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span>SEO title</span><span class="ax-pill ax-pill--verified">Set</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span>SEO description</span><span class="ax-pill ax-pill--needs">Missing</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span>Alt text · all media</span><span class="ax-pill ax-pill--verified">Complete</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span>Related programme link</span><span class="ax-pill ax-pill--verified">Linked</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span>Tags</span><span class="ax-pill ax-pill--verified">3 tags</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center;"><span>Word count within range</span><span class="ax-pill ax-pill--verified">OK</span></div>
+            </div>
+          </div>
+
+          <div class="cr-panel__section">
+            <div class="cr-panel__title">Changes since v3</div>
+            <div class="cr-diff">
+              <p>Cameroon does not lack ambition. <span class="cr-diff__removed">Across the country, there are people who…</span> <span class="cr-diff__added">Across cities and villages, young people build things —</span> repair engines, run enterprises out of small workshops…</p>
+              <p style="margin-top: 8px;"><span class="cr-diff__added">+ Added quote from cluster lead</span></p>
+              <p style="margin-top: 8px;"><span class="cr-diff__added">+ Added callout: cluster model definition</span></p>
+            </div>
+            <a href="version-history.html" class="ax-btn ax-btn--soft ax-btn--sm" style="margin-top: 12px; justify-content: center; width: 100%;">Open full version history</a>
+          </div>
+
+          <div class="cr-panel__section">
+            <div class="cr-panel__title">Reviewer comment</div>
+            <textarea class="ax-textarea" rows="3" placeholder="If you request changes, add a comment for the author. Required."></textarea>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+              <button class="ax-btn ax-btn--danger" style="flex: 1; justify-content: center;">Reject</button>
+              <button class="ax-btn ax-btn--soft" style="flex: 1; justify-content: center;">Request changes</button>
+            </div>
+            <button class="ax-btn ax-btn--accent" style="width: 100%; justify-content: center; margin-top: 6px;">Approve for publication</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'review-queue',crumbs:[{label:'Governance'},{label:'Review queue',href:'review-queue.html'},{label:'Reviewing article'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

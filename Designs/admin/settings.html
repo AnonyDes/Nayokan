@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Settings · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="styles/admin.css"></head>
+<body><div class="ax-app"><aside class="ax-sidebar" data-shell="sidebar"></aside>
+<header class="ax-topbar" data-shell="topbar"></header>
+<main class="ax-workspace"><div class="ax-page ax-page--wide">
+<div class="ax-page__head">
+<div class="ax-page__title-block">
+  <div class="ax-page__eyebrow">§ H · 07 · Administration · Settings</div>
+  <h1 class="ax-page__title">Settings</h1>
+  <p class="ax-page__lede">Organisation, website defaults, notifications and integrations. Only Super Admins can change settings on this screen.</p>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: start;">
+
+<aside style="background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); padding: 12px; position: sticky; top: 76px;">
+  <div class="ax-mono ax-mute" style="font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; padding: 8px 10px;">Settings</div>
+  <a href="#org" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 13px; font-weight: 500; background: var(--ink); color: white; border-radius: 3px;">Organisation</a>
+  <a href="#website" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 13px; color: var(--text-2); border-radius: 3px;">Website</a>
+  <a href="#notifications" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 13px; color: var(--text-2); border-radius: 3px;">Notifications</a>
+  <a href="#integrations" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 13px; color: var(--text-2); border-radius: 3px;">Integrations</a>
+  <a href="#security" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 13px; color: var(--text-2); border-radius: 3px;">Security</a>
+  <a href="#danger" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 13px; color: var(--danger); border-radius: 3px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px;">Danger zone</a>
+</aside>
+
+<div style="display: flex; flex-direction: column; gap: 20px;">
+
+<div class="ax-panel" id="org">
+  <div class="ax-panel__head"><div class="ax-panel__title">Organisation</div></div>
+  <div class="ax-panel__body ax-form">
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Legal name</div></div>
+      <div class="ax-form-row__body"><input class="ax-input" value="Nayokan · Cameroonian development institution"></div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Contact email</div></div>
+      <div class="ax-form-row__body"><input class="ax-input ax-input--mono" value="hello@nayokan.cm"></div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Address</div></div>
+      <div class="ax-form-row__body"><textarea class="ax-textarea" rows="3">Yaoundé · Centre Region · Cameroon
+Address line to be confirmed</textarea></div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Social links</div><div class="ax-form-row__hint">Public social channels.</div></div>
+      <div class="ax-form-row__body">
+        <div class="ax-field"><label class="ax-field__label">LinkedIn</label><div class="ax-input__prefix"><span>linkedin.com/company/</span><input value="nayokan"></div></div>
+        <div class="ax-field"><label class="ax-field__label">X / Twitter</label><div class="ax-input__prefix"><span>x.com/</span><input value="nayokan_cm"></div></div>
+        <div class="ax-field"><label class="ax-field__label">YouTube</label><div class="ax-input__prefix"><span>youtube.com/@</span><input value="nayokan"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ax-panel" id="website">
+  <div class="ax-panel__head"><div class="ax-panel__title">Website defaults</div></div>
+  <div class="ax-panel__body ax-form">
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Default language</div></div>
+      <div class="ax-form-row__body">
+        <div class="ax-radio-group"><button class="is-active">EN</button><button>FR</button></div>
+      </div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Supported languages</div><div class="ax-form-row__hint">English and French are enabled at launch.</div></div>
+      <div class="ax-form-row__body">
+        <div style="display: flex; gap: 8px;">
+          <span class="ax-tag" style="background: var(--success-bg); color: var(--success-ink); border-color: rgba(18,184,42,0.3);">EN · English <button>×</button></span>
+          <span class="ax-tag" style="background: var(--success-bg); color: var(--success-ink); border-color: rgba(18,184,42,0.3);">FR · Français <button>×</button></span>
+          <button class="ax-tag" style="border-style: dashed;">+ Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Default social image</div><div class="ax-form-row__hint">Used when a page has no specific Open Graph image.</div></div>
+      <div class="ax-form-row__body">
+        <div class="ax-imgslot ax-imgslot--wide" style="max-width: 320px;">DEFAULT OG · 1200 × 630</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ax-panel" id="notifications">
+  <div class="ax-panel__head"><div class="ax-panel__title">Notifications</div></div>
+  <div class="ax-panel__body">
+    <table class="ax-table" style="font-size: 13px;">
+      <thead><tr><th style="width: 50%;">Event</th><th>Email</th><th>In-app</th><th>Digest</th></tr></thead>
+      <tbody>
+        <tr><td>New application received</td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td>Daily 08:00</td></tr>
+        <tr><td>Article awaiting review</td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td>Real-time</td></tr>
+        <tr><td>Impact metric requires verification</td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td>Real-time</td></tr>
+        <tr><td>Programme deadline approaching</td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td>Daily 08:00</td></tr>
+        <tr><td>Enquiry assigned to you</td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td>Real-time</td></tr>
+        <tr><td>Content approved / published</td><td><label class="ax-toggle"><span class="ax-toggle__track"></span></label></td><td><label class="ax-toggle is-on"><span class="ax-toggle__track"></span></label></td><td>Daily 08:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="ax-panel" id="integrations">
+  <div class="ax-panel__head"><div class="ax-panel__title">Integrations</div><div class="ax-mono ax-mute">All disconnected until confirmed</div></div>
+  <div class="ax-panel__body">
+    <div class="ax-grid ax-grid-2">
+      <div style="background: var(--ws); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+        <div><div style="font-weight: 600; font-size: 13px;">Analytics</div><div class="ax-mono ax-mute" style="font-size: 10.5px; margin-top: 3px;">Privacy-first analytics · to be selected</div></div>
+        <span class="ax-pill ax-pill--neutral">Not connected</span>
+      </div><div style="background: var(--ws); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+        <div><div style="font-weight: 600; font-size: 13px;">Email delivery</div><div class="ax-mono ax-mute" style="font-size: 10.5px; margin-top: 3px;">Transactional email provider · to be selected</div></div>
+        <span class="ax-pill ax-pill--neutral">Not connected</span>
+      </div><div style="background: var(--ws); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+        <div><div style="font-weight: 600; font-size: 13px;">External booking · hospitality</div><div class="ax-mono ax-mute" style="font-size: 10.5px; margin-top: 3px;">Third-party booking provider</div></div>
+        <span class="ax-pill ax-pill--neutral">Not connected</span>
+      </div><div style="background: var(--ws); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+        <div><div style="font-weight: 600; font-size: 13px;">Application form gateway</div><div class="ax-mono ax-mute" style="font-size: 10.5px; margin-top: 3px;">Public-facing application forms</div></div>
+        <span class="ax-pill ax-pill--neutral">Not connected</span>
+      </div><div style="background: var(--ws); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+        <div><div style="font-weight: 600; font-size: 13px;">Search indexing · Google</div><div class="ax-mono ax-mute" style="font-size: 10.5px; margin-top: 3px;">Sitemap submission</div></div>
+        <span class="ax-pill ax-pill--neutral">Not connected</span>
+      </div><div style="background: var(--ws); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+        <div><div style="font-weight: 600; font-size: 13px;">File storage</div><div class="ax-mono ax-mute" style="font-size: 10.5px; margin-top: 3px;">Media library object store</div></div>
+        <span class="ax-pill ax-pill--neutral">Not connected</span>
+      </div>
+    </div>
+    <div class="ax-notice ax-notice--soft" style="margin-top: 14px;">
+      <svg class="ax-notice__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 15.5v.5"/></svg>
+      <div>Integrations are placeholders until Nayokan confirms specific vendors. No third-party service is connected by default.</div>
+    </div>
+  </div>
+</div>
+
+<div class="ax-panel" id="security">
+  <div class="ax-panel__head"><div class="ax-panel__title">Security</div></div>
+  <div class="ax-panel__body ax-form">
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Two-factor authentication</div></div>
+      <div class="ax-form-row__body"><label class="ax-toggle is-on"><span class="ax-toggle__track"></span><span class="ax-toggle__label">Required for all Nayokan staff (recommended)</span></label></div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Session timeout</div></div>
+      <div class="ax-form-row__body"><div class="ax-radio-group"><button>15 min</button><button>30 min</button><button class="is-active">60 min</button><button>4 hours</button></div></div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Dual approval for dangerous actions</div><div class="ax-form-row__hint">User deletion, role escalation, integrations.</div></div>
+      <div class="ax-form-row__body"><label class="ax-toggle is-on"><span class="ax-toggle__track"></span><span class="ax-toggle__label">Requires two Super Admins</span></label></div>
+    </div>
+  </div>
+</div>
+
+<div class="ax-panel" id="danger" style="border-color: rgba(194,34,34,0.3);">
+  <div class="ax-panel__head"><div class="ax-panel__title" style="color: var(--danger);">Danger zone</div></div>
+  <div class="ax-panel__body ax-form">
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Reset website to draft</div><div class="ax-form-row__hint">Puts every page back to draft. Requires 2 Super Admins.</div></div>
+      <div class="ax-form-row__body"><button class="ax-btn ax-btn--danger">Reset website…</button></div>
+    </div>
+    <div class="ax-form-row"><div class="ax-form-row__head"><div class="ax-form-row__title">Export &amp; delete all data</div><div class="ax-form-row__hint">Institutional decommission. Not reversible.</div></div>
+      <div class="ax-form-row__body"><button class="ax-btn ax-btn--danger">Request decommission…</button></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+</div></main></div>
+<script>window.AX_PAGE={screen:'settings',crumbs:[{"label":"Administration"},{"label":"Settings"}]};</script>
+<script src="scripts/shell.js"></script></body></html>

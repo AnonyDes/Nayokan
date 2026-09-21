@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enquiries · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ G · 01 · Operations · Enquiries</div>
+          <h1 class="ax-page__title">Enquiries</h1>
+          <p class="ax-page__lede">Inbound messages from the public Nayokan website — from partnerships to hospitality bookings. Every enquiry is assigned, tracked and resolved.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Export</button>
+          <button class="ax-btn ax-btn--primary">Assign selected</button>
+        </div>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-toolbar">
+          <div class="ax-tabs">
+            <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">52</span></button>
+            <button class="ax-tabs__tab">New <span class="ax-tabs__count">7</span></button>
+            <button class="ax-tabs__tab">In progress <span class="ax-tabs__count">11</span></button>
+            <button class="ax-tabs__tab">Resolved <span class="ax-tabs__count">34</span></button>
+          </div>
+          <div style="flex:1"></div>
+          <div class="ax-inline-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search enquiries…"></div>
+          <button class="ax-filter"><span class="ax-filter__label">Category</span><span class="ax-filter__value">All</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="ax-filter"><span class="ax-filter__label">Assigned</span><span class="ax-filter__value">Any</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+
+        <table class="ax-table">
+          <thead><tr>
+            <th class="ax-table__check"><span class="ax-check"></span></th>
+            <th style="width: 22%;">Contact</th>
+            <th>Organization</th>
+            <th>Category</th>
+            <th>Source page</th>
+            <th>Received</th>
+            <th>Assigned</th>
+            <th>Status</th>
+            <th></th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0342 <span class="ax-demo-tag">Demo</span></a><span class="ax-table__sub">contact.0342@nayokan.demo</span></td>
+              <td>— Withheld —</td>
+              <td><span class="ax-pill ax-pill--info">University</span></td>
+              <td class="is-mono">/startup-university-partnerships</td>
+              <td class="is-mono">3h ago</td>
+              <td>—</td>
+              <td><span class="ax-pill ax-pill--needs">New</span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0341</a><span class="ax-table__sub">partner.enquiry.0341@nayokan.demo</span></td>
+              <td>Development NGO · to be confirmed</td>
+              <td><span class="ax-pill ax-pill--info">Partnership</span></td>
+              <td class="is-mono">/partners</td>
+              <td class="is-mono">6h ago</td>
+              <td>—</td>
+              <td><span class="ax-pill ax-pill--needs">New</span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0340</a><span class="ax-table__sub">stay.0340@nayokan.demo</span></td>
+              <td>Individual</td>
+              <td><span class="ax-pill ax-pill--info">Hospitality</span></td>
+              <td class="is-mono">/hospitality-properties</td>
+              <td class="is-mono">Yesterday</td>
+              <td><span class="ax-avatar" style="width: 20px; height: 20px; font-size: 9px;">DE</span></td>
+              <td><span class="ax-pill ax-pill--in-progress">In progress</span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0339</a><span class="ax-table__sub">vc.enquiry.0339@nayokan.demo</span></td>
+              <td>Fund · Africa focus · to be confirmed</td>
+              <td><span class="ax-pill ax-pill--info">VC</span></td>
+              <td class="is-mono">/vc-partner</td>
+              <td class="is-mono">Yesterday</td>
+              <td><span class="ax-avatar" style="width: 20px; height: 20px; font-size: 9px;">MN</span></td>
+              <td><span class="ax-pill ax-pill--in-progress">In progress</span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0338</a><span class="ax-table__sub">general.0338@nayokan.demo</span></td>
+              <td>Individual</td>
+              <td><span class="ax-pill ax-pill--info">General</span></td>
+              <td class="is-mono">/contact</td>
+              <td class="is-mono">2d ago</td>
+              <td><span class="ax-avatar" style="width: 20px; height: 20px; font-size: 9px;">SN</span></td>
+              <td><span class="ax-pill ax-pill--in-progress">In progress</span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0337</a><span class="ax-table__sub">partner.enquiry.0337@nayokan.demo</span></td>
+              <td>Corporate · to be confirmed</td>
+              <td><span class="ax-pill ax-pill--info">Partnership</span></td>
+              <td class="is-mono">/partners</td>
+              <td class="is-mono">3d ago</td>
+              <td><span class="ax-avatar" style="width: 20px; height: 20px; font-size: 9px;">SN</span></td>
+              <td><span class="ax-pill ax-pill--verified">Resolved</span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0336</a><span class="ax-table__sub">stay.0336@nayokan.demo</span></td>
+              <td>Individual</td>
+              <td><span class="ax-pill ax-pill--info">Hospitality</span></td>
+              <td class="is-mono">/hospitality</td>
+              <td class="is-mono">5d ago</td>
+              <td><span class="ax-avatar" style="width: 20px; height: 20px; font-size: 9px;">DE</span></td>
+              <td><span class="ax-pill ax-pill--verified">Resolved</span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="enquiry-detail.html" class="ax-table__title">Enquiry #E-0335</a><span class="ax-table__sub">general.0335@nayokan.demo</span></td>
+              <td>Individual</td>
+              <td><span class="ax-pill ax-pill--info">General</span></td>
+              <td class="is-mono">/vti</td>
+              <td class="is-mono">1w ago</td>
+              <td><span class="ax-avatar" style="width: 20px; height: 20px; font-size: 9px;">MN</span></td>
+              <td><span class="ax-pill ax-pill--archived">Archived</span></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ax-pagination">
+          <div>Showing <strong style="color:var(--ink);">1 – 8</strong> of 52 enquiries</div>
+          <div class="ax-pagination__pages"><button>‹</button><button class="is-active">1</button><button>2</button><button>3</button><button>4</button><button>›</button></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'enquiries',crumbs:[{label:'Operations'},{label:'Enquiries'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Component library · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .ds-sec { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; }
+  .ds-sec__head { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: end; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--line-2); }
+  .ds-sec__num { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--text-3); text-transform: uppercase; }
+  .ds-sec__title { font-family: var(--f-head); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+  .ds-sec__lede { color: var(--text-3); font-size: 13px; margin-top: 6px; max-width: 60ch; }
+
+  .ds-swatch {
+    height: 90px; border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.06em;
+    position: relative;
+    border: 1px solid var(--line-2);
+  }
+  .ds-swatch__name { font-weight: 600; font-size: 12px; letter-spacing: 0; }
+  .ds-swatch__hex { opacity: 0.7; text-transform: uppercase; }
+
+  .ds-type-row {
+    display: grid; grid-template-columns: 160px 1fr auto;
+    gap: 20px; align-items: baseline;
+    padding: 14px 0; border-bottom: 1px solid var(--line);
+  }
+  .ds-type-row:last-child { border-bottom: none; }
+  .ds-type-row__meta { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .ds-comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .ds-comp-grid { grid-template-columns: 1fr; } }
+  .ds-comp {
+    background: var(--ws); border: 1px solid var(--line-2);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .ds-comp__lb { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--text-3); text-transform: uppercase; margin-bottom: 12px; }
+  .ds-comp__demo { padding: 20px 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 20px; }
+
+  .ds-spacing-row { display: flex; align-items: center; gap: 20px; padding: 10px 0; }
+  .ds-spacing-row__meta { font-family: var(--f-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.06em; width: 80px; }
+  .ds-spacing-row__bar { background: var(--ink); height: 24px; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ Z · 01 · System · Component library</div>
+          <h1 class="ax-page__title">Nayokan Admin — component library</h1>
+          <p class="ax-page__lede">The building blocks used across every admin screen. Derived from the public Nayokan brand, tuned for information density and operational clarity.</p>
+        </div>
+      </div>
+
+      <!-- COLOR -->
+      <section class="ds-sec">
+        <div class="ds-sec__head">
+          <div class="ds-sec__num">§ 01 · Color</div>
+          <div>
+            <div class="ds-sec__title">Colour system</div>
+            <div class="ds-sec__lede">Nayokan brand tokens plus admin-workspace neutrals. Green is reserved for primary actions, verified states and Nayokan identity — never as a background wash.</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;">
+          <div class="ds-swatch" style="background: #12B82A; color: #0A0A0A;"><span class="ds-swatch__name">Green</span><span class="ds-swatch__hex">#12B82A · --green</span></div>
+          <div class="ds-swatch" style="background: #08751A; color: white;"><span class="ds-swatch__name">Green deep</span><span class="ds-swatch__hex">#08751A</span></div>
+          <div class="ds-swatch" style="background: #0A0A0A; color: white;"><span class="ds-swatch__name">Ink</span><span class="ds-swatch__hex">#0A0A0A</span></div>
+          <div class="ds-swatch" style="background: #071A46; color: white;"><span class="ds-swatch__name">Navy</span><span class="ds-swatch__hex">#071A46</span></div>
+          <div class="ds-swatch" style="background: #F6F6F4; color: #0A0A0A; border-color: var(--line);"><span class="ds-swatch__name">Workspace</span><span class="ds-swatch__hex">#F6F6F4</span></div>
+          <div class="ds-swatch" style="background: #FFFFFF; color: #0A0A0A; border-color: var(--line-2);"><span class="ds-swatch__name">Paper</span><span class="ds-swatch__hex">#FFFFFF</span></div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <div class="ds-comp__lb">Status colours</div>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+            <div class="ds-swatch" style="background: #E9F9EC; color: #08751A;"><span class="ds-swatch__name">Success</span><span class="ds-swatch__hex">Verified · Approved · Live</span></div>
+            <div class="ds-swatch" style="background: #FFF3DE; color: #7A4600;"><span class="ds-swatch__name">Warn</span><span class="ds-swatch__hex">Draft · Needs review</span></div>
+            <div class="ds-swatch" style="background: #FCE9E9; color: #7A1414;"><span class="ds-swatch__name">Danger</span><span class="ds-swatch__hex">Rejected · Expired</span></div>
+            <div class="ds-swatch" style="background: #EDEDE8; color: #6B6B66;"><span class="ds-swatch__name">Neutral</span><span class="ds-swatch__hex">Archived · Inactive</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TYPOGRAPHY -->
+      <section class="ds-sec">
+        <div class="ds-sec__head">
+          <div class="ds-sec__num">§ 02 · Type</div>
+          <div>
+            <div class="ds-sec__title">Typography</div>
+            <div class="ds-sec__lede">Manrope for headings, Inter for body and forms, IBM Plex Mono for institutional metadata. This is the same stack as the public site.</div>
+          </div>
+        </div>
+
+        <div class="ds-type-row">
+          <div class="ds-type-row__meta">Manrope · 800 · 44px</div>
+          <div style="font-family: 'Manrope'; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; line-height: 1.02;">Institutional headline</div>
+          <div class="ds-type-row__meta">Display</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-row__meta">Manrope · 700 · 26px</div>
+          <div class="ax-page__title">Page title</div>
+          <div class="ds-type-row__meta">.ax-page__title</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-row__meta">Manrope · 700 · 15px</div>
+          <div style="font-family: 'Manrope'; font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">Panel &amp; card title</div>
+          <div class="ds-type-row__meta">.ax-panel__title</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-row__meta">Inter · 400 · 13.5px</div>
+          <div style="font-size: 13.5px; line-height: 1.55; max-width: 60ch;">Body text used throughout tables, forms and inline UI. Inter at 13.5px is the primary reading size in the admin, tighter than the public site.</div>
+          <div class="ds-type-row__meta">Body</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-row__meta">IBM Plex Mono · 500 · 10.5px</div>
+          <div class="ax-mono" style="letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3);">METADATA · IDS · TIMESTAMPS · STATUS</div>
+          <div class="ds-type-row__meta">.ax-mono</div>
+        </div>
+      </section>
+
+      <!-- BUTTONS -->
+      <section class="ds-sec">
+        <div class="ds-sec__head">
+          <div class="ds-sec__num">§ 03 · Components</div>
+          <div>
+            <div class="ds-sec__title">Buttons, inputs &amp; controls</div>
+            <div class="ds-sec__lede">All interactive components. Buttons come in 6 variants; every input uses the same border, focus ring and error state.</div>
+          </div>
+        </div>
+
+        <div class="ds-comp-grid">
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Buttons · size default</div>
+            <div class="ds-comp__demo">
+              <button class="ax-btn ax-btn--primary">Primary <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+              <button class="ax-btn ax-btn--accent">Accent</button>
+              <button class="ax-btn ax-btn--ghost">Ghost</button>
+              <button class="ax-btn ax-btn--soft">Soft</button>
+              <button class="ax-btn ax-btn--danger">Danger</button>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Buttons · sizes</div>
+            <div class="ds-comp__demo">
+              <button class="ax-btn ax-btn--primary ax-btn--sm">Small</button>
+              <button class="ax-btn ax-btn--primary">Default</button>
+              <button class="ax-btn ax-btn--primary ax-btn--lg">Large</button>
+              <button class="ax-btn ax-btn--primary is-disabled">Disabled</button>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Inputs</div>
+            <div class="ds-comp__demo" style="flex-direction: column; align-items: stretch; gap: 12px;">
+              <input class="ax-input" placeholder="Text input">
+              <input class="ax-input ax-input--mono" value="Monospace value · 240">
+              <div class="ax-input__prefix"><span>nayokan.cm</span><input value="/insights/…"></div>
+              <input class="ax-input is-error" value="Invalid value">
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Toggles &amp; radios</div>
+            <div class="ds-comp__demo" style="flex-direction: column; align-items: stretch; gap: 14px;">
+              <label class="ax-toggle is-on"><span class="ax-toggle__track"></span><span class="ax-toggle__label">Visible on website</span></label>
+              <label class="ax-toggle"><span class="ax-toggle__track"></span><span class="ax-toggle__label">Notifications</span></label>
+              <div class="ax-radio-group"><button class="is-active">Desktop</button><button>Tablet</button><button>Mobile</button></div>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Status pills</div>
+            <div class="ds-comp__demo">
+              <span class="ax-pill ax-pill--published">Published</span>
+              <span class="ax-pill ax-pill--draft">Draft</span>
+              <span class="ax-pill ax-pill--review">In review</span>
+              <span class="ax-pill ax-pill--needs">Needs work</span>
+              <span class="ax-pill ax-pill--rejected">Rejected</span>
+              <span class="ax-pill ax-pill--scheduled">Scheduled</span>
+              <span class="ax-pill ax-pill--archived">Archived</span>
+              <span class="ax-pill ax-pill--verified">Verified</span>
+              <span class="ax-pill ax-pill--info">Info</span>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">World tags</div>
+            <div class="ds-comp__demo">
+              <span class="ax-world ax-world--vti">VTI</span>
+              <span class="ax-world ax-world--sc">Startup</span>
+              <span class="ax-world ax-world--vc">VC</span>
+              <span class="ax-world ax-world--hos">Hos</span>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Filters &amp; tabs</div>
+            <div class="ds-comp__demo" style="flex-direction: column; align-items: stretch;">
+              <div class="ax-tabs" style="align-self: flex-start;">
+                <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">24</span></button>
+                <button class="ax-tabs__tab">Draft <span class="ax-tabs__count">6</span></button>
+                <button class="ax-tabs__tab">Live <span class="ax-tabs__count">18</span></button>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 12px;">
+                <button class="ax-filter"><span class="ax-filter__label">World</span><span class="ax-filter__value">All</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+                <button class="ax-filter is-active"><span class="ax-filter__label">Range</span><span class="ax-filter__value">Last 7d</span><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Progress</div>
+            <div class="ds-comp__demo" style="flex-direction: column; align-items: stretch; gap: 12px;">
+              <div><div class="ax-mono ax-mute" style="font-size: 10px; margin-bottom: 6px;">Verification chain</div><div class="ax-progress"><div class="ax-progress__bar ax-progress__bar--warn" style="width: 55%;"></div></div></div>
+              <div><div class="ax-mono ax-mute" style="font-size: 10px; margin-bottom: 6px;">Publication readiness</div><div class="ax-progress"><div class="ax-progress__bar ax-progress__bar--green" style="width: 88%;"></div></div></div>
+              <div><div class="ax-mono ax-mute" style="font-size: 10px; margin-bottom: 6px;">Media coverage</div><div class="ax-progress"><div class="ax-progress__bar" style="width: 30%;"></div></div></div>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Notices</div>
+            <div class="ds-comp__demo" style="flex-direction: column; align-items: stretch; gap: 8px;">
+              <div class="ax-notice ax-notice--warn"><svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg><div><div class="ax-notice__title">SEO description missing</div>Cannot publish yet.</div></div>
+              <div class="ax-notice ax-notice--success"><svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><div>Metric verified and approved.</div></div>
+              <div class="ax-notice ax-notice--danger"><svg class="ax-notice__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9 9 15M9 9l6 6"/></svg><div>This action cannot be undone.</div></div>
+            </div>
+          </div>
+
+          <div class="ds-comp">
+            <div class="ds-comp__lb">Avatars &amp; tags</div>
+            <div class="ds-comp__demo">
+              <span class="ax-avatar">MN</span>
+              <span class="ax-avatar ax-avatar--md">JB</span>
+              <span class="ax-avatar ax-avatar--lg">DE</span>
+              <span class="ax-tag">Vocational <button>×</button></span>
+              <span class="ax-tag">Cameroon <button>×</button></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPACING -->
+      <section class="ds-sec">
+        <div class="ds-sec__head">
+          <div class="ds-sec__num">§ 04 · Spacing</div>
+          <div>
+            <div class="ds-sec__title">Spacing scale</div>
+            <div class="ds-sec__lede">4-pixel base — same as the public Nayokan brand. Density-first: most admin components use s-2 to s-5.</div>
+          </div>
+        </div>
+        <div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-1 · 4px</div><div class="ds-spacing-row__bar" style="width: 4px;"></div></div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-2 · 8px</div><div class="ds-spacing-row__bar" style="width: 8px;"></div></div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-3 · 12px</div><div class="ds-spacing-row__bar" style="width: 12px;"></div></div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-4 · 16px</div><div class="ds-spacing-row__bar" style="width: 16px;"></div></div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-5 · 24px</div><div class="ds-spacing-row__bar" style="width: 24px;"></div></div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-6 · 32px</div><div class="ds-spacing-row__bar" style="width: 32px;"></div></div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-7 · 48px</div><div class="ds-spacing-row__bar" style="width: 48px;"></div></div>
+          <div class="ds-spacing-row"><div class="ds-spacing-row__meta">s-8 · 64px</div><div class="ds-spacing-row__bar" style="width: 64px;"></div></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'design-system',crumbs:[{label:'System'},{label:'Component library'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

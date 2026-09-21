@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Impact metrics · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .im-head {
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--radius-lg); padding: 20px 24px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  .im-head__title { font-family: var(--f-head); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .im-head__lede { color: rgba(255,255,255,0.65); font-size: 12.5px; margin-top: 6px; line-height: 1.55; }
+  .im-head__stat { border-left: 1px solid var(--line-invert); padding-left: 20px; }
+  .im-head__lb { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+  .im-head__val { font-family: var(--f-head); font-weight: 700; font-size: 26px; letter-spacing: -0.03em; margin-top: 6px; }
+  .im-head__val--good { color: var(--green); }
+  .im-head__val--warn { color: #FFB84A; }
+  .im-head__val--danger { color: #FF7A7A; }
+  @media (max-width: 1000px) { .im-head { grid-template-columns: 1fr 1fr; } .im-head__stat:first-child { grid-column: 1 / -1; border-left: none; padding-left: 0; } }
+
+  .im-notice {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 16px; border-radius: var(--radius);
+    background: var(--warn-bg); color: var(--warn-ink);
+    border: 1px solid rgba(199,119,0,0.22);
+    margin-bottom: 16px; font-size: 12.5px; line-height: 1.5;
+  }
+  .im-notice svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .im-notice strong { display: block; margin-bottom: 2px; }
+
+  .im-val {
+    font-family: var(--f-head); font-weight: 700; font-size: 20px;
+    letter-spacing: -0.02em; line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .im-val__unit { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; margin-left: 4px; font-weight: 500; }
+  .im-val--pending { color: var(--warn-ink); }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ F · 01 · Impact governance</div>
+          <h1 class="ax-page__title">Impact metrics</h1>
+          <p class="ax-page__lede">Every figure Nayokan publishes must be verified with evidence before it appears on the public website. Unverified figures are hidden by default.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Reporting period · Q3 2026</button>
+          <a href="metric-editor.html" class="ax-btn ax-btn--primary">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            Add impact metric
+          </a>
+        </div>
+      </div>
+
+      <!-- Governance strip -->
+      <div class="im-head">
+        <div>
+          <div class="im-head__title">Nayokan verified-first governance</div>
+          <div class="im-head__lede">A metric can only be marked <strong style="color:white;">Public</strong> after being verified against evidence and approved by a reviewer. This screen shows exactly where every figure sits in that chain.</div>
+        </div>
+        <div class="im-head__stat">
+          <div class="im-head__lb">Public · live</div>
+          <div class="im-head__val im-head__val--good">14</div>
+        </div>
+        <div class="im-head__stat">
+          <div class="im-head__lb">Verified · not yet public</div>
+          <div class="im-head__val">6</div>
+        </div>
+        <div class="im-head__stat">
+          <div class="im-head__lb">Needs verification</div>
+          <div class="im-head__val im-head__val--warn">7</div>
+        </div>
+        <div class="im-head__stat">
+          <div class="im-head__lb">Draft · no evidence</div>
+          <div class="im-head__val im-head__val--danger">3</div>
+        </div>
+      </div>
+
+      <!-- Alert -->
+      <div class="im-notice">
+        <svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg>
+        <div>
+          <strong>2 metrics require your verification before Q3 publication.</strong>
+          The Q3 impact review is scheduled for Wednesday · 24 Sept · 08:00. Verify the outstanding figures below to unblock publication.
+        </div>
+        <button class="ax-btn ax-btn--soft ax-btn--sm" style="margin-left: auto; flex-shrink: 0;">Show only unverified</button>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-toolbar">
+          <div class="ax-tabs">
+            <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">30</span></button>
+            <button class="ax-tabs__tab">Draft <span class="ax-tabs__count">3</span></button>
+            <button class="ax-tabs__tab">Needs verification <span class="ax-tabs__count">7</span></button>
+            <button class="ax-tabs__tab">Verified <span class="ax-tabs__count">6</span></button>
+            <button class="ax-tabs__tab">Approved · public <span class="ax-tabs__count">14</span></button>
+          </div>
+          <div style="flex:1"></div>
+          <button class="ax-filter"><span class="ax-filter__label">World</span><span class="ax-filter__value">All</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="ax-filter"><span class="ax-filter__label">Period</span><span class="ax-filter__value">Q3 2026</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+
+        <table class="ax-table">
+          <thead>
+            <tr>
+              <th class="ax-table__check"><span class="ax-check"></span></th>
+              <th style="width: 28%;">Metric</th>
+              <th class="is-num" style="width: 14%;">Value</th>
+              <th>Period</th>
+              <th>Source · Evidence</th>
+              <th>Status</th>
+              <th style="text-align:center;">Public</th>
+              <th style="width: 60px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">People trained · 2025 <span class="ax-demo-tag">Demo</span></span>
+                <span class="ax-table__sub">VTI · All clusters · Cameroon</span>
+              </td>
+              <td class="is-num"><span class="im-val im-val--pending">240<span class="im-val__unit">people</span></span></td>
+              <td class="is-mono">Full year · 2025</td>
+              <td>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span class="ax-pill ax-pill--needs">No evidence</span>
+                  <a href="metric-editor.html" style="color:var(--info-ink); font-family: var(--f-mono); font-size: 10.5px; text-decoration: underline;">Upload…</a>
+                </div>
+              </td>
+              <td><span class="ax-pill ax-pill--needs">Needs verification</span></td>
+              <td style="text-align:center;">
+                <span class="ax-toggle" title="Cannot publish — metric is unverified"><span class="ax-toggle__track" style="opacity: 0.5; cursor: not-allowed;"></span></span>
+              </td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Enterprises supported · Q2 2026</span>
+                <span class="ax-table__sub">Startup Centre · All programmes</span>
+              </td>
+              <td class="is-num"><span class="im-val">48<span class="im-val__unit">enterprises</span></span></td>
+              <td class="is-mono">Q2 · 2026</td>
+              <td>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span class="ax-pill ax-pill--verified">Evidence attached</span>
+                  <span class="ax-mono ax-mute" style="font-size: 10.5px;">3 files · 2 refs</span>
+                </div>
+              </td>
+              <td><span class="ax-pill ax-pill--approved">Approved</span></td>
+              <td style="text-align:center;"><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Cluster members active · Sept 2026</span>
+                <span class="ax-table__sub">VTI · All clusters</span>
+              </td>
+              <td class="is-num"><span class="im-val">312<span class="im-val__unit">members</span></span></td>
+              <td class="is-mono">Sept · 2026</td>
+              <td><span class="ax-pill ax-pill--verified">Verified · Programme records</span></td>
+              <td><span class="ax-pill ax-pill--pending">Awaiting approval</span></td>
+              <td style="text-align:center;"><span class="ax-toggle"><span class="ax-toggle__track"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Mentors engaged · YTD</span>
+                <span class="ax-table__sub">Startup Centre</span>
+              </td>
+              <td class="is-num"><span class="im-val">19<span class="im-val__unit">mentors</span></span></td>
+              <td class="is-mono">2026 · YTD</td>
+              <td><span class="ax-pill ax-pill--verified">Verified · Internal registry</span></td>
+              <td><span class="ax-pill ax-pill--approved">Approved</span></td>
+              <td style="text-align:center;"><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Portfolio ventures active</span>
+                <span class="ax-table__sub">Venture Capital</span>
+              </td>
+              <td class="is-num"><span class="im-val">9<span class="im-val__unit">ventures</span></span></td>
+              <td class="is-mono">Sept · 2026</td>
+              <td><span class="ax-pill ax-pill--verified">Internal portfolio ledger</span></td>
+              <td><span class="ax-pill ax-pill--approved">Approved</span></td>
+              <td style="text-align:center;"><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Guests hosted · 30 days</span>
+                <span class="ax-table__sub">Hospitality · All properties</span>
+              </td>
+              <td class="is-num"><span class="im-val im-val--pending">— <span class="im-val__unit">guests</span></span></td>
+              <td class="is-mono">30d rolling</td>
+              <td><span class="ax-pill ax-pill--needs">Value not entered</span></td>
+              <td><span class="ax-pill ax-pill--draft">Draft</span></td>
+              <td style="text-align:center;"><span class="ax-toggle" title="Draft — cannot publish"><span class="ax-toggle__track" style="opacity: 0.5; cursor: not-allowed;"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Certificates issued · 2025</span>
+                <span class="ax-table__sub">VTI · Certification pathway</span>
+              </td>
+              <td class="is-num"><span class="im-val">184<span class="im-val__unit">certificates</span></span></td>
+              <td class="is-mono">Full year · 2025</td>
+              <td><span class="ax-pill ax-pill--verified">Verified · Certification body</span></td>
+              <td><span class="ax-pill ax-pill--approved">Approved</span></td>
+              <td style="text-align:center;"><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Female participation rate · VTI</span>
+                <span class="ax-table__sub">VTI · Cohorts 1 – 4</span>
+              </td>
+              <td class="is-num"><span class="im-val">42<span class="im-val__unit">%</span></span></td>
+              <td class="is-mono">Cohort 1–4</td>
+              <td><span class="ax-pill ax-pill--pending">Awaiting evidence review</span></td>
+              <td><span class="ax-pill ax-pill--needs">Needs verification</span></td>
+              <td style="text-align:center;"><span class="ax-toggle" title="Cannot publish — unverified"><span class="ax-toggle__track" style="opacity: 0.5; cursor: not-allowed;"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">University partnerships</span>
+                <span class="ax-table__sub">Startup Centre · Signed MoUs</span>
+              </td>
+              <td class="is-num"><span class="im-val">4<span class="im-val__unit">universities</span></span></td>
+              <td class="is-mono">2026 · YTD</td>
+              <td><span class="ax-pill ax-pill--verified">Verified · Signed MoUs</span></td>
+              <td><span class="ax-pill ax-pill--approved">Approved</span></td>
+              <td style="text-align:center;"><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Applications received · 30 days</span>
+                <span class="ax-table__sub">All worlds · rolling</span>
+              </td>
+              <td class="is-num"><span class="im-val">72<span class="im-val__unit">apps</span></span></td>
+              <td class="is-mono">30d rolling</td>
+              <td><span class="ax-pill ax-pill--verified">Auto · System</span></td>
+              <td><span class="ax-pill ax-pill--pending">Awaiting approval</span></td>
+              <td style="text-align:center;"><span class="ax-toggle"><span class="ax-toggle__track"></span></span></td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <div class="ax-pagination">
+          <div>Showing <strong style="color:var(--ink);">1 – 10</strong> of 30 metrics</div>
+          <div class="ax-pagination__pages">
+            <button>‹</button>
+            <button class="is-active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>›</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  window.AX_PAGE = {
+    screen: 'impact-metrics',
+    crumbs: [{ label: 'Impact' }, { label: 'Metrics' }]
+  };
+</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

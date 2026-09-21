@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Applications · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .apps-kb { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+  .apps-kb__col {
+    background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg);
+    padding: 12px 12px 14px; min-height: 200px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .apps-kb__head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .apps-kb__label { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em; color: var(--text-3); text-transform: uppercase; }
+  .apps-kb__count { font-family: var(--f-head); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+  .apps-kb__card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 3px; padding: 10px;
+    cursor: pointer; transition: all var(--dur-fast);
+    position: relative;
+  }
+  .apps-kb__card:hover { border-color: var(--ink); transform: translateY(-1px); }
+  .apps-kb__id { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--text-3); }
+  .apps-kb__name { font-weight: 600; font-size: 12.5px; margin-top: 2px; line-height: 1.25; }
+  .apps-kb__meta { display: flex; gap: 6px; margin-top: 8px; align-items: center; font-size: 10.5px; color: var(--text-3); }
+  @media (max-width: 1200px) { .apps-kb { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 800px) { .apps-kb { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ D · 01 · Programmes · Applications</div>
+          <h1 class="ax-page__title">Applications</h1>
+          <p class="ax-page__lede">Every applicant who reached Nayokan through the public website — filtered, assigned and moved through decision.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Export CSV</button>
+          <div class="ax-radio-group">
+            <button class="is-active" title="Kanban view">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="6" height="18"/><rect x="10" y="3" width="4" height="14"/><rect x="15" y="3" width="6" height="10"/></svg>
+            </button>
+            <button title="Table view">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16"/><path d="M3 10h18M3 16h18M9 4v16"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters bar -->
+      <div class="ax-panel" style="margin-bottom: 16px;">
+        <div class="ax-toolbar">
+          <div class="ax-tabs">
+            <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">30</span></button>
+            <button class="ax-tabs__tab">New <span class="ax-tabs__count">12</span></button>
+            <button class="ax-tabs__tab">Under review <span class="ax-tabs__count">8</span></button>
+            <button class="ax-tabs__tab">Shortlisted <span class="ax-tabs__count">5</span></button>
+            <button class="ax-tabs__tab">Accepted <span class="ax-tabs__count">3</span></button>
+            <button class="ax-tabs__tab">Rejected <span class="ax-tabs__count">2</span></button>
+            <button class="ax-tabs__tab">Archived <span class="ax-tabs__count">14</span></button>
+          </div>
+
+          <div style="flex:1;"></div>
+
+          <div class="ax-inline-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Search applicants, programmes…">
+          </div>
+          <button class="ax-filter"><span class="ax-filter__label">World</span><span class="ax-filter__value">All</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="ax-filter"><span class="ax-filter__label">Programme</span><span class="ax-filter__value">Any</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="ax-filter"><span class="ax-filter__label">Reviewer</span><span class="ax-filter__value">Any</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+      </div>
+
+      <!-- Kanban -->
+      <div class="apps-kb">
+        <!-- NEW -->
+        <div class="apps-kb__col">
+          <div class="apps-kb__head">
+            <span class="apps-kb__label">New</span>
+            <span class="apps-kb__count">12</span>
+          </div>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0142</div>
+            <div class="apps-kb__name">Applicant · Welding Cohort 4</div>
+            <div class="apps-kb__meta"><span class="ax-world ax-world--vti">VTI</span><span>· 8h ago</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0141</div>
+            <div class="apps-kb__name">Applicant · Innovator Residency</div>
+            <div class="apps-kb__meta"><span class="ax-world ax-world--sc">Startup</span><span>· 12h ago</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0140</div>
+            <div class="apps-kb__name">Applicant · Enterprise Grant</div>
+            <div class="apps-kb__meta"><span class="ax-world">Opportunity</span><span>· 16h ago</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0139</div>
+            <div class="apps-kb__name">Applicant · Agri-processing</div>
+            <div class="apps-kb__meta"><span class="ax-world ax-world--vti">VTI</span><span>· 22h ago</span></div>
+          </a>
+          <button class="ax-btn ax-btn--soft ax-btn--sm" style="margin-top:auto; justify-content:center;">Show all 12</button>
+        </div>
+
+        <!-- UNDER REVIEW -->
+        <div class="apps-kb__col">
+          <div class="apps-kb__head">
+            <span class="apps-kb__label">Under review</span>
+            <span class="apps-kb__count">8</span>
+          </div>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0138</div>
+            <div class="apps-kb__name">Applicant · Textile Cluster</div>
+            <div class="apps-kb__meta"><span class="ax-avatar" style="width:16px;height:16px;font-size:8px;">SN</span><span>· 1d</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0137</div>
+            <div class="apps-kb__name">Applicant · Commercialisation Track</div>
+            <div class="apps-kb__meta"><span class="ax-avatar" style="width:16px;height:16px;font-size:8px;">DE</span><span>· 2d</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0135</div>
+            <div class="apps-kb__name">Applicant · Welding Cohort 4</div>
+            <div class="apps-kb__meta"><span class="ax-avatar" style="width:16px;height:16px;font-size:8px;">MN</span><span>· 3d</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0132</div>
+            <div class="apps-kb__name">Applicant · Innovator Residency</div>
+            <div class="apps-kb__meta"><span class="ax-avatar" style="width:16px;height:16px;font-size:8px;">SN</span><span>· 4d</span></div>
+          </a>
+        </div>
+
+        <!-- SHORTLISTED -->
+        <div class="apps-kb__col">
+          <div class="apps-kb__head">
+            <span class="apps-kb__label">Shortlisted</span>
+            <span class="apps-kb__count">5</span>
+          </div>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0131</div>
+            <div class="apps-kb__name">Applicant · Welding Cohort 4</div>
+            <div class="apps-kb__meta"><span class="ax-pill ax-pill--in-progress" style="font-size:9px; padding:1px 5px;">Interview scheduled</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0129</div>
+            <div class="apps-kb__name">Applicant · Innovator Residency</div>
+            <div class="apps-kb__meta"><span class="ax-pill ax-pill--in-progress" style="font-size:9px; padding:1px 5px;">Pitch review</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0128</div>
+            <div class="apps-kb__name">Applicant · Agri Cluster</div>
+            <div class="apps-kb__meta"><span class="ax-pill ax-pill--in-progress" style="font-size:9px; padding:1px 5px;">Reference check</span></div>
+          </a>
+        </div>
+
+        <!-- ACCEPTED -->
+        <div class="apps-kb__col">
+          <div class="apps-kb__head">
+            <span class="apps-kb__label">Accepted</span>
+            <span class="apps-kb__count">3</span>
+          </div>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0125</div>
+            <div class="apps-kb__name">Applicant · Cohort 4 · Confirmed</div>
+            <div class="apps-kb__meta"><span class="ax-pill ax-pill--published" style="font-size:9px; padding:1px 5px;">Notified</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0122</div>
+            <div class="apps-kb__name">Applicant · Cohort 4 · Confirmed</div>
+            <div class="apps-kb__meta"><span class="ax-pill ax-pill--published" style="font-size:9px; padding:1px 5px;">Notified</span></div>
+          </a>
+        </div>
+
+        <!-- REJECTED -->
+        <div class="apps-kb__col">
+          <div class="apps-kb__head">
+            <span class="apps-kb__label">Rejected</span>
+            <span class="apps-kb__count">2</span>
+          </div>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0118</div>
+            <div class="apps-kb__name">Applicant · Ineligible</div>
+            <div class="apps-kb__meta"><span class="ax-pill ax-pill--rejected" style="font-size:9px; padding:1px 5px;">Notified</span></div>
+          </a>
+          <a href="application-detail.html" class="apps-kb__card">
+            <div class="apps-kb__id">#A-2026-0114</div>
+            <div class="apps-kb__name">Applicant · Withdrew</div>
+            <div class="apps-kb__meta"><span class="ax-pill ax-pill--archived" style="font-size:9px; padding:1px 5px;">Archived</span></div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  window.AX_PAGE = {
+    screen: 'applications',
+    crumbs: [
+      { label: 'Programmes' },
+      { label: 'Applications' }
+    ]
+  };
+</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

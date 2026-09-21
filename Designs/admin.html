@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nayokan Admin · Screen Inventory</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="admin/styles/admin.css">
+<style>
+  body { background: var(--ws); }
+  .inv-hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 56px 40px 48px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .inv-hero__wrap { max-width: 1320px; margin: 0 auto; }
+  .inv-eyebrow {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.5); text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .inv-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--green); display: inline-block; }
+  .inv-title {
+    font-family: var(--f-head); font-weight: 800; font-size: 44px;
+    letter-spacing: -0.03em; line-height: 1.02;
+    margin: 18px 0 14px; max-width: 22ch;
+  }
+  .inv-title em { font-style: normal; color: var(--green); }
+  .inv-lede { color: rgba(255,255,255,0.72); font-size: 15px; max-width: 68ch; line-height: 1.55; }
+  .inv-meta {
+    display: flex; gap: 40px; margin-top: 28px;
+    padding-top: 24px; border-top: 1px solid var(--line-invert);
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.5); text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .inv-meta strong { color: var(--paper); font-weight: 600; }
+
+  .inv-body { max-width: 1320px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  .inv-section { margin-bottom: 48px; }
+  .inv-section__head {
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px;
+    padding-bottom: 16px; margin-bottom: 20px;
+    border-bottom: 1px solid var(--line-2);
+    align-items: end;
+  }
+  .inv-section__num {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em;
+    color: var(--text-3); text-transform: uppercase;
+  }
+  .inv-section__title {
+    font-family: var(--f-head); font-weight: 700; font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+  .inv-section__desc {
+    color: var(--text-3); font-size: 13px; margin-top: 6px; max-width: 60ch;
+  }
+
+  .inv-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 1100px) { .inv-grid { grid-template-columns: repeat(3,1fr); } }
+  @media (max-width: 780px)  { .inv-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px)  { .inv-grid { grid-template-columns: 1fr; } }
+
+  .inv-card {
+    background: var(--panel);
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: all var(--dur) var(--easing);
+    position: relative;
+    min-height: 132px;
+  }
+  .inv-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(10,10,10,0.06);
+  }
+  .inv-card__num {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--text-4); letter-spacing: 0.14em;
+  }
+  .inv-card__title {
+    font-family: var(--f-head); font-weight: 700; font-size: 15px;
+    letter-spacing: -0.01em; line-height: 1.2;
+    color: var(--ink);
+    margin-top: auto;
+  }
+  .inv-card__note {
+    font-size: 11.5px; color: var(--text-3); line-height: 1.4;
+  }
+  .inv-card__foot {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 10px; margin-top: auto; border-top: 1px solid var(--line);
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em;
+    color: var(--text-3); text-transform: uppercase;
+  }
+  .inv-card__foot span.new {
+    color: var(--success-ink); background: var(--success-bg);
+    padding: 2px 6px; border-radius: 3px;
+  }
+  .inv-card__foot .arrow { transition: transform var(--dur-fast); }
+  .inv-card:hover .arrow { transform: translateX(3px); color: var(--green-deep); }
+
+  .inv-card--core {
+    background: var(--ink); color: var(--paper);
+    border-color: var(--ink);
+  }
+  .inv-card--core .inv-card__title { color: var(--paper); }
+  .inv-card--core .inv-card__num, .inv-card--core .inv-card__note,
+  .inv-card--core .inv-card__foot { color: rgba(255,255,255,0.5); border-color: var(--line-invert); }
+
+  .inv-quick {
+    background: var(--panel); border: 1px solid var(--line-2);
+    border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 32px;
+    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+  }
+  .inv-quick__lede { font-size: 13px; color: var(--text-2); max-width: 62ch; }
+  .inv-quick__lede strong { color: var(--ink); font-weight: 600; }
+  .inv-quick__cta { display: flex; gap: 8px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<section class="inv-hero">
+  <div class="inv-hero__wrap">
+    <div class="inv-eyebrow">Nayokan · Internal Systems · v0.1</div>
+    <h1 class="inv-title">The operating layer <em>behind</em> Nayokan's digital ecosystem.</h1>
+    <p class="inv-lede">
+      Nayokan Admin is the internal content management, programme operations and
+      institutional governance platform. It is where staff manage articles, programmes,
+      applications, opportunities, people, partners, portfolio, hospitality, impact
+      metrics, enquiries, users and everything that appears on the public Nayokan
+      website. Precise. Institutional. Trustworthy.
+    </p>
+    <div class="inv-meta">
+      <div><strong>47</strong> screens designed</div>
+      <div><strong>4</strong> Nayokan worlds</div>
+      <div><strong>6</strong> user roles</div>
+      <div><strong>13</strong> content entities</div>
+      <div><strong>WCAG 2.2 AA</strong> target</div>
+    </div>
+  </div>
+</section>
+
+<div class="inv-body">
+
+  <div class="inv-quick">
+    <div class="inv-quick__lede">
+      Start with the <strong>Dashboard</strong> to see the content governance snapshot,
+      or jump directly to a specific area. Every screen shares the same shell,
+      component library and status vocabulary — the CMS is one coherent product.
+    </div>
+    <div class="inv-quick__cta">
+      <a href="admin/login.html" class="ax-btn ax-btn--ghost">View login</a>
+      <a href="admin/dashboard.html" class="ax-btn ax-btn--primary">
+        Open dashboard
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div>
+        <div class="inv-section__num">§ 01 · Core</div>
+      </div>
+      <div>
+        <div class="inv-section__title">Access &amp; command layer</div>
+        <div class="inv-section__desc">Entry, dashboard, notifications, global search.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/login.html" class="inv-card">
+        <div class="inv-card__num">A · 01</div>
+        <div class="inv-card__title">Admin Login</div>
+        <div class="inv-card__note">SSO, email + password, MFA prompt.</div>
+        <div class="inv-card__foot"><span>Auth</span><span class="arrow">→</span></div>
+      </a>
+      <a href="admin/dashboard.html" class="inv-card inv-card--core">
+        <div class="inv-card__num">A · 02</div>
+        <div class="inv-card__title">Dashboard</div>
+        <div class="inv-card__note">Governance-first — not fake analytics.</div>
+        <div class="inv-card__foot"><span>Home</span><span class="arrow">→</span></div>
+      </a>
+      <a href="admin/search.html" class="inv-card">
+        <div class="inv-card__num">A · 03</div>
+        <div class="inv-card__title">Global Search</div>
+        <div class="inv-card__note">Cross-entity search + filters.</div>
+        <div class="inv-card__foot"><span>⌘K</span><span class="arrow">→</span></div>
+      </a>
+      <a href="admin/notifications.html" class="inv-card">
+        <div class="inv-card__num">A · 04</div>
+        <div class="inv-card__title">Notifications</div>
+        <div class="inv-card__note">Review, approvals, deadlines, mentions.</div>
+        <div class="inv-card__foot"><span>Center</span><span class="arrow">→</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 02 · Content</div></div>
+      <div>
+        <div class="inv-section__title">Editorial &amp; publishing</div>
+        <div class="inv-section__desc">Pages, articles, stories, media library — with block editor, SEO panel and preview.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/pages.html" class="inv-card"><div class="inv-card__num">B · 01</div><div class="inv-card__title">Pages List</div><div class="inv-card__note">Institutional pages by world.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/page-editor.html" class="inv-card"><div class="inv-card__num">B · 02</div><div class="inv-card__title">Page Editor</div><div class="inv-card__note">Structured sections + preview.</div><div class="inv-card__foot"><span>Form</span><span class="arrow">→</span></div></a>
+      <a href="admin/articles.html" class="inv-card"><div class="inv-card__num">B · 03</div><div class="inv-card__title">Articles List</div><div class="inv-card__note">Draft → Review → Publish.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/article-editor.html" class="inv-card inv-card--core"><div class="inv-card__num">B · 04</div><div class="inv-card__title">Article Editor</div><div class="inv-card__note">Block editor · SEO · Preview.</div><div class="inv-card__foot"><span>Editor</span><span class="arrow">→</span></div></a>
+      <a href="admin/article-preview.html" class="inv-card"><div class="inv-card__num">B · 05</div><div class="inv-card__title">Article Preview</div><div class="inv-card__note">Desktop / tablet / mobile.</div><div class="inv-card__foot"><span>Preview</span><span class="arrow">→</span></div></a>
+      <a href="admin/media-library.html" class="inv-card"><div class="inv-card__num">B · 06</div><div class="inv-card__title">Media Library</div><div class="inv-card__note">Images, video, docs, alt text.</div><div class="inv-card__foot"><span>Grid</span><span class="arrow">→</span></div></a>
+      <a href="admin/stories.html" class="inv-card"><div class="inv-card__num">B · 07</div><div class="inv-card__title">Stories</div><div class="inv-card__note">Case studies + beneficiary outcomes.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 03 · Programmes</div></div>
+      <div>
+        <div class="inv-section__title">Programmes, clusters &amp; opportunities</div>
+        <div class="inv-section__desc">VTI programmes, entrepreneurial clusters, startup programmes, opportunities.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/programmes.html" class="inv-card"><div class="inv-card__num">C · 01</div><div class="inv-card__title">Programme List</div><div class="inv-card__note">All 4 worlds + status.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/programme-editor.html" class="inv-card"><div class="inv-card__num">C · 02</div><div class="inv-card__title">Programme Editor</div><div class="inv-card__note">Details, application, media, SEO.</div><div class="inv-card__foot"><span>Form</span><span class="arrow">→</span></div></a>
+      <a href="admin/clusters.html" class="inv-card"><div class="inv-card__num">C · 03</div><div class="inv-card__title">Cluster List</div><div class="inv-card__note">Entrepreneurial clusters.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/opportunities.html" class="inv-card"><div class="inv-card__num">C · 04</div><div class="inv-card__title">Opportunities</div><div class="inv-card__note">Auto-expire when past deadline.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 04 · Applications</div></div>
+      <div>
+        <div class="inv-section__title">Applicant intake &amp; review</div>
+        <div class="inv-section__desc">Structured review with reviewer assignment, notes, decision workflow.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/applications.html" class="inv-card inv-card--core"><div class="inv-card__num">D · 01</div><div class="inv-card__title">Application List</div><div class="inv-card__note">Tabs by status. Filters by world.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/application-detail.html" class="inv-card"><div class="inv-card__num">D · 02</div><div class="inv-card__title">Application Detail</div><div class="inv-card__note">Applicant + responses + docs + review.</div><div class="inv-card__foot"><span>Detail</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 05 · Ecosystem</div></div>
+      <div>
+        <div class="inv-section__title">People, partners, ventures, properties</div>
+        <div class="inv-section__desc">The institutional network. All entities visible on the public site are managed here.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/people.html" class="inv-card"><div class="inv-card__num">E · 01</div><div class="inv-card__title">People</div><div class="inv-card__note">Leadership + staff.</div><div class="inv-card__foot"><span>Directory</span><span class="arrow">→</span></div></a>
+      <a href="admin/mentors.html" class="inv-card"><div class="inv-card__num">E · 02</div><div class="inv-card__title">Mentors</div><div class="inv-card__note">Directory + expertise + availability.</div><div class="inv-card__foot"><span>Directory</span><span class="arrow">→</span></div></a>
+      <a href="admin/partners.html" class="inv-card"><div class="inv-card__num">E · 03</div><div class="inv-card__title">Partners</div><div class="inv-card__note">By category · logos · relationship.</div><div class="inv-card__foot"><span>Directory</span><span class="arrow">→</span></div></a>
+      <a href="admin/portfolio.html" class="inv-card"><div class="inv-card__num">E · 04</div><div class="inv-card__title">Portfolio</div><div class="inv-card__note">Ventures — no fake financials.</div><div class="inv-card__foot"><span>Directory</span><span class="arrow">→</span></div></a>
+      <a href="admin/properties.html" class="inv-card"><div class="inv-card__num">E · 05</div><div class="inv-card__title">Hospitality Properties</div><div class="inv-card__note">External booking model.</div><div class="inv-card__foot"><span>Directory</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 06 · Impact</div></div>
+      <div>
+        <div class="inv-section__title">Verified impact governance</div>
+        <div class="inv-section__desc">Every metric requires evidence &amp; verification before it can appear publicly.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/impact-metrics.html" class="inv-card inv-card--core"><div class="inv-card__num">F · 01</div><div class="inv-card__title">Impact Metrics</div><div class="inv-card__note">Verify → Approve → Public toggle.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/metric-editor.html" class="inv-card"><div class="inv-card__num">F · 02</div><div class="inv-card__title">Metric Editor</div><div class="inv-card__note">Value + evidence + verifier.</div><div class="inv-card__foot"><span>Form</span><span class="arrow">→</span></div></a>
+      <a href="admin/evidence.html" class="inv-card"><div class="inv-card__num">F · 03</div><div class="inv-card__title">Evidence Library</div><div class="inv-card__note">Reports · records · sources.</div><div class="inv-card__foot"><span>Grid</span><span class="arrow">→</span></div></a>
+      <a href="admin/impact-stories.html" class="inv-card"><div class="inv-card__num">F · 04</div><div class="inv-card__title">Impact Stories</div><div class="inv-card__note">Beneficiary + venture stories.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 07 · Operations</div></div>
+      <div>
+        <div class="inv-section__title">Enquiries, homepage, website</div>
+        <div class="inv-section__desc">Managing inbound conversation and controlling public-website structure.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/enquiries.html" class="inv-card"><div class="inv-card__num">G · 01</div><div class="inv-card__title">Enquiries</div><div class="inv-card__note">Assigned, in-progress, resolved.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/enquiry-detail.html" class="inv-card"><div class="inv-card__num">G · 02</div><div class="inv-card__title">Enquiry Detail</div><div class="inv-card__note">Contact + assign + notes.</div><div class="inv-card__foot"><span>Detail</span><span class="arrow">→</span></div></a>
+      <a href="admin/homepage-editor.html" class="inv-card"><div class="inv-card__num">G · 03</div><div class="inv-card__title">Homepage Editor</div><div class="inv-card__note">Controlled section builder.</div><div class="inv-card__foot"><span>Editor</span><span class="arrow">→</span></div></a>
+      <a href="admin/navigation.html" class="inv-card"><div class="inv-card__num">G · 04</div><div class="inv-card__title">Navigation</div><div class="inv-card__note">Menu items + destinations.</div><div class="inv-card__foot"><span>Editor</span><span class="arrow">→</span></div></a>
+      <a href="admin/seo.html" class="inv-card"><div class="inv-card__num">G · 05</div><div class="inv-card__title">SEO Manager</div><div class="inv-card__note">Search + social previews.</div><div class="inv-card__foot"><span>Editor</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 08 · Governance</div></div>
+      <div>
+        <div class="inv-section__title">Review, users, permissions, audit</div>
+        <div class="inv-section__desc">The parts that make it an institution — not just a CMS.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/review-queue.html" class="inv-card"><div class="inv-card__num">H · 01</div><div class="inv-card__title">Review Queue</div><div class="inv-card__note">Items awaiting approval.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/content-review.html" class="inv-card"><div class="inv-card__num">H · 02</div><div class="inv-card__title">Content Review</div><div class="inv-card__note">Approve · request changes · reject.</div><div class="inv-card__foot"><span>Detail</span><span class="arrow">→</span></div></a>
+      <a href="admin/version-history.html" class="inv-card"><div class="inv-card__num">H · 03</div><div class="inv-card__title">Version History</div><div class="inv-card__note">Compare · restore versions.</div><div class="inv-card__foot"><span>Detail</span><span class="arrow">→</span></div></a>
+      <a href="admin/users.html" class="inv-card"><div class="inv-card__num">H · 04</div><div class="inv-card__title">Users</div><div class="inv-card__note">Staff accounts + roles.</div><div class="inv-card__foot"><span>Table</span><span class="arrow">→</span></div></a>
+      <a href="admin/roles-permissions.html" class="inv-card"><div class="inv-card__num">H · 05</div><div class="inv-card__title">Roles &amp; Permissions</div><div class="inv-card__note">Visual permission matrix.</div><div class="inv-card__foot"><span>Matrix</span><span class="arrow">→</span></div></a>
+      <a href="admin/audit-log.html" class="inv-card"><div class="inv-card__num">H · 06</div><div class="inv-card__title">Audit Log</div><div class="inv-card__note">Every change · every actor.</div><div class="inv-card__foot"><span>Log</span><span class="arrow">→</span></div></a>
+      <a href="admin/settings.html" class="inv-card"><div class="inv-card__num">H · 07</div><div class="inv-card__title">Settings</div><div class="inv-card__note">Org · website · integrations.</div><div class="inv-card__foot"><span>Panel</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="inv-section">
+    <div class="inv-section__head">
+      <div><div class="inv-section__num">§ 09 · System</div></div>
+      <div>
+        <div class="inv-section__title">Design system &amp; handoff</div>
+        <div class="inv-section__desc">The visual language, component library, and everything a development team needs.</div>
+      </div>
+    </div>
+    <div class="inv-grid">
+      <a href="admin/design-system.html" class="inv-card"><div class="inv-card__num">Z · 01</div><div class="inv-card__title">Component Library</div><div class="inv-card__note">Every reusable admin component.</div><div class="inv-card__foot"><span>Docs</span><span class="arrow">→</span></div></a>
+      <a href="admin/states.html" class="inv-card"><div class="inv-card__num">Z · 02</div><div class="inv-card__title">State Library</div><div class="inv-card__note">Empty · loading · error · confirm.</div><div class="inv-card__foot"><span>Docs</span><span class="arrow">→</span></div></a>
+      <a href="admin/data-model.html" class="inv-card"><div class="inv-card__num">Z · 03</div><div class="inv-card__title">CMS Data Model</div><div class="inv-card__note">Entities &amp; relationships.</div><div class="inv-card__foot"><span>Diagram</span><span class="arrow">→</span></div></a>
+      <a href="admin/handoff.html" class="inv-card inv-card--core"><div class="inv-card__num">Z · 04</div><div class="inv-card__title">Developer Handoff</div><div class="inv-card__note">Routes · components · a11y · workflows.</div><div class="inv-card__foot"><span>Docs</span><span class="arrow">→</span></div></a>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

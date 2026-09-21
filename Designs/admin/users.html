@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Users · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ H · 04 · Administration · Users</div>
+          <h1 class="ax-page__title">Users</h1>
+          <p class="ax-page__lede">Staff accounts with access to the Nayokan Admin. Adding, disabling and role changes are all audited and require Super Admin authorisation.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Bulk invite</button>
+          <button class="ax-btn ax-btn--primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Invite user</button>
+        </div>
+      </div>
+
+      <div class="ax-grid ax-grid-4" style="margin-bottom: 20px;">
+        <div class="ax-stat"><div class="ax-stat__label">Total users</div><div class="ax-stat__value">15</div><div class="ax-stat__delta">14 active · 1 disabled</div></div>
+        <div class="ax-stat"><div class="ax-stat__label">Super admins</div><div class="ax-stat__value">2</div><div class="ax-stat__delta">Dual approval enabled</div></div>
+        <div class="ax-stat"><div class="ax-stat__label">2FA coverage</div><div class="ax-stat__value">100%</div><div class="ax-stat__delta ax-stat__delta--up">All accounts enrolled</div></div>
+        <div class="ax-stat"><div class="ax-stat__label">Stale sessions</div><div class="ax-stat__value">3</div><div class="ax-stat__delta ax-stat__delta--attn">Not active in 30 days</div></div>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-toolbar">
+          <div class="ax-tabs">
+            <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">15</span></button>
+            <button class="ax-tabs__tab">Active <span class="ax-tabs__count">14</span></button>
+            <button class="ax-tabs__tab">Disabled <span class="ax-tabs__count">1</span></button>
+            <button class="ax-tabs__tab">Invited <span class="ax-tabs__count">0</span></button>
+          </div>
+          <div style="flex:1"></div>
+          <div class="ax-inline-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search users…"></div>
+          <button class="ax-filter"><span class="ax-filter__label">Role</span><span class="ax-filter__value">Any</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+
+        <table class="ax-table">
+          <thead><tr>
+            <th class="ax-table__check"><span class="ax-check"></span></th>
+            <th style="width: 24%;">User</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>2FA</th>
+            <th>Last active</th>
+            <th></th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar">MN</span><div><div class="ax-table__title">Maria Ndongo</div><span class="ax-table__sub">Owner · founder</span></div></div></td>
+              <td class="is-mono">maria.ndongo@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--dark">Super Admin</span></td>
+              <td><span class="ax-pill ax-pill--active">Active</span></td>
+              <td class="is-mono"><span style="color: var(--success-ink);">● Enrolled</span></td>
+              <td class="is-mono">Now</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar">DE</span><div><div class="ax-table__title">David Ekwe</div><span class="ax-table__sub">Institutional lead</span></div></div></td>
+              <td class="is-mono">david.ekwe@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--dark">Super Admin</span></td>
+              <td><span class="ax-pill ax-pill--active">Active</span></td>
+              <td class="is-mono"><span style="color: var(--success-ink);">● Enrolled</span></td>
+              <td class="is-mono">1h ago</td>
+              <td></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar">SN</span><div><div class="ax-table__title">Sarah Ndenge</div><span class="ax-table__sub">Communications lead</span></div></div></td>
+              <td class="is-mono">sarah.ndenge@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--info">Communications</span></td>
+              <td><span class="ax-pill ax-pill--active">Active</span></td>
+              <td class="is-mono"><span style="color: var(--success-ink);">● Enrolled</span></td>
+              <td class="is-mono">2h ago</td>
+              <td></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar">JB</span><div><div class="ax-table__title">John Bekolo</div><span class="ax-table__sub">Programme manager</span></div></div></td>
+              <td class="is-mono">john.bekolo@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--info">Programme Manager</span></td>
+              <td><span class="ax-pill ax-pill--active">Active</span></td>
+              <td class="is-mono"><span style="color: var(--success-ink);">● Enrolled</span></td>
+              <td class="is-mono">3h ago</td>
+              <td></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar">AT</span><div><div class="ax-table__title">Aïssa Tchoumi</div><span class="ax-table__sub">Field &amp; stories</span></div></div></td>
+              <td class="is-mono">aissa.tchoumi@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--info">Content Editor</span></td>
+              <td><span class="ax-pill ax-pill--active">Active</span></td>
+              <td class="is-mono"><span style="color: var(--success-ink);">● Enrolled</span></td>
+              <td class="is-mono">Yesterday</td>
+              <td></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar">IM</span><div><div class="ax-table__title">Impact analyst · to be confirmed</div><span class="ax-table__sub">Impact office</span></div></div></td>
+              <td class="is-mono">impact.analyst@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--info">Impact Manager</span></td>
+              <td><span class="ax-pill ax-pill--active">Active</span></td>
+              <td class="is-mono"><span style="color: var(--success-ink);">● Enrolled</span></td>
+              <td class="is-mono">2d ago</td>
+              <td></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar">RV</span><div><div class="ax-table__title">Reviewer · leadership</div><span class="ax-table__sub">Reviewer only</span></div></div></td>
+              <td class="is-mono">reviewer.1@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--info">Reviewer</span></td>
+              <td><span class="ax-pill ax-pill--active">Active</span></td>
+              <td class="is-mono"><span style="color: var(--success-ink);">● Enrolled</span></td>
+              <td class="is-mono">4d ago</td>
+              <td></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><div style="display: flex; align-items: center; gap: 10px;"><span class="ax-avatar" style="background: var(--ws-3); color: var(--text-3);">CT</span><div><div class="ax-table__title" style="color: var(--text-3);">Former contractor</div><span class="ax-table__sub">Removed access</span></div></div></td>
+              <td class="is-mono ax-mute">contractor.old@nayokan.cm</td>
+              <td><span class="ax-pill ax-pill--info">Content Editor</span></td>
+              <td><span class="ax-pill ax-pill--disabled">Disabled</span></td>
+              <td class="is-mono ax-mute">—</td>
+              <td class="is-mono ax-mute">Disabled Sept 20</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ax-pagination">
+          <div>Showing <strong style="color:var(--ink);">1 – 8</strong> of 15 users</div>
+          <div class="ax-pagination__pages"><button>‹</button><button class="is-active">1</button><button>2</button><button>›</button></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'users',crumbs:[{label:'Administration'},{label:'Users'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

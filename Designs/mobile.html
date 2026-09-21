@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mobile Specification — Nayokan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Mobile design specification for the Nayokan digital ecosystem.">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/worlds.css">
+<link rel="stylesheet" href="styles/corporate.css">
+<link rel="stylesheet" href="styles/phase3b.css">
+</head>
+<body data-screen-label="Mobile Spec">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link">What we do</a>
+      <a href="vti.html" class="nav-link">VTI</a>
+      <a href="startup-centre.html" class="nav-link">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link">Hospitality</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="sub-hero">
+  <div class="sub-hero-inner">
+    <div class="sub-hero-meta">
+      <div class="crumbs">
+        <a href="index.html">Nayokan</a><span class="sep">/</span>
+        <a href="handoff.html">Handoff</a><span class="sep">/</span>
+        <span class="current">Mobile Specification</span>
+      </div>
+      <span class="sec">§ Design system · Mobile</span>
+      <span class="ref">/design-system/mobile</span>
+    </div>
+    <div class="sub-hero-body">
+      <h1>Mobile is not a <em>compromise</em>.</h1>
+      <p class="lede">
+        The Nayokan digital ecosystem must remain excellent at 320, 375, 390, 430 and
+        768px, not only on desktop. Below: breakpoint rules, per-screen framings, and
+        the specific patterns each priority screen uses on small devices.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap" id="mobile-spec-body">
+    
+  <div class="spec-section">
+    <div class="spec-grid">
+      <div class="spec-head"><span>§ 01 — Breakpoints</span><h3>Five tiers.<br>Fluid between them.</h3></div>
+      <div><div style="border:1px solid var(--line)">
+  <div style="display:grid;grid-template-columns:180px 1fr 1fr 1fr;gap:20px;padding:20px 24px;align-items:center;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);letter-spacing:0.05em;font-weight:600">XS · 320px</div>
+    <div style="color:var(--muted);font-size:0.9rem">Old Android · budget devices</div>
+    <div style="color:var(--ink);font-size:0.9rem">1-column, 15px base, condensed spacing</div>
+    <div style="color:var(--muted);font-size:0.85rem;font-family:'IBM Plex Mono',monospace">navigation collapses to burger</div>
+  </div>
+  <div style="display:grid;grid-template-columns:180px 1fr 1fr 1fr;gap:20px;padding:20px 24px;align-items:center;border-top:1px solid var(--line)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);letter-spacing:0.05em;font-weight:600">S · 375–390px</div>
+    <div style="color:var(--muted);font-size:0.9rem">iPhone SE · iPhone 12/13 mini · Pixel 5</div>
+    <div style="color:var(--ink);font-size:0.9rem">1-column, 16px base, standard spacing</div>
+    <div style="color:var(--muted);font-size:0.85rem;font-family:'IBM Plex Mono',monospace">burger, edge-to-edge cards</div>
+  </div>
+  <div style="display:grid;grid-template-columns:180px 1fr 1fr 1fr;gap:20px;padding:20px 24px;align-items:center;border-top:1px solid var(--line)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);letter-spacing:0.05em;font-weight:600">M · 430px</div>
+    <div style="color:var(--muted);font-size:0.9rem">iPhone 14/15 Pro Max · large Android</div>
+    <div style="color:var(--ink);font-size:0.9rem">1-column but wider content</div>
+    <div style="color:var(--muted);font-size:0.85rem;font-family:'IBM Plex Mono',monospace">same as S with wider gutters</div>
+  </div>
+  <div style="display:grid;grid-template-columns:180px 1fr 1fr 1fr;gap:20px;padding:20px 24px;align-items:center;border-top:1px solid var(--line)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);letter-spacing:0.05em;font-weight:600">T · 768px (tablet)</div>
+    <div style="color:var(--muted);font-size:0.9rem">iPad · Android tablets</div>
+    <div style="color:var(--ink);font-size:0.9rem">2-column grids appear</div>
+    <div style="color:var(--muted);font-size:0.85rem;font-family:'IBM Plex Mono',monospace">burger up to 960px</div>
+  </div>
+  <div style="display:grid;grid-template-columns:180px 1fr 1fr 1fr;gap:20px;padding:20px 24px;align-items:center;border-top:1px solid var(--line)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);letter-spacing:0.05em;font-weight:600">D · 961px+</div>
+    <div style="color:var(--muted);font-size:0.9rem">Desktop</div>
+    <div style="color:var(--ink);font-size:0.9rem">Full 12-column grid, primary nav visible</div>
+    <div style="color:var(--muted);font-size:0.85rem;font-family:'IBM Plex Mono',monospace">full editorial layout</div>
+  </div></div></div>
+    </div>
+  </div>
+
+  <div class="spec-section">
+    <div class="spec-grid">
+      <div class="spec-head"><span>§ 02 — Type scale</span><h3>Fluid clamp.<br>Never smaller than 15px.</h3><p>Body copy on mobile is 15px minimum (16px preferred). Display type uses clamp() so it scales smoothly.</p></div>
+      <div>
+        <div class="type-row"><span class="tlabel">Display / hero</span><div><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-0.04em;line-height:0.98">Ecosystem</div><small style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.14em">Manrope 800 · clamp(2.4rem, 6vw, 5rem)</small></div></div>
+        <div class="type-row"><span class="tlabel">Section H2</span><div><div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-0.02em;line-height:1.02">One connected pathway</div><small style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.14em">Manrope 700 · clamp(1.6rem, 3vw, 2.4rem)</small></div></div>
+        <div class="type-row"><span class="tlabel">Body / lede</span><div><p style="font-size:clamp(1rem,1.3vw,1.15rem);color:var(--muted);max-width:44ch;margin:0">Body copy scales fluidly. Line height 1.55 minimum for legibility on small screens.</p><small style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;display:block;margin-top:6px">Inter 400 · clamp(1rem, 1.3vw, 1.15rem)</small></div></div>
+        <div class="type-row"><span class="tlabel">Meta / mono</span><div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">§ 02 — meta labels stay 12px</span><small style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;display:block;margin-top:6px">IBM Plex Mono 500 · 0.72rem</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spec-section">
+    <div class="spec-grid">
+      <div class="spec-head"><span>§ 03 — Screen framings</span><h3>Priority screens<br>on mobile.</h3><p>Below: mobile framings of priority screens. Each phone is drawn at approximately iPhone reference (9:19.5).</p></div>
+      <div>
+  <div style="padding-top:8px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px"><span class="meta">§ Home</span><span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;color:var(--muted)">/ · Home</span></div>
+    <div class="phone-row">
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">§ YAOUNDÉ · CAMEROON</div>
+         <div class="mp-h">Building <em>people</em>, enterprises & productive systems.</div>
+         <div class="mp-photo"></div>
+         <div class="mp-bar" style="background:var(--ink);width:60%"></div>
+         <div class="mp-bar" style="background:var(--line-strong);width:45%;margin-top:4px"></div></div>
+    </div>
+  </div>
+  <div class="phone-label">Hero + editorial photo</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner" style="background:var(--ink);color:var(--paper)">
+      <div class="p-nav" style="border-color:var(--line-invert)">
+        <span style="color:var(--paper)">NAYOKAN</span>
+        <div class="p-burger"><span style="background:var(--paper)"></span><span style="background:var(--paper)"></span><span style="background:var(--paper)"></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta dark">§ 02 — NAYOKAN SYSTEM</div>
+         <div class="mp-h dark sm">Six stages.<br>One pathway.</div>
+         <div class="mp-list-item dark"><span style="color:var(--paper)">Build capability</span><span class="mp-num-green">01</span></div><div class="mp-list-item dark"><span style="color:var(--paper)">Organize production</span><span class="mp-num-green">02</span></div><div class="mp-list-item dark"><span style="color:var(--paper)">Create demand</span><span class="mp-num-green">03</span></div><div class="mp-list-item dark"><span style="color:var(--paper)">Commercialize innovation</span><span class="mp-num-green">04</span></div><div class="mp-list-item dark"><span style="color:var(--paper)">Mobilize capital</span><span class="mp-num-green">05</span></div><div class="mp-list-item dark"><span style="color:var(--paper)">Build productive assets</span><span class="mp-num-green">06</span></div></div>
+    </div>
+  </div>
+  <div class="phone-label">System — vertical progression</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">§ 03 — FOUR WORLDS</div><div class="mp-world"><div class="lbl">WORLD 01</div><div class="nm">VTI</div></div><div class="mp-world"><div class="lbl">WORLD 02</div><div class="nm">Startup Centre</div></div><div class="mp-world navy"><div class="lbl">WORLD 03</div><div class="nm">Venture Capital</div></div><div class="mp-world"><div class="lbl">WORLD 04</div><div class="nm">Hospitality</div></div></div>
+    </div>
+  </div>
+  <div class="phone-label">Worlds — stacked</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">§ 05 — IMPACT</div><div class="mp-metric"><div class="lbl">01 · People trained</div><div class="val">—</div><div class="tbc">figure tbc</div></div><div class="mp-metric"><div class="lbl">02 · Programmes</div><div class="val">—</div><div class="tbc">figure tbc</div></div><div class="mp-metric"><div class="lbl">03 · Enterprises</div><div class="val">—</div><div class="tbc">figure tbc</div></div><div class="mp-metric"><div class="lbl">04 · Partners</div><div class="val">—</div><div class="tbc">figure tbc</div></div></div>
+    </div>
+  </div>
+  <div class="phone-label">Impact — honest TBC</div>
+</div>
+    </div>
+  </div>
+  <div style="padding-top:24px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px"><span class="meta">§ VTI · Startup Centre · VC · Hospitality</span><span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;color:var(--muted)">world hero framings</span></div>
+    <div class="phone-row">
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">NAYOKAN / VTI</div>
+         <div class="mp-badge">01 · World · VTI</div>
+         <div class="mp-h">Practical<br>skills.<br><em>Productive</em> people.</div>
+         <div class="mp-cta">See programmes →</div></div>
+    </div>
+  </div>
+  <div class="phone-label">VTI hero</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">SC / PROGRAMME</div>
+         <div class="mp-h sm" style="margin-top:6px">Six months. Six milestones.</div>
+         <div class="mp-milestone"><div class="lbl">M1</div><div class="nm">M1 Onboard</div></div><div class="mp-milestone"><div class="lbl">M2</div><div class="nm">M2 Model</div></div><div class="mp-milestone"><div class="lbl">M3</div><div class="nm">M3 Pilots</div></div><div class="mp-milestone"><div class="lbl">M4</div><div class="nm">M4 Product</div></div><div class="mp-milestone"><div class="lbl">M5</div><div class="nm">M5 Ready</div></div><div class="mp-milestone"><div class="lbl">M6</div><div class="nm">M6 Handover</div></div></div>
+    </div>
+  </div>
+  <div class="phone-label">SC — vertical rail</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner" style="background:var(--ink);color:var(--paper)">
+      <div class="p-nav" style="border-color:var(--line-invert)">
+        <span style="color:var(--paper)">NAYOKAN</span>
+        <div class="p-burger"><span style="background:var(--paper)"></span><span style="background:var(--paper)"></span><span style="background:var(--paper)"></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta dark">NAYOKAN / VC</div>
+         <div class="mp-badge paper">03 · World · VC</div>
+         <div class="mp-h dark sm" style="line-height:1">Capital for<br><em style="color:var(--green-glow)">productive</em><br>enterprises.</div>
+         <div class="mp-cta green">Partnership enquiry →</div></div>
+    </div>
+  </div>
+  <div class="phone-label">VC — institutional navy</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">NAYOKAN / HOSPITALITY</div>
+         <div class="mp-h sm">A place to <em>arrive</em>, work, return.</div>
+         <div class="mp-hosp-row"><span class="nm">Guesthouse</span><span class="loc">Yaoundé</span></div><div class="mp-hosp-row"><span class="nm">Long-stay</span><span class="loc">Yaoundé</span></div><div class="mp-hosp-row"><span class="nm">Workspace</span><span class="loc">Yaoundé</span></div></div>
+    </div>
+  </div>
+  <div class="phone-label">Hospitality — refined</div>
+</div>
+    </div>
+  </div>
+  <div style="padding-top:24px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px"><span class="meta">§ Programme list · Application · Success · Contact</span><span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;color:var(--muted)">forms & long content</span></div>
+    <div class="phone-row">
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">VTI / PROGRAMMES</div>
+         <div class="mp-h sm">Programme catalogue.</div>
+         <div style="display:flex;gap:4px;margin-top:6px;overflow:hidden">
+           <span class="mp-chip on">All</span><span class="mp-chip">Digital</span><span class="mp-chip">Agri</span>
+         </div>
+         <div class="mp-prog-row"><div class="nm">P/001 Engineering</div><div class="st">● OPEN</div></div><div class="mp-prog-row"><div class="nm">P/002 Industrialisation</div><div class="st">● OPEN</div></div><div class="mp-prog-row"><div class="nm">P/003 Clusters</div><div class="st">● OPEN</div></div><div class="mp-prog-row"><div class="nm">P/004 Applied</div><div class="st">● OPEN</div></div></div>
+    </div>
+  </div>
+  <div class="phone-label">Programmes — filter + list</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">SC / APPLY · STEP 03/06</div>
+         <div class="mp-progress"></div>
+         <div class="mp-h sm">Your <em>innovation</em>.</div>
+         <div class="mp-fld"><div class="lbl">TITLE</div><div class="input"></div></div>
+         <div class="mp-fld"><div class="lbl">PROBLEM</div><div class="input tall focus"></div></div>
+         <div class="mp-cta" style="margin-top:8px">Continue to Step 04 →</div></div>
+    </div>
+  </div>
+  <div class="phone-label">Application — mid-flow</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">SC / SUCCESS</div>
+         <div class="mp-success">
+           <div class="mark">✓</div>
+           <div class="t">Application received.</div>
+           <p>Reference REF · APP/SC/2026/0247. Response within 4 weeks.</p>
+         </div>
+         <div class="mp-cta" style="margin-top:12px">Back to Startup Centre →</div></div>
+    </div>
+  </div>
+  <div class="phone-label">Success state</div>
+</div>
+      <div>
+  <div class="phone">
+    <div class="phone-inner">
+      <div class="p-nav">
+        <span>NAYOKAN</span>
+        <div class="p-burger"><span></span><span></span><span></span></div>
+      </div>
+      <div class="p-body"><div class="mp-meta">CONTACT</div>
+         <div class="mp-h sm">Enquiry routing.</div>
+         <div class="mp-route">Programme</div><div class="mp-route on">Partnership</div><div class="mp-route">Investor</div><div class="mp-route">Press</div><div class="mp-route">Other</div></div>
+    </div>
+  </div>
+  <div class="phone-label">Contact — routing</div>
+</div>
+    </div>
+  </div></div>
+    </div>
+  </div>
+
+  <div class="spec-section">
+    <div class="spec-grid">
+      <div class="spec-head"><span>§ 04 — Mobile-specific rules</span><h3>The rules<br>the system follows.</h3></div>
+      <div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/01</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Hero composition</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Photo drops below the headline on mobile. Headline stays large (clamp min 32-40px). Stats grid becomes a 2x2 or single-column stack.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/02</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Nayokan System</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Horizontal scroll converts to a vertical stack on mobile. Stage numbering preserved. Progress bar becomes a small step indicator.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/03</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Cards</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Multi-column card grids collapse in this order: 4 to 2 to 1 (never 3 to 1 abruptly).</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/04</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Forms</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Single column. Fields full-width. Labels always visible (never hidden into placeholder). Submit buttons full-width on mobile.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/05</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Tables / data</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Non-critical columns hidden at 1000px and below; the essential row identity and primary action remain visible.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/06</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Filters</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Chip rows scroll horizontally on mobile if they overflow. Selected state remains visible.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/07</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">CTA placement</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Primary CTA appears at the top of view AND at the section end. No hunting.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/08</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Image cropping</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">object-fit: cover with meaningful focal points. No arbitrary letterboxing.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/09</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Touch targets</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">44x44 minimum. Chips use extra padding. Navigation items are 48+ tall.</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">R/10</span>
+    <div><div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">Off-canvas nav</div><p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">Right-slide panel, full viewport, primary links large + numbered, language pill and CTA at the bottom.</p></div>
+  </div></div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">VTI</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="impact.html">Impact</a></li><li><a href="sitemap.html">Sitemap</a></li><li><a href="handoff.html">Handoff</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="partners.html">Partners</a></li><li><a href="states.html">States</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.1 · Phase 3B</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script src="scripts/system.js"></script>
+<script src="scripts/mobile-nav.js"></script>
+</body>
+</html>

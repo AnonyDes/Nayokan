@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Innovator Application — Nayokan Startup Centre</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Apply to the Nayokan Startup Centre — a serious institutional application for innovators, researchers and ventures.">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/worlds.css">
+<link rel="stylesheet" href="styles/startup.css">
+<link rel="stylesheet" href="styles/phase3b.css">
+</head>
+<body class="startup" data-screen-label="SC · Innovator Application">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link">What we do</a>
+      <a href="vti.html" class="nav-link">VTI</a>
+      <a href="startup-centre.html" class="nav-link active">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link">Hospitality</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="startup-apply.html" class="nav-cta">Apply</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="sub-hero">
+  <div class="sub-hero-inner">
+    <div class="sub-hero-meta">
+      <div class="crumbs">
+        <a href="index.html">Nayokan</a><span class="sep">/</span>
+        <a href="startup-centre.html">Startup Centre</a><span class="sep">/</span>
+        <span class="current">Innovator Application</span>
+      </div>
+      <span class="sec">§ Apply · Innovator</span>
+      <span class="ref">/startup-centre/apply</span>
+    </div>
+    <div class="sub-hero-body">
+      <h1>An <em>institutional</em> application.</h1>
+      <p class="lede">
+        The Startup Centre application is a serious document. Take your time, save your
+        progress, and submit when your venture is genuinely ready to enter the commercialization
+        pathway. Applications are reviewed monthly.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- STATE SWITCHER (design showcase) -->
+<section style="padding:32px 0;background:var(--bone);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <span class="meta">Preview state</span>
+      <div class="filter-bar" style="padding:0;border:none;margin:0;gap:6px">
+        <button class="chip on" data-state="default">Default</button>
+        <button class="chip" data-state="focused">Focused</button>
+        <button class="chip" data-state="filled">Filled</button>
+        <button class="chip" data-state="error">Validation error</button>
+        <button class="chip" data-state="submitting">Submitting</button>
+        <button class="chip" data-state="success">Success</button>
+        <button class="chip" data-state="failure">Failure</button>
+      </div>
+      <span class="meta" style="margin-left:auto">6 steps · autosaved</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN FORM -->
+<section class="section" id="form-region">
+  <div class="wrap">
+    <div class="form-shell">
+
+      <!-- Progress -->
+      <div class="form-progress" aria-label="Application progress">
+        <div class="fp-step done"><span class="num">01</span>Applicant</div>
+        <div class="fp-step done"><span class="num">02</span>Institution</div>
+        <div class="fp-step on"><span class="num">03</span>Innovation</div>
+        <div class="fp-step"><span class="num">04</span>Stage</div>
+        <div class="fp-step"><span class="num">05</span>Team & market</div>
+        <div class="fp-step"><span class="num">06</span>Consent</div>
+      </div>
+
+      <!-- STATE: DEFAULT / FOCUSED / FILLED / ERROR -->
+      <form id="applyForm" class="form-block" onsubmit="event.preventDefault();document.querySelector('[data-state=submitting]').click();">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+          <div>
+            <span class="meta">Step 03 · Innovation</span>
+            <h2 style="margin-top:8px">Tell us about your <em>innovation</em>.</h2>
+          </div>
+          <span class="cms-badge">Autosaved · 3s ago</span>
+        </div>
+        <p class="helper">
+          Describe the problem you are solving, your proposed solution, and where you are in
+          the commercialization journey. Be specific and honest — we prioritise clarity over polish.
+        </p>
+
+        <div class="form-grid">
+          <div class="ff full" id="ff-title">
+            <label for="innov-title">Working title of your innovation</label>
+            <input id="innov-title" type="text" placeholder="e.g. Post-harvest cold-chain platform for smallholder cooperatives">
+            <span class="hint">A short, plain-English title. Not a slogan.</span>
+          </div>
+
+          <div class="ff full" id="ff-problem">
+            <label for="innov-problem">The problem — what is broken today?</label>
+            <textarea id="innov-problem" placeholder="A concrete description of the problem. Who experiences it. How they cope today."></textarea>
+          </div>
+
+          <div class="ff full" id="ff-solution">
+            <label for="innov-solution">The solution — how your innovation addresses it</label>
+            <textarea id="innov-solution" placeholder="What you have built or intend to build. What makes it different from the current approach."></textarea>
+          </div>
+
+          <div class="ff" id="ff-sector">
+            <label for="innov-sector">Sector</label>
+            <select id="innov-sector">
+              <option value="">Select a sector</option>
+              <option>Agri-food</option>
+              <option>Digital & Tech</option>
+              <option>Health</option>
+              <option>Energy</option>
+              <option>Craft & Manufacturing</option>
+              <option>Fintech</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="ff" id="ff-source">
+            <label for="innov-source">Innovation source</label>
+            <select id="innov-source">
+              <option value="">Select</option>
+              <option>Original independent research</option>
+              <option>University research programme</option>
+              <option>Corporate spin-out</option>
+              <option>Field-experience insight</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <button type="button" class="btn btn-ghost" style="padding:12px 18px">← Previous step</button>
+            <span class="save-note">Draft saved · 3s ago</span>
+          </div>
+          <button type="submit" class="btn btn-primary">Continue to Step 04 <span class="arrow">→</span></button>
+        </div>
+      </form>
+
+      <!-- STATE: SUBMITTING (initially hidden) -->
+      <div id="state-submitting" class="status-block" style="display:none">
+        <div class="status-mark loading" aria-hidden="true"></div>
+        <h1>Submitting your application…</h1>
+        <p>Please keep this tab open. This usually takes 3–8 seconds while we validate your submission against the Nayokan review framework.</p>
+        <div class="status-ref">REF · APP/SC/2026/—</div>
+      </div>
+
+      <!-- STATE: SUCCESS -->
+      <div id="state-success" class="status-block" style="display:none">
+        <div class="status-mark ok">✓</div>
+        <h1>Application received.</h1>
+        <p>
+          Thank you. Your submission has been logged with the Startup Centre selection panel.
+          You will receive an acknowledgement email within 24h, and a first-round decision
+          within four weeks.
+        </p>
+        <div class="status-ref">REF · APP/SC/2026/0247</div>
+        <div class="status-actions">
+          <a href="startup-centre.html" class="btn btn-primary">Back to Startup Centre <span class="arrow">→</span></a>
+          <a href="startup-opportunities.html" class="btn btn-ghost">Browse other opportunities</a>
+        </div>
+      </div>
+
+      <!-- STATE: FAILURE -->
+      <div id="state-failure" class="status-block" style="display:none">
+        <div class="status-mark fail">!</div>
+        <h1>Submission failed.</h1>
+        <p>
+          We were unable to log your application. Your draft has been preserved locally and
+          nothing has been lost. Please try again in a few minutes, or contact the Startup
+          Centre team directly if the issue persists.
+        </p>
+        <div class="status-ref">ERR · NETWORK · Draft preserved</div>
+        <div class="status-actions">
+          <button class="btn btn-primary" onclick="document.querySelector('[data-state=default]').click()">Try again <span class="arrow">→</span></button>
+          <a href="mailto:innovators@nayokan.org" class="btn btn-ghost">Email the team</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCE — all form fields covered across the full application -->
+<section class="section bg-bone">
+  <div class="wrap">
+    <header class="section-header">
+      <div>
+        <span class="meta-num">§ Reference — full application specification</span>
+        <h2>All fields.<br>All six steps.</h2>
+      </div>
+      <p class="lead">
+        The full field specification of the innovator application, for internal reference
+        and developer implementation. Persistence is autosaved per step to reduce drop-off.
+      </p>
+    </header>
+
+    <div class="spec-grid" style="align-items:start">
+      <div class="spec-head"><span>Step 01</span><h3>Applicant</h3></div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px 24px">
+        <div class="ff"><label>Full name</label><input type="text" placeholder="e.g. Aïcha Nkomo" disabled></div>
+        <div class="ff"><label>Email</label><input type="email" placeholder="aicha@venture.cm" disabled></div>
+        <div class="ff"><label>Phone</label><input type="text" placeholder="+237 …" disabled></div>
+        <div class="ff"><label>Role</label><select disabled><option>Founder</option><option>Researcher</option><option>Team member</option></select></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="align-items:start;margin-top:32px">
+      <div class="spec-head"><span>Step 02</span><h3>Institution</h3></div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px 24px">
+        <div class="ff"><label>University or institution</label><input type="text" placeholder="e.g. University of Yaoundé I" disabled></div>
+        <div class="ff"><label>Department / lab</label><input type="text" placeholder="Optional" disabled></div>
+        <div class="ff full" style="grid-column:1/-1"><label>Institutional affiliation (context)</label><textarea placeholder="Are you formally affiliated? Any IP or supervisor considerations?" disabled></textarea></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="align-items:start;margin-top:32px">
+      <div class="spec-head"><span>Step 04</span><h3>Stage</h3></div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px 24px">
+        <div class="ff"><label>Current stage</label><select disabled><option>Idea</option><option>Validation</option><option>Product</option><option>Market</option><option>Revenue</option><option>Scale</option></select></div>
+        <div class="ff"><label>First evidence of demand?</label><select disabled><option>No</option><option>Pilot</option><option>Letters of intent</option><option>First customer</option><option>Recurring revenue</option></select></div>
+        <div class="ff full" style="grid-column:1/-1"><label>What proof of demand do you have today?</label><textarea placeholder="Pilots, letters of intent, first customers, revenue, etc." disabled></textarea></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="align-items:start;margin-top:32px">
+      <div class="spec-head"><span>Step 05</span><h3>Team & market</h3></div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px 24px">
+        <div class="ff"><label>Team size</label><input type="number" placeholder="e.g. 3" disabled></div>
+        <div class="ff"><label>Country / region of operation</label><input type="text" placeholder="e.g. Central Region, Cameroon" disabled></div>
+        <div class="ff full" style="grid-column:1/-1"><label>Target market — who buys, at what price, how often?</label><textarea placeholder="Customer profile, pricing hypothesis, purchase frequency." disabled></textarea></div>
+        <div class="ff full" style="grid-column:1/-1"><label>Supporting material (links, deck, video — optional)</label><input type="text" placeholder="One or more URLs (Drive, Notion, YouTube …)" disabled></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="align-items:start;margin-top:32px">
+      <div class="spec-head"><span>Step 06</span><h3>Consent</h3></div>
+      <div>
+        <div class="check-row">
+          <input type="checkbox" id="consent-review" disabled>
+          <label for="consent-review">I agree that Nayokan may review this submission with its selection panel.<small>Reviewed under Nayokan governance protocol; no external disclosure without your consent.</small></label>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="consent-contact" disabled>
+          <label for="consent-contact">I agree that Nayokan may contact me about this application and related opportunities.<small>You can withdraw consent at any time by emailing innovators@nayokan.org.</small></label>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="consent-truth" disabled>
+          <label for="consent-truth">I confirm the information provided is accurate to the best of my knowledge.</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">Vocational Training Institute</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="what-we-do.html">What we do</a></li><li><a href="impact.html">Impact</a></li><li><a href="insights.html">Insights</a></li><li><a href="sitemap.html">Sitemap</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="programmes.html">All programmes</a></li><li><a href="application.html">Apply</a></li><li><a href="partners.html">Partners</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.1 · Phase 3B</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script src="scripts/system.js"></script>
+<script src="scripts/mobile-nav.js"></script>
+<script>
+// State switcher demo
+(function(){
+  const form = document.getElementById('applyForm');
+  const submitting = document.getElementById('state-submitting');
+  const success = document.getElementById('state-success');
+  const failure = document.getElementById('state-failure');
+  const chips = document.querySelectorAll('[data-state]');
+  const fieldTitle = document.getElementById('ff-title');
+  const fieldProblem = document.getElementById('ff-problem');
+  const fieldSector = document.getElementById('ff-sector');
+  const titleInput = document.getElementById('innov-title');
+  const problemInput = document.getElementById('innov-problem');
+  const solutionInput = document.getElementById('innov-solution');
+  const sectorSelect = document.getElementById('innov-sector');
+  const sourceSelect = document.getElementById('innov-source');
+
+  function setChip(name){
+    chips.forEach(c => c.classList.toggle('on', c.dataset.state === name));
+  }
+  function reset(){
+    form.style.display = 'block';
+    submitting.style.display = 'none';
+    success.style.display = 'none';
+    failure.style.display = 'none';
+    [fieldTitle,fieldProblem,fieldSector].forEach(f => f.classList.remove('err'));
+    document.querySelectorAll('.err-msg').forEach(e => e.remove());
+    [titleInput,problemInput,solutionInput,sectorSelect,sourceSelect].forEach(i => i.value = '');
+    if (titleInput.blur) titleInput.blur();
+  }
+  function fill(){
+    titleInput.value = 'Post-harvest cold-chain platform for smallholder cooperatives';
+    problemInput.value = 'Smallholder cooperatives in the Central Region lose 20–35% of harvest value to spoilage in the first 72 hours. Existing cold-chain solutions are priced for industrial operators and require infrastructure that is not present in rural collection points.';
+    solutionInput.value = 'A modular, solar-powered cold-hold unit that connects to a cooperative logistics app — coordinating pick-up, quality grading, and route optimisation to nearest urban market.';
+    sectorSelect.value = 'Agri-food';
+    sourceSelect.value = 'University research programme';
+  }
+  function addErr(field, msg){
+    field.classList.add('err');
+    if (!field.querySelector('.err-msg')){
+      const s = document.createElement('span');
+      s.className = 'err-msg';
+      s.textContent = msg;
+      field.appendChild(s);
+    }
+  }
+  chips.forEach(c => c.addEventListener('click', () => {
+    setChip(c.dataset.state);
+    switch(c.dataset.state){
+      case 'default': reset(); break;
+      case 'focused': reset(); setTimeout(()=>titleInput.focus(),50); break;
+      case 'filled': reset(); fill(); break;
+      case 'error':
+        reset(); fill();
+        titleInput.value = '';
+        problemInput.value = '';
+        addErr(fieldTitle, 'A working title is required — a short phrase, not a slogan.');
+        addErr(fieldProblem, 'Please describe the problem in your own words.');
+        break;
+      case 'submitting':
+        form.style.display = 'none'; success.style.display='none'; failure.style.display='none';
+        submitting.style.display = 'block';
+        setTimeout(()=>{ if (document.querySelector('.chip.on').dataset.state==='submitting') document.querySelector('[data-state=success]').click(); }, 2200);
+        break;
+      case 'success':
+        form.style.display = 'none'; submitting.style.display='none'; failure.style.display='none';
+        success.style.display = 'block';
+        break;
+      case 'failure':
+        form.style.display = 'none'; submitting.style.display='none'; success.style.display='none';
+        failure.style.display = 'block';
+        break;
+    }
+    window.scrollTo({ top: document.getElementById('form-region').offsetTop - 80, behavior: 'smooth' });
+  }));
+})();
+</script>
+</body>
+</html>

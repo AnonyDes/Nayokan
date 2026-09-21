@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Programmes · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ C · 01 · Programmes</div>
+          <h1 class="ax-page__title">Programmes</h1>
+          <p class="ax-page__lede">Every institutional programme running across Nayokan's four worlds. Applications, deadlines and public visibility are managed here.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Export</button>
+          <a href="programme-editor.html" class="ax-btn ax-btn--primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add programme</a>
+        </div>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-toolbar">
+          <div class="ax-tabs">
+            <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">16</span></button>
+            <button class="ax-tabs__tab">VTI <span class="ax-tabs__count">8</span></button>
+            <button class="ax-tabs__tab">Startup <span class="ax-tabs__count">6</span></button>
+            <button class="ax-tabs__tab">Opportunities <span class="ax-tabs__count">2</span></button>
+          </div>
+          <div style="flex:1"></div>
+          <div class="ax-inline-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search programmes…"></div>
+          <button class="ax-filter"><span class="ax-filter__label">Status</span><span class="ax-filter__value">Any</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="ax-filter"><span class="ax-filter__label">Apps</span><span class="ax-filter__value">Open</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+
+        <table class="ax-table">
+          <thead><tr>
+            <th class="ax-table__check"><span class="ax-check"></span></th>
+            <th style="width: 30%;">Programme</th>
+            <th>World</th>
+            <th>Status</th>
+            <th>Applications</th>
+            <th>Deadline</th>
+            <th>Public</th>
+            <th>Updated</th>
+            <th></th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="programme-editor.html" class="ax-table__title">Welding · Cohort 4</a><span class="ax-table__sub">Sept 2026 — Feb 2028 · Yaoundé</span></td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td><span class="ax-pill ax-pill--open">Open</span></td>
+              <td class="is-mono">18 / 25</td>
+              <td class="is-mono">27 Sept 2026</td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td class="is-mono">2h ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><a href="programme-editor.html" class="ax-table__title">Textile Cluster · Cohort 4</a><span class="ax-table__sub">Sept 2026 — Mar 2028 · Yaoundé</span></td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td><span class="ax-pill ax-pill--closing">Closing soon</span></td>
+              <td class="is-mono">22 / 30</td>
+              <td class="is-mono">24 Sept 2026 · 3d</td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td class="is-mono">4h ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Agri-processing Cluster · Cohort 4 <span class="ax-demo-tag">Draft</span></span><span class="ax-table__sub">Details incomplete</span></td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td><span class="ax-pill ax-pill--draft">Draft</span></td>
+              <td class="is-mono">—</td>
+              <td class="is-mono" style="color:var(--warn-ink);">Missing</td>
+              <td><span class="ax-toggle"><span class="ax-toggle__track" style="opacity:0.5;"></span></span></td>
+              <td class="is-mono">3d ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Innovator Residency · 2026</span><span class="ax-table__sub">6-month residency · university-affiliated</span></td>
+              <td><span class="ax-world ax-world--sc">Startup</span></td>
+              <td><span class="ax-pill ax-pill--open">Open</span></td>
+              <td class="is-mono">42 / 60</td>
+              <td class="is-mono">15 Oct 2026</td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td class="is-mono">1d ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Commercialisation Track</span><span class="ax-table__sub">University IP → market pathway</span></td>
+              <td><span class="ax-world ax-world--sc">Startup</span></td>
+              <td><span class="ax-pill ax-pill--open">Open</span></td>
+              <td class="is-mono">14 / 20</td>
+              <td class="is-mono">Rolling</td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td class="is-mono">1w ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Enterprise Grant · 2026 Q4</span><span class="ax-table__sub">Small enterprise capital</span></td>
+              <td><span class="ax-world">Opportunity</span></td>
+              <td><span class="ax-pill ax-pill--upcoming">Upcoming</span></td>
+              <td class="is-mono">—</td>
+              <td class="is-mono">Opens 1 Nov 2026</td>
+              <td><span class="ax-toggle"><span class="ax-toggle__track"></span></span></td>
+              <td class="is-mono">2w ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Solar Micro-Enterprise · Pilot</span><span class="ax-table__sub">Pilot cluster · Bafoussam</span></td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td><span class="ax-pill ax-pill--closed">Closed</span></td>
+              <td class="is-mono">30 / 30</td>
+              <td class="is-mono">Closed · Jul 2026</td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td class="is-mono">2mo ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr><td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Legacy Programme · Cohort 1</span><span class="ax-table__sub">2022 launch cohort</span></td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td><span class="ax-pill ax-pill--archived">Archived</span></td>
+              <td class="is-mono">18 / 18</td>
+              <td class="is-mono">Completed 2024</td>
+              <td><span class="ax-toggle"><span class="ax-toggle__track"></span></span></td>
+              <td class="is-mono">6mo ago</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ax-pagination">
+          <div>Showing <strong style="color:var(--ink);">1 – 8</strong> of 16 programmes</div>
+          <div class="ax-pagination__pages"><button>‹</button><button class="is-active">1</button><button>2</button><button>›</button></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'programmes',crumbs:[{label:'Programmes'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

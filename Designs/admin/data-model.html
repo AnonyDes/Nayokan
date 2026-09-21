@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CMS data model · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .dm-map {
+    background: var(--ink); color: white;
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: auto;
+  }
+  .dm-map__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    min-width: 900px;
+    position: relative;
+  }
+  .dm-entity {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    position: relative;
+  }
+  .dm-entity--pub { border-color: var(--green); background: rgba(18,184,42,0.08); }
+  .dm-entity--gov { border-color: rgba(199,119,0,0.4); background: rgba(199,119,0,0.06); }
+  .dm-entity__type { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.18em; color: rgba(255,255,255,0.42); text-transform: uppercase; }
+  .dm-entity__name { font-family: var(--f-head); font-weight: 700; font-size: 15px; letter-spacing: -0.01em; margin-top: 4px; }
+  .dm-entity__fields { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .dm-entity__field { font-family: var(--f-mono); font-size: 10.5px; color: rgba(255,255,255,0.62); letter-spacing: 0.02em; padding: 2px 0; display: flex; justify-content: space-between; gap: 8px; }
+  .dm-entity__field-t { color: rgba(255,255,255,0.4); }
+  .dm-entity__rel { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--f-mono); font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; line-height: 1.5; }
+  .dm-entity__rel strong { color: var(--green); font-weight: 500; }
+
+  .dm-legend { display: flex; gap: 20px; padding: 14px 20px; background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius); font-size: 12px; margin-bottom: 20px; }
+  .dm-legend__lb { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--text-3); text-transform: uppercase; }
+  .dm-legend__swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: middle; margin-right: 6px; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ Z · 03 · System · CMS data model</div>
+          <h1 class="ax-page__title">CMS data model</h1>
+          <p class="ax-page__lede">The main content entities managed inside Nayokan Admin, their required fields and the relationships between them. This is a conceptual model — the physical schema is derived from it.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Download · JSON schema</button>
+        </div>
+      </div>
+
+      <div class="dm-legend">
+        <span class="dm-legend__lb">Legend ·</span>
+        <span><span class="dm-legend__swatch" style="background: rgba(18,184,42,0.4); border: 1px solid var(--green);"></span>Public-facing entity</span>
+        <span><span class="dm-legend__swatch" style="background: rgba(199,119,0,0.2); border: 1px solid rgba(199,119,0,0.6);"></span>Requires verification</span>
+        <span><span class="dm-legend__swatch" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.4);"></span>Internal / operational</span>
+      </div>
+
+      <div class="dm-map">
+        <div class="dm-map__grid">
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Content · public</div>
+            <div class="dm-entity__name">Article</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>title</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>slug</span><span class="dm-entity__field-t">string · unique</span></div>
+              <div class="dm-entity__field"><span>body_blocks</span><span class="dm-entity__field-t">json[]</span></div>
+              <div class="dm-entity__field"><span>excerpt</span><span class="dm-entity__field-t">text</span></div>
+              <div class="dm-entity__field"><span>cover_media_id</span><span class="dm-entity__field-t">fk → Media</span></div>
+              <div class="dm-entity__field"><span>author_id</span><span class="dm-entity__field-t">fk → User</span></div>
+              <div class="dm-entity__field"><span>world</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">workflow</span></div>
+              <div class="dm-entity__field"><span>seo</span><span class="dm-entity__field-t">json</span></div>
+              <div class="dm-entity__field"><span>published_at</span><span class="dm-entity__field-t">datetime?</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Media</strong> (cover · gallery)<br>→ <strong>Programme</strong> (related)<br>→ <strong>User</strong> (author · reviewer)</div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Content · public</div>
+            <div class="dm-entity__name">Page</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>path</span><span class="dm-entity__field-t">string · unique</span></div>
+              <div class="dm-entity__field"><span>title</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>sections</span><span class="dm-entity__field-t">json[]</span></div>
+              <div class="dm-entity__field"><span>world</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">workflow</span></div>
+              <div class="dm-entity__field"><span>seo</span><span class="dm-entity__field-t">json</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Media</strong> (sections)<br>→ <strong>NavigationItem</strong></div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Programme · public</div>
+            <div class="dm-entity__name">Programme</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>slug</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>world</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>type</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>duration</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>application_deadline</span><span class="dm-entity__field-t">datetime?</span></div>
+              <div class="dm-entity__field"><span>certification</span><span class="dm-entity__field-t">string?</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>public</span><span class="dm-entity__field-t">boolean</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Cluster</strong> (0..n)<br>→ <strong>Application</strong> (0..n)<br>→ <strong>Media</strong> (hero · gallery)</div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Programme · public</div>
+            <div class="dm-entity__name">Cluster</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>sector</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>location</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>programme_id</span><span class="dm-entity__field-t">fk → Programme</span></div>
+              <div class="dm-entity__field"><span>member_count</span><span class="dm-entity__field-t">int?</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>public</span><span class="dm-entity__field-t">boolean</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Programme</strong> (parent)<br>→ <strong>Opportunity</strong> (0..n)</div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Programme · public</div>
+            <div class="dm-entity__name">Opportunity</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>title</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>category</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>eligibility</span><span class="dm-entity__field-t">text</span></div>
+              <div class="dm-entity__field"><span>deadline</span><span class="dm-entity__field-t">datetime?</span></div>
+              <div class="dm-entity__field"><span>external_url</span><span class="dm-entity__field-t">url?</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">enum · auto-expiring</span></div>
+              <div class="dm-entity__field"><span>world</span><span class="dm-entity__field-t">enum</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Application</strong> (0..n)</div>
+          </div>
+
+          <div class="dm-entity">
+            <div class="dm-entity__type">Operational</div>
+            <div class="dm-entity__name">Application</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>programme_id</span><span class="dm-entity__field-t">fk → Programme</span></div>
+              <div class="dm-entity__field"><span>applicant</span><span class="dm-entity__field-t">json</span></div>
+              <div class="dm-entity__field"><span>responses</span><span class="dm-entity__field-t">json[]</span></div>
+              <div class="dm-entity__field"><span>documents</span><span class="dm-entity__field-t">fk[] → Media</span></div>
+              <div class="dm-entity__field"><span>reviewer_id</span><span class="dm-entity__field-t">fk → User?</span></div>
+              <div class="dm-entity__field"><span>notes</span><span class="dm-entity__field-t">json[]</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">workflow</span></div>
+              <div class="dm-entity__field"><span>submitted_at</span><span class="dm-entity__field-t">datetime</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Programme</strong> or <strong>Opportunity</strong><br>→ <strong>User</strong> (reviewer)</div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Ecosystem · public</div>
+            <div class="dm-entity__name">Person</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>position</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>division</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>bio</span><span class="dm-entity__field-t">text</span></div>
+              <div class="dm-entity__field"><span>photo_media_id</span><span class="dm-entity__field-t">fk → Media</span></div>
+              <div class="dm-entity__field"><span>links</span><span class="dm-entity__field-t">json</span></div>
+              <div class="dm-entity__field"><span>display_order</span><span class="dm-entity__field-t">int</span></div>
+              <div class="dm-entity__field"><span>public</span><span class="dm-entity__field-t">boolean · consent</span></div>
+            </div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Ecosystem · public</div>
+            <div class="dm-entity__name">Mentor</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>expertise</span><span class="dm-entity__field-t">string[]</span></div>
+              <div class="dm-entity__field"><span>sector</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>availability</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>cohort_ids</span><span class="dm-entity__field-t">fk[] → Programme</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>public</span><span class="dm-entity__field-t">boolean</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Programme</strong> (0..n)</div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Ecosystem · public</div>
+            <div class="dm-entity__name">Partner</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>category</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>logo_media_id</span><span class="dm-entity__field-t">fk → Media</span></div>
+              <div class="dm-entity__field"><span>website</span><span class="dm-entity__field-t">url?</span></div>
+              <div class="dm-entity__field"><span>relationship</span><span class="dm-entity__field-t">text</span></div>
+              <div class="dm-entity__field"><span>consent_recorded</span><span class="dm-entity__field-t">boolean</span></div>
+              <div class="dm-entity__field"><span>featured</span><span class="dm-entity__field-t">boolean</span></div>
+              <div class="dm-entity__field"><span>public</span><span class="dm-entity__field-t">boolean</span></div>
+            </div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Ecosystem · public</div>
+            <div class="dm-entity__name">Venture</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>description</span><span class="dm-entity__field-t">text</span></div>
+              <div class="dm-entity__field"><span>sector</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>stage</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>location</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>website</span><span class="dm-entity__field-t">url?</span></div>
+              <div class="dm-entity__field"><span>related_programme_id</span><span class="dm-entity__field-t">fk?</span></div>
+              <div class="dm-entity__field"><span>portfolio_status</span><span class="dm-entity__field-t">enum</span></div>
+            </div>
+            <div class="dm-entity__rel">→ <strong>Programme</strong> (0..1)<br>Note: No financial fields.</div>
+          </div>
+
+          <div class="dm-entity dm-entity--pub">
+            <div class="dm-entity__type">Ecosystem · public</div>
+            <div class="dm-entity__name">Property</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>location</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>type</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>amenities</span><span class="dm-entity__field-t">json[]</span></div>
+              <div class="dm-entity__field"><span>gallery</span><span class="dm-entity__field-t">fk[] → Media</span></div>
+              <div class="dm-entity__field"><span>capacity</span><span class="dm-entity__field-t">int</span></div>
+              <div class="dm-entity__field"><span>external_booking_url</span><span class="dm-entity__field-t">url</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">enum</span></div>
+            </div>
+            <div class="dm-entity__rel">External booking model — no reservations stored.</div>
+          </div>
+
+          <div class="dm-entity dm-entity--gov">
+            <div class="dm-entity__type">Impact · governed</div>
+            <div class="dm-entity__name">ImpactMetric</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>value</span><span class="dm-entity__field-t">numeric</span></div>
+              <div class="dm-entity__field"><span>unit</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>description</span><span class="dm-entity__field-t">text</span></div>
+              <div class="dm-entity__field"><span>reporting_period</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>scope</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>world</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>evidence_ids</span><span class="dm-entity__field-t">fk[] → Evidence</span></div>
+              <div class="dm-entity__field"><span>verified_by</span><span class="dm-entity__field-t">fk → User?</span></div>
+              <div class="dm-entity__field"><span>verified_at</span><span class="dm-entity__field-t">datetime?</span></div>
+              <div class="dm-entity__field"><span>public</span><span class="dm-entity__field-t">boolean · gated</span></div>
+            </div>
+            <div class="dm-entity__rel">public=true is <strong>rejected</strong> unless verified.</div>
+          </div>
+
+          <div class="dm-entity dm-entity--gov">
+            <div class="dm-entity__type">Impact · governed</div>
+            <div class="dm-entity__name">Evidence</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>title</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>type</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>source</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>date</span><span class="dm-entity__field-t">date</span></div>
+              <div class="dm-entity__field"><span>file_media_id</span><span class="dm-entity__field-t">fk → Media</span></div>
+              <div class="dm-entity__field"><span>related_metric_ids</span><span class="dm-entity__field-t">fk[]</span></div>
+              <div class="dm-entity__field"><span>verified_by</span><span class="dm-entity__field-t">fk → User?</span></div>
+              <div class="dm-entity__field"><span>immutable</span><span class="dm-entity__field-t">true (append-only)</span></div>
+            </div>
+          </div>
+
+          <div class="dm-entity">
+            <div class="dm-entity__type">Operational</div>
+            <div class="dm-entity__name">Enquiry</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>category</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>contact</span><span class="dm-entity__field-t">json</span></div>
+              <div class="dm-entity__field"><span>organization</span><span class="dm-entity__field-t">string?</span></div>
+              <div class="dm-entity__field"><span>message</span><span class="dm-entity__field-t">text</span></div>
+              <div class="dm-entity__field"><span>source_page</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>assigned_id</span><span class="dm-entity__field-t">fk → User?</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">workflow</span></div>
+              <div class="dm-entity__field"><span>notes</span><span class="dm-entity__field-t">json[]</span></div>
+            </div>
+          </div>
+
+          <div class="dm-entity">
+            <div class="dm-entity__type">Operational</div>
+            <div class="dm-entity__name">Media</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>filename</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>mime_type</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>dimensions</span><span class="dm-entity__field-t">json</span></div>
+              <div class="dm-entity__field"><span>alt_text</span><span class="dm-entity__field-t">text · required</span></div>
+              <div class="dm-entity__field"><span>caption</span><span class="dm-entity__field-t">text?</span></div>
+              <div class="dm-entity__field"><span>source_credit</span><span class="dm-entity__field-t">string?</span></div>
+              <div class="dm-entity__field"><span>collection_id</span><span class="dm-entity__field-t">fk?</span></div>
+              <div class="dm-entity__field"><span>uploaded_by</span><span class="dm-entity__field-t">fk → User</span></div>
+            </div>
+          </div>
+
+          <div class="dm-entity">
+            <div class="dm-entity__type">Administration</div>
+            <div class="dm-entity__name">User</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>email</span><span class="dm-entity__field-t">string · unique</span></div>
+              <div class="dm-entity__field"><span>name</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>role_id</span><span class="dm-entity__field-t">fk → Role</span></div>
+              <div class="dm-entity__field"><span>status</span><span class="dm-entity__field-t">enum</span></div>
+              <div class="dm-entity__field"><span>mfa_enrolled</span><span class="dm-entity__field-t">boolean · required</span></div>
+              <div class="dm-entity__field"><span>last_active</span><span class="dm-entity__field-t">datetime</span></div>
+            </div>
+          </div>
+
+          <div class="dm-entity">
+            <div class="dm-entity__type">Administration</div>
+            <div class="dm-entity__name">AuditEntry</div>
+            <div class="dm-entity__fields">
+              <div class="dm-entity__field"><span>id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>actor_id</span><span class="dm-entity__field-t">fk → User</span></div>
+              <div class="dm-entity__field"><span>action</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>object_type</span><span class="dm-entity__field-t">string</span></div>
+              <div class="dm-entity__field"><span>object_id</span><span class="dm-entity__field-t">uuid</span></div>
+              <div class="dm-entity__field"><span>previous</span><span class="dm-entity__field-t">json?</span></div>
+              <div class="dm-entity__field"><span>next</span><span class="dm-entity__field-t">json?</span></div>
+              <div class="dm-entity__field"><span>created_at</span><span class="dm-entity__field-t">datetime</span></div>
+            </div>
+            <div class="dm-entity__rel">Immutable · append-only.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-panel__head"><div class="ax-panel__title">Publishing workflow (applies to Article, Page, Programme, Story, Impact metric)</div></div>
+        <div class="ax-panel__body">
+          <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;">
+            ${['Draft','Submitted','In review','Approved / Changes requested','Scheduled','Published'].map((s,i) => `<div style="background: ${i===0?'var(--ws)':i===1?'var(--info-bg)':i===2?'var(--warn-bg)':i===3?'var(--success-bg)':i===4?'var(--info-bg)':'var(--success-bg)'}; color: ${i===0?'var(--text-2)':i===1?'var(--info-ink)':i===2?'var(--warn-ink)':'var(--success-ink)'}; padding: 12px; border-radius: var(--radius); text-align: center;"><div class="ax-mono" style="font-size: 10px; letter-spacing: 0.14em; opacity: 0.6;">STEP ${i+1}</div><div style="font-family: var(--f-head); font-weight: 700; font-size: 13px; margin-top: 4px;">${s}</div></div>`).join('')}
+          </div>
+          <div class="ax-mono ax-mute" style="font-size: 11px; margin-top: 12px; text-align: center; letter-spacing: 0.06em;">Every state transition is audited. Approvals require reviewer role. Publish requires visibility toggle + verified prerequisites.</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'design-system',crumbs:[{label:'System'},{label:'Data model'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

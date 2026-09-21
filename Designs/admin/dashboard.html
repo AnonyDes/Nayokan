@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dashboard · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  /* Dashboard-specific composition */
+  .dash-hero {
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dash-hero__eyebrow {
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.5); text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .dash-hero__eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--green); }
+  .dash-hero__greet {
+    font-family: var(--f-head); font-weight: 700; font-size: 24px;
+    letter-spacing: -0.02em; line-height: 1.15;
+  }
+  .dash-hero__greet em { font-style: normal; color: var(--green); }
+  .dash-hero__note { color: rgba(255,255,255,0.62); font-size: 13.5px; margin-top: 8px; max-width: 52ch; }
+  .dash-hero__snap {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 4px 20px;
+    padding-left: 24px;
+    border-left: 1px solid var(--line-invert);
+  }
+  .dash-hero__snap-item {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--line-invert);
+    font-size: 12.5px;
+  }
+  .dash-hero__snap-item:last-child, .dash-hero__snap-item:nth-last-child(2) { border-bottom: none; }
+  .dash-hero__snap-label { color: rgba(255,255,255,0.62); font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .dash-hero__snap-value { font-family: var(--f-head); font-weight: 700; font-size: 18px; color: var(--paper); font-variant-numeric: tabular-nums; }
+  .dash-hero__snap-value--attn { color: var(--green); }
+
+  @media (max-width: 1000px) {
+    .dash-hero { grid-template-columns: 1fr; }
+    .dash-hero__snap { padding-left: 0; border-left: none; padding-top: 16px; border-top: 1px solid var(--line-invert); }
+  }
+
+  /* Quick actions */
+  .dash-quick { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 24px; }
+  @media (max-width: 1200px) { .dash-quick { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 700px) { .dash-quick { grid-template-columns: repeat(2, 1fr); } }
+
+  .dash-quick__item {
+    background: var(--panel); border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12.5px; font-weight: 600;
+    color: var(--ink);
+    transition: all var(--dur-fast);
+    cursor: pointer;
+    min-height: 46px;
+  }
+  .dash-quick__item:hover { border-color: var(--ink); transform: translateY(-1px); }
+  .dash-quick__ic {
+    width: 28px; height: 28px;
+    background: var(--ws); border-radius: var(--radius-xs);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    color: var(--ink);
+  }
+  .dash-quick__item:hover .dash-quick__ic { background: var(--green); }
+  .dash-quick__ic svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+  /* Governance grid */
+  .dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; }
+  @media (max-width: 1100px) { .dash-grid { grid-template-columns: 1fr; } }
+
+  /* Content-status strip */
+  .dash-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    margin-bottom: 20px;
+    background: var(--panel);
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .dash-strip__col {
+    padding: 16px 18px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .dash-strip__col:last-child { border-right: none; }
+  .dash-strip__label {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em;
+    color: var(--text-3); text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .dash-strip__val {
+    font-family: var(--f-head); font-weight: 700; font-size: 30px;
+    letter-spacing: -0.03em; line-height: 1; margin: 10px 0 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .dash-strip__delta {
+    font-family: var(--f-mono); font-size: 11px; color: var(--text-3);
+    letter-spacing: 0.02em;
+  }
+  .dash-strip__col--attn::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--warn);
+  }
+  .dash-strip__col--good::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--green);
+  }
+  @media (max-width: 900px) { .dash-strip { grid-template-columns: repeat(2, 1fr); } .dash-strip__col:nth-child(2n) { border-right: none; } }
+
+  /* Attention list */
+  .dash-attn__row {
+    display: grid; grid-template-columns: 24px 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: background var(--dur-fast);
+  }
+  .dash-attn__row:last-child { border-bottom: none; }
+  .dash-attn__row:hover { background: var(--ws); }
+  .dash-attn__marker {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--warn);
+  }
+  .dash-attn__marker--danger { background: var(--danger); }
+  .dash-attn__marker--info { background: var(--info); }
+  .dash-attn__title { font-weight: 600; font-size: 13px; }
+  .dash-attn__sub { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; margin-top: 2px; }
+  .dash-attn__age { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.04em; }
+
+  /* Applications kanban preview */
+  .dash-apps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; padding: 14px 18px 18px; }
+  .dash-apps__col {
+    background: var(--ws); border-radius: var(--radius);
+    padding: 10px 12px 12px;
+    min-height: 130px;
+  }
+  .dash-apps__head {
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em;
+    color: var(--text-3); text-transform: uppercase;
+    padding-bottom: 8px; margin-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .dash-apps__count { font-family: var(--f-head); font-weight: 700; font-size: 20px; color: var(--ink); letter-spacing: -0.02em; }
+  .dash-apps__mini {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 6px 8px; margin-bottom: 4px;
+    font-size: 11.5px;
+  }
+  .dash-apps__mini-t { font-weight: 600; color: var(--ink); line-height: 1.2; }
+  .dash-apps__mini-s { font-family: var(--f-mono); font-size: 9.5px; color: var(--text-3); letter-spacing: 0.06em; margin-top: 2px; }
+  @media (max-width: 900px) { .dash-apps { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Activity feed */
+  .dash-activity__row {
+    display: grid; grid-template-columns: 22px 1fr auto;
+    gap: 10px; align-items: flex-start;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+  }
+  .dash-activity__row:last-child { border-bottom: none; }
+  .dash-activity__av {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ws-3);
+    color: var(--ink);
+    font-family: var(--f-mono); font-weight: 600; font-size: 9.5px;
+    display: grid; place-items: center;
+  }
+  .dash-activity__body strong { font-weight: 600; }
+  .dash-activity__body .verb { color: var(--text-2); }
+  .dash-activity__body .obj { color: var(--ink); font-weight: 600; }
+  .dash-activity__time { font-family: var(--f-mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.04em; }
+
+  /* Worlds strip */
+  .dash-worlds { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+  .dash-world {
+    background: var(--panel); border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dash-world__num {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em;
+    color: var(--text-3);
+  }
+  .dash-world__name {
+    font-family: var(--f-head); font-weight: 700; font-size: 15px;
+    letter-spacing: -0.01em; margin-top: 2px;
+  }
+  .dash-world__stats {
+    display: flex; gap: 20px; margin-top: 12px;
+    padding-top: 10px; border-top: 1px solid var(--line);
+  }
+  .dash-world__stat { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.02em; }
+  .dash-world__stat strong { display: block; font-family: var(--f-head); font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 2px; }
+  @media (max-width: 900px) { .dash-worlds { grid-template-columns: repeat(2,1fr); } }
+</style>
+</head>
+<body>
+
+<div class="ax-app">
+
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+
+  <main class="ax-workspace">
+    <div class="ax-page">
+
+      <!-- HERO / GREETING -->
+      <section class="dash-hero">
+        <div>
+          <div class="dash-hero__eyebrow">Monday · 21 September 2026 · 09:14 · WAT</div>
+          <h1 class="dash-hero__greet">Good morning, <em>Maria.</em><br>Four items are waiting on you today.</h1>
+          <p class="dash-hero__note">
+            One article awaiting review from David. Two impact metrics require verification
+            before Q3 publication. One VTI programme deadline closes in 6 days.
+          </p>
+        </div>
+        <div class="dash-hero__snap">
+          <div class="dash-hero__snap-item">
+            <span class="dash-hero__snap-label">Awaiting you</span>
+            <span class="dash-hero__snap-value dash-hero__snap-value--attn">4</span>
+          </div>
+          <div class="dash-hero__snap-item">
+            <span class="dash-hero__snap-label">Assigned team</span>
+            <span class="dash-hero__snap-value">17</span>
+          </div>
+          <div class="dash-hero__snap-item">
+            <span class="dash-hero__snap-label">In review</span>
+            <span class="dash-hero__snap-value">9</span>
+          </div>
+          <div class="dash-hero__snap-item">
+            <span class="dash-hero__snap-label">Scheduled today</span>
+            <span class="dash-hero__snap-value">2</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK ACTIONS -->
+      <div class="dash-quick">
+        <a class="dash-quick__item" href="article-editor.html">
+          <span class="dash-quick__ic"><svg viewBox="0 0 24 24"><path d="M4 3h13a2 2 0 0 1 2 2v15l-4-3H6a2 2 0 0 1-2-2z"/><path d="M8 8h9M8 12h9M8 16h6"/></svg></span>
+          Create article
+        </a>
+        <a class="dash-quick__item" href="programme-editor.html">
+          <span class="dash-quick__ic"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span>
+          Add programme
+        </a>
+        <a class="dash-quick__item" href="opportunities.html">
+          <span class="dash-quick__ic"><svg viewBox="0 0 24 24"><path d="m12 4 2.5 5 5.5.8-4 3.9.9 5.5L12 16.7 7.1 19.2 8 13.7 4 9.8l5.5-.8z"/></svg></span>
+          Add opportunity
+        </a>
+        <a class="dash-quick__item" href="partners.html">
+          <span class="dash-quick__ic"><svg viewBox="0 0 24 24"><path d="M11 17 8 20a2 2 0 0 1-3-3l4-4"/><path d="m13 15 4 4a2 2 0 0 0 3-3l-6-6a2 2 0 0 0-3 0l-2 2a2 2 0 0 1-3 0L4 10"/></svg></span>
+          Add partner
+        </a>
+        <a class="dash-quick__item" href="metric-editor.html">
+          <span class="dash-quick__ic"><svg viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="m8 16 3-4 3 2 5-7"/></svg></span>
+          Add metric
+        </a>
+        <a class="dash-quick__item" href="media-library.html">
+          <span class="dash-quick__ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m21 15-4-4-8 8"/><circle cx="9" cy="10" r="2"/></svg></span>
+          Upload media
+        </a>
+        <a class="dash-quick__item" href="applications.html">
+          <span class="dash-quick__ic"><svg viewBox="0 0 24 24"><path d="M4 12h4l2 3h4l2-3h4"/><path d="M4 12V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6"/><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg></span>
+          Review applications
+        </a>
+      </div>
+
+      <!-- CONTENT STATUS STRIP -->
+      <div class="dash-strip">
+        <div class="dash-strip__col">
+          <div class="dash-strip__label">Drafts</div>
+          <div class="dash-strip__val">14</div>
+          <div class="dash-strip__delta">Across articles &amp; pages</div>
+        </div>
+        <div class="dash-strip__col dash-strip__col--attn">
+          <div class="dash-strip__label">Pending review</div>
+          <div class="dash-strip__val">9</div>
+          <div class="dash-strip__delta">3 assigned to you</div>
+        </div>
+        <div class="dash-strip__col">
+          <div class="dash-strip__label">Scheduled</div>
+          <div class="dash-strip__val">6</div>
+          <div class="dash-strip__delta">Next: Wed, 24 Sept · 08:00</div>
+        </div>
+        <div class="dash-strip__col dash-strip__col--good">
+          <div class="dash-strip__label">Published · 30 days</div>
+          <div class="dash-strip__val">28</div>
+          <div class="dash-strip__delta">Currently live on nayokan.cm</div>
+        </div>
+        <div class="dash-strip__col dash-strip__col--attn">
+          <div class="dash-strip__label">Needs attention</div>
+          <div class="dash-strip__val">11</div>
+          <div class="dash-strip__delta">Metadata · verification · SEO</div>
+        </div>
+      </div>
+
+      <!-- ROW 1: content health + applications -->
+      <div class="dash-grid">
+        <!-- CONTENT REQUIRING ATTENTION -->
+        <div class="ax-panel">
+          <div class="ax-panel__head">
+            <div class="ax-panel__title">
+              <span class="ax-panel__title-num">§ 07 ·</span>
+              Content requiring attention
+              <span class="ax-pill ax-pill--needs" style="margin-left:6px;">11 open</span>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <a class="ax-btn ax-btn--soft ax-btn--sm" href="#">All content health</a>
+            </div>
+          </div>
+          <div class="ax-panel__body--flush">
+            <div class="dash-attn__row">
+              <span class="dash-attn__marker dash-attn__marker--danger"></span>
+              <div>
+                <div class="dash-attn__title">Impact metric “People trained · 2025” has no supporting evidence</div>
+                <div class="dash-attn__sub">Impact · Verification required before public toggle</div>
+              </div>
+              <span class="ax-pill ax-pill--needs">Unverified</span>
+              <span class="dash-attn__age">4d</span>
+            </div>
+            <div class="dash-attn__row">
+              <span class="dash-attn__marker"></span>
+              <div>
+                <div class="dash-attn__title">Article “How Cameroon builds productive capability” missing SEO description</div>
+                <div class="dash-attn__sub">Content · Draft · blocked from scheduling</div>
+              </div>
+              <span class="ax-pill ax-pill--needs">SEO gap</span>
+              <span class="dash-attn__age">2d</span>
+            </div>
+            <div class="dash-attn__row">
+              <span class="dash-attn__marker"></span>
+              <div>
+                <div class="dash-attn__title">VTI programme “Agri-processing Cluster · Cohort 4” missing application deadline</div>
+                <div class="dash-attn__sub">Programme · Cannot open applications</div>
+              </div>
+              <span class="ax-pill ax-pill--needs">Field missing</span>
+              <span class="dash-attn__age">3d</span>
+            </div>
+            <div class="dash-attn__row">
+              <span class="dash-attn__marker"></span>
+              <div>
+                <div class="dash-attn__title">Partner record “University of Yaoundé I” missing logo</div>
+                <div class="dash-attn__sub">Ecosystem · Not visible on public partner grid</div>
+              </div>
+              <span class="ax-pill ax-pill--needs">Asset missing</span>
+              <span class="dash-attn__age">6d</span>
+            </div>
+            <div class="dash-attn__row">
+              <span class="dash-attn__marker"></span>
+              <div>
+                <div class="dash-attn__title">Property “Nayokan Guesthouse · Yaoundé” missing gallery images</div>
+                <div class="dash-attn__sub">Hospitality · Visible on site but incomplete</div>
+              </div>
+              <span class="ax-pill ax-pill--needs">Asset missing</span>
+              <span class="dash-attn__age">1w</span>
+            </div>
+            <div class="dash-attn__row">
+              <span class="dash-attn__marker dash-attn__marker--info"></span>
+              <div>
+                <div class="dash-attn__title">3 drafts have not been touched in over 30 days</div>
+                <div class="dash-attn__sub">Content · Consider archiving or completing</div>
+              </div>
+              <span class="ax-pill ax-pill--neutral">Stale</span>
+              <span class="dash-attn__age">30d+</span>
+            </div>
+            <div class="dash-attn__row">
+              <span class="dash-attn__marker dash-attn__marker--danger"></span>
+              <div>
+                <div class="dash-attn__title">2 opportunities have passed their deadline but are still marked Open</div>
+                <div class="dash-attn__sub">Programmes · Must be closed manually</div>
+              </div>
+              <span class="ax-pill ax-pill--expired">Expired</span>
+              <span class="dash-attn__age">Now</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVITY FEED -->
+        <div class="ax-panel">
+          <div class="ax-panel__head">
+            <div class="ax-panel__title">
+              <span class="ax-panel__title-num">§ 09 ·</span>
+              Recent activity
+            </div>
+            <a href="audit-log.html" class="ax-btn ax-btn--soft ax-btn--sm">Audit log</a>
+          </div>
+          <div class="ax-panel__body--flush">
+            <div class="dash-activity__row">
+              <div class="dash-activity__av">MN</div>
+              <div class="dash-activity__body">
+                <strong>Maria</strong> <span class="verb">updated the VTI programme</span> <span class="obj">Agri-processing Cluster · Cohort 4</span>
+              </div>
+              <div class="dash-activity__time">2m</div>
+            </div>
+            <div class="dash-activity__row">
+              <div class="dash-activity__av">JB</div>
+              <div class="dash-activity__body">
+                <strong>John</strong> <span class="verb">submitted for review</span> <span class="obj">“Building productive capability”</span>
+              </div>
+              <div class="dash-activity__time">18m</div>
+            </div>
+            <div class="dash-activity__row">
+              <div class="dash-activity__av">DE</div>
+              <div class="dash-activity__body">
+                <strong>David</strong> <span class="verb">approved impact metric</span> <span class="obj">Enterprises supported · Q2</span>
+              </div>
+              <div class="dash-activity__time">1h</div>
+            </div>
+            <div class="dash-activity__row">
+              <div class="dash-activity__av">SN</div>
+              <div class="dash-activity__body">
+                <strong>Sarah</strong> <span class="verb">published Startup Centre opportunity</span> <span class="obj">Innovator Residency · 2026</span>
+              </div>
+              <div class="dash-activity__time">2h</div>
+            </div>
+            <div class="dash-activity__row">
+              <div class="dash-activity__av">MN</div>
+              <div class="dash-activity__body">
+                <strong>Maria</strong> <span class="verb">changed user permissions for</span> <span class="obj">Aïssa Tchoumi</span>
+              </div>
+              <div class="dash-activity__time">3h</div>
+            </div>
+            <div class="dash-activity__row">
+              <div class="dash-activity__av">JB</div>
+              <div class="dash-activity__body">
+                <strong>John</strong> <span class="verb">uploaded 12 images to</span> <span class="obj">Media library · Cohort 4</span>
+              </div>
+              <div class="dash-activity__time">4h</div>
+            </div>
+            <div class="dash-activity__row">
+              <div class="dash-activity__av">DE</div>
+              <div class="dash-activity__body">
+                <strong>David</strong> <span class="verb">requested changes on</span> <span class="obj">“Hospitality year in review”</span>
+              </div>
+              <div class="dash-activity__time">Yesterday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPLICATIONS PIPELINE -->
+      <div class="ax-panel" style="margin-bottom: 20px;">
+        <div class="ax-panel__head">
+          <div class="ax-panel__title">
+            <span class="ax-panel__title-num">§ 06 ·</span>
+            Applications pipeline
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div class="ax-radio-group">
+              <button class="is-active">All worlds</button>
+              <button>VTI</button>
+              <button>Startup Centre</button>
+              <button>Opportunities</button>
+            </div>
+            <a href="applications.html" class="ax-btn ax-btn--soft ax-btn--sm">Open pipeline</a>
+          </div>
+        </div>
+        <div class="dash-apps">
+          <div class="dash-apps__col">
+            <div class="dash-apps__head"><span>New</span><span class="dash-apps__count">12</span></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0142</div><div class="dash-apps__mini-s">VTI · Welding · 8h ago</div></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0141</div><div class="dash-apps__mini-s">Startup · Innovator · 12h ago</div></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0140</div><div class="dash-apps__mini-s">Opportunity · Grant · 16h ago</div></div>
+          </div>
+          <div class="dash-apps__col">
+            <div class="dash-apps__head"><span>Under review</span><span class="dash-apps__count">8</span></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0138</div><div class="dash-apps__mini-s">Reviewer: Sarah · 1d</div></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0137</div><div class="dash-apps__mini-s">Reviewer: David · 2d</div></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0135</div><div class="dash-apps__mini-s">Reviewer: Maria · 3d</div></div>
+          </div>
+          <div class="dash-apps__col">
+            <div class="dash-apps__head"><span>Shortlisted</span><span class="dash-apps__count">5</span></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0131</div><div class="dash-apps__mini-s">VTI · Interview scheduled</div></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0129</div><div class="dash-apps__mini-s">Startup · Pitch review</div></div>
+          </div>
+          <div class="dash-apps__col">
+            <div class="dash-apps__head"><span>Accepted</span><span class="dash-apps__count">3</span></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0125</div><div class="dash-apps__mini-s">Cohort 4 · Confirmed</div></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0122</div><div class="dash-apps__mini-s">Cohort 4 · Confirmed</div></div>
+          </div>
+          <div class="dash-apps__col">
+            <div class="dash-apps__head"><span>Rejected</span><span class="dash-apps__count">2</span></div>
+            <div class="dash-apps__mini"><div class="dash-apps__mini-t">Applicant #A-2026-0118</div><div class="dash-apps__mini-s">Ineligible · Notified</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WORLDS -->
+      <div class="dash-worlds">
+        <div class="dash-world">
+          <div class="dash-world__num">01 · World</div>
+          <div class="dash-world__name">Vocational Training Institute</div>
+          <div class="dash-world__stats">
+            <div class="dash-world__stat"><strong>8</strong>Programmes</div>
+            <div class="dash-world__stat"><strong>14</strong>Clusters</div>
+            <div class="dash-world__stat"><strong>42</strong>Open apps</div>
+          </div>
+        </div>
+        <div class="dash-world">
+          <div class="dash-world__num">02 · World</div>
+          <div class="dash-world__name">Startup Centre</div>
+          <div class="dash-world__stats">
+            <div class="dash-world__stat"><strong>6</strong>Programmes</div>
+            <div class="dash-world__stat"><strong>19</strong>Mentors</div>
+            <div class="dash-world__stat"><strong>28</strong>Open apps</div>
+          </div>
+        </div>
+        <div class="dash-world">
+          <div class="dash-world__num">03 · World</div>
+          <div class="dash-world__name">Venture Capital</div>
+          <div class="dash-world__stats">
+            <div class="dash-world__stat"><strong>9</strong>Ventures</div>
+            <div class="dash-world__stat"><strong>4</strong>In pipeline</div>
+            <div class="dash-world__stat"><strong>—</strong>Applications</div>
+          </div>
+        </div>
+        <div class="dash-world">
+          <div class="dash-world__num">04 · World</div>
+          <div class="dash-world__name">Hospitality</div>
+          <div class="dash-world__stats">
+            <div class="dash-world__stat"><strong>3</strong>Properties</div>
+            <div class="dash-world__stat"><strong>18</strong>Enquiries · 30d</div>
+            <div class="dash-world__stat"><strong>2</strong>Draft entries</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENQUIRIES + PUBLISHED -->
+      <div class="dash-grid">
+        <div class="ax-panel">
+          <div class="ax-panel__head">
+            <div class="ax-panel__title"><span class="ax-panel__title-num">§ 08 ·</span> Enquiries · last 30 days</div>
+            <a href="enquiries.html" class="ax-btn ax-btn--soft ax-btn--sm">All enquiries</a>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); border-top:0;">
+            <div style="padding:16px 18px; border-right:1px solid var(--line);">
+              <div class="dash-strip__label">New</div>
+              <div class="dash-strip__val">7</div>
+              <div class="dash-strip__delta">Awaiting assignment</div>
+            </div>
+            <div style="padding:16px 18px; border-right:1px solid var(--line);">
+              <div class="dash-strip__label">In progress</div>
+              <div class="dash-strip__val">11</div>
+              <div class="dash-strip__delta">Assigned to team</div>
+            </div>
+            <div style="padding:16px 18px;">
+              <div class="dash-strip__label">Resolved</div>
+              <div class="dash-strip__val">34</div>
+              <div class="dash-strip__delta">Median response · 6h 12m</div>
+            </div>
+          </div>
+          <div style="padding:14px 18px; border-top:1px solid var(--line);">
+            <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px;">
+              <div><div class="dash-strip__label">General</div><div style="font-family:var(--f-head); font-weight:700; font-size:18px; margin-top:4px;">18</div></div>
+              <div><div class="dash-strip__label">Partnership</div><div style="font-family:var(--f-head); font-weight:700; font-size:18px; margin-top:4px;">9</div></div>
+              <div><div class="dash-strip__label">University</div><div style="font-family:var(--f-head); font-weight:700; font-size:18px; margin-top:4px;">6</div></div>
+              <div><div class="dash-strip__label">VC</div><div style="font-family:var(--f-head); font-weight:700; font-size:18px; margin-top:4px;">4</div></div>
+              <div><div class="dash-strip__label">Hospitality</div><div style="font-family:var(--f-head); font-weight:700; font-size:18px; margin-top:4px;">15</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ax-panel">
+          <div class="ax-panel__head">
+            <div class="ax-panel__title"><span class="ax-panel__title-num">§ 04 ·</span> Scheduled for publication</div>
+            <a href="articles.html" class="ax-btn ax-btn--soft ax-btn--sm">All scheduled</a>
+          </div>
+          <div class="ax-panel__body--flush">
+            <div class="dash-attn__row" style="grid-template-columns: 24px 1fr auto auto;">
+              <span class="dash-attn__marker dash-attn__marker--info"></span>
+              <div>
+                <div class="dash-attn__title">“Nayokan Q3 impact review”</div>
+                <div class="dash-attn__sub">Article · Communications · Ready</div>
+              </div>
+              <span class="ax-mono ax-mute">Wed · 24 Sep · 08:00</span>
+              <span class="ax-pill ax-pill--scheduled">Scheduled</span>
+            </div>
+            <div class="dash-attn__row" style="grid-template-columns: 24px 1fr auto auto;">
+              <span class="dash-attn__marker dash-attn__marker--info"></span>
+              <div>
+                <div class="dash-attn__title">“Cohort 4 — welcome cohort”</div>
+                <div class="dash-attn__sub">Story · VTI · Ready</div>
+              </div>
+              <span class="ax-mono ax-mute">Fri · 26 Sep · 12:00</span>
+              <span class="ax-pill ax-pill--scheduled">Scheduled</span>
+            </div>
+            <div class="dash-attn__row" style="grid-template-columns: 24px 1fr auto auto;">
+              <span class="dash-attn__marker dash-attn__marker--info"></span>
+              <div>
+                <div class="dash-attn__title">Homepage · Featured programmes rotation</div>
+                <div class="dash-attn__sub">Homepage · Website</div>
+              </div>
+              <span class="ax-mono ax-mute">Mon · 29 Sep · 06:00</span>
+              <span class="ax-pill ax-pill--scheduled">Scheduled</span>
+            </div>
+            <div class="dash-attn__row" style="grid-template-columns: 24px 1fr auto auto;">
+              <span class="dash-attn__marker dash-attn__marker--info"></span>
+              <div>
+                <div class="dash-attn__title">“Building enterprise readiness”</div>
+                <div class="dash-attn__sub">Article · Startup Centre</div>
+              </div>
+              <span class="ax-mono ax-mute">Wed · 1 Oct · 09:00</span>
+              <span class="ax-pill ax-pill--scheduled">Scheduled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  window.AX_PAGE = {
+    screen: 'dashboard',
+    crumbs: [{ label: 'Dashboard' }]
+  };
+</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

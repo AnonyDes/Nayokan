@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Article Editor · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .ed-shell { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start; }
+  @media (max-width: 1200px) { .ed-shell { grid-template-columns: 1fr; } }
+
+  .ed-doc { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); overflow: hidden; }
+
+  .ed-doc__meta {
+    display: flex; align-items: center; gap: 12px; padding: 10px 20px;
+    border-bottom: 1px solid var(--line-2); background: var(--ws);
+    font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .ed-doc__meta strong { color: var(--ink); font-family: var(--f-sans); font-size: 12px; text-transform: none; letter-spacing: 0; font-weight: 600; }
+  .ed-doc__meta__sep { color: var(--text-4); }
+
+  .ed-doc__canvas { padding: 32px 48px; max-width: 780px; margin: 0 auto; }
+
+  .ed-title {
+    font-family: var(--f-head); font-weight: 700; font-size: 34px;
+    letter-spacing: -0.025em; line-height: 1.08;
+    border: none; outline: none; background: transparent;
+    width: 100%; padding: 8px 0; margin-bottom: 4px;
+  }
+  .ed-title:focus { border-bottom: 1px dashed var(--line-strong); }
+  .ed-slug {
+    font-family: var(--f-mono); font-size: 12px; color: var(--text-3);
+    letter-spacing: 0.02em; padding: 4px 0 20px;
+  }
+  .ed-slug em { color: var(--text-2); font-style: normal; }
+  .ed-slug button {
+    font-family: var(--f-mono); font-size: 10.5px; color: var(--info-ink);
+    margin-left: 8px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .ed-excerpt {
+    font-family: var(--f-sans); font-size: 16px; line-height: 1.55;
+    color: var(--text-2);
+    border: none; outline: none; background: transparent;
+    width: 100%; padding: 0 0 16px; resize: none;
+    font-style: italic;
+  }
+  .ed-cover {
+    aspect-ratio: 16/8;
+    background: repeating-linear-gradient(135deg, var(--ws-2) 0 10px, var(--ws) 10px 20px);
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+    display: grid; place-items: center;
+    color: var(--text-3);
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 8px 0 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ed-cover__btn {
+    position: absolute; bottom: 12px; right: 12px;
+    background: rgba(10,10,10,0.7); color: var(--paper);
+    padding: 5px 10px; border-radius: 3px;
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Block editor rails */
+  .ed-block { position: relative; padding: 8px 0; }
+  .ed-block__rail {
+    position: absolute; left: -56px; top: 8px;
+    display: flex; flex-direction: column; gap: 2px;
+    opacity: 0; transition: opacity var(--dur-fast);
+  }
+  .ed-block:hover .ed-block__rail { opacity: 1; }
+  .ed-block__rail-btn {
+    width: 22px; height: 22px;
+    border-radius: 3px; color: var(--text-3);
+    display: grid; place-items: center;
+  }
+  .ed-block__rail-btn:hover { background: var(--ws-2); color: var(--ink); }
+  .ed-block__rail-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+  .ed-block__type {
+    font-family: var(--f-mono); font-size: 9.5px; color: var(--text-4);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 2px 0 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ed-block__type::before { content: ''; width: 3px; height: 3px; background: var(--text-4); }
+
+  .ed-p { font-size: 16px; line-height: 1.68; color: var(--ink); }
+  .ed-h { font-family: var(--f-head); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; line-height: 1.2; margin: 4px 0 6px; }
+
+  .ed-quote {
+    padding: 16px 0 16px 20px;
+    border-left: 2px solid var(--green);
+    font-family: var(--f-head); font-weight: 600;
+    font-size: 20px; line-height: 1.4;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .ed-quote__cite { display: block; font-family: var(--f-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.1em; margin-top: 12px; text-transform: uppercase; font-weight: 500; }
+
+  .ed-callout {
+    padding: 16px 18px;
+    background: var(--ws);
+    border: 1px solid var(--line-2);
+    border-left: 3px solid var(--ink);
+    border-radius: 3px;
+    font-size: 14px; line-height: 1.55;
+  }
+  .ed-callout__title { font-weight: 600; margin-bottom: 4px; }
+
+  .ed-inline-img {
+    background: repeating-linear-gradient(135deg, var(--ws-2) 0 10px, var(--ws) 10px 20px);
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+    aspect-ratio: 16/9;
+    display: grid; place-items: center;
+    color: var(--text-3);
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    margin: 4px 0 8px;
+  }
+  .ed-inline-cap {
+    font-family: var(--f-mono); font-size: 11.5px; color: var(--text-3);
+    padding: 4px 4px 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* Insert block bar */
+  .ed-insert {
+    display: flex; align-items: center; gap: 8px;
+    margin: 12px 0 8px; padding: 8px 12px;
+    border: 1px dashed var(--line-2);
+    border-radius: var(--radius);
+    background: var(--ws);
+    color: var(--text-3);
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: all var(--dur-fast);
+  }
+  .ed-insert:hover { border-color: var(--ink); color: var(--ink); background: var(--panel); }
+  .ed-insert svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .ed-insert__opts { display: flex; gap: 4px; margin-left: auto; }
+  .ed-insert__opt {
+    padding: 3px 8px;
+    border: 1px solid var(--line-2);
+    border-radius: 3px;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em;
+    color: var(--text-3);
+    text-transform: uppercase;
+    background: var(--panel);
+  }
+  .ed-insert__opt:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* Right sidebar */
+  .ed-side { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 76px; }
+
+  .ed-side__acc { border: 1px solid var(--line-2); border-radius: var(--radius-lg); background: var(--panel); overflow: hidden; }
+  .ed-side__acc-head {
+    padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--line-2);
+    font-family: var(--f-head); font-weight: 700; font-size: 13.5px;
+  }
+  .ed-side__acc-head__num { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.14em; color: var(--text-3); text-transform: uppercase; }
+  .ed-side__acc-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 14px; }
+
+  .ed-side__status {
+    padding: 14px 16px;
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--radius-lg);
+  }
+  .ed-side__status-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--line-invert); font-size: 12px; }
+  .ed-side__status-row:last-of-type { border: none; }
+  .ed-side__status-lb { color: rgba(255,255,255,0.5); font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .ed-side__status-val { font-family: var(--f-mono); font-size: 12px; color: var(--paper); }
+  .ed-side__status-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+
+  .ed-seo-preview {
+    background: var(--paper); border: 1px solid var(--line-2);
+    border-radius: var(--radius); padding: 12px;
+    font-family: 'Arial', sans-serif;
+  }
+  .ed-seo-preview__site { font-size: 11px; color: #202124; }
+  .ed-seo-preview__title { color: #1a0dab; font-size: 16px; font-weight: 400; margin: 2px 0; line-height: 1.3; letter-spacing: 0; }
+  .ed-seo-preview__desc { font-size: 12px; color: #4d5156; line-height: 1.5; }
+
+  .ed-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  .ed-progress {
+    display: flex; flex-direction: column; gap: 4px;
+    margin: 4px 0;
+  }
+  .ed-progress__meta { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; text-transform: uppercase; }
+  .ed-progress__val { color: var(--success-ink); font-weight: 600; }
+
+  .ed-preview-toggle {
+    display: flex; padding: 3px;
+    background: var(--ws-2);
+    border-radius: var(--radius);
+    gap: 2px;
+  }
+  .ed-preview-toggle button {
+    flex: 1; padding: 5px 8px;
+    font-size: 11px; font-weight: 500;
+    border-radius: 3px;
+    color: var(--text-3);
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  }
+  .ed-preview-toggle button svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .ed-preview-toggle button.is-active { background: var(--panel); color: var(--ink); font-weight: 600; }
+
+  .ed-footer-actions {
+    background: var(--panel); border-top: 1px solid var(--line-2);
+    padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; bottom: 0; z-index: 5;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    gap: 12px; flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ B · 04 · Content · Editing article #ART-2026-024</div>
+          <h1 class="ax-page__title">Building productive capability</h1>
+          <p class="ax-page__lede">Last edited by <strong>John Bekolo</strong> · 2 minutes ago · autosaved.</p>
+        </div>
+        <div class="ax-page__actions">
+          <a href="articles.html" class="ax-btn ax-btn--soft">
+            <svg viewBox="0 0 24 24"><path d="M11 6 5 12l6 6M5 12h14"/></svg>
+            Back to articles
+          </a>
+          <a href="article-preview.html" class="ax-btn ax-btn--ghost">
+            <svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            Preview
+          </a>
+          <button class="ax-btn ax-btn--primary">
+            Submit for review
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="ed-shell">
+
+        <!-- MAIN DOC -->
+        <div class="ed-doc">
+
+          <div class="ed-doc__meta">
+            <strong>Article</strong>
+            <span class="ed-doc__meta__sep">·</span>
+            <span class="ax-pill ax-pill--review">In review</span>
+            <span class="ed-doc__meta__sep">·</span>
+            <span>Autosaved · 2m ago</span>
+            <span class="ed-doc__meta__sep">·</span>
+            <span>v4 · <a href="version-history.html" style="color:var(--info-ink); text-decoration: underline;">Version history</a></span>
+            <span style="margin-left:auto; display:flex; gap:12px; align-items:center;">
+              <span>Words <strong style="color:var(--ink); font-family:var(--f-sans); font-size:12px;">1,024</strong></span>
+              <span>Reading <strong style="color:var(--ink); font-family:var(--f-sans); font-size:12px;">5 min</strong></span>
+              <span>Language <strong style="color:var(--ink); font-family:var(--f-sans); font-size:12px;">EN</strong></span>
+            </span>
+          </div>
+
+          <div class="ed-doc__canvas">
+
+            <!-- COVER -->
+            <div class="ed-cover">
+              <div>COVER IMAGE · 16 / 8 · Drop or select</div>
+              <button class="ed-cover__btn">Choose from media library</button>
+            </div>
+
+            <!-- TITLE -->
+            <input class="ed-title" value="Building productive capability: why Cameroon needs a vocational renaissance">
+
+            <div class="ed-slug">
+              nayokan.cm<em>/insights/building-productive-capability</em>
+              <button>Edit slug</button>
+            </div>
+
+            <!-- EXCERPT -->
+            <textarea class="ed-excerpt" rows="2">A field-note from Nayokan on how vocational training becomes the backbone of a productive economy — and what happens when we treat it as strategic infrastructure.</textarea>
+
+            <!-- BLOCK: paragraph -->
+            <div class="ed-block">
+              <div class="ed-block__rail">
+                <button class="ed-block__rail-btn" aria-label="Move up"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg></button>
+                <button class="ed-block__rail-btn" aria-label="Move down"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+                <button class="ed-block__rail-btn" aria-label="Drag"><svg viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></svg></button>
+              </div>
+              <div class="ed-block__type">Paragraph</div>
+              <p class="ed-p">Cameroon does not lack ambition. Across cities and villages, young people build things — repair engines, run enterprises out of small workshops, coax value out of raw agricultural output. What Cameroon lacks, structurally, is a formal recognition of that capability. Vocational training is where recognition begins.</p>
+            </div>
+
+            <!-- BLOCK: heading -->
+            <div class="ed-block">
+              <div class="ed-block__rail">
+                <button class="ed-block__rail-btn"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg></button>
+                <button class="ed-block__rail-btn"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+                <button class="ed-block__rail-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></svg></button>
+              </div>
+              <div class="ed-block__type">Heading · H2</div>
+              <h2 class="ed-h">Capability, not credentials</h2>
+            </div>
+
+            <!-- BLOCK: paragraph -->
+            <div class="ed-block">
+              <div class="ed-block__type">Paragraph</div>
+              <p class="ed-p">The Nayokan Vocational Training Institute exists to make one thing explicit: skill is infrastructure. When a welder can prove their skill against a national standard, when an agri-processor can join a productive cluster with peer accountability, when a small enterprise can hire against a recognisable qualification — that country becomes measurably more productive.</p>
+            </div>
+
+            <!-- BLOCK: quote -->
+            <div class="ed-block">
+              <div class="ed-block__rail">
+                <button class="ed-block__rail-btn"><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg></button>
+                <button class="ed-block__rail-btn"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+                <button class="ed-block__rail-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/></svg></button>
+              </div>
+              <div class="ed-block__type">Quote</div>
+              <blockquote class="ed-quote">
+                We are not training people to leave Cameroon. We are training people to build it.
+                <span class="ed-quote__cite">— A Nayokan cluster lead, September 2026</span>
+              </blockquote>
+            </div>
+
+            <!-- BLOCK: image -->
+            <div class="ed-block">
+              <div class="ed-block__type">Image · Media block</div>
+              <div class="ed-inline-img">FIELD PHOTOGRAPH · Cohort 4 workshop</div>
+              <div class="ed-inline-cap">Caption · Cluster session, Yaoundé. Photo credit to be added before publish.</div>
+            </div>
+
+            <!-- BLOCK: callout -->
+            <div class="ed-block">
+              <div class="ed-block__type">Callout · Contextual note</div>
+              <div class="ed-callout">
+                <div class="ed-callout__title">Nayokan cluster model</div>
+                Clusters are peer groupings of small enterprises within a shared sector — welding, agri-processing, textiles — that train, produce and defend market share together.
+              </div>
+            </div>
+
+            <!-- BLOCK: paragraph -->
+            <div class="ed-block">
+              <div class="ed-block__type">Paragraph</div>
+              <p class="ed-p">This is what a vocational renaissance looks like in practice: not new buildings, but new proofs of capability, distributed across the country, connected to buyers and mentors and capital pathways. Nayokan is one node in that network. There must be many more.</p>
+            </div>
+
+            <!-- INSERT NEW BLOCK -->
+            <button class="ed-insert">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Add a new block</span>
+              <div class="ed-insert__opts">
+                <button class="ed-insert__opt">Heading</button>
+                <button class="ed-insert__opt">Paragraph</button>
+                <button class="ed-insert__opt">Image</button>
+                <button class="ed-insert__opt">Quote</button>
+                <button class="ed-insert__opt">Video</button>
+                <button class="ed-insert__opt">Gallery</button>
+                <button class="ed-insert__opt">Callout</button>
+                <button class="ed-insert__opt">CTA</button>
+                <button class="ed-insert__opt">Related</button>
+              </div>
+            </button>
+
+          </div>
+
+          <!-- FOOTER ACTIONS -->
+          <div class="ed-footer-actions">
+            <div style="display:flex; gap:8px; align-items:center;">
+              <span class="ax-pill ax-pill--needs">SEO description missing</span>
+              <span class="ax-mono ax-mute-2">2 issues before publish</span>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button class="ax-btn ax-btn--soft">Save draft</button>
+              <button class="ax-btn ax-btn--ghost">Discard changes</button>
+              <button class="ax-btn ax-btn--primary">Submit for review</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDEBAR -->
+        <div class="ed-side">
+
+          <!-- Status -->
+          <div class="ed-side__status">
+            <div class="ed-side__status-row"><span class="ed-side__status-lb">Status</span><span class="ax-pill ax-pill--review">In review</span></div>
+            <div class="ed-side__status-row"><span class="ed-side__status-lb">Assigned reviewer</span><span class="ed-side__status-val">David Ekwe</span></div>
+            <div class="ed-side__status-row"><span class="ed-side__status-lb">Submitted</span><span class="ed-side__status-val">Yesterday · 16:42</span></div>
+            <div class="ed-side__status-row"><span class="ed-side__status-lb">Visibility</span><span class="ed-side__status-val">Not visible publicly</span></div>
+            <div class="ed-side__status-actions">
+              <button class="ax-btn ax-btn--ghost ax-btn--sm" style="border-color: rgba(255,255,255,0.3); color: white; justify-content:center;">Reassign</button>
+              <button class="ax-btn ax-btn--accent ax-btn--sm" style="justify-content:center;">Recall</button>
+            </div>
+          </div>
+
+          <!-- Publish workflow -->
+          <div class="ed-side__acc">
+            <div class="ed-side__acc-head">
+              <span>Publishing workflow</span>
+              <span class="ed-side__acc-head__num">Step 3 · 6</span>
+            </div>
+            <div class="ed-side__acc-body">
+              <ol style="display:flex; flex-direction:column; gap:6px; font-size:12.5px;">
+                <li style="display:flex; gap:8px; align-items:center; color:var(--text-3);"><span class="ax-avatar" style="background:var(--success); color:white; width:20px; height:20px; font-size:10px;">✓</span> Draft</li>
+                <li style="display:flex; gap:8px; align-items:center; color:var(--text-3);"><span class="ax-avatar" style="background:var(--success); color:white; width:20px; height:20px; font-size:10px;">✓</span> Submitted</li>
+                <li style="display:flex; gap:8px; align-items:center; color:var(--ink); font-weight:600;"><span class="ax-avatar" style="background:var(--warn); color:white; width:20px; height:20px; font-size:10px;">3</span> In review · David</li>
+                <li style="display:flex; gap:8px; align-items:center; color:var(--text-4);"><span class="ax-avatar" style="background:var(--ws-3); color:var(--text-3); width:20px; height:20px; font-size:10px;">4</span> Approved</li>
+                <li style="display:flex; gap:8px; align-items:center; color:var(--text-4);"><span class="ax-avatar" style="background:var(--ws-3); color:var(--text-3); width:20px; height:20px; font-size:10px;">5</span> Scheduled</li>
+                <li style="display:flex; gap:8px; align-items:center; color:var(--text-4);"><span class="ax-avatar" style="background:var(--ws-3); color:var(--text-3); width:20px; height:20px; font-size:10px;">6</span> Published</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Metadata -->
+          <div class="ed-side__acc">
+            <div class="ed-side__acc-head">
+              <span>Article metadata</span>
+              <span class="ed-side__acc-head__num">B · 04a</span>
+            </div>
+            <div class="ed-side__acc-body">
+              <div class="ax-field">
+                <label class="ax-field__label">Nayokan world</label>
+                <select class="ax-select">
+                  <option>01 · Vocational Training Institute</option>
+                  <option>02 · Startup Centre</option>
+                  <option>03 · Venture Capital</option>
+                  <option>04 · Hospitality</option>
+                  <option>All worlds</option>
+                </select>
+              </div>
+              <div class="ax-field">
+                <label class="ax-field__label">Category</label>
+                <select class="ax-select">
+                  <option>Field notes</option>
+                  <option>Programme updates</option>
+                  <option>Institutional letter</option>
+                  <option>Impact review</option>
+                  <option>Announcement</option>
+                </select>
+              </div>
+              <div class="ax-field">
+                <label class="ax-field__label">Author</label>
+                <select class="ax-select">
+                  <option>John Bekolo · Programme Manager</option>
+                  <option>Maria Ndongo · Super Admin</option>
+                  <option>Sarah Ndenge · Communications</option>
+                </select>
+              </div>
+              <div class="ax-field">
+                <label class="ax-field__label">Tags</label>
+                <div class="ed-tags">
+                  <span class="ax-tag">Vocational <button>×</button></span>
+                  <span class="ax-tag">Clusters <button>×</button></span>
+                  <span class="ax-tag">Cameroon <button>×</button></span>
+                  <button class="ax-tag" style="border-style: dashed;">+ Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEO -->
+          <div class="ed-side__acc">
+            <div class="ed-side__acc-head">
+              <span>SEO &amp; discovery</span>
+              <span class="ed-side__acc-head__num" style="color:var(--warn-ink);">Needs work</span>
+            </div>
+            <div class="ed-side__acc-body">
+
+              <div class="ax-notice ax-notice--warn">
+                <svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg>
+                <div class="ax-notice__body">
+                  <div class="ax-notice__title">Meta description is missing</div>
+                  This article cannot be scheduled for publication until the SEO description is added.
+                </div>
+              </div>
+
+              <div class="ax-field">
+                <label class="ax-field__label">Meta title <span class="ax-mute" style="font-family:var(--f-mono); font-size:9.5px; margin-left:auto;">58 / 60</span></label>
+                <input class="ax-input" value="Building productive capability — Nayokan">
+              </div>
+              <div class="ax-field">
+                <label class="ax-field__label">Meta description <span class="ax-req">Required</span> <span class="ax-mute" style="font-family:var(--f-mono); font-size:9.5px; margin-left:auto;">0 / 160</span></label>
+                <textarea class="ax-textarea is-error" placeholder="One clear paragraph, 140–160 characters."></textarea>
+                <div class="ax-field__error">
+                  <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6.5"/><path d="M8 5v3M8 11v.5"/></svg>
+                  Meta description is required before publishing.
+                </div>
+              </div>
+
+              <div class="ed-progress">
+                <div class="ed-progress__meta"><span>SEO health</span><span class="ed-progress__val" style="color:var(--warn-ink);">Needs improvement</span></div>
+                <div class="ax-progress"><div class="ax-progress__bar ax-progress__bar--warn" style="width:55%;"></div></div>
+              </div>
+
+              <div class="ed-seo-preview">
+                <div class="ed-seo-preview__site">nayokan.cm › insights › building-productive-capability</div>
+                <div class="ed-seo-preview__title">Building productive capability — Nayokan</div>
+                <div class="ed-seo-preview__desc">— add a meta description to complete the search preview —</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div class="ed-side__acc">
+            <div class="ed-side__acc-head">
+              <span>Preview</span>
+              <span class="ed-side__acc-head__num">B · 05</span>
+            </div>
+            <div class="ed-side__acc-body">
+              <div class="ed-preview-toggle">
+                <button class="is-active"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M8 20h8"/></svg>Desktop</button>
+                <button><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1"/></svg>Tablet</button>
+                <button><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="1"/></svg>Mobile</button>
+              </div>
+              <a href="article-preview.html" class="ax-btn ax-btn--ghost" style="justify-content:center;">Open preview</a>
+              <div class="ax-notice ax-notice--soft" style="font-size:11.5px;">
+                <svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <div>Preview will render exactly as the article appears on the public website. It is <strong>not live</strong>.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  window.AX_PAGE = {
+    screen: 'articles',
+    crumbs: [
+      { label: 'Content' },
+      { label: 'Articles', href: 'articles.html' },
+      { label: 'Edit article' }
+    ]
+  };
+</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

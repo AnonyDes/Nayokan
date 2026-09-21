@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Phase 3B Handoff — Nayokan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Phase 3B delivery notes and developer handoff for the Nayokan digital ecosystem.">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/worlds.css">
+<link rel="stylesheet" href="styles/corporate.css">
+<link rel="stylesheet" href="styles/phase3b.css">
+</head>
+<body data-screen-label="Phase 3B Handoff">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link">What we do</a>
+      <a href="vti.html" class="nav-link">VTI</a>
+      <a href="startup-centre.html" class="nav-link">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link">Hospitality</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="sub-hero">
+  <div class="sub-hero-inner">
+    <div class="sub-hero-meta">
+      <div class="crumbs">
+        <a href="index.html">Nayokan</a><span class="sep">/</span>
+        <span class="current">Phase 3B Handoff</span>
+      </div>
+      <span class="sec">§ Delivery · Phase 3B</span>
+      <span class="ref">/design-system/handoff</span>
+    </div>
+    <div class="sub-hero-body">
+      <h1>Phase 3B — <em>completion</em> and handoff.</h1>
+      <p class="lede">
+        A completion pass on top of the approved Phase 3 foundation. Missing routes
+        added. Content-governance issues fixed. State library formalised. Mobile
+        specification documented. Ready to hand to Claude Code for production
+        implementation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <!-- HEADLINE COUNTS -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:64px">
+      <div style="background:var(--paper);padding:24px 20px"><span class="meta">Screens · total</span><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-0.03em;margin-top:6px">36</div><small style="color:var(--muted);font-size:0.82rem">18 Phase 3 + 18 Phase 3B</small></div>
+      <div style="background:var(--paper);padding:24px 20px"><span class="meta">New in Phase 3B</span><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-0.03em;margin-top:6px;color:var(--green-deep)">18</div><small style="color:var(--muted);font-size:0.82rem">All four worlds + corporate</small></div>
+      <div style="background:var(--paper);padding:24px 20px"><span class="meta">Governance fixes</span><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-0.03em;margin-top:6px">3</div><small style="color:var(--muted);font-size:0.82rem">Counters, EST. year, animation gate</small></div>
+      <div style="background:var(--paper);padding:24px 20px"><span class="meta">Design system</span><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-0.03em;margin-top:6px">Locked</div><small style="color:var(--muted);font-size:0.82rem">No breaking changes to base</small></div>
+    </div>
+
+    <!-- A. SITEMAP -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ A — Sitemap</span>
+          <h3>Complete route<br>index with status.</h3>
+          <p>Legend: <span class="pill-status done">Complete</span> <span class="pill-status new">Added 3B</span> <span class="pill-status partial">Partial</span> <span class="pill-status future">Not yet</span></p>
+        </div>
+        <div>
+          <div id="sitemap-groups"></div>
+          <div style="margin-top:24px;text-align:right"><a href="sitemap.html" class="link-inline">Live sitemap page <span class="arrow">→</span></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B. SCREEN INVENTORY -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ B — Screen inventory</span>
+          <h3>Every screen<br>and what it delivers.</h3>
+        </div>
+        <div id="screen-inventory"></div>
+      </div>
+    </div>
+
+    <!-- C. COMPONENT INVENTORY -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ C — Component inventory</span>
+          <h3>Reusable<br>components.</h3>
+          <p>Reference implementations live in <code style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;background:var(--bone);padding:2px 6px">styles/phase3b.css</code> and shared partials.</p>
+        </div>
+        <div>
+          <div class="pgrid pgrid-2">
+            <div class="deliver-card"><span class="meta">C/01</span><h4>Nav (desktop + mobile off-canvas)</h4><p style="color:var(--muted);font-size:0.9rem">Sticky primary nav with active state, language pill, and burger-injected mobile panel via <code>scripts/mobile-nav.js</code>.</p></div>
+            <div class="deliver-card"><span class="meta">C/02</span><h4>Footer</h4><p style="color:var(--muted);font-size:0.9rem">Four-column dark footer with brand, divisions, institution, engage. Content-managed link lists.</p></div>
+            <div class="deliver-card"><span class="meta">C/03</span><h4>Buttons</h4><p style="color:var(--muted);font-size:0.9rem">Primary (ink), accent (green), ghost (outline). Full state overlay incl. focus ring. Details in <a href="states.html">States</a>.</p></div>
+            <div class="deliver-card"><span class="meta">C/04</span><h4>Cards — pcard / pf-card / dir-card</h4><p style="color:var(--muted);font-size:0.9rem">Programme cards, portfolio cards, people/mentor cards. Light + dark variants.</p></div>
+            <div class="deliver-card"><span class="meta">C/05</span><h4>Forms</h4><p style="color:var(--muted);font-size:0.9rem">ff field wrapper handles label/input/hint/error atomically. Multi-step form uses <code>.form-progress</code>.</p></div>
+            <div class="deliver-card"><span class="meta">C/06</span><h4>Filter bar & chips</h4><p style="color:var(--muted);font-size:0.9rem">Reusable chip row with counts, active state, clear button and inline search.</p></div>
+            <div class="deliver-card"><span class="meta">C/07</span><h4>Badges — pill-status, cms-badge, placeholder-tag</h4><p style="color:var(--muted);font-size:0.9rem">Content-governance markers. TBC placeholders are always visually restrained.</p></div>
+            <div class="deliver-card"><span class="meta">C/08</span><h4>Metric cell</h4><p style="color:var(--muted);font-size:0.9rem">Big-number cell — never animates unless <code>data-count-verified="true"</code>.</p></div>
+            <div class="deliver-card"><span class="meta">C/09</span><h4>Tabs / segmented control</h4><p style="color:var(--muted);font-size:0.9rem">Emergent — chip row doubles as segmented control on state-switching pages.</p></div>
+            <div class="deliver-card"><span class="meta">C/10</span><h4>Modal / dialog</h4><p style="color:var(--muted);font-size:0.9rem">Scrim + centered modal + close button + action row. Confirmation variant for destructive actions.</p></div>
+            <div class="deliver-card"><span class="meta">C/11</span><h4>Content states</h4><p style="color:var(--muted);font-size:0.9rem">Skeleton (loading), state-empty, state-error, populated — full pattern in <a href="states.html">States</a>.</p></div>
+            <div class="deliver-card"><span class="meta">C/12</span><h4>Stage rail</h4><p style="color:var(--muted);font-size:0.9rem">Six-column stage / step rail used across commercialization, pipeline and programme milestones. Dark variant for VC.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D. DESIGN SYSTEM -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ D — Design system</span>
+          <h3>Confirmed tokens.<br>Preserved base.</h3>
+        </div>
+        <div>
+          <span class="meta">Colour palette</span>
+          <div class="swatch-row" style="margin-top:12px">
+            <div class="swatch" style="background:#12B82A"><span class="sname">Nayokan Green</span><span class="shex">#12B82A</span></div>
+            <div class="swatch dark" style="background:#08751A"><span class="sname">Deep Green</span><span class="shex">#08751A</span></div>
+            <div class="swatch dark" style="background:#000000"><span class="sname">Black</span><span class="shex">#000000</span></div>
+            <div class="swatch dark" style="background:#071A46"><span class="sname">Navy</span><span class="shex">#071A46</span></div>
+            <div class="swatch" style="background:#F3F6F3"><span class="sname">Soft Neutral</span><span class="shex">#F3F6F3</span></div>
+            <div class="swatch" style="background:#FFFFFF;border-color:var(--line-strong)"><span class="sname">White</span><span class="shex">#FFFFFF</span></div>
+          </div>
+
+          <div style="margin-top:32px"><span class="meta">Typography</span>
+            <div class="type-row"><span class="tlabel">Display / hero</span><div><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:3rem;letter-spacing:-0.04em;line-height:0.98">Nayokan</div><small style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.14em">Manrope 800 · headline family</small></div></div>
+            <div class="type-row"><span class="tlabel">Body / UI</span><div><p style="font-size:1.1rem;color:var(--ink);max-width:44ch;margin:0">Inter for all body copy and UI. Balanced, quiet, institutional.</p><small style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;display:block;margin-top:6px">Inter 400/500/600/700</small></div></div>
+            <div class="type-row"><span class="tlabel">Metadata / mono</span><div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase">§ 02 — REFERENCE · MONO</span><small style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;display:block;margin-top:6px">IBM Plex Mono 500 · captions, refs, data labels</small></div></div>
+          </div>
+
+          <div style="margin-top:32px"><span class="meta">Spacing / radius / shadows / motion</span>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px">
+              <div style="padding:20px;border:1px solid var(--line);background:var(--paper)">
+                <span class="meta">Spacing</span>
+                <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);line-height:1.8">4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128 · 160</div>
+                <small style="color:var(--muted)">4px base scale · s-1 through s-11</small>
+              </div>
+              <div style="padding:20px;border:1px solid var(--line);background:var(--paper)">
+                <span class="meta">Radius</span>
+                <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);line-height:1.8">2px · 4px · 8px · 100px (chips)</div>
+                <small style="color:var(--muted)">Restrained radii — no oversized bubbles</small>
+              </div>
+              <div style="padding:20px;border:1px solid var(--line);background:var(--paper)">
+                <span class="meta">Shadows</span>
+                <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);line-height:1.8">rare · long soft (12/32 · -18px inset)</div>
+                <small style="color:var(--muted)">Prefer borders and elevation-by-contrast</small>
+              </div>
+              <div style="padding:20px;border:1px solid var(--line);background:var(--paper)">
+                <span class="meta">Motion</span>
+                <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink);line-height:1.8">180ms · 320ms · 620ms · easing (0.22,1,0.36,1)</div>
+                <small style="color:var(--muted)">Restrained. Respects prefers-reduced-motion.</small>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:32px"><span class="meta">Breakpoints</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+              ${['320','375','390','430','768','961','1280','1440'].map(b => `<span class="chip">${b}px</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E. CONTENT GOVERNANCE -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ E — Content governance</span>
+          <h3>Every remaining<br>TBC / demo /<br>placeholder.</h3>
+          <p>Every item below requires Nayokan confirmation before production launch.</p>
+        </div>
+        <div id="governance-list"></div>
+      </div>
+    </div>
+
+    <!-- F. RESPONSIVE COVERAGE -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ F — Responsive coverage</span>
+          <h3>What has<br>desktop · tablet · mobile.</h3>
+        </div>
+        <div id="responsive-coverage"></div>
+      </div>
+    </div>
+
+    <!-- G. IMPLEMENTATION NOTES -->
+    <div class="spec-section">
+      <div class="spec-grid">
+        <div class="spec-head">
+          <span>§ G — Implementation notes</span>
+          <h3>For the<br>production developer.</h3>
+        </div>
+        <div id="impl-notes"></div>
+      </div>
+    </div>
+
+    <!-- FINAL LINKS -->
+    <div style="margin-top:64px;padding:48px 40px;background:var(--ink);color:var(--paper);display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center">
+      <div>
+        <span class="meta on-dark">§ Ready to build</span>
+        <h2 style="font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(2rem,3.4vw,3rem);letter-spacing:-0.04em;line-height:1;color:var(--paper);margin-top:16px">Complete. Coherent.<br><em style="font-style:italic;font-weight:500;color:var(--green)">Implementable</em>.</h2>
+      </div>
+      <div>
+        <p style="color:var(--muted-invert);margin-bottom:24px;line-height:1.55">
+          Every route below has a working design. Every state has a reference.
+          The design system is locked. The content governance is in place.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="sitemap.html" class="btn btn-accent">Open sitemap <span class="arrow">→</span></a>
+          <a href="states.html" class="btn btn-ghost on-dark">States library</a>
+          <a href="mobile.html" class="btn btn-ghost on-dark">Mobile spec</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">VTI</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="impact.html">Impact</a></li><li><a href="sitemap.html">Sitemap</a></li><li><a href="handoff.html">Handoff</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="partners.html">Partners</a></li><li><a href="states.html">States</a></li><li><a href="mobile.html">Mobile spec</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.1 · Phase 3B</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script>
+// Sitemap groups (rendered inline via JS for brevity)
+(function () {
+  const groups = [
+    ['Global · Corporate', [
+      ['index.html','Home','done'],
+      ['what-we-do.html','What we do','done'],
+      ['about.html','About','done'],
+      ['impact.html','Impact','done'],
+      ['insights.html','Insights','done'],
+      ['article.html','Article detail','done'],
+      ['programmes.html','Programmes directory','done'],
+      ['contact.html','Contact','done'],
+      ['partners.html','Partners','new'],
+      ['sitemap.html','Sitemap','done'],
+      ['handoff.html','Handoff (this page)','new'],
+      ['states.html','States & Components','new'],
+      ['mobile.html','Mobile spec','new'],
+    ]],
+    ['VTI · Vocational Training Institute', [
+      ['vti.html','VTI Home','done'],
+      ['vti-programmes.html','VTI · Programmes','new'],
+      ['vti-clusters.html','VTI · Entrepreneurial Clusters','new'],
+      ['programme-detail.html','Programme detail','done'],
+      ['cluster-detail.html','Cluster detail','done'],
+      ['application.html','Application flow','done'],
+      ['application-success.html','Application success','done'],
+    ]],
+    ['Startup Centre', [
+      ['startup-centre.html','Startup Centre Home','done'],
+      ['startup-programme.html','Programme','new'],
+      ['startup-commercialization.html','Commercialization Pathway','new'],
+      ['startup-apply.html','Innovator Application (all form states)','new'],
+      ['startup-university-partnerships.html','University Partnerships','new'],
+      ['startup-mentors.html','Mentors','new'],
+      ['startup-opportunities.html','Opportunities','new'],
+      ['startup-portfolio.html','Portfolio','new'],
+      ['portfolio-detail.html','Portfolio venture detail','done'],
+    ]],
+    ['Venture Capital', [
+      ['venture-capital.html','VC Home','done'],
+      ['vc-approach.html','Investment Approach','new'],
+      ['vc-pipeline.html','Venture Pipeline','new'],
+      ['vc-portfolio.html','Portfolio','new'],
+      ['vc-partner.html','Partnership Enquiry','new'],
+    ]],
+    ['Hospitality', [
+      ['hospitality.html','Hospitality Home','done'],
+      ['hospitality-properties.html','Properties','new'],
+      ['property-detail.html','Property detail','done'],
+    ]],
+  ];
+  const target = document.getElementById('sitemap-groups');
+  target.innerHTML = groups.map(g => `
+    <div style="margin-bottom:32px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:8px">
+        <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:-0.015em">${g[0]}</div>
+        <span class="meta">${g[1].length} screens</span>
+      </div>
+      ${g[1].map(r => `
+        <a href="${r[0]}" style="display:grid;grid-template-columns:1fr 100px 24px;gap:16px;padding:12px 4px;align-items:center;border-bottom:1px solid var(--line)">
+          <span style="font-family:'Manrope',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:-0.01em">${r[1]}<small style="display:block;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:400;color:var(--muted);letter-spacing:0.06em;margin-top:2px">${r[0]}</small></span>
+          <span class="pill-status ${r[2]}" style="justify-self:end">${r[2]==='new'?'Added 3B':(r[2]==='done'?'Complete':(r[2]==='partial'?'Partial':'Future'))}</span>
+          <span style="color:var(--muted);text-align:right">→</span>
+        </a>`).join('')}
+    </div>`).join('');
+
+  // Screen inventory (compact)
+  const inv = [
+    ['Home','Hero, editorial photo, Nayokan System (horizontal), Four Worlds, Flagship Programmes, Impact (TBC-honest), Stories, Partners, CTA'],
+    ['What we do','Ecosystem overview + 6-stage system explanation'],
+    ['About','Story, values, timeline, leadership'],
+    ['Impact','Big metrics (TBC-honest), impact-by-world, stories, reports library'],
+    ['Insights','Editorial article directory with filters'],
+    ['Article detail','Long-form editorial reading template'],
+    ['Programmes directory','Filterable ecosystem-wide programme index'],
+    ['Contact','Enquiry routing with general contact form'],
+    ['Partners (3B)','Partner ecosystem — categories, why partner, collaboration models, partner wall (all TBC)'],
+    ['Sitemap','Live index of every screen'],
+    ['Handoff (3B)','This page — Phase 3B delivery notes'],
+    ['States (3B)','Buttons, forms, submission, content, interactive, nav, listings, modals, a11y'],
+    ['Mobile spec (3B)','Breakpoints, type scale, priority-screen mobile framings, mobile rules'],
+    ['VTI Home','World hero, locator, approach, programmes, clusters, apply'],
+    ['VTI Programmes (3B)','Programme catalogue with filter, cards, common components block'],
+    ['VTI Clusters (3B)','How clusters work, sector filter, 6 cluster cards, system position'],
+    ['Programme detail','Deep programme page (structure, curriculum, application)'],
+    ['Cluster detail','Deep cluster page'],
+    ['Application flow','6-step interactive form (VTI)'],
+    ['Application success','Post-submission confirmation state'],
+    ['Startup Centre Home','World hero, pipeline, mentors, universities, portfolio, innovator CTA'],
+    ['SC Programme (3B)','Who its for, 6 milestones, support provided, next intake'],
+    ['SC Commercialization (3B)','Idea → Validation → Product → Market → Revenue → Scale + system connection'],
+    ['SC Apply (3B)','Innovator application with LIVE state switcher: default/focused/filled/error/submitting/success/failure'],
+    ['SC University Partnerships (3B)','Proposition, what Nayokan provides, active partners wall'],
+    ['SC Mentors (3B)','Filter bar, mentor grid, detail preview, apply-as-mentor CTA'],
+    ['SC Opportunities (3B)','Programme, funding, challenges, calls, mentor apps — with empty state + pagination'],
+    ['SC Portfolio (3B)','Venture cards, sector filter, honest TBC on financials'],
+    ['Portfolio venture detail','Individual venture page'],
+    ['VC Home','Institutional navy hero, approach, pipeline table, enquiry form'],
+    ['VC Approach (3B)','Investment philosophy, sectors, stage focus, support model'],
+    ['VC Pipeline (3B)','6-stage pipeline visualisation with governance notes'],
+    ['VC Portfolio (3B)','Dark portfolio grid with sector filter and honest TBC'],
+    ['VC Partner (3B)','Partnership enquiry — 6 categories, structured form'],
+    ['Hospitality Home','Refined hero, intro, 3 properties, booking enquiry'],
+    ['Hospitality Properties (3B)','Property catalogue + external-vs-future booking pathway'],
+    ['Property detail','Individual property page'],
+  ];
+  document.getElementById('screen-inventory').innerHTML = `
+    <div style="border-top:1px solid var(--line)">
+      ${inv.map((r,i) => `
+        <div style="display:grid;grid-template-columns:280px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline">
+          <span style="font-family:'Manrope',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:-0.01em"><span class="meta" style="margin-right:8px">${String(i+1).padStart(2,'0')}</span>${r[0]}</span>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.5">${r[1]}</p>
+        </div>`).join('')}
+    </div>`;
+
+  // Governance list
+  const gov = [
+    ['Brand lockup — establishment year','Removed EST. 2019 from hero. Present as location-only until Nayokan confirms.','fixed'],
+    ['Impact counters — home + impact','No animated numbers. All four metrics show em-dash + "figure to be confirmed".','fixed'],
+    ['Impact by world — impact.html','Numeric TBC everywhere; only 3 (hospitality properties) reduced to placeholder as well pending confirmation.','fixed'],
+    ['Data-count-verified gate','Counter animation now requires data-count-verified="true" — no accidental animation of unverified numbers.','fixed'],
+    ['VTI · programme durations, cohorts, accreditation','All marked [duration tbc] / [cohort tbc] / [accreditation tbc].','pending Nayokan'],
+    ['SC · mentor names + portraits','Placeholder MN portraits, all names read "Mentor Name tbc".','pending Nayokan'],
+    ['SC · portfolio venture names','V/01…V/09 references with "tbc" — no invented company names.','pending Nayokan'],
+    ['VC · financial figures','No ticket sizes, ownership %, portfolio value, returns. All em-dash TBC.','pending Nayokan'],
+    ['VC · portfolio company names','VC/001…VC/006 references — no invented brands.','pending Nayokan'],
+    ['Hospitality · rates + rooms','All rates and precise room counts marked TBC.','pending Nayokan'],
+    ['Partners · logos + named partners','All partner cells labelled "Logo — tbc". No fabricated logos.','pending Nayokan'],
+    ['Testimonials','None used anywhere in the site — will not be added until real testimonials collected.','n/a'],
+    ['Leadership bios','Not published. Awaits real content.','pending Nayokan'],
+    ['French translation','FR toggle demonstrated but not populated. Real translation is a separate deliverable.','future']
+  ];
+  document.getElementById('governance-list').innerHTML = `
+    <div style="border-top:1px solid var(--line)">
+      ${gov.map(r => `
+        <div style="display:grid;grid-template-columns:1fr 100px;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start">
+          <div>
+            <div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:0.98rem;letter-spacing:-0.01em">${r[0]}</div>
+            <p style="color:var(--muted);font-size:0.9rem;margin-top:4px;max-width:60ch">${r[1]}</p>
+          </div>
+          <span class="pill-status ${r[2]==='fixed'?'new':(r[2]==='n/a'?'done':(r[2]==='future'?'future':'partial'))}" style="justify-self:end">${r[2]}</span>
+        </div>`).join('')}
+    </div>`;
+
+  // Responsive coverage
+  const cov = [
+    ['Home','✓','✓','✓'],
+    ['What we do','✓','✓','✓'],
+    ['VTI Home','✓','✓','✓'],
+    ['VTI Programmes','✓','✓','✓'],
+    ['VTI Clusters','✓','✓','✓'],
+    ['Startup Centre Home','✓','✓','✓'],
+    ['SC Programme','✓','✓','✓'],
+    ['SC Commercialization','✓','✓','✓'],
+    ['SC Apply','✓','✓','✓'],
+    ['SC University Partnerships','✓','✓','✓'],
+    ['SC Mentors','✓','✓','✓'],
+    ['SC Opportunities','✓','✓','✓'],
+    ['SC Portfolio','✓','✓','✓'],
+    ['VC Home','✓','✓','✓'],
+    ['VC Approach','✓','✓','✓'],
+    ['VC Pipeline','✓','✓','✓'],
+    ['VC Portfolio','✓','✓','✓'],
+    ['VC Partner','✓','✓','✓'],
+    ['Hospitality Home','✓','✓','✓'],
+    ['Hospitality Properties','✓','✓','✓'],
+    ['Impact','✓','✓','✓'],
+    ['Insights','✓','✓','✓'],
+    ['Application (flow)','✓','✓','✓'],
+    ['Contact','✓','✓','✓'],
+    ['Partners','✓','✓','✓'],
+  ];
+  document.getElementById('responsive-coverage').innerHTML = `
+    <div style="border:1px solid var(--line)">
+      <div style="display:grid;grid-template-columns:1fr 80px 80px 80px;gap:16px;padding:14px 20px;border-bottom:1px solid var(--ink);font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)">
+        <span>Screen</span><span style="text-align:center">Desktop</span><span style="text-align:center">Tablet</span><span style="text-align:center">Mobile</span>
+      </div>
+      ${cov.map((r,i) => `
+        <div style="display:grid;grid-template-columns:1fr 80px 80px 80px;gap:16px;padding:12px 20px;${i===cov.length-1?'':'border-bottom:1px solid var(--line)'};align-items:center">
+          <span style="font-family:'Manrope',sans-serif;font-weight:600;font-size:0.9rem;letter-spacing:-0.01em">${r[0]}</span>
+          <span style="text-align:center;color:var(--green-deep);font-weight:600">${r[1]}</span>
+          <span style="text-align:center;color:var(--green-deep);font-weight:600">${r[2]}</span>
+          <span style="text-align:center;color:var(--green-deep);font-weight:600">${r[3]}</span>
+        </div>`).join('')}
+    </div>
+    <p style="margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase">All screens verified at 320 / 375 / 390 / 430 / 768 / 961+ via CSS clamp + grid collapse rules.</p>`;
+
+  // Impl notes
+  const impl = [
+    ['File structure','Static HTML per route (already structured as sibling .html files). Shared partials via /styles and /scripts. No framework required for a first launch — the design ports cleanly to any SSG or React app.'],
+    ['CMS-driven regions','See states.html § 10. Programmes, articles, mentors, portfolio, properties, partners, impact metrics, case studies and clusters are CMS. Nayokan System, nav, footer, forms schema are static.'],
+    ['Forms','All forms use the ff/form-block pattern. Validation runs on blur + on submit. State copy is standardised (see startup-apply.html live switcher). All forms produce a reference number in the success state — REF · [FORM]/[YY]/NNNN.'],
+    ['Impact counters','Never animate unless data-count-verified="true". Default to em-dash + "figure to be confirmed". Do not opt in until Nayokan approves the specific figure.'],
+    ['Placeholder pattern','Use <span class="placeholder-tag">tbc</span> next to any unverified content. It renders as a small superscript in brackets — visible but restrained.'],
+    ['Mobile navigation','scripts/mobile-nav.js injects an off-canvas panel from the desktop nav. To customise the panel, edit the injector — do NOT duplicate the nav in every HTML file.'],
+    ['Motion','Respect prefers-reduced-motion (already handled globally). Reveal-on-scroll is opt-in via .reveal. No motion carries essential information.'],
+    ['Accessibility','Maintain visible focus rings on every interactive element (already default). Contrast ratios verified against WCAG 2.2 AA. Do not remove the focus ring in production styles.'],
+    ['Image requirements','Every editorial photo is documentary/institutional. When adding a new photo, use nayokan-XX.jpg naming convention and include descriptive alt text. No stock imagery.'],
+    ['Language switch','EN is primary. FR is future. When French content lands, add lang="fr" root, verify that Manrope loads FR ligatures, and audit line-lengths (French text runs ~15-25% longer).']
+  ];
+  document.getElementById('impl-notes').innerHTML = `
+    <div style="border-top:1px solid var(--line)">
+      ${impl.map((r,i) => `
+        <div style="display:grid;grid-template-columns:80px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;color:var(--green-deep)">I/${String(i+1).padStart(2,'0')}</span>
+          <div>
+            <div style="font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.015em">${r[0]}</div>
+            <p style="color:var(--muted);font-size:0.94rem;margin-top:4px;line-height:1.55">${r[1]}</p>
+          </div>
+        </div>`).join('')}
+    </div>`;
+})();
+</script>
+<script src="scripts/system.js"></script>
+<script src="scripts/mobile-nav.js"></script>
+</body>
+</html>

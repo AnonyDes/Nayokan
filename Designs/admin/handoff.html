@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Developer handoff · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .ho-hero {
+    background: var(--ink); color: white;
+    border-radius: var(--radius-lg);
+    padding: 40px 40px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ho-hero__eb { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.18em; color: rgba(255,255,255,0.5); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .ho-hero__eb::before { content: ''; width: 5px; height: 5px; background: var(--green); }
+  .ho-hero__title { font-family: var(--f-head); font-weight: 800; font-size: 40px; letter-spacing: -0.03em; line-height: 1.02; margin: 14px 0 10px; max-width: 22ch; }
+  .ho-hero__title em { font-style: normal; color: var(--green); }
+  .ho-hero__lede { color: rgba(255,255,255,0.7); font-size: 15px; max-width: 68ch; line-height: 1.55; }
+  .ho-hero__meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line-invert); }
+  .ho-hero__meta-lb { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+  .ho-hero__meta-val { font-family: var(--f-head); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin-top: 6px; }
+  @media (max-width: 900px) { .ho-hero__meta { grid-template-columns: 1fr 1fr; } }
+
+  .ho-sec { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 20px; }
+  .ho-sec__head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: end; padding-bottom: 18px; margin-bottom: 20px; border-bottom: 1px solid var(--line-2); }
+  .ho-sec__num { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--text-3); text-transform: uppercase; }
+  .ho-sec__title { font-family: var(--f-head); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+  .ho-sec__lede { color: var(--text-3); font-size: 13px; margin-top: 6px; max-width: 64ch; }
+
+  .ho-body p { font-size: 14px; line-height: 1.6; color: var(--text); margin-bottom: 12px; max-width: 70ch; }
+  .ho-body strong { color: var(--ink); font-weight: 600; }
+  .ho-body h4 { font-family: var(--f-head); font-weight: 700; font-size: 15px; margin: 16px 0 8px; }
+
+  .ho-list { border: 1px solid var(--line-2); border-radius: var(--radius); overflow: hidden; }
+  .ho-list__row { display: grid; grid-template-columns: 200px 1fr auto; gap: 20px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 13px; align-items: center; }
+  .ho-list__row:last-child { border-bottom: none; }
+  .ho-list__lb { font-family: var(--f-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.02em; }
+  .ho-list__val strong { font-weight: 600; }
+
+  .ho-code {
+    background: var(--ink); color: rgba(255,255,255,0.86);
+    border-radius: var(--radius); padding: 12px 14px;
+    font-family: var(--f-mono); font-size: 11.5px;
+    line-height: 1.7; letter-spacing: 0.02em;
+    overflow-x: auto;
+  }
+  .ho-code .k { color: var(--green); }
+  .ho-code .s { color: #ffd18a; }
+  .ho-code .c { color: rgba(255,255,255,0.4); font-style: italic; }
+
+  .ho-check { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; font-size: 13.5px; }
+  .ho-check__box { width: 16px; height: 16px; border: 1.5px solid var(--success); border-radius: 3px; background: var(--success-bg); display: grid; place-items: center; flex-shrink: 0; margin-top: 2px; }
+  .ho-check__box svg { width: 10px; height: 10px; stroke: var(--success-ink); stroke-width: 2.5; fill: none; }
+  .ho-check strong { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ Z · 04 · System · Developer handoff</div>
+          <h1 class="ax-page__title">Developer handoff</h1>
+          <p class="ax-page__lede">A single-document overview of everything a development team needs to build the Nayokan Admin — routes, components, workflows, permissions, accessibility and its relationship to the public site.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Print / PDF</button>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="ho-hero">
+        <div class="ho-hero__eb">Nayokan Admin · v0.1 · September 2026</div>
+        <h1 class="ho-hero__title">The operating layer behind Nayokan's <em>digital ecosystem.</em></h1>
+        <p class="ho-hero__lede">
+          Nayokan Admin is the institutional content, programme and impact-governance platform. It is a separate product from the public nayokan.cm site. Everything published on the public site is authored, verified and approved here first. This document is the blueprint for building it.
+        </p>
+        <div class="ho-hero__meta">
+          <div><div class="ho-hero__meta-lb">Screens</div><div class="ho-hero__meta-val">47</div></div>
+          <div><div class="ho-hero__meta-lb">Data entities</div><div class="ho-hero__meta-val">13</div></div>
+          <div><div class="ho-hero__meta-lb">User roles</div><div class="ho-hero__meta-val">6</div></div>
+          <div><div class="ho-hero__meta-lb">Accessibility target</div><div class="ho-hero__meta-val">WCAG 2.2 AA</div></div>
+        </div>
+      </div>
+
+      <!-- ROUTES -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 01 · Routes</div>
+          <div>
+            <div class="ho-sec__title">Route table</div>
+            <div class="ho-sec__lede">All admin routes live under <code>/admin/*</code>. The public Nayokan website (<code>nayokan.cm/*</code>) is a separate deployment consuming the same content store.</div>
+          </div>
+        </div>
+        <div class="ho-list">
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/login</span><span class="ho-list__val"><strong>Sign in</strong> · Email + password + MFA · SSO alternative</span><span class="ax-pill ax-pill--info">Public</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin</span><span class="ho-list__val"><strong>Dashboard</strong> · Governance-first overview</span><span class="ax-pill ax-pill--verified">All roles</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/articles</span><span class="ho-list__val"><strong>Articles list</strong> · /admin/articles/:id → editor</span><span class="ax-pill ax-pill--verified">Editor, Comms</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/pages</span><span class="ho-list__val"><strong>Pages list</strong> · /admin/pages/:id → structured section editor</span><span class="ax-pill ax-pill--verified">Editor, Comms</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/media</span><span class="ho-list__val"><strong>Media library</strong> · Upload + metadata + alt text</span><span class="ax-pill ax-pill--verified">All content roles</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/programmes</span><span class="ho-list__val"><strong>Programmes</strong> · /admin/programmes/:id · Clusters, Opportunities nested</span><span class="ax-pill ax-pill--verified">Programme Manager</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/applications</span><span class="ho-list__val"><strong>Applications</strong> · /admin/applications/:id → detail + review</span><span class="ax-pill ax-pill--verified">Programme Manager</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/ecosystem/*</span><span class="ho-list__val"><strong>People · Mentors · Partners · Portfolio · Properties</strong></span><span class="ax-pill ax-pill--verified">Varies</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/impact/*</span><span class="ho-list__val"><strong>Impact metrics · Evidence · Impact stories</strong> · Verification-gated publish</span><span class="ax-pill ax-pill--verified">Impact Manager</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/enquiries</span><span class="ho-list__val"><strong>Enquiries</strong> · /admin/enquiries/:id → assignment &amp; resolve</span><span class="ax-pill ax-pill--verified">Comms</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/website/*</span><span class="ho-list__val"><strong>Homepage · Navigation · SEO</strong> · Structured section editing</span><span class="ax-pill ax-pill--verified">Editor, Comms</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/review-queue</span><span class="ho-list__val"><strong>Review queue</strong> · /admin/review/:id → content review flow</span><span class="ax-pill ax-pill--verified">Reviewer</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">/admin/admin/*</span><span class="ho-list__val"><strong>Users · Roles &amp; permissions · Audit log · Settings</strong></span><span class="ax-pill ax-pill--rejected">Super Admin only</span></div>
+        </div>
+      </section>
+
+      <!-- COMPONENT LIBRARY -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 02 · Components</div>
+          <div>
+            <div class="ho-sec__title">Reusable admin components</div>
+            <div class="ho-sec__lede">Every screen is built from this component set. See <a href="design-system.html" style="color: var(--info-ink); text-decoration: underline;">design-system.html</a> for the visual specs and <a href="states.html" style="color: var(--info-ink); text-decoration: underline;">states.html</a> for state coverage.</div>
+          </div>
+        </div>
+        <div class="ho-body">
+          <p><strong>Application shell:</strong> <code>ax-app</code> · <code>ax-sidebar</code> · <code>ax-topbar</code> · <code>ax-workspace</code>. Sidebar is 248px, collapsible on tablet, hidden on mobile with a hamburger topbar. Topbar height is 56px fixed.</p>
+          <p><strong>Layout primitives:</strong> <code>ax-page</code> (default), <code>ax-page--wide</code> (no max width), <code>ax-page--narrow</code> (1120px). <code>ax-page__head</code> gives every screen a consistent title, eyebrow, lede and action group.</p>
+          <p><strong>Data display:</strong> <code>ax-panel</code> · <code>ax-stat</code> · <code>ax-table</code> (with <code>ax-toolbar</code>, <code>ax-tabs</code>, <code>ax-filter</code>, <code>ax-inline-search</code>, <code>ax-pagination</code>).</p>
+          <p><strong>Status vocabulary:</strong> <code>ax-pill--{published, draft, review, needs, rejected, scheduled, archived, verified, active, expired, closing, upcoming, info, dark, neutral}</code>. Every pill combines colour, label and dot — never colour alone.</p>
+          <p><strong>Forms:</strong> <code>ax-field</code> + <code>ax-input</code>/<code>ax-textarea</code>/<code>ax-select</code>, <code>ax-input__prefix</code>, <code>ax-toggle</code>, <code>ax-radio-group</code>, <code>ax-form-row</code> (two-column label + body layout).</p>
+          <p><strong>Feedback:</strong> <code>ax-notice--{warn, danger, success, info, soft}</code> · <code>ax-modal</code> for confirmations · <code>ax-empty</code>, <code>ax-skeleton</code> for empty and loading.</p>
+          <p><strong>World tags:</strong> <code>ax-world--{vti, sc, vc, hos}</code> · always prefixed with the numbered world (01…04) in monospace.</p>
+        </div>
+      </section>
+
+      <!-- WORKFLOW -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 03 · Workflows</div>
+          <div>
+            <div class="ho-sec__title">Publishing &amp; verification workflows</div>
+            <div class="ho-sec__lede">Two chained workflows govern everything: the editorial publishing chain, and the impact verification chain. They are intentionally strict.</div>
+          </div>
+        </div>
+        <div class="ho-body">
+          <h4>Editorial publishing chain</h4>
+          <p><code>Draft → Submitted → In review → (Approved | Changes requested) → Scheduled → Published</code>. Applies to Article, Page, Story, Programme, Opportunity, Person, Mentor, Partner, Property. Every state transition is written to <strong>AuditEntry</strong> with actor, timestamp and diff.</p>
+          <p>Publish is blocked if any of these preflight fields is missing: cover media, SEO title, SEO description, alt text on all inline media, and (for programmes) application deadline.</p>
+
+          <h4>Impact verification chain</h4>
+          <p><code>Drafted → Evidence attached → Verified → Approved → Public toggle</code>. The <strong>Public</strong> boolean on <code>ImpactMetric</code> can only be set to <strong>true</strong> if the metric has passed Verified and Approved. Attempting to set public on a lower state must be rejected server-side with a <strong>ContentGovernanceError</strong>.</p>
+          <p>Evidence is append-only. Records cannot be edited after creation — corrections require a new evidence record superseding the old one, with an explicit link.</p>
+
+          <h4>Review queue</h4>
+          <p>Items enter the queue when submitted. They stay assigned to a single reviewer at a time. Items older than 72h are surfaced to leadership and can be reassigned.</p>
+        </div>
+      </section>
+
+      <!-- PERMISSIONS -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 04 · Permissions</div>
+          <div>
+            <div class="ho-sec__title">Roles &amp; enforcement</div>
+            <div class="ho-sec__lede">Six roles with progressive access. See <a href="roles-permissions.html" style="color: var(--info-ink); text-decoration: underline;">roles-permissions.html</a> for the full matrix.</div>
+          </div>
+        </div>
+        <div class="ho-body">
+          <p><strong>Roles:</strong> Super Admin · Content Editor · Programme Manager · Communications · Impact Manager · Reviewer.</p>
+          <p><strong>Enforcement:</strong> Every route and API endpoint checks the caller's role against a policy map. UI permissions are advisory — the server is the source of truth. Actions marked "dangerous" (user disable, role change, integration edit, decommission) require dual approval from a second Super Admin before they execute.</p>
+          <p><strong>2FA:</strong> Required for every admin account. No exceptions.</p>
+          <p><strong>Sessions:</strong> 60 minute inactivity timeout. Autosave preserves drafts across sign-outs.</p>
+        </div>
+      </section>
+
+      <!-- CMS RELATIONSHIP TO PUBLIC SITE -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 05 · Public site</div>
+          <div>
+            <div class="ho-sec__title">Relationship to the public Nayokan website</div>
+            <div class="ho-sec__lede">The admin owns content. The public site consumes it. They are separate deployments with a defined contract.</div>
+          </div>
+        </div>
+        <div class="ho-body">
+          <p>The public site (<code>nayokan.cm</code>) reads content from the CMS via a versioned content API. Only entities with <code>public = true</code> AND <code>status = 'published'</code> are served.</p>
+          <p><strong>Preview:</strong> Every content object exposes a signed preview URL that renders it exactly as it would appear publicly. Preview URLs are prefixed <code>preview.nayokan.cm/*</code> and clearly badged <em>PREVIEW · NOT LIVE</em>.</p>
+          <p><strong>Caching:</strong> Publishing writes to the CMS and invalidates the public-site cache within 60 seconds. Unpublishing removes from the cache immediately.</p>
+          <p><strong>Scheduled publishing:</strong> A background job sweeps every 5 minutes for content whose <code>scheduled_at</code> has passed and moves it to Published.</p>
+        </div>
+
+        <div class="ho-code" style="margin-top: 12px;">
+<span class="c">// Public content contract</span>
+<span class="k">GET</span> https://api.nayokan.cm/v1/pages/:path <span class="c">→ returns Page + resolved section content</span>
+<span class="k">GET</span> https://api.nayokan.cm/v1/articles <span class="c">?world, ?limit, ?cursor</span>
+<span class="k">GET</span> https://api.nayokan.cm/v1/programmes <span class="c">?world, ?status=open</span>
+<span class="k">GET</span> https://api.nayokan.cm/v1/impact-metrics <span class="c">// only public=true &amp; approved</span>
+<span class="k">POST</span> https://api.nayokan.cm/v1/enquiries <span class="c">// public-facing submissions</span>
+<span class="k">POST</span> https://api.nayokan.cm/v1/applications <span class="c">// public-facing submissions</span>
+        </div>
+      </section>
+
+      <!-- ACCESSIBILITY -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 06 · Accessibility</div>
+          <div>
+            <div class="ho-sec__title">Accessibility baseline</div>
+            <div class="ho-sec__lede">Target WCAG 2.2 AA. The admin is a working tool for institutional staff — accessibility is non-negotiable.</div>
+          </div>
+        </div>
+        <div class="ho-body">
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span><strong>Keyboard navigation.</strong> Every interactive element is reachable by <span class="ax-kbd">Tab</span>. <span class="ax-kbd">⌘K</span>/<span class="ax-kbd">Ctrl K</span> opens global search from anywhere.</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span><strong>Visible focus rings.</strong> 2px green outline with 2px offset on <code>:focus-visible</code>.</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span><strong>Never colour alone.</strong> Every status pill combines colour + label + dot. Every warning combines colour + icon + text.</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span><strong>Labels &amp; aria.</strong> Every form field has a visible label. Icons that stand alone as buttons carry <code>aria-label</code>.</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span><strong>Alt text is required.</strong> Media cannot be attached to published content without alt text.</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span><strong>Reduced motion.</strong> Skeletons and transitions honour <code>prefers-reduced-motion</code>.</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span><strong>Contrast.</strong> Body text on workspace = 4.6 : 1. Pill text on tint = 4.5 : 1. Green on ink = 4.7 : 1.</span></div>
+        </div>
+      </section>
+
+      <!-- RESPONSIVE -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 07 · Responsive</div>
+          <div>
+            <div class="ho-sec__title">Responsive strategy</div>
+            <div class="ho-sec__lede">Desktop-first. The admin is primarily used on 13–15" laptop screens. Tablet and mobile support prioritise review, notifications, enquiries and quick edits.</div>
+          </div>
+        </div>
+        <div class="ho-list">
+          <div class="ho-list__row"><span class="ho-list__lb">≥ 1200 px · Desktop</span><span class="ho-list__val"><strong>Full experience.</strong> Sidebar, topbar, all tables, dual-column editors.</span><span class="ax-mono ax-mute">Primary target</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">900 – 1199 px · Laptop</span><span class="ho-list__val"><strong>Sidebar preserved.</strong> Editor right-rails collapse below main. Dense tables scroll horizontally.</span><span class="ax-mono ax-mute">Common</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">640 – 899 px · Tablet</span><span class="ho-list__val"><strong>Sidebar hidden behind toggle.</strong> Tables convert to card lists where appropriate.</span><span class="ax-mono ax-mute">Field / review</span></div>
+          <div class="ho-list__row"><span class="ho-list__lb">&lt; 640 px · Mobile</span><span class="ho-list__val"><strong>Mobile-only surfaces:</strong> Dashboard, Review queue, Notifications, Enquiries, Applications detail. Editing on mobile is intentionally limited.</span><span class="ax-mono ax-mute">Reviewer / on-the-go</span></div>
+        </div>
+      </section>
+
+      <!-- FINAL QUALITY CHECKLIST -->
+      <section class="ho-sec">
+        <div class="ho-sec__head">
+          <div class="ho-sec__num">§ 08 · Quality</div>
+          <div>
+            <div class="ho-sec__title">Institutional quality test</div>
+            <div class="ho-sec__lede">The design meets the standard when every one of these questions can be answered "yes" without qualification.</div>
+          </div>
+        </div>
+        <div class="ho-body">
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could a Nayokan employee use this without knowing how to code?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could a communications employee publish an article end-to-end?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could a programme manager manage applications from intake to decision?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could an impact manager verify a metric before it appears publicly?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could leadership approve content and see exactly what will publish?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could an administrator control user permissions safely?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could Nayokan update the homepage without a developer?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could the team see exactly what is live on the public website?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could an administrator recover an accidental content change?</span></div>
+          <div class="ho-check"><span class="ho-check__box"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><span>Could the system <strong>prevent</strong> unverified information from being published as verified?</span></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'design-system',crumbs:[{label:'System'},{label:'Developer handoff'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

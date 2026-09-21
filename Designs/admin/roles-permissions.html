@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Roles &amp; permissions · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .rp-matrix { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .rp-matrix th, .rp-matrix td { border: 1px solid var(--line); padding: 12px 14px; vertical-align: middle; }
+  .rp-matrix thead th {
+    background: var(--ws); text-align: left;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em;
+    color: var(--text-3); text-transform: uppercase;
+    padding: 12px 14px;
+  }
+  .rp-matrix thead th.role { min-width: 130px; text-align: center; }
+  .rp-matrix thead th.role .role-name { color: var(--ink); font-family: var(--f-head); font-size: 13px; letter-spacing: -0.01em; text-transform: none; font-weight: 700; }
+  .rp-matrix thead th.role .role-sub { display: block; margin-top: 3px; font-family: var(--f-mono); font-size: 9.5px; font-weight: 500; }
+  .rp-matrix tbody th {
+    text-align: left; background: var(--panel);
+    font-family: var(--f-sans); font-weight: 600; font-size: 13px;
+    padding: 12px 16px;
+  }
+  .rp-matrix tbody th .sub { display: block; font-family: var(--f-mono); font-size: 10px; color: var(--text-3); font-weight: 400; letter-spacing: 0.06em; margin-top: 2px; text-transform: uppercase; }
+  .rp-matrix tbody td { text-align: center; }
+  .rp-matrix tr.section td, .rp-matrix tr.section th {
+    background: var(--ink); color: var(--paper);
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; padding: 8px 16px;
+    text-align: left;
+  }
+
+  .rp-cell {
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    padding: 3px 8px; border-radius: 3px;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em;
+    font-weight: 600; text-transform: uppercase;
+    min-width: 66px;
+  }
+  .rp-cell--full { background: var(--success-bg); color: var(--success-ink); }
+  .rp-cell--view { background: var(--info-bg); color: var(--info-ink); }
+  .rp-cell--review { background: var(--warn-bg); color: var(--warn-ink); }
+  .rp-cell--none { color: var(--text-4); }
+
+  .rp-legend { display: flex; gap: 10px; padding: 12px 18px; border-bottom: 1px solid var(--line-2); font-size: 11.5px; align-items: center; flex-wrap: wrap; }
+  .rp-legend__lb { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--text-3); text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ H · 05 · Administration · Governance</div>
+          <h1 class="ax-page__title">Roles &amp; permissions</h1>
+          <p class="ax-page__lede">Nayokan's role model. Permissions here control what every staff member can read, create, approve and publish across the platform.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Export matrix</button>
+          <button class="ax-btn ax-btn--primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Create role</button>
+        </div>
+      </div>
+
+      <div class="ax-notice ax-notice--soft" style="margin-bottom: 16px;">
+        <svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div>
+          <div class="ax-notice__title">Permission changes are audited and reversible.</div>
+          Every change on this screen is recorded in the audit log with actor, timestamp, previous value and new value. Dangerous permissions require dual-approval from a second Super Admin.
+        </div>
+      </div>
+
+      <div class="ax-panel">
+
+        <div class="rp-legend">
+          <span class="rp-legend__lb">Legend ·</span>
+          <span class="rp-cell rp-cell--full">Full</span> <span class="ax-mute">Read + write + publish</span>
+          <span class="rp-cell rp-cell--review">Review</span> <span class="ax-mute">Approve or request changes</span>
+          <span class="rp-cell rp-cell--view">View</span> <span class="ax-mute">Read only</span>
+          <span class="rp-cell rp-cell--none">—</span> <span class="ax-mute">No access</span>
+        </div>
+
+        <div style="overflow-x:auto;">
+        <table class="rp-matrix">
+          <thead>
+            <tr>
+              <th style="min-width: 260px;">Area</th>
+              <th class="role"><span class="role-name">Super Admin</span><span class="role-sub">2 people</span></th>
+              <th class="role"><span class="role-name">Content Editor</span><span class="role-sub">4 people</span></th>
+              <th class="role"><span class="role-name">Programme Manager</span><span class="role-sub">3 people</span></th>
+              <th class="role"><span class="role-name">Communications</span><span class="role-sub">2 people</span></th>
+              <th class="role"><span class="role-name">Impact Manager</span><span class="role-sub">1 person</span></th>
+              <th class="role"><span class="role-name">Reviewer</span><span class="role-sub">3 people</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="section"><th colspan="7">Content</th></tr>
+            <tr><th>Pages <span class="sub">Institutional pages</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Articles &amp; insights <span class="sub">Editorial</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Stories <span class="sub">Case studies · beneficiary outcomes</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Media library <span class="sub">Upload · metadata · alt text</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+            </tr>
+
+            <tr class="section"><th colspan="7">Programmes</th></tr>
+            <tr><th>Programmes &amp; clusters <span class="sub">VTI / Startup / Opportunities</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Applications <span class="sub">Applicant intake · decisions</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+
+            <tr class="section"><th colspan="7">Ecosystem</th></tr>
+            <tr><th>People &amp; mentors <span class="sub">Leadership · staff · mentors</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Partners <span class="sub">Institutional relationships</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Portfolio / ventures <span class="sub">VC portfolio</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Hospitality properties <span class="sub">Guesthouses · short-stay</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+
+            <tr class="section"><th colspan="7">Impact governance</th></tr>
+            <tr><th>Impact metrics <span class="sub">Values · verification</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Evidence library <span class="sub">Sources · verification records</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+
+            <tr class="section"><th colspan="7">Website</th></tr>
+            <tr><th>Homepage · navigation · SEO <span class="sub">Public website</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--review">Review</span></td>
+            </tr>
+            <tr><th>Enquiries <span class="sub">Contact · partnership · VC</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+            </tr>
+
+            <tr class="section"><th colspan="7">Administration <span style="color: #FF7A7A; margin-left: 12px;">Dangerous · requires 2FA + dual approval</span></th></tr>
+            <tr><th>Users <span class="sub">Staff accounts</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+            </tr>
+            <tr><th>Roles &amp; permissions <span class="sub">This screen</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+            </tr>
+            <tr><th>Audit log <span class="sub">System-wide activity</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+              <td><span class="rp-cell rp-cell--view">View</span></td>
+            </tr>
+            <tr><th>Settings <span class="sub">Organization · integrations</span></th>
+              <td><span class="rp-cell rp-cell--full">Full</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+              <td><span class="rp-cell rp-cell--none">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'roles',crumbs:[{label:'Administration'},{label:'Roles & permissions'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

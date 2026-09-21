@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Portfolio · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ E · 04 · Ecosystem · VC portfolio</div>
+          <h1 class="ax-page__title">Portfolio</h1>
+          <p class="ax-page__lede">Ventures in Nayokan's Venture Capital pipeline and post-investment portfolio. No financial figures are recorded here unless externally verified and disclosed with venture consent.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Export</button>
+          <button class="ax-btn ax-btn--primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add venture</button>
+        </div>
+      </div>
+
+      <div class="ax-notice ax-notice--warn" style="margin-bottom: 16px;">
+        <svg class="ax-notice__icon" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/></svg>
+        <div><div class="ax-notice__title">No fake financials.</div>Investment amounts, valuations and ownership percentages are only recorded when supplied and verified. Do not fabricate financial figures for demo purposes.</div>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-toolbar">
+          <div class="ax-tabs">
+            <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">9</span></button>
+            <button class="ax-tabs__tab">Pipeline <span class="ax-tabs__count">4</span></button>
+            <button class="ax-tabs__tab">Invested <span class="ax-tabs__count">5</span></button>
+            <button class="ax-tabs__tab">Exited <span class="ax-tabs__count">0</span></button>
+          </div>
+          <div style="flex:1"></div>
+          <div class="ax-inline-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search ventures…"></div>
+        </div>
+
+        <table class="ax-table">
+          <thead><tr>
+            <th class="ax-table__check"><span class="ax-check"></span></th>
+            <th style="width: 24%;">Venture</th>
+            <th>Sector</th>
+            <th>Stage</th>
+            <th>Location</th>
+            <th>Related programme</th>
+            <th>Status</th>
+            <th>Public</th>
+            <th></th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Agri-processing<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-001</span></td>
+              <td>Agri-processing</td>
+              <td class="is-mono">Seed</td>
+              <td class="is-mono">Yaoundé</td>
+              <td>VTI Cluster · Agri</td>
+              <td><span class="ax-pill ax-pill--draft">Pipeline</span></td>
+              <td><span class="ax-toggle "><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Micro-solar<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-002</span></td>
+              <td>Energy</td>
+              <td class="is-mono">Pre-seed</td>
+              <td class="is-mono">Bafoussam</td>
+              <td>Startup · Innovator</td>
+              <td><span class="ax-pill ax-pill--draft">Pipeline</span></td>
+              <td><span class="ax-toggle "><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Digital textile<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-003</span></td>
+              <td>Textile · digital</td>
+              <td class="is-mono">Seed</td>
+              <td class="is-mono">Douala</td>
+              <td>Startup · Commercialisation</td>
+              <td><span class="ax-pill ax-pill--published">Invested</span></td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Cold-chain logistics<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-004</span></td>
+              <td>Logistics</td>
+              <td class="is-mono">Series A</td>
+              <td class="is-mono">Douala</td>
+              <td>VTI · Cluster</td>
+              <td><span class="ax-pill ax-pill--published">Invested</span></td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Farm-to-market<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-005</span></td>
+              <td>Agri-tech</td>
+              <td class="is-mono">Seed</td>
+              <td class="is-mono">Yaoundé</td>
+              <td>Startup · Innovator</td>
+              <td><span class="ax-pill ax-pill--published">Invested</span></td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Health diagnostics<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-006</span></td>
+              <td>Health</td>
+              <td class="is-mono">Pre-seed</td>
+              <td class="is-mono">Buea</td>
+              <td>Startup · Innovator</td>
+              <td><span class="ax-pill ax-pill--draft">Pipeline</span></td>
+              <td><span class="ax-toggle "><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · EdTech · vocational<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-007</span></td>
+              <td>EdTech</td>
+              <td class="is-mono">Seed</td>
+              <td class="is-mono">Yaoundé</td>
+              <td>VTI · Digital</td>
+              <td><span class="ax-pill ax-pill--published">Invested</span></td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Construction materials<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-008</span></td>
+              <td>Construction</td>
+              <td class="is-mono">Seed</td>
+              <td class="is-mono">Douala</td>
+              <td>VTI · Metalwork</td>
+              <td><span class="ax-pill ax-pill--published">Invested</span></td>
+              <td><span class="ax-toggle is-on"><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr><tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td><span class="ax-table__title">Venture · Waste circular<span class="ax-demo-tag">Content to be confirmed</span></span><span class="ax-table__sub">/portfolio/#V-2026-009</span></td>
+              <td>Circular economy</td>
+              <td class="is-mono">Pre-seed</td>
+              <td class="is-mono">Yaoundé</td>
+              <td>Community</td>
+              <td><span class="ax-pill ax-pill--draft">Pipeline</span></td>
+              <td><span class="ax-toggle "><span class="ax-toggle__track"></span></span></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'portfolio',crumbs:[{"label":"Ecosystem"},{"label":"Portfolio"}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

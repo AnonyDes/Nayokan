@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Version history · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .vh-split { display: grid; grid-template-columns: 320px 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 1100px) { .vh-split { grid-template-columns: 1fr; } }
+
+  .vh-list { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); overflow: hidden; position: sticky; top: 76px; }
+  .vh-list__head { padding: 14px 16px; border-bottom: 1px solid var(--line-2); font-family: var(--f-head); font-weight: 700; font-size: 14px; }
+
+  .vh-item {
+    display: grid; grid-template-columns: 24px 1fr auto; gap: 10px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+    cursor: pointer; transition: background var(--dur-fast);
+    align-items: flex-start;
+  }
+  .vh-item:hover { background: var(--ws); }
+  .vh-item.is-active { background: var(--ws); border-left: 2px solid var(--ink); padding-left: 14px; }
+  .vh-item__ver { font-family: var(--f-mono); font-size: 11px; font-weight: 600; color: var(--ink); }
+  .vh-item__meta { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.04em; margin-top: 2px; }
+  .vh-item__author { font-size: 12.5px; font-weight: 500; margin-top: 4px; }
+  .vh-item__time { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); }
+
+  .vh-detail { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); overflow: hidden; }
+  .vh-detail__head { padding: 16px 20px; border-bottom: 1px solid var(--line-2); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .vh-detail__title { font-family: var(--f-head); font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+  .vh-detail__meta { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; margin-top: 3px; }
+  .vh-detail__body { padding: 20px; font-size: 13px; line-height: 1.6; max-width: 720px; margin: 0 auto; }
+  .vh-detail__body h4 { font-family: var(--f-head); font-size: 18px; letter-spacing: -0.015em; margin: 16px 0 8px; }
+  .vh-detail__body ins { background: var(--success-bg); color: var(--success-ink); text-decoration: none; padding: 1px 2px; }
+  .vh-detail__body del { background: var(--danger-bg); color: var(--danger-ink); padding: 1px 2px; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ H · 03 · Governance · Version history</div>
+          <h1 class="ax-page__title">Version history — "Building productive capability"</h1>
+          <p class="ax-page__lede">Every save creates a version. You can compare versions and restore earlier ones. All restores are logged.</p>
+        </div>
+        <div class="ax-page__actions">
+          <a href="article-editor.html" class="ax-btn ax-btn--soft"><svg viewBox="0 0 24 24"><path d="M11 6 5 12l6 6M5 12h14"/></svg>Back to article</a>
+          <button class="ax-btn ax-btn--primary">Compare selected</button>
+        </div>
+      </div>
+
+      <div class="vh-split">
+        <div class="vh-list">
+          <div class="vh-list__head">All versions · 4</div>
+
+          <div class="vh-item is-active">
+            <div><input type="checkbox" checked style="margin-top: 4px;"></div>
+            <div>
+              <div class="vh-item__ver">v4 · Published <span class="ax-pill ax-pill--published" style="margin-left: 6px; font-size: 8.5px;">Live</span></div>
+              <div class="vh-item__meta">Current version</div>
+              <div class="vh-item__author">Maria Ndongo</div>
+            </div>
+            <div class="vh-item__time">Sep 21 · 09:14</div>
+          </div>
+
+          <div class="vh-item">
+            <div><input type="checkbox" style="margin-top: 4px;"></div>
+            <div>
+              <div class="vh-item__ver">v3 · Approved</div>
+              <div class="vh-item__meta">SEO title added, minor rewrite</div>
+              <div class="vh-item__author">David Ekwe</div>
+            </div>
+            <div class="vh-item__time">Sep 20 · 11:22</div>
+          </div>
+
+          <div class="vh-item">
+            <div><input type="checkbox" style="margin-top: 4px;"></div>
+            <div>
+              <div class="vh-item__ver">v2 · Changes requested</div>
+              <div class="vh-item__meta">Structural revision to opening</div>
+              <div class="vh-item__author">Sarah Ndenge</div>
+            </div>
+            <div class="vh-item__time">Sep 19 · 15:08</div>
+          </div>
+
+          <div class="vh-item">
+            <div><input type="checkbox" style="margin-top: 4px;"></div>
+            <div>
+              <div class="vh-item__ver">v1 · Draft</div>
+              <div class="vh-item__meta">Initial draft</div>
+              <div class="vh-item__author">Maria Ndongo</div>
+            </div>
+            <div class="vh-item__time">Sep 18 · 09:02</div>
+          </div>
+        </div>
+
+        <div class="vh-detail">
+          <div class="vh-detail__head">
+            <div>
+              <div class="vh-detail__title">v4 · current — compared against v3</div>
+              <div class="vh-detail__meta">Maria Ndongo · Sept 21 · 09:14 · 42 words added, 18 removed</div>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="ax-btn ax-btn--soft ax-btn--sm">View version</button>
+              <button class="ax-btn ax-btn--ghost ax-btn--sm">Restore v3</button>
+            </div>
+          </div>
+          <div class="vh-detail__body">
+            <h4>Building productive capability: <ins>why Cameroon needs a vocational renaissance</ins></h4>
+            <p><em>A field-note from Nayokan on how vocational training becomes the backbone of a productive economy — and what happens when we treat it as strategic infrastructure.</em></p>
+            <p>Cameroon does not lack ambition. <del>Across the country, there are people who make things — engines are repaired, small workshops run enterprises, agricultural value is coaxed out of raw output.</del> <ins>Across cities and villages, young people build things — repair engines, run enterprises out of small workshops, coax value out of raw agricultural output.</ins> What Cameroon lacks, structurally, is a formal recognition of that capability. Vocational training is where recognition begins.</p>
+            <ins><p style="border-left: 2px solid var(--green); padding: 8px 0 8px 12px; font-family: var(--f-head); font-weight: 600; font-size: 17px;">We are not training people to leave Cameroon. We are training people to build it.</p></ins>
+            <p>The Nayokan Vocational Training Institute exists to make one thing explicit: skill is infrastructure. When a welder can prove their skill against a national standard, when an agri-processor can join a productive cluster with peer accountability, when a small enterprise can hire against a recognisable qualification — that country becomes measurably more productive.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'articles',crumbs:[{label:'Governance'},{label:'Version history'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

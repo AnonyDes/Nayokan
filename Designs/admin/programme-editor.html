@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Programme editor · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .pe-tabs { display: flex; border-bottom: 1px solid var(--line-2); margin-bottom: 20px; gap: 2px; }
+  .pe-tabs button {
+    padding: 10px 14px;
+    font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-3);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .pe-tabs button.is-active { color: var(--ink); border-bottom-color: var(--ink); }
+  .pe-tabs button:hover:not(.is-active) { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page">
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ C · 02 · Programme editor</div>
+          <h1 class="ax-page__title">Welding · Cohort 4</h1>
+          <p class="ax-page__lede">VTI · Cluster programme · Yaoundé · <span class="ax-pill ax-pill--open" style="margin-left:6px;">Open</span> · 18 of 25 places filled.</p>
+        </div>
+        <div class="ax-page__actions">
+          <a href="programmes.html" class="ax-btn ax-btn--soft"><svg viewBox="0 0 24 24"><path d="M11 6 5 12l6 6M5 12h14"/></svg>Back</a>
+          <a href="#" class="ax-btn ax-btn--ghost"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>Preview</a>
+          <button class="ax-btn ax-btn--primary">Save changes</button>
+        </div>
+      </div>
+
+      <div class="pe-tabs">
+        <button class="is-active">Overview</button>
+        <button>Details</button>
+        <button>Application</button>
+        <button>Media</button>
+        <button>SEO</button>
+        <button>Publishing</button>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-panel__body">
+          <div class="ax-form">
+            <div class="ax-form-row">
+              <div class="ax-form-row__head">
+                <div class="ax-form-row__title">Programme name</div>
+                <div class="ax-form-row__hint">Visible on public site.</div>
+              </div>
+              <div class="ax-form-row__body">
+                <input class="ax-input" value="Welding · Cohort 4">
+              </div>
+            </div>
+
+            <div class="ax-form-row">
+              <div class="ax-form-row__head">
+                <div class="ax-form-row__title">World &amp; category</div>
+                <div class="ax-form-row__hint">Determines where this programme appears in navigation.</div>
+              </div>
+              <div class="ax-form-row__body">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                  <div class="ax-field"><label class="ax-field__label">Nayokan world</label>
+                    <select class="ax-select">
+                      <option>01 · Vocational Training Institute</option>
+                      <option>02 · Startup Centre</option>
+                      <option>03 · Venture Capital</option>
+                      <option>04 · Hospitality</option>
+                    </select>
+                  </div>
+                  <div class="ax-field"><label class="ax-field__label">Programme type</label>
+                    <select class="ax-select"><option>Entrepreneurial cluster</option><option>Certification programme</option><option>Cohort programme</option><option>Rolling admission</option></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ax-form-row">
+              <div class="ax-form-row__head">
+                <div class="ax-form-row__title">Short description</div>
+                <div class="ax-form-row__hint">One paragraph. Appears in listings.</div>
+              </div>
+              <div class="ax-form-row__body">
+                <textarea class="ax-textarea" rows="2">A structured welding programme for young Cameroonian practitioners, delivered as a peer-accountable cluster with certification against a national metalwork standard.</textarea>
+              </div>
+            </div>
+
+            <div class="ax-form-row">
+              <div class="ax-form-row__head">
+                <div class="ax-form-row__title">Full description</div>
+                <div class="ax-form-row__hint">Public programme page body. Supports paragraphs and headings.</div>
+              </div>
+              <div class="ax-form-row__body">
+                <textarea class="ax-textarea" rows="6">The Welding Cohort 4 programme runs over 18 months at Nayokan's Yaoundé workshop. Participants train in structural, sheet-metal and pipe welding through supervised practice, cluster peer review and quarterly external assessment.
+
+Every participant leaves with a portfolio, a certification against Nayokan's national metalwork standard, and a formal placement in the Welding Cluster — a peer network with shared tooling, shared orders and shared accountability.
+
+The programme is delivered in French and English, with fabrication practice conducted primarily in French.</textarea>
+              </div>
+            </div>
+
+            <div class="ax-form-row">
+              <div class="ax-form-row__head">
+                <div class="ax-form-row__title">Duration &amp; delivery</div>
+                <div class="ax-form-row__hint">Programme logistics.</div>
+              </div>
+              <div class="ax-form-row__body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+                  <div class="ax-field"><label class="ax-field__label">Duration</label><input class="ax-input" value="18 months"></div>
+                  <div class="ax-field"><label class="ax-field__label">Start date</label><input class="ax-input ax-input--mono" value="15 Oct 2026"></div>
+                  <div class="ax-field"><label class="ax-field__label">End date</label><input class="ax-input ax-input--mono" value="15 Feb 2028"></div>
+                  <div class="ax-field"><label class="ax-field__label">Location</label><input class="ax-input" value="Yaoundé workshop · Nayokan Centre"></div>
+                  <div class="ax-field"><label class="ax-field__label">Delivery model</label><select class="ax-select"><option>In-person · workshop</option><option>Hybrid</option><option>Remote</option></select></div>
+                  <div class="ax-field"><label class="ax-field__label">Certification</label><select class="ax-select"><option>Nayokan National Metalwork Standard</option><option>Nayokan Certificate of Completion</option><option>None</option></select></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ax-form-row">
+              <div class="ax-form-row__head">
+                <div class="ax-form-row__title">Application window</div>
+                <div class="ax-form-row__hint">Nayokan will automatically mark the programme "Closed" 24h after the deadline.</div>
+              </div>
+              <div class="ax-form-row__body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                  <div class="ax-field"><label class="ax-field__label">Applications</label>
+                    <div class="ax-radio-group"><button class="is-active">Open</button><button>Closed</button></div>
+                  </div>
+                  <div class="ax-field"><label class="ax-field__label">Deadline</label><input class="ax-input ax-input--mono" value="27 Sept 2026 · 23:59 WAT"></div>
+                  <div class="ax-field"><label class="ax-field__label">Application URL</label><div class="ax-input__prefix"><span>nayokan.cm</span><input value="/apply/welding-cohort-4"></div></div>
+                  <div class="ax-field"><label class="ax-field__label">Places available</label><input class="ax-input ax-input--mono" value="25"></div>
+                </div>
+                <div class="ax-notice ax-notice--soft">
+                  <svg class="ax-notice__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 15.5v.5"/></svg>
+                  <div class="ax-notice__body">Required application documents: <strong>Motivation letter · National ID · Work samples (optional)</strong>. Configure in the <a href="#" style="color:var(--info-ink); text-decoration: underline;">Application tab</a>.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ax-form-row">
+              <div class="ax-form-row__head">
+                <div class="ax-form-row__title">Public visibility</div>
+                <div class="ax-form-row__hint">Whether this programme is visible on the public Nayokan website.</div>
+              </div>
+              <div class="ax-form-row__body">
+                <label class="ax-toggle is-on"><span class="ax-toggle__track"></span><span class="ax-toggle__label">Visible on website</span></label>
+                <div class="ax-field__hint">Live at <a href="../vti-programmes.html" style="color:var(--info-ink); text-decoration: underline;">nayokan.cm/vti-programmes</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'programmes',crumbs:[{label:'Programmes',href:'programmes.html'},{label:'Welding · Cohort 4'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

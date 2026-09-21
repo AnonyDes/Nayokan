@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Homepage editor · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .he-grid { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 1100px) { .he-grid { grid-template-columns: 1fr; } }
+
+  .he-sections {
+    background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: sticky; top: 76px;
+  }
+  .he-sections__head { padding: 14px 16px; border-bottom: 1px solid var(--line-2); display: flex; justify-content: space-between; align-items: center; }
+  .he-sections__title { font-family: var(--f-head); font-weight: 700; font-size: 14px; }
+  .he-sections__list { padding: 8px; }
+  .he-sec {
+    display: grid; grid-template-columns: 18px 32px 1fr 32px; gap: 8px; align-items: center;
+    padding: 8px 10px; border-radius: 3px;
+    cursor: pointer; transition: all var(--dur-fast);
+    margin-bottom: 2px;
+  }
+  .he-sec:hover { background: var(--ws-2); }
+  .he-sec.is-active { background: var(--ink); color: var(--paper); }
+  .he-sec__drag { color: var(--text-3); font-family: var(--f-mono); font-size: 11px; text-align: center; }
+  .he-sec.is-active .he-sec__drag { color: rgba(255,255,255,0.4); }
+  .he-sec__num { font-family: var(--f-mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.1em; }
+  .he-sec.is-active .he-sec__num { color: rgba(255,255,255,0.4); }
+  .he-sec__title { font-weight: 500; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .he-sec__sub { font-family: var(--f-mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.02em; margin-top: 1px; }
+  .he-sec.is-active .he-sec__sub { color: rgba(255,255,255,0.5); }
+  .he-sec__toggle {
+    width: 28px; height: 16px;
+    background: var(--ws-3); border-radius: 999px;
+    position: relative; flex-shrink: 0;
+  }
+  .he-sec__toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; background: white; border-radius: 50%; transition: transform var(--dur-fast); }
+  .he-sec__toggle.is-on { background: var(--green); }
+  .he-sec__toggle.is-on::after { transform: translateX(12px); }
+  .he-sec.is-active .he-sec__toggle { background: rgba(255,255,255,0.2); }
+  .he-sec.is-active .he-sec__toggle.is-on { background: var(--green); }
+
+  .he-canvas {
+    background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .he-canvas__head { padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line-2); }
+  .he-canvas__title { font-family: var(--f-head); font-weight: 700; font-size: 16px; }
+  .he-canvas__sub { font-family: var(--f-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.08em; margin-top: 3px; }
+  .he-canvas__body { padding: 24px; }
+
+  .he-preview {
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--radius); padding: 40px 32px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .he-preview__badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--warn-bg); color: var(--warn-ink);
+    padding: 3px 8px; border-radius: 3px;
+    font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .he-preview__eyebrow {
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.5); text-transform: uppercase; display: flex; align-items: center; gap: 8px;
+  }
+  .he-preview__eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--green); }
+  .he-preview__title {
+    font-family: var(--f-head); font-weight: 800; font-size: 40px;
+    letter-spacing: -0.03em; line-height: 1.02;
+    margin: 12px 0;
+  }
+  .he-preview__title em { font-style: normal; color: var(--green); }
+  .he-preview__lede { color: rgba(255,255,255,0.7); font-size: 15px; max-width: 60ch; line-height: 1.55; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ G · 03 · Website · Homepage</div>
+          <h1 class="ax-page__title">Homepage editor</h1>
+          <p class="ax-page__lede">The public Nayokan homepage is built from structured sections. You cannot freely restyle it — this preserves institutional consistency. You can reorder sections, edit copy and select curated content.</p>
+        </div>
+        <div class="ax-page__actions">
+          <a href="../index.html" target="_blank" class="ax-btn ax-btn--soft">
+            <svg viewBox="0 0 24 24"><path d="M14 3h7v7M10 14 21 3M21 14v7h-7"/></svg>
+            View live homepage
+          </a>
+          <button class="ax-btn ax-btn--ghost">Preview changes</button>
+          <button class="ax-btn ax-btn--primary">Publish changes</button>
+        </div>
+      </div>
+
+      <div class="ax-notice ax-notice--info" style="margin-bottom: 16px;">
+        <svg class="ax-notice__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 15.5v.5"/></svg>
+        <div>
+          <div class="ax-notice__title">Preserve institutional consistency.</div>
+          Homepage sections have fixed layouts by design. Reorder, enable, disable, and edit within each section — Nayokan does not permit visual freeform editing here to keep the public site coherent.
+        </div>
+      </div>
+
+      <div class="he-grid">
+
+        <!-- SECTION LIST -->
+        <div class="he-sections">
+          <div class="he-sections__head">
+            <div class="he-sections__title">Homepage sections</div>
+            <div class="ax-mono ax-mute">8 of 10</div>
+          </div>
+          <div class="he-sections__list">
+            <div class="he-sec is-active">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">01</div>
+              <div><div class="he-sec__title">Hero</div><div class="he-sec__sub">Institutional statement</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">02</div>
+              <div><div class="he-sec__title">Nayokan system</div><div class="he-sec__sub">Stage narrative</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">03</div>
+              <div><div class="he-sec__title">Four worlds</div><div class="he-sec__sub">VTI · SC · VC · Hospitality</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">04</div>
+              <div><div class="he-sec__title">Flagship programmes</div><div class="he-sec__sub">3 selected · rotating</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">05</div>
+              <div><div class="he-sec__title">Impact</div><div class="he-sec__sub">6 verified metrics</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">06</div>
+              <div><div class="he-sec__title">Stories</div><div class="he-sec__sub">4 selected</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">07</div>
+              <div><div class="he-sec__title">Partners</div><div class="he-sec__sub">Curated logos</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">08</div>
+              <div><div class="he-sec__title">Final CTA</div><div class="he-sec__sub">Partnership call</div></div>
+              <div class="he-sec__toggle is-on"></div>
+            </div>
+            <div class="he-sec" style="opacity: 0.55;">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">09</div>
+              <div><div class="he-sec__title">Newsletter signup</div><div class="he-sec__sub">Disabled</div></div>
+              <div class="he-sec__toggle"></div>
+            </div>
+            <div class="he-sec" style="opacity: 0.55;">
+              <div class="he-sec__drag">::</div>
+              <div class="he-sec__num">10</div>
+              <div><div class="he-sec__title">Event banner</div><div class="he-sec__sub">Disabled</div></div>
+              <div class="he-sec__toggle"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CANVAS -->
+        <div>
+          <div class="he-canvas">
+            <div class="he-canvas__head">
+              <div>
+                <div class="he-canvas__title">Section 01 · Hero</div>
+                <div class="he-canvas__sub">Fixed layout · edit copy, CTA and hero image only</div>
+              </div>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <span class="ax-pill ax-pill--published">Published</span>
+                <button class="ax-btn ax-btn--soft ax-btn--sm">Revert</button>
+                <button class="ax-btn ax-btn--primary ax-btn--sm">Save section</button>
+              </div>
+            </div>
+            <div class="he-canvas__body">
+              <!-- LIVE PREVIEW -->
+              <div class="he-preview">
+                <div class="he-preview__badge">Preview · not live</div>
+                <div class="he-preview__eyebrow">A Cameroonian development institution</div>
+                <h2 class="he-preview__title">Building <em>people</em>, enterprises&nbsp;and productive systems for Cameroon.</h2>
+                <div class="he-preview__lede">Nayokan is an ecosystem of vocational training, entrepreneurship, innovation and capital — connecting human capability to productive enterprise across four institutional worlds.</div>
+              </div>
+
+              <!-- FIELDS -->
+              <div class="ax-form">
+                <div class="ax-form-row">
+                  <div class="ax-form-row__head"><div class="ax-form-row__title">Eyebrow</div><div class="ax-form-row__hint">The small mono label above the headline.</div></div>
+                  <div class="ax-form-row__body"><input class="ax-input" value="A Cameroonian development institution"></div>
+                </div>
+
+                <div class="ax-form-row">
+                  <div class="ax-form-row__head"><div class="ax-form-row__title">Headline</div><div class="ax-form-row__hint">Use <em>&lt;em&gt;</em> tags for the accented italic word.</div></div>
+                  <div class="ax-form-row__body"><textarea class="ax-textarea" rows="3">Building &lt;em&gt;people&lt;/em&gt;, enterprises&amp;nbsp;and productive systems for Cameroon.</textarea></div>
+                </div>
+
+                <div class="ax-form-row">
+                  <div class="ax-form-row__head"><div class="ax-form-row__title">Supporting copy</div><div class="ax-form-row__hint">1–3 sentences describing Nayokan.</div></div>
+                  <div class="ax-form-row__body"><textarea class="ax-textarea" rows="3">Nayokan is an ecosystem of vocational training, entrepreneurship, innovation and capital — connecting human capability to productive enterprise across four institutional worlds.</textarea></div>
+                </div>
+
+                <div class="ax-form-row">
+                  <div class="ax-form-row__head"><div class="ax-form-row__title">Primary CTA</div><div class="ax-form-row__hint">The dark button in the hero.</div></div>
+                  <div class="ax-form-row__body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                      <div class="ax-field"><label class="ax-field__label">Label</label><input class="ax-input" value="Explore what we do"></div>
+                      <div class="ax-field"><label class="ax-field__label">Destination</label><select class="ax-select"><option>#what-we-do (anchor)</option><option>/what-we-do</option><option>/vti</option><option>/startup-centre</option></select></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ax-form-row">
+                  <div class="ax-form-row__head"><div class="ax-form-row__title">Secondary CTA</div><div class="ax-form-row__hint">Ghost button next to primary.</div></div>
+                  <div class="ax-form-row__body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                      <div class="ax-field"><label class="ax-field__label">Label</label><input class="ax-input" value="Partner with Nayokan"></div>
+                      <div class="ax-field"><label class="ax-field__label">Destination</label><select class="ax-select"><option>#cta (anchor)</option><option>/contact</option></select></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ax-form-row">
+                  <div class="ax-form-row__head"><div class="ax-form-row__title">Hero visual</div><div class="ax-form-row__hint">Selected from the media library. 16:9 recommended.</div></div>
+                  <div class="ax-form-row__body">
+                    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center;">
+                      <div class="ax-imgslot ax-imgslot--wide" style="aspect-ratio: 16/9; padding: 8px;">HERO · Institutional</div>
+                      <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="font-weight: 600; font-size: 13px;">nayokan-hero-a.jpg</div>
+                        <div class="ax-mono ax-mute" style="font-size: 10.5px;">3840 × 2160 · 5.8 MB · alt text set</div>
+                        <div style="display: flex; gap: 6px; margin-top: 4px;">
+                          <button class="ax-btn ax-btn--soft ax-btn--sm">Replace</button>
+                          <button class="ax-btn ax-btn--ghost ax-btn--sm">Remove</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ax-form-row">
+                  <div class="ax-form-row__head"><div class="ax-form-row__title">Public visibility</div><div class="ax-form-row__hint">Whether this section renders on the live website.</div></div>
+                  <div class="ax-form-row__body">
+                    <label class="ax-toggle is-on"><span class="ax-toggle__track"></span><span class="ax-toggle__label">Section is live</span></label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'homepage',crumbs:[{label:'Website'},{label:'Homepage'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

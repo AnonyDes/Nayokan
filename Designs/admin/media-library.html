@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Media library · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .mlib { display: grid; grid-template-columns: 220px 1fr 300px; gap: 20px; align-items: start; min-height: 600px; }
+  @media (max-width: 1200px) { .mlib { grid-template-columns: 200px 1fr; } .mlib__side { display: none; } }
+
+  .mlib__nav {
+    background: var(--panel); border: 1px solid var(--line-2);
+    border-radius: var(--radius-lg); padding: 12px 8px;
+    position: sticky; top: 76px;
+  }
+  .mlib__nav-group { padding: 8px 8px 4px; }
+  .mlib__nav-group-lb { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--text-3); text-transform: uppercase; padding: 6px 8px 8px; }
+  .mlib__nav-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    padding: 6px 8px; border-radius: 3px; cursor: pointer;
+    font-size: 13px; color: var(--text-2);
+  }
+  .mlib__nav-item:hover { background: var(--ws-2); color: var(--ink); }
+  .mlib__nav-item.is-active { background: var(--ink); color: var(--paper); font-weight: 500; }
+  .mlib__nav-count { font-family: var(--f-mono); font-size: 10.5px; opacity: 0.5; }
+
+  .mlib__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .mlib__grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .mlib-tile {
+    background: var(--panel); border: 1px solid var(--line-2);
+    border-radius: var(--radius); overflow: hidden;
+    cursor: pointer; transition: all var(--dur-fast);
+    position: relative;
+  }
+  .mlib-tile.is-selected { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(10,10,10,0.06); }
+  .mlib-tile:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .mlib-tile__thumb {
+    aspect-ratio: 1/1;
+    background: repeating-linear-gradient(135deg, var(--ws-2) 0 10px, var(--ws) 10px 20px);
+    display: grid; place-items: center;
+    color: var(--text-3);
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px;
+  }
+  .mlib-tile__thumb--video { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); color: #eee; }
+  .mlib-tile__thumb--doc { background: var(--ws); color: var(--text-2); }
+  .mlib-tile__info { padding: 8px 10px; }
+  .mlib-tile__name { font-size: 12px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mlib-tile__meta { font-family: var(--f-mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.04em; margin-top: 2px; }
+  .mlib-tile__badge {
+    position: absolute; top: 8px; left: 8px;
+    background: rgba(10,10,10,0.75); color: white;
+    padding: 2px 6px; border-radius: 2px;
+    font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .mlib-tile__no-alt {
+    position: absolute; top: 8px; right: 8px;
+    background: var(--warn); color: white;
+    width: 16px; height: 16px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--f-mono); font-size: 10px; font-weight: 700;
+  }
+
+  .mlib__side {
+    background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: sticky; top: 76px;
+  }
+  .mlib__side-head {
+    padding: 14px 16px; border-bottom: 1px solid var(--line-2);
+    font-family: var(--f-head); font-weight: 700; font-size: 14px;
+  }
+  .mlib__side-preview { padding: 16px; }
+  .mlib__side-body { padding: 0 16px 16px; }
+  .mlib__side-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
+  .mlib__side-row:last-of-type { border-bottom: none; }
+  .mlib__side-lb { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; color: var(--text-3); text-transform: uppercase; }
+
+  .mlib__dnd {
+    padding: 20px;
+    border: 2px dashed var(--line-strong);
+    border-radius: var(--radius);
+    text-align: center;
+    background: var(--ws);
+    margin-bottom: 16px;
+  }
+  .mlib__dnd svg { width: 24px; height: 24px; stroke: var(--text-3); fill: none; stroke-width: 1.5; margin: 0 auto 8px; }
+  .mlib__dnd-t { font-weight: 600; font-size: 13px; }
+  .mlib__dnd-s { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ B · 06 · Content · Media library</div>
+          <h1 class="ax-page__title">Media library</h1>
+          <p class="ax-page__lede">Images, video, and documents used across the Nayokan website. All assets require alt text and a source credit before they can be attached to published content.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">New folder</button>
+          <button class="ax-btn ax-btn--primary"><svg viewBox="0 0 24 24"><path d="M12 3v14M6 9l6-6 6 6M4 21h16"/></svg>Upload</button>
+        </div>
+      </div>
+
+      <div class="mlib">
+        <div class="mlib__nav">
+          <div class="mlib__dnd" style="padding: 14px 10px; margin: 0 0 8px;">
+            <svg viewBox="0 0 24 24"><path d="M12 3v14M6 9l6-6 6 6M4 21h16"/></svg>
+            <div class="mlib__dnd-t" style="font-size: 12px;">Drop files here</div>
+            <div class="mlib__dnd-s">or click Upload</div>
+          </div>
+          <div class="mlib__nav-group">
+            <div class="mlib__nav-group-lb">Type</div>
+            <div class="mlib__nav-item is-active"><span>All media</span><span class="mlib__nav-count">240</span></div>
+            <div class="mlib__nav-item"><span>Images</span><span class="mlib__nav-count">184</span></div>
+            <div class="mlib__nav-item"><span>Video</span><span class="mlib__nav-count">14</span></div>
+            <div class="mlib__nav-item"><span>Documents</span><span class="mlib__nav-count">42</span></div>
+          </div>
+          <div class="mlib__nav-group">
+            <div class="mlib__nav-group-lb">Collections</div>
+            <div class="mlib__nav-item"><span>Homepage</span><span class="mlib__nav-count">28</span></div>
+            <div class="mlib__nav-item"><span>Cohort 4 workshop</span><span class="mlib__nav-count">42</span></div>
+            <div class="mlib__nav-item"><span>Impact reports 2025</span><span class="mlib__nav-count">12</span></div>
+            <div class="mlib__nav-item"><span>Partner logos</span><span class="mlib__nav-count">18</span></div>
+            <div class="mlib__nav-item"><span>Property galleries</span><span class="mlib__nav-count">36</span></div>
+          </div>
+          <div class="mlib__nav-group">
+            <div class="mlib__nav-group-lb">Filter</div>
+            <div class="mlib__nav-item"><span>Missing alt text</span><span class="mlib__nav-count" style="color: var(--warn);">7</span></div>
+            <div class="mlib__nav-item"><span>Missing source</span><span class="mlib__nav-count" style="color: var(--warn);">4</span></div>
+            <div class="mlib__nav-item"><span>Unused</span><span class="mlib__nav-count">12</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="ax-panel" style="margin-bottom: 12px;">
+            <div class="ax-toolbar" style="padding: 8px 12px;">
+              <div class="ax-inline-search" style="min-width: 260px;">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+                <input placeholder="Search media, filenames, alt text…">
+              </div>
+              <button class="ax-filter"><span class="ax-filter__label">Sort</span><span class="ax-filter__value">Newest</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+              <button class="ax-filter is-active"><span class="ax-filter__label">Warnings</span><span class="ax-filter__value">Show 7</span><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+              <div style="flex:1"></div>
+              <div class="ax-mono ax-mute">240 items · 1.2 GB used of 20 GB</div>
+            </div>
+          </div>
+
+          <div class="mlib__grid">
+            <div class="mlib-tile is-selected"><div class="mlib-tile__thumb">FIELD PHOTO · Cohort 4 workshop</div><div class="mlib-tile__badge">JPG · 4.2 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">cohort4-workshop-a01.jpg</div><div class="mlib-tile__meta">3200 × 2100 · 2h ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">FIELD PHOTO · Cohort 4</div><div class="mlib-tile__badge">JPG · 3.8 MB</div><div class="mlib-tile__no-alt" title="Missing alt text">!</div><div class="mlib-tile__info"><div class="mlib-tile__name">cohort4-workshop-a02.jpg</div><div class="mlib-tile__meta">3200 × 2100 · 2h ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">FIELD PHOTO · Cohort 4</div><div class="mlib-tile__badge">JPG · 4.1 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">cohort4-workshop-a03.jpg</div><div class="mlib-tile__meta">3200 × 2100 · 2h ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb mlib-tile__thumb--video">▶ VIDEO · Yaoundé workshop</div><div class="mlib-tile__badge">MP4 · 48 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">yaounde-workshop.mp4</div><div class="mlib-tile__meta">01:24 · 1080p · 3d ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">PARTNER LOGO placeholder</div><div class="mlib-tile__badge">SVG</div><div class="mlib-tile__info"><div class="mlib-tile__name">partner-logo-01.svg</div><div class="mlib-tile__meta">Vector · 6d ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">PORTRAIT · Programme lead</div><div class="mlib-tile__badge">JPG · 2.4 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">portrait-programme-lead.jpg</div><div class="mlib-tile__meta">1800 × 2400 · 1w ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">PROPERTY · Guesthouse exterior</div><div class="mlib-tile__badge">JPG · 3.6 MB</div><div class="mlib-tile__no-alt" title="Missing alt text">!</div><div class="mlib-tile__info"><div class="mlib-tile__name">guesthouse-yaounde-01.jpg</div><div class="mlib-tile__meta">3600 × 2400 · 1w ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb mlib-tile__thumb--doc">PDF · Impact report 2024</div><div class="mlib-tile__badge">PDF · 2.1 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">impact-report-2024.pdf</div><div class="mlib-tile__meta">18 pages · 2mo ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">HERO · Institutional</div><div class="mlib-tile__badge">JPG · 5.8 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">nayokan-hero-a.jpg</div><div class="mlib-tile__meta">3840 × 2160 · 3mo ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">EVENT · Programme launch</div><div class="mlib-tile__badge">JPG · 3.2 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">launch-event-01.jpg</div><div class="mlib-tile__meta">3200 × 2100 · 3mo ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">EVENT · Programme launch</div><div class="mlib-tile__badge">JPG · 3.4 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">launch-event-02.jpg</div><div class="mlib-tile__meta">3200 × 2100 · 3mo ago</div></div></div>
+            <div class="mlib-tile"><div class="mlib-tile__thumb">PORTRAIT · Mentor</div><div class="mlib-tile__badge">JPG · 1.8 MB</div><div class="mlib-tile__info"><div class="mlib-tile__name">mentor-portrait-04.jpg</div><div class="mlib-tile__meta">1600 × 2100 · 4mo ago</div></div></div>
+          </div>
+        </div>
+
+        <div class="mlib__side">
+          <div class="mlib__side-head">Asset details</div>
+          <div class="mlib__side-preview">
+            <div class="ax-imgslot ax-imgslot--sq">FIELD PHOTO · Cohort 4 workshop</div>
+          </div>
+          <div class="mlib__side-body">
+            <div class="mlib__side-row"><span class="mlib__side-lb">File</span><span class="ax-mono">cohort4-workshop-a01.jpg</span></div>
+            <div class="mlib__side-row"><span class="mlib__side-lb">Dimensions</span><span class="ax-mono">3200 × 2100</span></div>
+            <div class="mlib__side-row"><span class="mlib__side-lb">Size</span><span class="ax-mono">4.2 MB</span></div>
+            <div class="mlib__side-row"><span class="mlib__side-lb">Uploaded by</span><span>John Bekolo</span></div>
+            <div class="mlib__side-row"><span class="mlib__side-lb">Uploaded</span><span class="ax-mono">2h ago</span></div>
+            <div class="mlib__side-row"><span class="mlib__side-lb">Used in</span><span>2 articles · 1 programme</span></div>
+
+            <div class="ax-field" style="margin-top: 14px;">
+              <label class="ax-field__label">Alt text <span class="ax-req">Required</span></label>
+              <textarea class="ax-textarea" rows="2">Nayokan Cohort 4 participants working at welding stations inside the Yaounde workshop.</textarea>
+            </div>
+            <div class="ax-field" style="margin-top: 12px;"><label class="ax-field__label">Caption</label><input class="ax-input" value="Cluster session · September 2026"></div>
+            <div class="ax-field" style="margin-top: 12px;"><label class="ax-field__label">Source / credit</label><input class="ax-input" value="Nayokan · Communications"></div>
+            <div class="ax-field" style="margin-top: 12px;"><label class="ax-field__label">Collection</label><select class="ax-select"><option>Cohort 4 workshop</option><option>Homepage</option><option>Institutional</option></select></div>
+
+            <div style="display:flex; gap: 6px; margin-top: 16px;">
+              <button class="ax-btn ax-btn--primary" style="flex:1; justify-content: center;">Save</button>
+              <button class="ax-btn ax-btn--danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'media',crumbs:[{label:'Content'},{label:'Media library'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

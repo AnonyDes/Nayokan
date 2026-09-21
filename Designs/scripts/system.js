@@ -38,7 +38,9 @@
   });
 
   // ---- Counter animation (Impact) ----
-  const counters = document.querySelectorAll('[data-count]');
+  // Governance rule: only animate elements whose data-count value is confirmed.
+  // Mark verified counters with data-count-verified="true" to opt in.
+  const counters = document.querySelectorAll('[data-count][data-count-verified="true"]');
   if (counters.length && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -60,4 +62,17 @@
     }, { threshold: 0.4 });
     counters.forEach(el => io.observe(el));
   }
+
+  // ---- Mobile navigation (burger) ----
+  document.querySelectorAll('.nav-burger').forEach(burger => {
+    burger.addEventListener('click', () => {
+      const isOpen = document.body.classList.toggle('nav-open');
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('nav-open')) return;
+    if (e.target.closest('.nav-mobile-panel') || e.target.closest('.nav-burger')) return;
+    document.body.classList.remove('nav-open');
+  });
 })();

@@ -1,0 +1,70 @@
+SHELL_START
+(opts) => `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>${opts.title} — Nayokan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="${opts.desc}">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/worlds.css">
+${opts.extraCss || ''}
+<link rel="stylesheet" href="styles/phase3b.css">
+</head>
+<body class="${opts.bodyClass || ''}" data-screen-label="${opts.label}">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link${opts.active==='what-we-do'?' active':''}">What we do</a>
+      <a href="vti.html" class="nav-link${opts.active==='vti'?' active':''}">VTI</a>
+      <a href="startup-centre.html" class="nav-link${opts.active==='sc'?' active':''}">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link${opts.active==='vc'?' active':''}">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link${opts.active==='hosp'?' active':''}">Hospitality</a>
+      <a href="impact.html" class="nav-link${opts.active==='impact'?' active':''}">Impact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="${opts.ctaHref||'contact.html'}" class="nav-cta">${opts.ctaText||'Contact'}</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+${opts.main}
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">Vocational Training Institute</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="what-we-do.html">What we do</a></li><li><a href="impact.html">Impact</a></li><li><a href="insights.html">Insights</a></li><li><a href="sitemap.html">Sitemap</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="programmes.html">All programmes</a></li><li><a href="application.html">Apply</a></li><li><a href="partners.html">Partners</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.1 · Phase 3B</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script src="scripts/system.js"></script>
+<script src="scripts/mobile-nav.js"></script>
+${opts.extraJs || ''}
+</body>
+</html>`
+SUB_START
+(crumbs, sec, route, title, lede) => `
+<section class="sub-hero">
+  <div class="sub-hero-inner">
+    <div class="sub-hero-meta">
+      <div class="crumbs">${crumbs}</div>
+      <span class="sec">${sec}</span>
+      <span class="ref">${route}</span>
+    </div>
+    <div class="sub-hero-body">
+      <h1>${title}</h1>
+      <p class="lede">${lede}</p>
+    </div>
+  </div>
+</section>`

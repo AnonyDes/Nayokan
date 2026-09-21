@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Audit log · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+<style>
+  .al-row {
+    display: grid; grid-template-columns: 130px 30px 1fr 180px;
+    gap: 14px; align-items: center;
+    padding: 12px 20px; border-bottom: 1px solid var(--line);
+    cursor: pointer; transition: background var(--dur-fast);
+  }
+  .al-row:hover { background: var(--ws); }
+  .al-row.is-expanded { background: var(--ws); border-bottom: 1px solid var(--line-2); }
+  .al-row.is-expanded + .al-detail { display: block; }
+  .al-detail {
+    display: none;
+    padding: 16px 20px 20px 200px;
+    background: var(--ws);
+    border-bottom: 1px solid var(--line-2);
+  }
+  .al-detail__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .al-detail__col {
+    background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius);
+    padding: 12px 14px; font-family: var(--f-mono); font-size: 11.5px;
+    line-height: 1.6;
+  }
+  .al-detail__lb { font-size: 9.5px; letter-spacing: 0.16em; color: var(--text-3); text-transform: uppercase; margin-bottom: 6px; }
+  .al-detail__kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; }
+  .al-detail__k { color: var(--text-3); }
+  .al-detail__v { color: var(--ink); }
+  .al-detail__prev { color: var(--danger-ink); text-decoration: line-through; }
+  .al-detail__next { color: var(--success-ink); }
+
+  .al-time { font-family: var(--f-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.02em; }
+  .al-time strong { color: var(--ink); font-weight: 600; display: block; font-size: 11.5px; }
+
+  .al-body { font-size: 13px; line-height: 1.4; }
+  .al-body strong { color: var(--ink); font-weight: 600; }
+  .al-body .obj { color: var(--ink); font-weight: 600; }
+  .al-body .verb { color: var(--text-2); }
+
+  .al-tag { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; margin-left: 6px; }
+  .al-tag--dangerous { background: var(--danger-bg); color: var(--danger-ink); }
+  .al-tag--governance { background: var(--info-bg); color: var(--info-ink); }
+</style>
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ H · 06 · Administration · Governance</div>
+          <h1 class="ax-page__title">Audit log</h1>
+          <p class="ax-page__lede">Every action on the platform, with actor, timestamp and — where relevant — the before-and-after values. The audit log is append-only and cannot be edited or deleted.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">Export · CSV</button>
+          <button class="ax-btn ax-btn--soft">Export · JSON</button>
+        </div>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-toolbar">
+          <div class="ax-inline-search" style="min-width: 280px;">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+            <input placeholder="Search actor, action, object…">
+          </div>
+          <button class="ax-filter"><span class="ax-filter__label">Actor</span><span class="ax-filter__value">All</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="ax-filter"><span class="ax-filter__label">Object</span><span class="ax-filter__value">Any</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="ax-filter is-active"><span class="ax-filter__label">Range</span><span class="ax-filter__value">Last 7 days</span><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+          <button class="ax-filter"><span class="ax-filter__label">Category</span><span class="ax-filter__value">Any</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div style="flex:1"></div>
+          <div class="ax-mono ax-mute">742 entries · last 7 days</div>
+        </div>
+
+        <div class="al-row is-expanded">
+          <div class="al-time"><strong>21 Sep · 14:12</strong>2m ago</div>
+          <span class="ax-avatar">MN</span>
+          <div class="al-body"><strong>Maria Ndongo</strong> <span class="verb">updated impact metric</span> <span class="obj">People trained · 2025</span> <span class="al-tag al-tag--governance">Impact</span></div>
+          <span class="ax-pill ax-pill--info">Update</span>
+        </div>
+        <div class="al-detail">
+          <div class="al-detail__grid">
+            <div class="al-detail__col">
+              <div class="al-detail__lb">Previous state</div>
+              <div class="al-detail__kv">
+                <span class="al-detail__k">value</span><span class="al-detail__v al-detail__prev">198</span>
+                <span class="al-detail__k">status</span><span class="al-detail__v al-detail__prev">Draft</span>
+                <span class="al-detail__k">public</span><span class="al-detail__v al-detail__prev">false</span>
+              </div>
+            </div>
+            <div class="al-detail__col">
+              <div class="al-detail__lb">New state</div>
+              <div class="al-detail__kv">
+                <span class="al-detail__k">value</span><span class="al-detail__v al-detail__next">240</span>
+                <span class="al-detail__k">status</span><span class="al-detail__v al-detail__next">Needs verification</span>
+                <span class="al-detail__k">public</span><span class="al-detail__v al-detail__next">false</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 10px; font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em;">
+            IP 41.204 · WAT · Session id S-2026-3812 · Object id IM-004
+          </div>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>21 Sep · 13:52</strong>22m ago</div>
+          <span class="ax-avatar">JB</span>
+          <div class="al-body"><strong>John Bekolo</strong> <span class="verb">submitted article for review</span> <span class="obj">"Building productive capability"</span></div>
+          <span class="ax-pill ax-pill--info">Submit</span>
+        </div>
+        <div class="al-detail"></div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>21 Sep · 13:04</strong>1h ago</div>
+          <span class="ax-avatar">DE</span>
+          <div class="al-body"><strong>David Ekwe</strong> <span class="verb">approved impact metric</span> <span class="obj">Enterprises supported · Q2</span> <span class="al-tag al-tag--governance">Impact</span></div>
+          <span class="ax-pill ax-pill--approved">Approve</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>21 Sep · 11:44</strong>2h ago</div>
+          <span class="ax-avatar">SN</span>
+          <div class="al-body"><strong>Sarah Ndenge</strong> <span class="verb">published Startup Centre opportunity</span> <span class="obj">Innovator Residency · 2026</span></div>
+          <span class="ax-pill ax-pill--published">Publish</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>21 Sep · 10:22</strong>3h ago</div>
+          <span class="ax-avatar">MN</span>
+          <div class="al-body"><strong>Maria Ndongo</strong> <span class="verb">changed user permissions for</span> <span class="obj">Aïssa Tchoumi</span> <span class="al-tag al-tag--dangerous">Dangerous</span></div>
+          <span class="ax-pill ax-pill--rejected">Perm change</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>21 Sep · 09:41</strong>4h ago</div>
+          <span class="ax-avatar">JB</span>
+          <div class="al-body"><strong>John Bekolo</strong> <span class="verb">uploaded 12 images to media library</span> <span class="obj">· Cohort 4</span></div>
+          <span class="ax-pill ax-pill--info">Upload</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>20 Sep · 17:12</strong>Yesterday</div>
+          <span class="ax-avatar">DE</span>
+          <div class="al-body"><strong>David Ekwe</strong> <span class="verb">requested changes on</span> <span class="obj">"Hospitality year in review"</span></div>
+          <span class="ax-pill ax-pill--rejected">Reject</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>20 Sep · 16:04</strong>Yesterday</div>
+          <span class="ax-avatar">MN</span>
+          <div class="al-body"><strong>Maria Ndongo</strong> <span class="verb">created programme</span> <span class="obj">Welding · Cohort 4</span></div>
+          <span class="ax-pill ax-pill--verified">Create</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>20 Sep · 14:22</strong>Yesterday</div>
+          <span class="ax-avatar">SN</span>
+          <div class="al-body"><strong>Sarah Ndenge</strong> <span class="verb">signed in from new device</span> <span class="obj">Firefox · macOS · Yaoundé</span> <span class="al-tag al-tag--dangerous">Security</span></div>
+          <span class="ax-pill ax-pill--info">Auth</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>20 Sep · 09:14</strong>Yesterday</div>
+          <span class="ax-avatar">MN</span>
+          <div class="al-body"><strong>Maria Ndongo</strong> <span class="verb">disabled user account</span> <span class="obj">Contractor · former staff</span> <span class="al-tag al-tag--dangerous">Dangerous</span></div>
+          <span class="ax-pill ax-pill--rejected">Disable</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>19 Sep · 15:41</strong>2d ago</div>
+          <span class="ax-avatar">SN</span>
+          <div class="al-body"><strong>Sarah Ndenge</strong> <span class="verb">edited homepage section</span> <span class="obj">Featured programmes</span></div>
+          <span class="ax-pill ax-pill--info">Update</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>19 Sep · 11:32</strong>2d ago</div>
+          <span class="ax-avatar">DE</span>
+          <div class="al-body"><strong>David Ekwe</strong> <span class="verb">restored previous version</span> <span class="obj">"On patient capital: a Nayokan letter" · v3</span></div>
+          <span class="ax-pill ax-pill--info">Restore</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>18 Sep · 09:24</strong>3d ago</div>
+          <span class="ax-avatar">MN</span>
+          <div class="al-body"><strong>Maria Ndongo</strong> <span class="verb">archived programme</span> <span class="obj">Legacy Programme · Cohort 1</span></div>
+          <span class="ax-pill ax-pill--archived">Archive</span>
+        </div>
+
+        <div class="al-row">
+          <div class="al-time"><strong>18 Sep · 08:12</strong>3d ago</div>
+          <span class="ax-avatar" style="background: var(--ink); color: var(--paper);">SYS</span>
+          <div class="al-body"><strong>System</strong> <span class="verb">auto-closed opportunity</span> <span class="obj">Grant · 2026 Q3</span> <span class="verb">· deadline passed</span></div>
+          <span class="ax-pill ax-pill--expired">Auto</span>
+        </div>
+
+        <div class="ax-pagination">
+          <div>Showing <strong style="color:var(--ink);">1 – 14</strong> of 742 entries</div>
+          <div class="ax-pagination__pages">
+            <button>‹</button><button class="is-active">1</button><button>2</button><button>3</button><button>4</button><button>…</button><button>53</button><button>›</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script>window.AX_PAGE={screen:'audit',crumbs:[{label:'Administration'},{label:'Audit log'}]};</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>

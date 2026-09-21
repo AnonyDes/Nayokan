@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Articles · Nayokan Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+<div class="ax-app">
+  <aside class="ax-sidebar" data-shell="sidebar"></aside>
+  <header class="ax-topbar" data-shell="topbar"></header>
+
+  <main class="ax-workspace">
+    <div class="ax-page ax-page--wide">
+
+      <div class="ax-page__head">
+        <div class="ax-page__title-block">
+          <div class="ax-page__eyebrow">§ B · 03 · Content · Articles &amp; Insights</div>
+          <h1 class="ax-page__title">Articles</h1>
+          <p class="ax-page__lede">Editorial pieces published across the Nayokan ecosystem — insights, essays, programme notes, institutional updates.</p>
+        </div>
+        <div class="ax-page__actions">
+          <button class="ax-btn ax-btn--soft">
+            <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+            Export
+          </button>
+          <a href="article-editor.html" class="ax-btn ax-btn--primary">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            Create article
+          </a>
+        </div>
+      </div>
+
+      <div class="ax-panel">
+        <div class="ax-toolbar">
+          <div class="ax-tabs">
+            <button class="ax-tabs__tab is-active">All <span class="ax-tabs__count">24</span></button>
+            <button class="ax-tabs__tab">Draft <span class="ax-tabs__count">6</span></button>
+            <button class="ax-tabs__tab">In review <span class="ax-tabs__count">3</span></button>
+            <button class="ax-tabs__tab">Changes requested <span class="ax-tabs__count">1</span></button>
+            <button class="ax-tabs__tab">Scheduled <span class="ax-tabs__count">2</span></button>
+            <button class="ax-tabs__tab">Published <span class="ax-tabs__count">11</span></button>
+            <button class="ax-tabs__tab">Archived <span class="ax-tabs__count">1</span></button>
+          </div>
+
+          <div style="flex:1;"></div>
+
+          <div class="ax-inline-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Search articles…">
+          </div>
+
+          <button class="ax-filter">
+            <span class="ax-filter__label">World</span>
+            <span class="ax-filter__value">All</span>
+            <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <button class="ax-filter">
+            <span class="ax-filter__label">Author</span>
+            <span class="ax-filter__value">Any</span>
+            <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <button class="ax-filter is-active">
+            <span class="ax-filter__label">Updated</span>
+            <span class="ax-filter__value">Last 30d</span>
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+
+        <table class="ax-table">
+          <thead>
+            <tr>
+              <th class="ax-table__check"><span class="ax-check"></span></th>
+              <th style="width:34%;">Title</th>
+              <th>World</th>
+              <th>Author</th>
+              <th>Status</th>
+              <th>Updated</th>
+              <th class="is-num">Views · 30d</th>
+              <th style="width:80px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Building productive capability: why Cameroon needs a vocational renaissance</span>
+                <span class="ax-table__sub">/insights/building-productive-capability</span>
+              </td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td>
+                <span style="display:inline-flex; align-items:center; gap:6px;">
+                  <span class="ax-avatar">JB</span> John Bekolo
+                </span>
+              </td>
+              <td><span class="ax-pill ax-pill--review">In review</span></td>
+              <td class="is-mono">2h ago</td>
+              <td class="is-num is-mono">—</td>
+              <td>
+                <div class="ax-table__row-actions">
+                  <button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check is-checked"></span></td>
+              <td>
+                <span class="ax-table__title">How Cameroonian universities are commercialising research <span class="ax-demo-tag">Demo</span></span>
+                <span class="ax-table__sub">/insights/university-commercialisation</span>
+              </td>
+              <td><span class="ax-world ax-world--sc">Startup</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">SN</span> Sarah Ndenge</span></td>
+              <td><span class="ax-pill ax-pill--draft">Draft</span></td>
+              <td class="is-mono">Yesterday</td>
+              <td class="is-num is-mono">—</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Nayokan Q3 impact review — twelve verified indicators</span>
+                <span class="ax-table__sub">/insights/q3-impact-review</span>
+              </td>
+              <td><span class="ax-world">All worlds</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">MN</span> Maria Ndongo</span></td>
+              <td><span class="ax-pill ax-pill--scheduled">Scheduled · Wed 08:00</span></td>
+              <td class="is-mono">3d ago</td>
+              <td class="is-num is-mono">—</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Cohort 4 — welcoming our newest learners</span>
+                <span class="ax-table__sub">/insights/cohort-4-welcome</span>
+              </td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">AT</span> Aïssa Tchoumi</span></td>
+              <td><span class="ax-pill ax-pill--published">Published</span></td>
+              <td class="is-mono">1w ago</td>
+              <td class="is-num is-mono">1,204</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Hospitality year in review — Yaoundé guesthouse learnings</span>
+                <span class="ax-table__sub">/insights/hospitality-year-in-review</span>
+              </td>
+              <td><span class="ax-world ax-world--hos">Hospitality</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">DE</span> David Ekwe</span></td>
+              <td><span class="ax-pill ax-pill--rejected">Changes requested</span></td>
+              <td class="is-mono">Yesterday</td>
+              <td class="is-num is-mono">—</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Field notes: the enterprise cluster model</span>
+                <span class="ax-table__sub">/insights/enterprise-cluster-model</span>
+              </td>
+              <td><span class="ax-world ax-world--vti">VTI</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">JB</span> John Bekolo</span></td>
+              <td><span class="ax-pill ax-pill--published">Published</span></td>
+              <td class="is-mono">2w ago</td>
+              <td class="is-num is-mono">862</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Innovator residency — 2026 call for applications</span>
+                <span class="ax-table__sub">/insights/innovator-residency-2026</span>
+              </td>
+              <td><span class="ax-world ax-world--sc">Startup</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">SN</span> Sarah Ndenge</span></td>
+              <td><span class="ax-pill ax-pill--published">Published</span></td>
+              <td class="is-mono">3w ago</td>
+              <td class="is-num is-mono">2,140</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Building enterprise readiness in Cameroon's startups</span>
+                <span class="ax-table__sub">/insights/enterprise-readiness</span>
+              </td>
+              <td><span class="ax-world ax-world--sc">Startup</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">SN</span> Sarah Ndenge</span></td>
+              <td><span class="ax-pill ax-pill--scheduled">Scheduled · 1 Oct</span></td>
+              <td class="is-mono">4d ago</td>
+              <td class="is-num is-mono">—</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">The mentor's chair — six lessons from Cohort 3</span>
+                <span class="ax-table__sub">/insights/mentors-chair-cohort-3</span>
+              </td>
+              <td><span class="ax-world ax-world--sc">Startup</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">MN</span> Maria Ndongo</span></td>
+              <td><span class="ax-pill ax-pill--draft">Draft</span></td>
+              <td class="is-mono">32d ago</td>
+              <td class="is-num is-mono">—</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Nayokan Guesthouse — a productive asset in practice</span>
+                <span class="ax-table__sub">/insights/nayokan-guesthouse-practice</span>
+              </td>
+              <td><span class="ax-world ax-world--hos">Hospitality</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">DE</span> David Ekwe</span></td>
+              <td><span class="ax-pill ax-pill--published">Published</span></td>
+              <td class="is-mono">5w ago</td>
+              <td class="is-num is-mono">548</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">On patient capital: a Nayokan letter</span>
+                <span class="ax-table__sub">/insights/patient-capital-letter</span>
+              </td>
+              <td><span class="ax-world ax-world--vc">VC</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">MN</span> Maria Ndongo</span></td>
+              <td><span class="ax-pill ax-pill--published">Published</span></td>
+              <td class="is-mono">6w ago</td>
+              <td class="is-num is-mono">1,802</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td class="ax-table__check"><span class="ax-check"></span></td>
+              <td>
+                <span class="ax-table__title">Old draft — abandoned working title</span>
+                <span class="ax-table__sub">/insights/draft-abc-1029</span>
+              </td>
+              <td><span class="ax-world">Unassigned</span></td>
+              <td><span style="display:inline-flex; align-items:center; gap:6px;"><span class="ax-avatar">JB</span> John Bekolo</span></td>
+              <td><span class="ax-pill ax-pill--archived">Archived</span></td>
+              <td class="is-mono">4mo ago</td>
+              <td class="is-num is-mono">—</td>
+              <td><div class="ax-table__row-actions"><button class="ax-iconbtn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button></div></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ax-pagination">
+          <div>Showing <strong style="color:var(--ink);">1 – 12</strong> of 24 articles</div>
+          <div class="ax-pagination__pages">
+            <button>‹</button>
+            <button class="is-active">1</button>
+            <button>2</button>
+            <button>›</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  window.AX_PAGE = {
+    screen: 'articles',
+    crumbs: [
+      { label: 'Content', href: 'articles.html' },
+      { label: 'Articles' }
+    ]
+  };
+</script>
+<script src="scripts/shell.js"></script>
+</body>
+</html>
