@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sitemap · All screens — Nayokan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/corporate.css">
+<style>
+  .sitemap-section {
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+  }
+  .sitemap-section:first-of-type { border-top: none; }
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .sitemap-head span {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .sitemap-head h3 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .sitemap-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .sitemap-link {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--paper);
+    align-items: center;
+    transition: background var(--dur-fast);
+  }
+  .sitemap-link:hover { background: var(--bone); }
+  .sitemap-link .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .sitemap-link .name {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.015em;
+  }
+  .sitemap-link .name small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0;
+    margin-top: 2px;
+  }
+  .sitemap-link .arrow { color: var(--muted); font-size: 1.1rem; }
+  .sitemap-link:hover .arrow { color: var(--green-deep); transform: translateX(4px); }
+  @media (max-width: 900px) {
+    .sitemap-grid { grid-template-columns: 1fr; gap: 24px; }
+    .sitemap-links { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-screen-label="00 Sitemap">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link">What we do</a>
+      <a href="vti.html" class="nav-link">VTI</a>
+      <a href="startup-centre.html" class="nav-link">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link">Hospitality</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+      <a href="insights.html" class="nav-link">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="corp-hero">
+  <div class="corp-hero-inner">
+    <div>
+      <div class="corp-hero-crumbs"><a href="index.html">Nayokan</a><span class="sep">/</span><span class="current">Sitemap</span></div>
+      <span class="corp-hero-sec">§ Complete screen index</span>
+    </div>
+    <div>
+      <h1 class="corp-hero-title">All screens.<br><em>One index.</em></h1>
+      <p class="corp-hero-lede">
+        A working sitemap of the Nayokan digital ecosystem — every screen designed so far,
+        organized by area. Useful for review, walkthroughs and internal navigation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <div class="sitemap-section">
+      <div class="sitemap-grid">
+        <div class="sitemap-head">
+          <span>§ 01</span>
+          <h3>Global · Corporate</h3>
+        </div>
+        <div class="sitemap-links">
+          <a href="index.html" class="sitemap-link"><span class="num">S/01</span><span class="name">Home<small>Flagship — hero, system, four worlds, impact</small></span><span class="arrow">→</span></a>
+          <a href="what-we-do.html" class="sitemap-link"><span class="num">S/02</span><span class="name">What we do<small>Ecosystem overview + 6-stage system</small></span><span class="arrow">→</span></a>
+          <a href="about.html" class="sitemap-link"><span class="num">S/03</span><span class="name">About<small>Story, values, timeline, leadership</small></span><span class="arrow">→</span></a>
+          <a href="impact.html" class="sitemap-link"><span class="num">S/04</span><span class="name">Impact<small>Big metrics, by-world breakdown, stories, reports</small></span><span class="arrow">→</span></a>
+          <a href="insights.html" class="sitemap-link"><span class="num">S/05</span><span class="name">Insights<small>Editorial article directory + filters</small></span><span class="arrow">→</span></a>
+          <a href="article.html" class="sitemap-link"><span class="num">S/06</span><span class="name">Article detail<small>Long-form editorial reading template</small></span><span class="arrow">→</span></a>
+          <a href="programmes.html" class="sitemap-link"><span class="num">S/07</span><span class="name">Programmes directory<small>Filterable ecosystem-wide programme index</small></span><span class="arrow">→</span></a>
+          <a href="contact.html" class="sitemap-link"><span class="num">S/08</span><span class="name">Contact<small>Enquiry routing + general form</small></span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sitemap-section">
+      <div class="sitemap-grid">
+        <div class="sitemap-head">
+          <span>§ 02 · World 01</span>
+          <h3>Vocational Training Institute — VTI</h3>
+        </div>
+        <div class="sitemap-links">
+          <a href="vti.html" class="sitemap-link"><span class="num">V/01</span><span class="name">VTI Home<small>Practical · human · energetic world entry</small></span><span class="arrow">→</span></a>
+          <a href="programme-detail.html" class="sitemap-link"><span class="num">V/02</span><span class="name">Programme detail<small>P/001 — Professional Growth Engineering</small></span><span class="arrow">→</span></a>
+          <a href="cluster-detail.html" class="sitemap-link"><span class="num">V/03</span><span class="name">Cluster detail<small>C/02 — Agri-Food & Production cluster</small></span><span class="arrow">→</span></a>
+          <a href="application.html" class="sitemap-link"><span class="num">V/04</span><span class="name">Application flow<small>6-step interactive form</small></span><span class="arrow">→</span></a>
+          <a href="application-success.html" class="sitemap-link"><span class="num">V/05</span><span class="name">Application success<small>Post-submission confirmation state</small></span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sitemap-section">
+      <div class="sitemap-grid">
+        <div class="sitemap-head">
+          <span>§ 03 · World 02</span>
+          <h3>Startup Centre</h3>
+        </div>
+        <div class="sitemap-links">
+          <a href="startup-centre.html" class="sitemap-link"><span class="num">SC/01</span><span class="name">Startup Centre Home<small>Innovative · experimental world entry</small></span><span class="arrow">→</span></a>
+          <a href="portfolio-detail.html" class="sitemap-link"><span class="num">SC/02</span><span class="name">Portfolio venture detail<small>V/01 — Agri-processing venture</small></span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sitemap-section">
+      <div class="sitemap-grid">
+        <div class="sitemap-head">
+          <span>§ 04 · World 03</span>
+          <h3>Venture Capital</h3>
+        </div>
+        <div class="sitemap-links">
+          <a href="venture-capital.html" class="sitemap-link"><span class="num">VC/01</span><span class="name">Venture Capital Home<small>Confident · analytical · institutional (dark navy)</small></span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sitemap-section">
+      <div class="sitemap-grid">
+        <div class="sitemap-head">
+          <span>§ 05 · World 04</span>
+          <h3>Hospitality</h3>
+        </div>
+        <div class="sitemap-links">
+          <a href="hospitality.html" class="sitemap-link"><span class="num">HS/01</span><span class="name">Hospitality Home<small>Refined · calm · premium world entry</small></span><span class="arrow">→</span></a>
+          <a href="property-detail.html" class="sitemap-link"><span class="num">HS/02</span><span class="name">Property detail<small>P/001 — The Nayokan Guesthouse, Yaoundé</small></span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sitemap-section">
+      <div class="sitemap-grid">
+        <div class="sitemap-head">
+          <span>§ Meta</span>
+          <h3>System</h3>
+        </div>
+        <div class="sitemap-links">
+          <a href="sitemap.html" class="sitemap-link"><span class="num">M/01</span><span class="name">Sitemap<small>This page — complete screen index</small></span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:64px; padding:32px; background:var(--bone); border:1px solid var(--line)">
+      <span class="meta">Delivery note</span>
+      <p style="margin-top:12px; color:var(--ink); font-size:1.05rem; line-height:1.55; max-width:64ch">
+        <strong style="font-family:'Manrope',sans-serif; font-weight:700">18 screens delivered</strong> in the working ecosystem: 5 flagship world screens + 8 corporate spine + 5 depth templates (programme, application flow, success, cluster, property, portfolio).
+        Each screen shares the same design system, navigation and footer. Placeholders are marked with subtle italic <em>[tbc]</em> tags per content-governance protocol.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">Vocational Training Institute</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="what-we-do.html">What we do</a></li><li><a href="impact.html">Impact</a></li><li><a href="insights.html">Insights</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="programmes.html">Programmes</a></li><li><a href="application.html">Apply</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.0 · Working design</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script src="scripts/system.js"></script>
+</body>
+</html>

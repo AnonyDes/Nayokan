@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Inauguration day — Nayokan VTI · Insights</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A documentary look at the inauguration of the Nayokan Vocational Training Institute in Yaoundé, and what it means for productive-systems building in Cameroon.">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/corporate.css">
+<style>
+  /* Article-specific */
+  .article-hero {
+    padding-top: 120px;
+    padding-bottom: 48px;
+  }
+  .article-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    text-align: left;
+  }
+  .article-hero .article-cat {
+    display: inline-block;
+    color: var(--green-deep);
+    margin-bottom: 20px;
+  }
+  .article-hero-title {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+    margin-bottom: 32px;
+    max-width: 22ch;
+  }
+  .article-hero-title em { font-style: italic; font-weight: 500; }
+  .article-hero-meta {
+    display: flex; gap: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  .article-cover {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--bone);
+    max-width: 1240px;
+    margin: 0 auto 64px;
+    padding: 0 var(--gutter);
+  }
+  .article-cover-inner {
+    width: 100%; height: 100%; overflow: hidden;
+  }
+  .article-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .article-cover-cap {
+    max-width: 1240px;
+    margin: 12px auto 0;
+    padding: 0 var(--gutter);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .article-body-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px var(--gutter) 96px;
+  }
+  .article-body-wrap p {
+    font-size: 1.15rem;
+    line-height: 1.72;
+    color: var(--ink);
+    margin-bottom: 28px;
+    max-width: 62ch;
+  }
+  .article-body-wrap p.lede {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+  .article-body-wrap p.lede::first-letter {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 5rem;
+    line-height: 0.9;
+    float: left;
+    padding: 6px 12px 0 0;
+    color: var(--green-deep);
+  }
+  .article-body-wrap h2 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-top: 56px;
+    margin-bottom: 20px;
+  }
+  .article-body-wrap blockquote {
+    border-left: 2px solid var(--green);
+    padding-left: 28px;
+    margin: 40px 0;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 30ch;
+  }
+  .article-body-wrap blockquote em { font-style: italic; }
+
+  .article-figure {
+    margin: 48px 0;
+  }
+  .article-figure img { width: 100%; height: auto; display: block; }
+  .article-figure figcaption {
+    padding-top: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .article-share {
+    max-width: 720px;
+    margin: 40px auto 0;
+    padding: 32px var(--gutter);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+  }
+  .article-share .meta { color: var(--muted); }
+  .article-share-buttons { display: flex; gap: 12px; }
+  .article-share-buttons a {
+    padding: 8px 14px;
+    border: 1px solid var(--line-strong);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink);
+    transition: all var(--dur-fast);
+  }
+  .article-share-buttons a:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .article-related {
+    background: var(--bone);
+    padding: clamp(64px, 8vw, 128px) 0;
+  }
+  .article-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6);
+  }
+  @media (max-width: 900px) { .article-related-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-screen-label="11 Article">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link">What we do</a>
+      <a href="vti.html" class="nav-link">VTI</a>
+      <a href="startup-centre.html" class="nav-link">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link">Hospitality</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+      <a href="insights.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div style="display:flex; gap:8px; align-items:center; padding-bottom:24px; margin-bottom:32px; border-bottom:1px solid var(--line); font-family:'IBM Plex Mono',monospace; font-size:var(--f-meta); letter-spacing:0.14em; text-transform:uppercase; color:var(--muted);">
+      <a href="index.html" style="color:var(--muted)">Nayokan</a>
+      <span style="opacity:0.4">/</span>
+      <a href="insights.html" style="color:var(--muted)">Insights</a>
+      <span style="opacity:0.4">/</span>
+      <span style="color:var(--ink)">Article</span>
+    </div>
+    <span class="article-cat">Feature · Nayokan Updates</span>
+    <h1 class="article-hero-title">Inauguration day — the Nayokan Vocational Training <em>Institute</em> in Yaoundé.</h1>
+    <div class="article-hero-meta">
+      <span>September 2026</span>
+      <span>8 min read</span>
+      <span>By Nayokan Editorial <span class="placeholder-tag">author tbc</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- COVER -->
+<figure class="article-cover">
+  <div class="article-cover-inner">
+    <img src="assets/photos/nayokan-06.jpg" alt="Nayokan VTI inauguration ceremony, Yaoundé.">
+  </div>
+</figure>
+<div class="article-cover-cap">
+  Fig. 001 — Members of the Nayokan Association at the VTI inauguration, Yaoundé.
+</div>
+
+<!-- BODY -->
+<article class="article-body-wrap">
+  <p class="lede">
+    The Nayokan Vocational Training Institute opened its doors to its first cohort of
+    trainees this month. What follows is less a ceremonial account than a working note on
+    what the launch means for the wider Nayokan agenda — and for the productive-systems
+    thesis it stands on.
+  </p>
+
+  <p>
+    The idea behind Nayokan has always been institutional rather than programmatic. Not a
+    single training, not a single incubation, not a single investment vehicle — but a
+    connected pathway from human capability to productive enterprise to productive assets.
+    The VTI is the front door to that pathway.
+  </p>
+
+  <p>
+    Its curriculum is explicit about this. Every module is designed with a downstream
+    destination in mind — an entrepreneurial cluster, a small enterprise, a venture in the
+    Startup Centre pipeline. Practical skills are the starting point, not the endpoint.
+  </p>
+
+  <blockquote>
+    Skills alone are not enough. <em>Systems create lasting value.</em>
+  </blockquote>
+
+  <h2>Why vocational training comes first</h2>
+
+  <p>
+    Cameroon's economic debate has long oscillated between two poles: the "innovation
+    economy" narrative and the "industrial base" narrative. Nayokan's position is that
+    neither works without the other, and that both rest on a foundation neither one
+    always names — <em>productive human capability.</em>
+  </p>
+
+  <p>
+    That is what the VTI produces. Not degree-holders, not incubatees, not investees —
+    people who can produce. Who can operate machinery, deliver services, structure small
+    enterprises, and — critically — <em>train the next cohort themselves</em>.
+  </p>
+
+  <figure class="article-figure">
+    <img src="assets/photos/nayokan-08.jpg" alt="Trainees at the Nayokan VTI computer lab.">
+    <figcaption>Fig. 002 — VTI training lab in operation. First cohort onboarding session.</figcaption>
+  </figure>
+
+  <h2>The cluster question</h2>
+
+  <p>
+    The VTI is not designed to graduate individuals into a generic labour market. It is
+    designed to graduate them into <em>entrepreneurial clusters</em> — structured groups
+    of graduates and small enterprises collaborating around a common productive activity.
+  </p>
+
+  <p>
+    Six clusters are currently being formed, covering digital & technology, agri-food &
+    production, craft & manufacturing, hospitality & services, health & wellness, and the
+    creative economy. Each cluster shares tools, market access, mentorship and — in time
+    — access to Nayokan Startup Centre and Venture Capital resources.
+  </p>
+
+  <h2>What happens next</h2>
+
+  <p>
+    The first cohort will move through the practical modules over the coming months.
+    Cluster formation begins in parallel. The Startup Centre commercialization pathway
+    will be opened to select cluster ventures in early 2027.
+  </p>
+
+  <p>
+    The full <em>capability → production → markets → innovation → capital → assets</em>
+    pathway now has an operating front door. The remaining work is to run it — cohort
+    after cohort, cluster after cluster, year after year.
+  </p>
+
+  <p>
+    We will return with more from inside the VTI in the coming issues.
+  </p>
+</article>
+
+<!-- SHARE -->
+<div class="article-share">
+  <span class="meta">Share this article</span>
+  <div class="article-share-buttons">
+    <a href="#">Copy link</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Email</a>
+  </div>
+</div>
+
+<!-- RELATED -->
+<section class="article-related">
+  <div class="wrap">
+    <span class="meta">§ Related insights</span>
+    <h2 style="margin-top:12px; margin-bottom:40px">Continue reading.</h2>
+    <div class="article-related-grid">
+      <a href="article.html" class="article-card">
+        <div class="article-thumb placeholder" data-num="02"></div>
+        <span class="article-cat">Innovation</span>
+        <h4 class="article-title">Commercializing university research in Central Africa.</h4>
+        <span class="article-meta"><span>Aug 2026 · 6 min</span><span>Startup Centre</span></span>
+      </a>
+      <a href="article.html" class="article-card">
+        <div class="article-thumb placeholder" data-num="04"></div>
+        <span class="article-cat">Entrepreneurship</span>
+        <h4 class="article-title">Cluster formation — a practical guide for graduates.</h4>
+        <span class="article-meta"><span>Jul 2026 · 7 min</span><span>VTI</span></span>
+      </a>
+      <a href="article.html" class="article-card">
+        <div class="article-thumb placeholder" data-num="06"></div>
+        <span class="article-cat">Development</span>
+        <h4 class="article-title">The productive-systems thesis — capability to capital.</h4>
+        <span class="article-meta"><span>Jun 2026 · 12 min</span><span>Nayokan</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">Vocational Training Institute</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="what-we-do.html">What we do</a></li><li><a href="impact.html">Impact</a></li><li><a href="insights.html">Insights</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="programmes.html">Programmes</a></li><li><a href="application.html">Apply</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.0 · Working design</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script src="scripts/system.js"></script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Apply — Nayokan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Apply to a Nayokan programme. Multi-step application form with save-and-return.">
+<link rel="stylesheet" href="styles/system.css">
+<link rel="stylesheet" href="styles/corporate.css">
+<link rel="stylesheet" href="styles/detail.css">
+</head>
+<body data-screen-label="14 Application">
+
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="assets/logo-mark.svg" alt="" width="34" height="34"><span class="wordmark">NAYOKAN</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="what-we-do.html" class="nav-link">What we do</a>
+      <a href="vti.html" class="nav-link">VTI</a>
+      <a href="startup-centre.html" class="nav-link">Startup Centre</a>
+      <a href="venture-capital.html" class="nav-link">Venture Capital</a>
+      <a href="hospitality.html" class="nav-link">Hospitality</a>
+      <a href="impact.html" class="nav-link">Impact</a>
+      <a href="insights.html" class="nav-link">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group"><button data-lang="EN" class="active">EN</button><button data-lang="FR">FR</button></div>
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="appl-page">
+  <div class="appl-header">
+    <div class="appl-header-inner">
+      <div>
+        <div class="appl-crumbs">
+          <a href="index.html">Nayokan</a>
+          <span class="sep">/</span>
+          <a href="programmes.html">Programmes</a>
+          <span class="sep">/</span>
+          <span class="current">Apply</span>
+        </div>
+        <h1 class="appl-title">Application · <em style="font-style:italic;font-weight:500">P/001</em></h1>
+      </div>
+      <div class="appl-progress" id="applProgress">
+        <div class="appl-step active" data-step="1">01 · Start</div>
+        <div class="appl-step" data-step="2">02 · You</div>
+        <div class="appl-step" data-step="3">03 · Programme</div>
+        <div class="appl-step" data-step="4">04 · Motivation</div>
+        <div class="appl-step" data-step="5">05 · Consent</div>
+        <div class="appl-step" data-step="6">06 · Review</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="appl-body">
+    <!-- STEP 1 — Start / intro -->
+    <section class="appl-step-content" id="step-1">
+      <span class="meta">§ Step 01 — Getting started</span>
+      <h2 style="margin-top:8px">Before you begin.</h2>
+      <p class="step-hint">
+        This application takes about 8 minutes. Your progress is saved locally after each
+        step, so you can return and finish. All information is confidential and reviewed
+        by the relevant Nayokan programme team.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin: 32px 0;">
+        <div style="padding:20px; border:1px solid var(--line); background:var(--bone)">
+          <span class="meta">You'll need</span>
+          <ul style="margin-top:12px; padding:0; list-style:none;">
+            <li style="padding:8px 0; border-top:1px solid var(--line); color:var(--ink); font-size:0.95rem">— Basic contact information</li>
+            <li style="padding:8px 0; border-top:1px solid var(--line); color:var(--ink); font-size:0.95rem">— A short written motivation</li>
+            <li style="padding:8px 0; border-top:1px solid var(--line); color:var(--ink); font-size:0.95rem">— About 8 minutes</li>
+          </ul>
+        </div>
+        <div style="padding:20px; border:1px solid var(--line); background:var(--bone)">
+          <span class="meta">You'll hear back</span>
+          <p style="margin-top:12px; font-family:'Manrope',sans-serif; font-weight:700; font-size:1.5rem; letter-spacing:-0.02em; line-height:1.1">Within 5–10 business days.</p>
+          <p style="margin-top:8px; color:var(--muted); font-size:0.9rem">All applications are reviewed by a Nayokan programme lead.</p>
+        </div>
+      </div>
+
+      <div class="appl-actions">
+        <a href="programmes.html" class="link-inline">← Back to programmes</a>
+        <button onclick="applGo(2)" class="btn btn-primary">Begin application <span class="arrow">→</span></button>
+      </div>
+    </section>
+
+    <!-- STEP 2 — You -->
+    <section class="appl-step-content" id="step-2" hidden>
+      <span class="meta">§ Step 02 — About you</span>
+      <h2 style="margin-top:8px">Tell us who you are.</h2>
+      <p class="step-hint">Basic contact information. We use this only to route and reply to your application.</p>
+
+      <div class="appl-field">
+        <label>Full name <span class="req">*</span></label>
+        <input type="text" placeholder="First & last name" required>
+      </div>
+      <div class="appl-field">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" placeholder="you@email.com" required>
+      </div>
+      <div class="appl-field">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" placeholder="+237 …">
+      </div>
+      <div class="appl-field">
+        <label>City · Region <span class="req">*</span></label>
+        <input type="text" placeholder="e.g. Yaoundé · Centre" required>
+      </div>
+      <div class="appl-field">
+        <label>Age</label>
+        <select>
+          <option value="">Select…</option>
+          <option>18–22</option><option>23–28</option><option>29–35</option><option>35+</option>
+        </select>
+      </div>
+
+      <div class="appl-actions">
+        <button onclick="applGo(1)" class="link-inline">← Back</button>
+        <div style="display:flex; gap:16px; align-items:center">
+          <span class="step-nav">Step 02 of 06</span>
+          <button onclick="applGo(3)" class="btn btn-primary">Continue <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3 — Programme -->
+    <section class="appl-step-content" id="step-3" hidden>
+      <span class="meta">§ Step 03 — Programme of interest</span>
+      <h2 style="margin-top:8px">Which programme are you applying for?</h2>
+      <p class="step-hint">Choose the primary programme. You can indicate secondary interests below.</p>
+
+      <div class="appl-field">
+        <label>Primary programme <span class="req">*</span></label>
+        <div class="appl-radio-group" style="margin-top:12px">
+          <label class="appl-radio">
+            <input type="radio" name="prog" value="p001" checked>
+            <div>Professional Growth Engineering (P/001) <small>VTI · Open · Rolling admissions</small></div>
+          </label>
+          <label class="appl-radio">
+            <input type="radio" name="prog" value="p002">
+            <div>Skills for Industrialisation (P/002) <small>VTI · Open · Next cohort Sept 2026</small></div>
+          </label>
+          <label class="appl-radio">
+            <input type="radio" name="prog" value="p004">
+            <div>Innovation Commercialization (P/004) <small>Startup Centre · Open · Rolling</small></div>
+          </label>
+          <label class="appl-radio">
+            <input type="radio" name="prog" value="p005">
+            <div>University Research Commercialization (P/005) <small>Startup Centre · Open · Rolling</small></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="appl-field">
+        <label>Preferred cluster (if applicable)</label>
+        <select>
+          <option value="">Not sure yet</option>
+          <option>Digital & Technology</option>
+          <option>Agri-Food & Production</option>
+          <option>Craft & Manufacturing</option>
+          <option>Hospitality & Services</option>
+          <option>Health & Wellness</option>
+          <option>Creative Economy</option>
+        </select>
+      </div>
+
+      <div class="appl-actions">
+        <button onclick="applGo(2)" class="link-inline">← Back</button>
+        <div style="display:flex; gap:16px; align-items:center">
+          <span class="step-nav">Step 03 of 06</span>
+          <button onclick="applGo(4)" class="btn btn-primary">Continue <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4 — Motivation -->
+    <section class="appl-step-content" id="step-4" hidden>
+      <span class="meta">§ Step 04 — Motivation & background</span>
+      <h2 style="margin-top:8px">Tell us your motivation.</h2>
+      <p class="step-hint">This is the part programme leads read most carefully. Speak plainly, and in your own voice.</p>
+
+      <div class="appl-field">
+        <label>Highest educational level</label>
+        <select>
+          <option>Baccalaureate</option>
+          <option>Undergraduate degree (BAC+3)</option>
+          <option>Master's / postgraduate</option>
+          <option>Doctorate / Research</option>
+          <option>Other technical training</option>
+        </select>
+      </div>
+      <div class="appl-field">
+        <label>Current occupation</label>
+        <input type="text" placeholder="e.g. Student, small business, worker, none">
+      </div>
+      <div class="appl-field">
+        <label>Why this programme? <span class="req">*</span></label>
+        <textarea placeholder="300–500 words. Be specific." required></textarea>
+      </div>
+      <div class="appl-field">
+        <label>What would you do with what you learn?</label>
+        <textarea placeholder="Concrete plans, if you have them."></textarea>
+      </div>
+
+      <div class="appl-actions">
+        <button onclick="applGo(3)" class="link-inline">← Back</button>
+        <div style="display:flex; gap:16px; align-items:center">
+          <span class="step-nav">Step 04 of 06</span>
+          <button onclick="applGo(5)" class="btn btn-primary">Continue <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5 — Consent -->
+    <section class="appl-step-content" id="step-5" hidden>
+      <span class="meta">§ Step 05 — Consent</span>
+      <h2 style="margin-top:8px">A few permissions before we finish.</h2>
+      <p class="step-hint">All standard. You can withdraw consent at any time by writing to us.</p>
+
+      <div class="appl-field">
+        <div class="appl-radio-group" style="margin-top:12px">
+          <label class="appl-radio">
+            <input type="checkbox" checked>
+            <div>I confirm the information above is accurate to the best of my knowledge. <small>Required to submit.</small></div>
+          </label>
+          <label class="appl-radio">
+            <input type="checkbox" checked>
+            <div>I agree that Nayokan may use my application information to review my candidacy and contact me. <small>Required to submit.</small></div>
+          </label>
+          <label class="appl-radio">
+            <input type="checkbox">
+            <div>I'd like to receive occasional updates about other Nayokan programmes and opportunities. <small>Optional.</small></div>
+          </label>
+          <label class="appl-radio">
+            <input type="checkbox">
+            <div>If accepted, I consent to being featured (with prior approval) in Nayokan editorial content. <small>Optional.</small></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="appl-actions">
+        <button onclick="applGo(4)" class="link-inline">← Back</button>
+        <div style="display:flex; gap:16px; align-items:center">
+          <span class="step-nav">Step 05 of 06</span>
+          <button onclick="applGo(6)" class="btn btn-primary">Continue <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 6 — Review -->
+    <section class="appl-step-content" id="step-6" hidden>
+      <span class="meta">§ Step 06 — Review</span>
+      <h2 style="margin-top:8px">Review before submitting.</h2>
+      <p class="step-hint">This is a demo — no real submission. In production, this becomes your signed summary.</p>
+
+      <div class="appl-review-grid">
+        <div class="appl-review-row"><span class="meta">Programme</span><span class="val">P/001 — Professional Growth Engineering</span></div>
+        <div class="appl-review-row"><span class="meta">Cluster</span><span class="val">— <span class="placeholder-tag">from step 03</span></span></div>
+        <div class="appl-review-row"><span class="meta">Name</span><span class="val">— <span class="placeholder-tag">from step 02</span></span></div>
+        <div class="appl-review-row"><span class="meta">Email</span><span class="val">— <span class="placeholder-tag">from step 02</span></span></div>
+        <div class="appl-review-row"><span class="meta">Location</span><span class="val">— <span class="placeholder-tag">from step 02</span></span></div>
+        <div class="appl-review-row"><span class="meta">Education</span><span class="val">— <span class="placeholder-tag">from step 04</span></span></div>
+        <div class="appl-review-row"><span class="meta">Motivation</span><span class="val">— <span class="placeholder-tag">from step 04</span></span></div>
+        <div class="appl-review-row"><span class="meta">Consent</span><span class="val">✓ Confirmed</span></div>
+      </div>
+
+      <div class="appl-actions">
+        <button onclick="applGo(5)" class="link-inline">← Back to edit</button>
+        <div style="display:flex; gap:16px; align-items:center">
+          <span class="step-nav">Step 06 of 06</span>
+          <a href="application-success.html" class="btn btn-accent">Submit application <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer" style="margin-top: 0">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="assets/logo-mark.svg" alt="Nayokan" style="height:40px;width:auto;filter:brightness(0) invert(1)"><div class="footer-tag">Building people, enterprises and productive systems for Cameroon.</div></div>
+      <div class="footer-col"><h4>Divisions</h4><ul><li><a href="vti.html">Vocational Training Institute</a></li><li><a href="startup-centre.html">Startup Centre</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="hospitality.html">Hospitality</a></li></ul></div>
+      <div class="footer-col"><h4>Institution</h4><ul><li><a href="about.html">About</a></li><li><a href="what-we-do.html">What we do</a></li><li><a href="impact.html">Impact</a></li><li><a href="insights.html">Insights</a></li></ul></div>
+      <div class="footer-col"><h4>Engage</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="programmes.html">Programmes</a></li><li><a href="application.html">Apply</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© Nayokan 2026 · Yaoundé, Cameroon</span><span>Digital ecosystem · v1.0 · Working design</span><span>EN · FR</span></div>
+  </div>
+</footer>
+
+<script src="scripts/system.js"></script>
+<script>
+  // Simple step navigation
+  function applGo(n) {
+    for (let i = 1; i <= 6; i++) {
+      const s = document.getElementById('step-' + i);
+      if (s) s.hidden = (i !== n);
+      const p = document.querySelector('.appl-step[data-step="' + i + '"]');
+      if (p) {
+        p.classList.remove('active','done');
+        if (i < n) p.classList.add('done');
+        if (i === n) p.classList.add('active');
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
