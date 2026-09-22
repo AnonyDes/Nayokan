@@ -1,12 +1,17 @@
+"use client";
+
+import { usePathname, useSearchParams } from "next/navigation";
 import { Icon } from "./icons";
 import { SiteSelector, type SiteFilter } from "./SiteSelector";
+import { crumbsForPath, type Crumb } from "./crumbs";
 
-export interface Crumb {
-  label: string;
-  href?: string;
-}
+export type { Crumb };
 
-export function Topbar({ crumbs, siteFilter }: { crumbs: Crumb[]; siteFilter: SiteFilter }) {
+export function Topbar({ siteFilter }: { siteFilter: SiteFilter }) {
+  const pathname = usePathname();
+  const site = useSearchParams().get("site");
+  const crumbs = crumbsForPath(pathname, site);
+
   return (
     <>
       <nav className="ax-crumbs" aria-label="Breadcrumb">

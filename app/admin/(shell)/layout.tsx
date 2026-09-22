@@ -9,9 +9,8 @@ import { AdminShell } from "@/admin/shell/AdminShell";
 export const dynamic = "force-dynamic";
 
 // AdminShell calls requireAdminSession() itself, so every route under this
-// group gets the auth + MFA + idle-expiry check for free. Crumbs are fixed
-// to Dashboard for now — Phase 6 has only one route in this group; once
-// Phase 7+ adds more, generalize this (per-route crumbs) rather than before.
+// group gets the auth + MFA + idle-expiry check for free. Breadcrumbs are
+// derived from the pathname inside Topbar (src/admin/shell/crumbs.ts).
 export default function AdminShellLayout({ children }: { children: ReactNode }) {
-  return <AdminShell crumbs={[{ label: "Dashboard" }]}>{children}</AdminShell>;
+  return <AdminShell>{children}</AdminShell>;
 }

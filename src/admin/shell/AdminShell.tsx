@@ -5,7 +5,7 @@ import { ROLE_LABELS } from "@/platform/auth/roles";
 import { isSiteId } from "@/platform/sites/types";
 import { filterNav } from "./filterNav";
 import { Sidebar } from "./Sidebar";
-import { Topbar, type Crumb } from "./Topbar";
+import { Topbar } from "./Topbar";
 import { SITE_FILTER_COOKIE, type SiteFilter } from "./SiteSelector";
 
 export async function getSiteFilter(): Promise<SiteFilter> {
@@ -13,7 +13,7 @@ export async function getSiteFilter(): Promise<SiteFilter> {
   return isSiteId(value) ? value : "all";
 }
 
-export async function AdminShell({ crumbs, children }: { crumbs: Crumb[]; children: ReactNode }) {
+export async function AdminShell({ children }: { children: ReactNode }) {
   const session = await requireAdminSession();
   const groups = filterNav(session);
   const siteFilter = await getSiteFilter();
@@ -24,7 +24,7 @@ export async function AdminShell({ crumbs, children }: { crumbs: Crumb[]; childr
         <Sidebar groups={groups} userName={session.fullName} roleLabel={ROLE_LABELS[session.role]} />
       </aside>
       <header className="ax-topbar">
-        <Topbar crumbs={crumbs} siteFilter={siteFilter} />
+        <Topbar siteFilter={siteFilter} />
       </header>
       <main className="ax-workspace">{children}</main>
     </div>
