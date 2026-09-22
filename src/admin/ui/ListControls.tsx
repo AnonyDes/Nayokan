@@ -5,6 +5,58 @@ import { useCallback, useTransition } from "react";
 import { Toolbar, Tabs, FilterButton, InlineSearch, type TabItem } from "./Toolbar";
 import { Select } from "./Data";
 
+/**
+ * URL-driven pagination footer. Server components render this with the
+ * already-computed range; it writes ?page= like the rest of ListControls.
+ */
+export function PaginationControl({ from, to, total, noun, page, pages }: {
+  from: number;
+  to: number;
+  total: number;
+  noun: string;
+  page: number;
+  pages: number;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const [, startTransition] = useTransition();
+
+  const go = (n: number) => {
+    const next = new URLSearchParams(params.toString());
+    if (n <= 1) next.delete("page");
+    else next.set("page", String(n));
+    startTransition(() => router.replace(`${pathname}?${next.toString()}`, { scroll: false }));
+  };
+
+  return (
+    <div className="ax-pagination">
+      <div>
+        Showing{" "}
+        <strong style={{ color: "var(--ink)" }}>
+          {total === 0 ? 0 : `${from} – ${to}`}
+        </strong>{" "}
+        of {total} {noun}
+      </div>
+      {pages > 1 && (
+        <div className="ax-pagination__pages">
+          <button disabled={page <= 1} onClick={() => go(page - 1)} aria-label="Previous page">
+            ‹
+          </button>
+          {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
+            <button key={n} className={n === page ? "is-active" : ""} onClick={() => go(n)} aria-current={n === page ? "page" : undefined}>
+              {n}
+            </button>
+          ))}
+          <button disabled={page >= pages} onClick={() => go(page + 1)} aria-label="Next page">
+            ›
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export interface FilterSpec {
   /** searchParams key, e.g. "world". */
   key: string;

@@ -1,5 +1,7 @@
 import type { CSSProperties, ReactNode, SelectHTMLAttributes } from "react";
 
+// Pagination lives in ListControls' client world — see PaginationControl below.
+
 /** ax-select wrapper. */
 export function Select({ className, children, ...rest }: SelectHTMLAttributes<HTMLSelectElement>) {
   return (
@@ -9,43 +11,10 @@ export function Select({ className, children, ...rest }: SelectHTMLAttributes<HT
   );
 }
 
-/** Pagination footer: range summary + page buttons. */
-export function Pagination({ from, to, total, noun, page, pages, onPage }: {
-  from: number;
-  to: number;
-  total: number;
-  noun: string;
-  page: number;
-  pages: number;
-  onPage?: (page: number) => void;
-}) {
-  const nums = Array.from({ length: pages }, (_, i) => i + 1);
-  return (
-    <div className="ax-pagination">
-      <div>
-        Showing{" "}
-        <strong style={{ color: "var(--ink)" }}>
-          {total === 0 ? 0 : `${from} – ${to}`}
-        </strong>{" "}
-        of {total} {noun}
-      </div>
-      {pages > 1 && (
-        <div className="ax-pagination__pages">
-          <button disabled={page <= 1} onClick={() => onPage?.(page - 1)} aria-label="Previous page">
-            ‹
-          </button>
-          {nums.map((n) => (
-            <button key={n} className={n === page ? "is-active" : ""} onClick={() => onPage?.(n)} aria-current={n === page ? "page" : undefined}>
-              {n}
-            </button>
-          ))}
-          <button disabled={page >= pages} onClick={() => onPage?.(page + 1)} aria-label="Next page">
-            ›
-          </button>
-        </div>
-      )}
-    </div>
-  );
+/** Pagination footer: range summary + page buttons (URL-driven — see
+ *  PaginationControl for the client component that writes ?page=). */
+export function PaginationShell({ children }: { children: ReactNode }) {
+  return <div className="ax-pagination">{children}</div>;
 }
 
 /** ax-stat summary block. */
