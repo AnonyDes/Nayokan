@@ -1,0 +1,295 @@
+/* Venture Capital — Confident · Analytical · Institutional
+   Navy-dominant, data-forward, dark surfaces. */
+
+body[data-world="vc"] { background: var(--navy); color: var(--paper); }
+body[data-world="vc"] .nav { background: rgba(7,26,70,0.86); }
+body[data-world="vc"] .nav.scrolled { background: rgba(7,26,70,0.96); border-bottom-color: var(--line-invert); }
+body[data-world="vc"] .nav-link { color: var(--paper); }
+body[data-world="vc"] .nav-link::after { background: var(--paper); }
+body[data-world="vc"] .nav-logo .wordmark { color: var(--paper); }
+body[data-world="vc"] .nav-logo img { filter: brightness(0) invert(1); }
+body[data-world="vc"] .lang-toggle { border-color: var(--line-invert-strong); }
+body[data-world="vc"] .lang-toggle button { color: var(--muted-invert); }
+body[data-world="vc"] .lang-toggle button.active { background: var(--paper); color: var(--navy); }
+body[data-world="vc"] .nav-cta { background: var(--green); color: var(--ink); }
+body[data-world="vc"] .nav-cta:hover { background: var(--paper); color: var(--ink); }
+
+body[data-world="vc"] .world-hero { background: var(--navy); border-bottom-color: var(--line-invert); }
+body[data-world="vc"] .world-hero-crumbs { border-bottom-color: var(--line-invert); color: var(--muted-invert); }
+body[data-world="vc"] .world-hero-crumbs a { color: var(--muted-invert); }
+body[data-world="vc"] .world-hero-crumbs a:hover { color: var(--paper); }
+body[data-world="vc"] .world-hero-crumbs .current { color: var(--paper); }
+body[data-world="vc"] .world-badge { border-color: var(--paper); color: var(--paper); }
+body[data-world="vc"] .world-badge .num { color: var(--green-glow); }
+body[data-world="vc"] .world-hero-title { color: var(--paper); }
+body[data-world="vc"] .world-hero-title em { color: var(--green-glow); }
+body[data-world="vc"] .world-hero-lede { color: var(--muted-invert); }
+
+body[data-world="vc"] .world-hero-figure { background: var(--navy-2); }
+body[data-world="vc"] .world-hero-stats { background: var(--line-invert); border-color: var(--line-invert); }
+body[data-world="vc"] .world-hero-stat { background: var(--navy); }
+body[data-world="vc"] .world-hero-stat .meta { color: var(--muted-invert); }
+body[data-world="vc"] .world-hero-stat .num { color: var(--paper); }
+
+body[data-world="vc"] .world-locator { background: var(--navy-2); border-bottom-color: var(--line-invert); }
+body[data-world="vc"] .world-locator-inner { color: var(--muted-invert); }
+body[data-world="vc"] .world-locator-stage { border-color: var(--line-invert-strong); color: var(--muted-invert); }
+body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color: var(--navy); border-color: var(--paper); }
+
+/* VC hero graphic: a data panel */
+.vc-hero-panel {
+  aspect-ratio: 4/5;
+  background: var(--navy-2);
+  border: 1px solid var(--line-invert);
+  padding: 28px;
+  display: flex; flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+.vc-hero-panel-head {
+  display: flex; justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-invert);
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted-invert);
+}
+.vc-hero-panel-head .live {
+  display: inline-flex; gap: 6px; align-items: center;
+  color: var(--green-glow);
+}
+.vc-hero-panel-head .live::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green-glow);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+.vc-hero-metric {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line-invert);
+}
+.vc-hero-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; color: var(--muted-invert);
+  letter-spacing: 0.06em;
+}
+.vc-hero-metric-val {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+}
+
+.vc-hero-chart {
+  flex: 1;
+  display: flex; align-items: flex-end; gap: 6px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-invert);
+}
+.vc-hero-chart .bar {
+  flex: 1;
+  background: var(--paper);
+  opacity: 0.85;
+  min-height: 12px;
+  position: relative;
+}
+.vc-hero-chart .bar.accent { background: var(--green-glow); opacity: 1; }
+.vc-hero-chart .bar.faded { opacity: 0.3; }
+.vc-hero-chart-label {
+  position: absolute;
+  bottom: -20px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted-invert);
+  letter-spacing: 0.06em;
+}
+
+/* Approach — 3 pillar columns */
+.vc-approach {
+  padding: clamp(80px, 10vw, 128px) 0;
+  background: var(--navy);
+  border-bottom: 1px solid var(--line-invert);
+}
+.vc-approach .section-header {
+  border-bottom-color: var(--line-invert);
+}
+.vc-approach h2 { color: var(--paper); }
+.vc-approach .lead { color: var(--muted-invert); }
+.vc-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line-invert);
+  border: 1px solid var(--line-invert);
+}
+.vc-pillar {
+  background: var(--navy);
+  padding: 40px 32px;
+  min-height: 320px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: background var(--dur-fast);
+}
+.vc-pillar:hover { background: var(--navy-2); }
+.vc-pillar .num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green-glow);
+}
+.vc-pillar h4 {
+  font-family: var(--font-heading);
+  font-weight: 700; font-size: 1.6rem;
+  letter-spacing: -0.02em; line-height: 1.1;
+  color: var(--paper);
+  max-width: 16ch;
+}
+.vc-pillar p {
+  color: var(--muted-invert);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  flex: 1;
+}
+.vc-pillar-detail {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.08em;
+  color: var(--paper);
+  padding-top: 16px;
+  border-top: 1px solid var(--line-invert);
+  display: flex; justify-content: space-between;
+}
+@media (max-width: 900px) { .vc-pillars { grid-template-columns: 1fr; } }
+
+/* Pipeline table */
+.vc-pipeline {
+  padding: clamp(80px, 10vw, 128px) 0;
+  background: var(--navy-2);
+  border-bottom: 1px solid var(--line-invert);
+}
+.vc-pipeline .section-header { border-bottom-color: var(--line-invert); }
+.vc-pipeline h2 { color: var(--paper); }
+.vc-pipeline .lead { color: var(--muted-invert); }
+.vc-table {
+  border-top: 1px solid var(--paper);
+  border-bottom: 1px solid var(--paper);
+}
+.vc-thead, .vc-trow {
+  display: grid;
+  grid-template-columns: 80px 1fr 140px 120px 100px 100px;
+  gap: 16px;
+  padding: 20px 8px;
+  align-items: center;
+}
+.vc-thead {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted-invert);
+  border-bottom: 1px solid var(--line-invert);
+}
+.vc-trow {
+  border-top: 1px solid var(--line-invert);
+  transition: background var(--dur-fast);
+}
+.vc-trow:first-child { border-top: none; }
+.vc-trow:hover { background: rgba(255,255,255,0.03); }
+.vc-trow .vid {
+  font-family: var(--font-mono);
+  color: var(--green-glow);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+}
+.vc-trow .vname {
+  font-family: var(--font-heading);
+  font-weight: 600; color: var(--paper);
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
+}
+.vc-trow .vname small {
+  display: block; margin-top: 4px;
+  font-family: var(--font-body); font-weight: 400;
+  color: var(--muted-invert); font-size: 0.82rem;
+  letter-spacing: 0;
+}
+.vc-trow .vcol {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--paper);
+  letter-spacing: 0.04em;
+}
+.vc-trow .vstage {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--line-invert-strong);
+  color: var(--muted-invert);
+  width: max-content;
+}
+.vc-trow .vstage.seed { color: var(--green-glow); border-color: var(--green-glow); }
+.vc-trow .vstage.growth { color: var(--paper); border-color: var(--paper); }
+@media (max-width: 900px) {
+  .vc-thead { display: none; }
+  .vc-trow { grid-template-columns: 1fr; gap: 8px; padding: 20px 4px; }
+}
+
+/* Enquiry CTA */
+.vc-enquiry {
+  padding: clamp(80px, 10vw, 128px) 0;
+  background: var(--ink);
+}
+.vc-enquiry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8);
+  align-items: start;
+}
+.vc-enquiry h2 {
+  color: var(--paper);
+  font-size: clamp(2.4rem, 5vw, 4.4rem); letter-spacing: -0.04em; line-height: 0.98;
+}
+.vc-enquiry h2 em { font-style: italic; font-weight: 500; color: var(--green-glow); }
+.vc-enquiry-body { color: var(--muted-invert); }
+.vc-enquiry-body p { max-width: 46ch; }
+
+.vc-enquiry-form {
+  border: 1px solid var(--line-invert);
+  padding: 32px;
+  background: var(--ink-2);
+}
+.vc-enquiry-form .frow {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-invert);
+}
+.vc-enquiry-form label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted-invert);
+  display: block;
+  margin-bottom: 6px;
+}
+.vc-enquiry-form input, .vc-enquiry-form select, .vc-enquiry-form textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  resize: vertical;
+}
+.vc-enquiry-form select option { color: var(--ink); }
+.vc-enquiry-form textarea { min-height: 60px; }
+.vc-enquiry-form .btn { margin-top: 24px; width: 100%; justify-content: center; }
+@media (max-width: 900px) { .vc-enquiry-grid { grid-template-columns: 1fr; } }
+body[data-world="vc"] .related { background: var(--navy-2); border-top-color: var(--line-invert); }
+body[data-world="vc"] .related h3 { color: var(--muted-invert); }
+body[data-world="vc"] .related-grid { background: var(--line-invert); }
+body[data-world="vc"] .related-card { background: var(--navy); color: var(--paper); }
+body[data-world="vc"] .related-card:hover { background: var(--paper); color: var(--navy); }
+body[data-world="vc"] .related-card .meta { color: var(--muted-invert); }
+body[data-world="vc"] .related-card:hover .meta { color: var(--navy); opacity: 0.6; }
