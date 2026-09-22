@@ -66,14 +66,15 @@ describe("PropertyPatchSchema", () => {
 
 describe("PartnerPatchSchema", () => {
   it("requires the consent boolean", () => {
-    const { consentRecorded: _omit, ...rest } = {
+    const base: Record<string, unknown> = {
       id: "ptn-1",
       name: "P",
       category: "university",
       consentRecorded: true,
       isPublic: false,
     };
-    expect(PartnerPatchSchema.safeParse(rest).success).toBe(false);
+    delete base.consentRecorded;
+    expect(PartnerPatchSchema.safeParse(base).success).toBe(false);
   });
 });
 
