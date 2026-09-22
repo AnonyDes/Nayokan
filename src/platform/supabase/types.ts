@@ -14,6 +14,215 @@ export type Database = {
   }
   public: {
     Tables: {
+      application_documents: {
+        Row: {
+          application_id: string
+          created_at: string
+          file_name: string
+          id: string
+          mime_type: string
+          size_bytes: number
+          storage_path: string
+          uploaded_at: string | null
+        }
+        Insert: {
+          application_id: string
+          created_at?: string
+          file_name: string
+          id?: string
+          mime_type: string
+          size_bytes: number
+          storage_path: string
+          uploaded_at?: string | null
+        }
+        Update: {
+          application_id?: string
+          created_at?: string
+          file_name?: string
+          id?: string
+          mime_type?: string
+          size_bytes?: number
+          storage_path?: string
+          uploaded_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "application_documents_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      application_notes: {
+        Row: {
+          application_id: string
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          application_id: string
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          application_id?: string
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "application_notes_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "applications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "application_notes_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      applications: {
+        Row: {
+          age_band: string | null
+          assigned_to: string | null
+          city_region: string | null
+          consents: Json
+          created_at: string
+          decision_reason: string | null
+          education_level: string | null
+          email: string
+          full_name: string
+          id: string
+          motivation: string
+          occupation: string | null
+          opportunity_id: string | null
+          phone: string | null
+          plans: string | null
+          preferred_cluster_id: string | null
+          programme_id: string | null
+          reference: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          secondary_interests: string[] | null
+          site: Database["public"]["Enums"]["site_id"]
+          source_host: string | null
+          source_url: string | null
+          status: Database["public"]["Enums"]["application_status"]
+          submitted_at: string
+          updated_at: string
+          world: Database["public"]["Enums"]["world"]
+        }
+        Insert: {
+          age_band?: string | null
+          assigned_to?: string | null
+          city_region?: string | null
+          consents?: Json
+          created_at?: string
+          decision_reason?: string | null
+          education_level?: string | null
+          email: string
+          full_name: string
+          id?: string
+          motivation: string
+          occupation?: string | null
+          opportunity_id?: string | null
+          phone?: string | null
+          plans?: string | null
+          preferred_cluster_id?: string | null
+          programme_id?: string | null
+          reference: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          secondary_interests?: string[] | null
+          site: Database["public"]["Enums"]["site_id"]
+          source_host?: string | null
+          source_url?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          submitted_at?: string
+          updated_at?: string
+          world: Database["public"]["Enums"]["world"]
+        }
+        Update: {
+          age_band?: string | null
+          assigned_to?: string | null
+          city_region?: string | null
+          consents?: Json
+          created_at?: string
+          decision_reason?: string | null
+          education_level?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          motivation?: string
+          occupation?: string | null
+          opportunity_id?: string | null
+          phone?: string | null
+          plans?: string | null
+          preferred_cluster_id?: string | null
+          programme_id?: string | null
+          reference?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          secondary_interests?: string[] | null
+          site?: Database["public"]["Enums"]["site_id"]
+          source_host?: string | null
+          source_url?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          submitted_at?: string
+          updated_at?: string
+          world?: Database["public"]["Enums"]["world"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "applications_opportunity_id_fkey"
+            columns: ["opportunity_id"]
+            isOneToOne: false
+            referencedRelation: "opportunities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "applications_preferred_cluster_id_fkey"
+            columns: ["preferred_cluster_id"]
+            isOneToOne: false
+            referencedRelation: "clusters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "applications_programme_id_fkey"
+            columns: ["programme_id"]
+            isOneToOne: false
+            referencedRelation: "programmes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "applications_reviewed_by_fkey"
+            columns: ["reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       articles: {
         Row: {
           approved_at: string | null
@@ -374,6 +583,133 @@ export type Database = {
             columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      enquiries: {
+        Row: {
+          assigned_to: string | null
+          category: string
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          organization: string | null
+          programme_id: string | null
+          property_id: string | null
+          reference: string
+          resolved_at: string | null
+          site: Database["public"]["Enums"]["site_id"]
+          source_host: string | null
+          source_page: string | null
+          source_url: string | null
+          status: Database["public"]["Enums"]["enquiry_status"]
+          updated_at: string
+          world: Database["public"]["Enums"]["world"]
+        }
+        Insert: {
+          assigned_to?: string | null
+          category: string
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          organization?: string | null
+          programme_id?: string | null
+          property_id?: string | null
+          reference: string
+          resolved_at?: string | null
+          site: Database["public"]["Enums"]["site_id"]
+          source_host?: string | null
+          source_page?: string | null
+          source_url?: string | null
+          status?: Database["public"]["Enums"]["enquiry_status"]
+          updated_at?: string
+          world: Database["public"]["Enums"]["world"]
+        }
+        Update: {
+          assigned_to?: string | null
+          category?: string
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          organization?: string | null
+          programme_id?: string | null
+          property_id?: string | null
+          reference?: string
+          resolved_at?: string | null
+          site?: Database["public"]["Enums"]["site_id"]
+          source_host?: string | null
+          source_page?: string | null
+          source_url?: string | null
+          status?: Database["public"]["Enums"]["enquiry_status"]
+          updated_at?: string
+          world?: Database["public"]["Enums"]["world"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enquiries_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enquiries_programme_id_fkey"
+            columns: ["programme_id"]
+            isOneToOne: false
+            referencedRelation: "programmes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enquiries_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      enquiry_notes: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          enquiry_id: string
+          id: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          enquiry_id: string
+          id?: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          enquiry_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enquiry_notes_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enquiry_notes_enquiry_id_fkey"
+            columns: ["enquiry_id"]
+            isOneToOne: false
+            referencedRelation: "enquiries"
             referencedColumns: ["id"]
           },
         ]
@@ -1897,6 +2233,48 @@ export type Database = {
           },
         ]
       }
+      submission_attempts: {
+        Row: {
+          created_at: string
+          id: string
+          ip_hash: string
+          kind: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_hash: string
+          kind: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_hash?: string
+          kind?: string
+        }
+        Relationships: []
+      }
+      submission_counters: {
+        Row: {
+          kind: string
+          last: number
+          site: Database["public"]["Enums"]["site_id"]
+          year: number
+        }
+        Insert: {
+          kind: string
+          last?: number
+          site: Database["public"]["Enums"]["site_id"]
+          year: number
+        }
+        Update: {
+          kind?: string
+          last?: number
+          site?: Database["public"]["Enums"]["site_id"]
+          year?: number
+        }
+        Relationships: []
+      }
       user_site_scopes: {
         Row: {
           created_at: string
@@ -2089,7 +2467,70 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      confirm_application_document: {
+        Args: { p_document_id: string }
+        Returns: undefined
+      }
+      register_application_document: {
+        Args: {
+          p_application_id: string
+          p_file_name: string
+          p_mime_type: string
+          p_size_bytes: number
+        }
+        Returns: {
+          document_id: string
+          storage_path: string
+        }[]
+      }
+      submit_application: {
+        Args: {
+          p_age_band?: string
+          p_city_region?: string
+          p_consents?: Json
+          p_education_level?: string
+          p_email: string
+          p_full_name: string
+          p_honeypot?: string
+          p_ip?: string
+          p_motivation: string
+          p_occupation?: string
+          p_opportunity_id?: string
+          p_phone?: string
+          p_plans?: string
+          p_preferred_cluster_id?: string
+          p_programme_id?: string
+          p_secondary_interests?: string[]
+          p_site: Database["public"]["Enums"]["site_id"]
+          p_source_host?: string
+          p_source_url?: string
+        }
+        Returns: {
+          id: string
+          reference: string
+        }[]
+      }
+      submit_enquiry: {
+        Args: {
+          p_category: string
+          p_email: string
+          p_honeypot?: string
+          p_ip?: string
+          p_message: string
+          p_name: string
+          p_organization?: string
+          p_programme_id?: string
+          p_property_id?: string
+          p_site: Database["public"]["Enums"]["site_id"]
+          p_source_host?: string
+          p_source_page?: string
+          p_source_url?: string
+        }
+        Returns: {
+          id: string
+          reference: string
+        }[]
+      }
     }
     Enums: {
       application_status:
