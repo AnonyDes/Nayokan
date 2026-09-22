@@ -13,7 +13,9 @@ export default defineConfig({
   use: { trace: "on-first-retry", navigationTimeout: 60_000 },
   webServer: {
     command: `npm run dev -- -p ${PORT}`,
-    url: `${host("")}/`,
+    // Probe plain localhost: Node's resolver can't map *.localhost on
+    // Windows (Chromium can — per-project baseURLs keep the real hosts).
+    url: `http://localhost:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },

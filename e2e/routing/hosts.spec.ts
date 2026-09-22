@@ -19,8 +19,13 @@ test("admin paths 404 on public hosts", async ({ page }) => {
   expect(res?.status()).toBe(404);
 });
 
-test("legacy corporate paths redirect to the subdomain", async ({ request }) => {
-  const res = await request.get(url("", "/vocational-training/programmes"), { maxRedirects: 0 });
-  expect(res.status()).toBe(308);
-  expect(res.headers()["location"]).toBe(url("vti", "/programmes"));
+test("legacy corporate paths redirect to the subdomain", async ({ page }) => {
+  // Drive the request through the browser: *.localhost resolves natively in
+  // Chromium, while Node's resolver (apiRequestContext) does not on Windows.
+  const [response] = await Promise.all([
+    page.waitForResponse((r) => r.url().includes("/vocational-training/programmes")),
+    page.goto(url("", "/vocational-training/programmes"), { waitUntil: "commit" }).catch(() => null),
+  ]);
+  expect(response.status()).toBe(308);
+  expect(response.headers()["location"]).toBe(url("vti", "/programmes"));
 });

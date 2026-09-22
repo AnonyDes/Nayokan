@@ -17,8 +17,10 @@ const TOKEN = process.env.SUPABASE_ACCESS_KEY;
 // Public write RPCs callable by anon on purpose (SECURITY DEFINER, rate
 // limited). Grow this list deliberately, never casually.
 const ANON_FUNCTION_ALLOWLIST = new Set([
-  // 'public.submit_application(uuid,text,...)',
-  // 'public.submit_enquiry(...)',
+  "public.submit_application(p_site site_id, p_full_name text, p_email text, p_motivation text, p_programme_id uuid, p_opportunity_id uuid, p_phone text, p_city_region text, p_age_band text, p_education_level text, p_occupation text, p_plans text, p_preferred_cluster_id uuid, p_secondary_interests text[], p_consents jsonb, p_source_url text, p_source_host text, p_ip text, p_honeypot text)",
+  "public.submit_enquiry(p_site site_id, p_category text, p_name text, p_email text, p_message text, p_organization text, p_property_id uuid, p_programme_id uuid, p_source_page text, p_source_url text, p_source_host text, p_ip text, p_honeypot text)",
+  "public.register_application_document(p_application_id uuid, p_file_name text, p_mime_type text, p_size_bytes integer)",
+  "public.confirm_application_document(p_document_id uuid)",
 ]);
 
 if (!TOKEN) {
