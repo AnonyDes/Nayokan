@@ -20,7 +20,13 @@ test("admin paths 404 on public hosts", async ({ page }) => {
 });
 
 test("legacy corporate paths redirect to the subdomain", async ({ request }) => {
-  const res = await request.get(url("", "/vocational-training/programmes"), { maxRedirects: 0 });
+  // Node can't resolve *.localhost — hit 127.0.0.1 with the real Host header.
+  const host = new URL(url("")).host;
+  const ip = `http://127.0.0.1:${host.split(":")[1]}`;
+  const res = await request.get(`${ip}/vocational-training/programmes`, {
+    maxRedirects: 0,
+    headers: { host },
+  });
   expect(res.status()).toBe(308);
   expect(res.headers()["location"]).toBe(url("vti", "/programmes"));
 });

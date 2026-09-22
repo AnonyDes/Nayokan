@@ -13,7 +13,8 @@ export default defineConfig({
   use: { trace: "on-first-retry", navigationTimeout: 60_000 },
   webServer: {
     command: `npm run dev -- -p ${PORT}`,
-    url: `${host("")}/`,
+    // Probe via 127.0.0.1: *.localhost resolves inside Chromium, not Node.
+    url: `http://127.0.0.1:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },
@@ -23,6 +24,7 @@ export default defineConfig({
     { name: "startup", testMatch: /startup\/.*\.spec\.ts/, use: { ...devices["Desktop Chrome"], baseURL: host("startup") } },
     { name: "admin", testMatch: /admin\/.*\.spec\.ts/, use: { ...devices["Desktop Chrome"], baseURL: host("admin") } },
     { name: "routing", testMatch: /routing\/.*\.spec\.ts/, use: { ...devices["Desktop Chrome"] } },
-    { name: "mobile", testMatch: /(corporate|vti|startup)\/.*\.spec\.ts/, use: { ...devices["Pixel 7"], baseURL: host("") } },
+    // Mobile runs the corporate spec on the corporate host at a phone viewport.
+    { name: "mobile", testMatch: /corporate\/.*\.spec\.ts/, use: { ...devices["Pixel 7"], baseURL: host("") } },
   ],
 });
