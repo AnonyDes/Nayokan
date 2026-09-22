@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requirePermission } from "@/platform/auth/permissions";
 import { siteUrl } from "@/platform/sites/registry";
+import { previewHref } from "@/platform/preview/token";
 import { Page, PageHead } from "@/admin/ui/Page";
 import { Notice } from "@/admin/ui/Notice";
 import { DemoTag } from "@/admin/ui/Feedback";
@@ -18,7 +19,7 @@ export default async function StoryEditorPage({ params }: { params: Promise<{ id
   if (!story) notFound();
 
   const host = new URL(siteUrl(story.site)).host;
-  const previewPath = siteUrl(story.site, `/stories/${story.slug}`);
+  const preview = previewHref(story.site, `/stories/${story.slug}`);
 
   return (
     <Page width="wide">
@@ -48,7 +49,7 @@ export default async function StoryEditorPage({ params }: { params: Promise<{ id
         </div>
       )}
 
-      <StoryEditor story={story} host={host} previewPath={previewPath} />
+      <StoryEditor story={story} host={host} previewPath={preview.href} previewSigned={preview.signed} />
     </Page>
   );
 }

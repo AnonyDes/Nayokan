@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requirePermission } from "@/platform/auth/permissions";
-import { siteUrl } from "@/platform/sites/registry";
+import { previewHref } from "@/platform/preview/token";
 import { Page, PageHead } from "@/admin/ui/Page";
 import { Notice } from "@/admin/ui/Notice";
 import { Pill, type PillTone } from "@/admin/ui/Pill";
@@ -37,6 +37,7 @@ export default async function ProgrammeEditorPage({ params }: { params: Promise<
   if (!prog) notFound();
 
   const filled = prog.appsFilled === null ? null : `${prog.appsFilled} of ${prog.appsCapacity ?? "—"} places filled`;
+  const preview = previewHref(prog.site, `/programmes/${prog.id}`);
 
   return (
     <Page>
@@ -65,11 +66,11 @@ export default async function ProgrammeEditorPage({ params }: { params: Promise<
               Back
             </Link>
             <a
-              href={siteUrl(prog.site, `/programmes/${prog.id}`)}
+              href={preview.href}
               target="_blank"
               rel="noreferrer"
               className="ax-btn ax-btn--ghost"
-              title="Signed preview lands with the preview contract (Session A); this opens the live path"
+              title={preview.signed ? "Signed draft preview on the owning site's host" : "Signed preview pending PREVIEW_SECRET — this opens the live path"}
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />

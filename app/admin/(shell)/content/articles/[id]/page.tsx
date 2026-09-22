@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requirePermission } from "@/platform/auth/permissions";
 import { siteUrl } from "@/platform/sites/registry";
+import { previewHref } from "@/platform/preview/token";
 import { Page, PageHead } from "@/admin/ui/Page";
 import { Notice } from "@/admin/ui/Notice";
 import { DemoTag } from "@/admin/ui/Feedback";
@@ -18,7 +19,7 @@ export default async function ArticleEditorPage({ params }: { params: Promise<{ 
   if (!article) notFound();
 
   const host = new URL(siteUrl(article.site)).host;
-  const previewPath = siteUrl(article.site, `/insights/${article.slug}`);
+  const preview = previewHref(article.site, `/insights/${article.slug}`);
 
   return (
     <Page width="wide">
@@ -52,7 +53,7 @@ export default async function ArticleEditorPage({ params }: { params: Promise<{ 
         </div>
       )}
 
-      <ArticleEditor article={article} host={host} previewPath={previewPath} />
+      <ArticleEditor article={article} host={host} previewPath={preview.href} previewSigned={preview.signed} />
     </Page>
   );
 }

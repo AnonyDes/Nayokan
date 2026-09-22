@@ -51,7 +51,7 @@ const WORLD_OPTIONS = [
  * content, not a free-form article. Consent + evidence are the hard gates
  * (stories.html); the publish transition enforces them server-side in Phase 10.
  */
-export function StoryEditor({ story, host, previewPath }: { story: AdminStory; host: string; previewPath: string }) {
+export function StoryEditor({ story, host, previewPath, previewSigned }: { story: AdminStory; host: string; previewPath: string; previewSigned?: boolean }) {
   const [title, setTitle] = useState(story.title);
   const [slug, setSlug] = useState(story.slug);
   const [slugEditing, setSlugEditing] = useState(false);
@@ -257,8 +257,16 @@ export function StoryEditor({ story, host, previewPath }: { story: AdminStory; h
               Open preview on {host}
             </a>
             <Notice tone="soft">
-              Preview renders on the owning site&apos;s host. It is <strong>not live</strong> — the signed-preview route
-              itself lands with Session A&apos;s site work.
+              {previewSigned ? (
+                <>
+                  Signed preview — renders the draft on {host} at <span className="ax-mono">/__preview/</span> with a not-live badge.
+                </>
+              ) : (
+                <>
+                  Preview renders on the owning site&apos;s host. It is <strong>not live</strong> — the signed-preview route
+                  itself lands with Session A&apos;s site work.
+                </>
+              )}
             </Notice>
           </div>
         </div>

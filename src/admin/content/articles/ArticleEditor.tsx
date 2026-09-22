@@ -127,7 +127,7 @@ const wordCount = (blocks: RichBlock[], extra: string[]) =>
     .split(/\s+/)
     .filter(Boolean).length;
 
-export function ArticleEditor({ article, host, previewPath }: { article: AdminArticle; host: string; previewPath: string }) {
+export function ArticleEditor({ article, host, previewPath, previewSigned }: { article: AdminArticle; host: string; previewPath: string; previewSigned?: boolean }) {
   const [title, setTitle] = useState(article.title);
   const [slug, setSlug] = useState(article.slug);
   const [slugEditing, setSlugEditing] = useState(false);
@@ -556,8 +556,16 @@ export function ArticleEditor({ article, host, previewPath }: { article: AdminAr
               Open preview on {host}
             </a>
             <Notice tone="soft">
-              Preview renders on the owning site&apos;s host. It is <strong>not live</strong> — the signed-preview route
-              itself lands with Session A&apos;s site work.
+              {previewSigned ? (
+                <>
+                  Signed preview — renders the draft on {host} at <span className="ax-mono">/__preview/</span> with a not-live badge.
+                </>
+              ) : (
+                <>
+                  Preview renders on the owning site&apos;s host. It is <strong>not live</strong> — the signed-preview route
+                  itself lands with Session A&apos;s site work.
+                </>
+              )}
             </Notice>
           </div>
         </div>
