@@ -6,6 +6,7 @@ import {
   buildRoutingConfig,
   routeRequest,
 } from "@/platform/sites/route-request";
+import { refreshAdminSession } from "@/platform/auth/admin-session";
 
 // Hostname → site resolution (ADR-001). The hostname only selects which
 // experience renders; it is never an authorization input. Admin auth is
@@ -38,11 +39,8 @@ export async function proxy(request: NextRequest) {
       // Rewrite to a path no route owns, so Next renders app/not-found.tsx with a 404.
       return NextResponse.rewrite(new URL("/__not-found", request.url));
 
-    case "admin": {
-      // Session refresh + login redirect are added by the admin workstream
-      // (src/platform/auth/admin-session.ts). Keep this branch thin.
-      return NextResponse.next();
-    }
+    case "admin":
+      return refreshAdminSession(request);
 
     case "rewrite": {
       const headers = new Headers(request.headers);
