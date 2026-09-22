@@ -714,6 +714,224 @@ export type Database = {
           },
         ]
       }
+      evidence: {
+        Row: {
+          created_at: string
+          evidence_date: string | null
+          file_media_id: string | null
+          id: string
+          source: string | null
+          supersedes_id: string | null
+          title: string
+          type: Database["public"]["Enums"]["evidence_type"]
+          uploaded_by: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          evidence_date?: string | null
+          file_media_id?: string | null
+          id?: string
+          source?: string | null
+          supersedes_id?: string | null
+          title: string
+          type?: Database["public"]["Enums"]["evidence_type"]
+          uploaded_by?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          evidence_date?: string | null
+          file_media_id?: string | null
+          id?: string
+          source?: string | null
+          supersedes_id?: string | null
+          title?: string
+          type?: Database["public"]["Enums"]["evidence_type"]
+          uploaded_by?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evidence_file_media_id_fkey"
+            columns: ["file_media_id"]
+            isOneToOne: false
+            referencedRelation: "media"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evidence_supersedes_id_fkey"
+            columns: ["supersedes_id"]
+            isOneToOne: false
+            referencedRelation: "evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evidence_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evidence_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      impact_metric_values: {
+        Row: {
+          id: string
+          metric_id: string
+          note: string | null
+          period: string
+          recorded_at: string
+          recorded_by: string | null
+          value: number | null
+        }
+        Insert: {
+          id?: string
+          metric_id: string
+          note?: string | null
+          period: string
+          recorded_at?: string
+          recorded_by?: string | null
+          value?: number | null
+        }
+        Update: {
+          id?: string
+          metric_id?: string
+          note?: string | null
+          period?: string
+          recorded_at?: string
+          recorded_by?: string | null
+          value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "impact_metric_values_metric_id_fkey"
+            columns: ["metric_id"]
+            isOneToOne: false
+            referencedRelation: "impact_metrics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "impact_metric_values_recorded_by_fkey"
+            columns: ["recorded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      impact_metrics: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          is_public: boolean
+          name: string
+          programme_id: string | null
+          provenance: Json
+          published_at: string | null
+          reporting_scope: string | null
+          slug: string
+          status: Database["public"]["Enums"]["metric_status"]
+          unit: Database["public"]["Enums"]["metric_unit"]
+          updated_at: string
+          updated_by: string | null
+          verified_at: string | null
+          verified_by: string | null
+          world: Database["public"]["Enums"]["world"] | null
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          id?: string
+          is_public?: boolean
+          name: string
+          programme_id?: string | null
+          provenance?: Json
+          published_at?: string | null
+          reporting_scope?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["metric_status"]
+          unit?: Database["public"]["Enums"]["metric_unit"]
+          updated_at?: string
+          updated_by?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+          world?: Database["public"]["Enums"]["world"] | null
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          id?: string
+          is_public?: boolean
+          name?: string
+          programme_id?: string | null
+          provenance?: Json
+          published_at?: string | null
+          reporting_scope?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["metric_status"]
+          unit?: Database["public"]["Enums"]["metric_unit"]
+          updated_at?: string
+          updated_by?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+          world?: Database["public"]["Enums"]["world"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "impact_metrics_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "impact_metrics_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "impact_metrics_programme_id_fkey"
+            columns: ["programme_id"]
+            isOneToOne: false
+            referencedRelation: "programmes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "impact_metrics_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "impact_metrics_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media: {
         Row: {
           alt_text: string
@@ -1015,6 +1233,49 @@ export type Database = {
             columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      metric_evidence: {
+        Row: {
+          added_by: string | null
+          created_at: string
+          evidence_id: string
+          metric_id: string
+        }
+        Insert: {
+          added_by?: string | null
+          created_at?: string
+          evidence_id: string
+          metric_id: string
+        }
+        Update: {
+          added_by?: string | null
+          created_at?: string
+          evidence_id?: string
+          metric_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "metric_evidence_added_by_fkey"
+            columns: ["added_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "metric_evidence_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: false
+            referencedRelation: "evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "metric_evidence_metric_id_fkey"
+            columns: ["metric_id"]
+            isOneToOne: false
+            referencedRelation: "impact_metrics"
             referencedColumns: ["id"]
           },
         ]
@@ -2555,6 +2816,13 @@ export type Database = {
         | "in_progress"
         | "resolved"
         | "archived"
+      evidence_type:
+        | "report"
+        | "document"
+        | "dataset"
+        | "photo"
+        | "letter"
+        | "other"
       listing_status: "pipeline" | "active" | "alumni" | "exited"
       mentor_availability: "open" | "limited" | "by_request"
       metric_status:
@@ -2563,6 +2831,14 @@ export type Database = {
         | "verified"
         | "approved"
         | "published"
+      metric_unit:
+        | "people"
+        | "enterprises"
+        | "certificates"
+        | "percent"
+        | "ventures"
+        | "partnerships"
+        | "count"
       opportunity_category:
         | "residency"
         | "grant"
@@ -2759,6 +3035,14 @@ export const Constants = {
         "resolved",
         "archived",
       ],
+      evidence_type: [
+        "report",
+        "document",
+        "dataset",
+        "photo",
+        "letter",
+        "other",
+      ],
       listing_status: ["pipeline", "active", "alumni", "exited"],
       mentor_availability: ["open", "limited", "by_request"],
       metric_status: [
@@ -2767,6 +3051,15 @@ export const Constants = {
         "verified",
         "approved",
         "published",
+      ],
+      metric_unit: [
+        "people",
+        "enterprises",
+        "certificates",
+        "percent",
+        "ventures",
+        "partnerships",
+        "count",
       ],
       opportunity_category: [
         "residency",
