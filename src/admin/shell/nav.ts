@@ -26,9 +26,9 @@ function siteEditorGroup(site: SiteId): NavGroup {
     label: siteLabel[site],
     items: [
       { id: `${site}-pages`, href: `/admin/sites/${site}/pages`, label: "Pages", icon: "file", require: { area: "pages", level: "view", site } },
-      { id: `${site}-homepage`, href: `/admin/sites/${site}/homepage`, label: "Homepage", icon: "home", require: { area: "website", level: "view", site } },
-      { id: `${site}-navigation`, href: `/admin/sites/${site}/navigation`, label: "Navigation", icon: "sitemap", require: { area: "website", level: "view", site } },
-      { id: `${site}-seo`, href: `/admin/sites/${site}/seo`, label: "SEO", icon: "target", require: { area: "website", level: "view", site } },
+      { id: `${site}-homepage`, href: `/admin/sites/${site}/homepage`, label: "Homepage", icon: "home", require: { area: "site_config", level: "view", site } },
+      { id: `${site}-navigation`, href: `/admin/sites/${site}/navigation`, label: "Navigation", icon: "sitemap", require: { area: "site_config", level: "view", site } },
+      { id: `${site}-seo`, href: `/admin/sites/${site}/seo`, label: "SEO", icon: "target", require: { area: "site_config", level: "view", site } },
     ],
   };
 }
@@ -51,7 +51,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { id: "stories", href: "/admin/content/stories", label: "Stories", icon: "quote", require: { area: "stories", level: "view", site: "corporate" } },
       { id: "partners", href: "/admin/ecosystem/partners", label: "Partners", icon: "handshake", require: { area: "partners", level: "view" } },
       { id: "people", href: "/admin/ecosystem/people", label: "People", icon: "user", require: { area: "people", level: "view" } },
-      { id: "portfolio", href: "/admin/ecosystem/portfolio", label: "Venture Capital", icon: "graph", require: { area: "portfolio", level: "view" } },
+      { id: "portfolio", href: "/admin/ecosystem/portfolio", label: "Venture Capital", icon: "graph", require: { area: "ventures", level: "view" } },
       { id: "properties", href: "/admin/ecosystem/properties", label: "Hospitality", icon: "building", require: { area: "properties", level: "view" } },
     ],
   },
@@ -70,7 +70,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { id: "startup-programmes", href: "/admin/programmes?site=startup", label: "Programme", icon: "layers", require: { area: "programmes", level: "view", site: "startup" } },
       { id: "startup-opportunities", href: "/admin/programmes/opportunities?site=startup", label: "Opportunities", icon: "star", require: { area: "programmes", level: "view", site: "startup" } },
       { id: "startup-mentors", href: "/admin/ecosystem/mentors", label: "Mentors", icon: "users", require: { area: "people", level: "view", site: "startup" } },
-      { id: "startup-portfolio", href: "/admin/ecosystem/portfolio?site=startup", label: "Portfolio", icon: "graph", require: { area: "portfolio", level: "view", site: "startup" } },
+      { id: "startup-portfolio", href: "/admin/ecosystem/portfolio?site=startup", label: "Portfolio", icon: "graph", require: { area: "ventures", level: "view", site: "startup" } },
     ],
   },
   {

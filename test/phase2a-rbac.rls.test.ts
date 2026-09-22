@@ -209,11 +209,12 @@ describe("audit_log", () => {
       .select("id")
       .single();
     expect(error).toBeNull();
+    expect(row).not.toBeNull();
 
-    const { error: updErr } = await fx.service.from("audit_log").update({ action: "mutated" }).eq("id", row.id);
+    const { error: updErr } = await fx.service.from("audit_log").update({ action: "mutated" }).eq("id", row!.id);
     expect(String(updErr?.message)).toMatch(/append_only/);
 
-    const { error: delErr } = await fx.service.from("audit_log").delete().eq("id", row.id);
+    const { error: delErr } = await fx.service.from("audit_log").delete().eq("id", row!.id);
     expect(String(delErr?.message)).toMatch(/append_only/);
   });
 });

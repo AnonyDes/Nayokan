@@ -33,12 +33,12 @@ describe("hasPermission", () => {
     expect(hasPermission(s, "applications", "full", "startup")).toBe(false);
   });
 
-  it("impact_manager has full impact access but none on enquiries or website", () => {
+  it("impact_manager has full impact access but none on enquiries or site_config", () => {
     const s = session({ role: "impact_manager" });
     expect(hasPermission(s, "impact_metrics", "full")).toBe(true);
     expect(hasPermission(s, "evidence", "full")).toBe(true);
     expect(hasPermission(s, "enquiries", "view")).toBe(false);
-    expect(hasPermission(s, "website", "view")).toBe(false);
+    expect(hasPermission(s, "site_config", "view")).toBe(false);
   });
 
   it("content_editor cannot touch applications or users", () => {

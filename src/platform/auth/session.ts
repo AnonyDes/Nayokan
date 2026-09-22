@@ -57,7 +57,7 @@ const resolve = cache(async (): Promise<ResolvedAdminSession> => {
 
   const profile = await resolveDirectory().getProfile({ id: user.id, email: user.email ?? "" });
   if (!profile) return { kind: "no_profile" };
-  if (profile.status === "disabled") return { kind: "disabled" };
+  if (profile.status !== "active") return { kind: "disabled" }; // invited + suspended both deny
 
   return {
     kind: "ok",
