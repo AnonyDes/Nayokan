@@ -13,7 +13,6 @@ test.describe("startup routes", () => {
     "/mentors",
     "/opportunities",
     "/portfolio",
-    "/portfolio/agri-processing-venture",
     "/apply",
     "/apply/success",
     "/privacy",
@@ -63,8 +62,14 @@ test.describe("startup journeys", () => {
   });
 
   test("portfolio detail renders anonymised venture", async ({ page }) => {
-    await go(page, "/portfolio/agri-processing-venture");
-    await expect(page.locator("h1").first()).toContainText(/venture/i);
+    // Venture slugs come from the content repository — follow the first card.
+    await go(page, "/portfolio");
+    const first = page.locator('a[href^="/portfolio/"]').first();
+    await expect(first).toBeVisible();
+    const href = await first.getAttribute("href");
+    const res = await go(page, href!);
+    expect(res?.status()).toBe(200);
+    await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.locator(".portv-facts")).toBeVisible();
   });
 

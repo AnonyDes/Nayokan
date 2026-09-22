@@ -38,13 +38,20 @@ test.describe("corporate routes", () => {
   }
 
   test("insights article renders", async ({ page }) => {
-    const res = await go(page, "/insights/inauguration-day-vti-yaounde");
+    // Slugs come from the content repository — follow the first card link.
+    await go(page, "/insights");
+    const first = page.locator('a[href^="/insights/"]').first();
+    await expect(first).toBeVisible();
+    const res = await go(page, (await first.getAttribute("href"))!);
     expect(res?.status()).toBe(200);
     await expect(page.locator("h1").first()).toBeVisible();
   });
 
   test("property detail renders", async ({ page }) => {
-    const res = await go(page, "/hospitality/properties/nayokan-guesthouse");
+    await go(page, "/hospitality/properties");
+    const first = page.locator('a[href^="/hospitality/properties/"]').first();
+    await expect(first).toBeVisible();
+    const res = await go(page, (await first.getAttribute("href"))!);
     expect(res?.status()).toBe(200);
   });
 
