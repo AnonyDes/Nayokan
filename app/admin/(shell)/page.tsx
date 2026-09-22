@@ -119,7 +119,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       <Panel className="dash-apps-panel" >
-        <PanelHead titleNum="§ 06 ·" title="Applications pipeline" actions={<a href="/admin/applications" className="ax-btn ax-btn--soft ax-btn--sm">Open pipeline</a>} />
+        <PanelHead titleNum="§ 06 ·" title="Applications pipeline" actions={<Link href="/admin/applications" className="ax-btn ax-btn--soft ax-btn--sm">Open pipeline</Link>} />
         <div className="dash-apps">
           {data.applicationsPipeline.map((col) => (
             <div className="dash-apps__col" key={col.status}>
@@ -151,7 +151,7 @@ export default async function AdminDashboardPage() {
 
       <div className="dash-grid">
         <Panel>
-          <PanelHead titleNum="§ 08 ·" title="Enquiries · last 30 days" actions={<a href="/admin/enquiries" className="ax-btn ax-btn--soft ax-btn--sm">All enquiries</a>} />
+          <PanelHead titleNum="§ 08 ·" title="Enquiries · last 30 days" actions={<Link href="/admin/enquiries" className="ax-btn ax-btn--soft ax-btn--sm">All enquiries</Link>} />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)" }}>
             <div style={{ padding: "16px 18px", borderRight: "1px solid var(--line)" }}>
               <div className="dash-strip__label">New</div>
