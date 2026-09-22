@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "@/admin/dashboard/dashboard.css";
 import { requireAdminSession } from "@/platform/auth/session";
 import { getSiteFilter } from "@/admin/shell/AdminShell";
@@ -169,7 +170,7 @@ export default async function AdminDashboardPage() {
         </Panel>
 
         <Panel>
-          <PanelHead titleNum="§ 04 ·" title="Scheduled for publication" actions={<a href="/admin/content/articles" className="ax-btn ax-btn--soft ax-btn--sm">All scheduled</a>} />
+          <PanelHead titleNum="§ 04 ·" title="Scheduled for publication" actions={<Link href="/admin/content/articles" className="ax-btn ax-btn--soft ax-btn--sm">All scheduled</Link>} />
           <PanelBody flush>
             {data.scheduledForPublication.map((item) => (
               <div className="dash-attn__row" style={{ gridTemplateColumns: "24px 1fr auto auto" }} key={item.id}>
