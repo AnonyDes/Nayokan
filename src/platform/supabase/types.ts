@@ -223,6 +223,59 @@ export type Database = {
           },
         ]
       }
+      approval_requests: {
+        Row: {
+          action: string
+          approved_by: string[]
+          created_at: string
+          id: string
+          payload: Json
+          reason: string
+          record_id: string | null
+          requested_by: string
+          required_approvals: number
+          resolved_at: string | null
+          status: string
+          table_name: string | null
+        }
+        Insert: {
+          action: string
+          approved_by?: string[]
+          created_at?: string
+          id?: string
+          payload?: Json
+          reason: string
+          record_id?: string | null
+          requested_by: string
+          required_approvals?: number
+          resolved_at?: string | null
+          status?: string
+          table_name?: string | null
+        }
+        Update: {
+          action?: string
+          approved_by?: string[]
+          created_at?: string
+          id?: string
+          payload?: Json
+          reason?: string
+          record_id?: string | null
+          requested_by?: string
+          required_approvals?: number
+          resolved_at?: string | null
+          status?: string
+          table_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "approval_requests_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       articles: {
         Row: {
           approved_at: string | null
@@ -581,6 +634,44 @@ export type Database = {
           {
             foreignKeyName: "clusters_updated_by_fkey"
             columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      content_versions: {
+        Row: {
+          created_at: string
+          id: string
+          record_id: string
+          saved_by: string | null
+          snapshot: Json
+          table_name: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          record_id: string
+          saved_by?: string | null
+          snapshot: Json
+          table_name: string
+          version: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          record_id?: string
+          saved_by?: string | null
+          snapshot?: Json
+          table_name?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_versions_saved_by_fkey"
+            columns: ["saved_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -1350,6 +1441,47 @@ export type Database = {
           {
             foreignKeyName: "navigation_items_updated_by_fkey"
             columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          kind: string
+          link: string | null
+          read_at: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          link?: string | null
+          read_at?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          link?: string | null
+          read_at?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -2217,6 +2349,44 @@ export type Database = {
           },
         ]
       }
+      review_comments: {
+        Row: {
+          action: string
+          author_id: string | null
+          body: string
+          created_at: string
+          id: string
+          record_id: string
+          table_name: string
+        }
+        Insert: {
+          action: string
+          author_id?: string | null
+          body: string
+          created_at?: string
+          id?: string
+          record_id: string
+          table_name: string
+        }
+        Update: {
+          action?: string
+          author_id?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+          record_id?: string
+          table_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "review_comments_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       role_permissions: {
         Row: {
           area: Database["public"]["Enums"]["permission_area"]
@@ -2728,9 +2898,26 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      approve_request: {
+        Args: { p_approve?: boolean; p_request_id: string }
+        Returns: Json
+      }
       confirm_application_document: {
         Args: { p_document_id: string }
         Returns: undefined
+      }
+      publish_scheduled_content: { Args: never; Returns: number }
+      record_audit: {
+        Args: {
+          p_action: string
+          p_metadata?: Json
+          p_next?: Json
+          p_object_id?: string
+          p_object_type: string
+          p_previous?: Json
+          p_site?: Database["public"]["Enums"]["site_id"]
+        }
+        Returns: string
       }
       register_application_document: {
         Args: {
@@ -2743,6 +2930,20 @@ export type Database = {
           document_id: string
           storage_path: string
         }[]
+      }
+      request_approval: {
+        Args: {
+          p_action: string
+          p_payload?: Json
+          p_reason?: string
+          p_record_id?: string
+          p_table?: string
+        }
+        Returns: string
+      }
+      restore_content_version: {
+        Args: { p_id: string; p_table: string; p_version: number }
+        Returns: Json
       }
       submit_application: {
         Args: {
@@ -2791,6 +2992,16 @@ export type Database = {
           id: string
           reference: string
         }[]
+      }
+      transition_content: {
+        Args: {
+          p_action: string
+          p_comment?: string
+          p_id: string
+          p_scheduled_at?: string
+          p_table: string
+        }
+        Returns: Json
       }
     }
     Enums: {
