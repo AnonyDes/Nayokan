@@ -1,16 +1,16 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { getSupabasePublicEnv } from "@/platform/env/public";
+import { requireSecret } from "@/platform/env/server";
+import { IDLE_COOKIE, IDLE_TIMEOUT_MS, signIdleTimestamp, verifyIdleTimestamp } from "./idle-token";
 
 // Optimistic session refresh + redirect for proxy.ts's "admin" branch. This
 // is deliberately thin (Next 16 auth guide: "Proxy should not be your only
 // line of defense") — it only reads the Supabase session from cookies and
 // redirects unauthenticated/idle callers. The real checks (MFA level, role,
-// site scope) live in src/platform/auth/session.ts + permissions.ts and run
-// again on every Server Component and Server Action.
-
-const IDLE_TIMEOUT_MS = 60 * 60 * 1000; // 60 minutes (readiness-report §10)
-const IDLE_COOKIE = "nayokan_admin_seen";
+// site scope, AND idle expiry again) live in src/platform/auth/session.ts +
+// permissions.ts and run again on every Server Component and Server Action —
+// this file is the fast, optimistic pre-check, not the authority.
 
 // Reachable without a completed session: the sign-in flow itself, the
 // mandatory-MFA enrolment/verification steps (a signed-in-but-not-yet-aal2
@@ -30,13 +30,16 @@ export async function refreshAdminSession(request: NextRequest): Promise<NextRes
   const { pathname } = request.nextUrl;
 
   // No Supabase project configured yet (readiness-report §17: a Phase 2
-  // blocker, not a Phase 0/1 one). Treat that exactly like "no session" —
-  // nobody can be authenticated without it anyway — rather than surfacing a
-  // raw env-parsing stack trace to the browser. The real, detailed error
-  // still prints to the server console for whoever is setting it up.
+  // blocker, not a Phase 0/1 one), or SESSION_SIGNING_SECRET isn't set.
+  // Treat either exactly like "no session" — nobody can be authenticated
+  // without Supabase anyway, and without a signing secret the idle cookie
+  // can't be trusted — rather than surfacing a raw stack trace to the
+  // browser. The real, detailed error still prints to the server console.
   let env;
+  let signingSecret: string;
   try {
     env = getSupabasePublicEnv();
+    signingSecret = requireSecret("SESSION_SIGNING_SECRET");
   } catch (error) {
     if (isPublicAdminPath(pathname)) return NextResponse.next();
     console.error("[admin-session] Supabase is not configured; redirecting to login.", error);
@@ -72,16 +75,22 @@ export async function refreshAdminSession(request: NextRequest): Promise<NextRes
   }
 
   // 60-minute idle expiry, stamped on every request so it applies before any
-  // page render — a signed session with an old cookie is force-signed-out.
+  // page render. The cookie is HMAC-signed (idle-token.ts): no cookie at all
+  // means "first request after login," which passes; a cookie that's
+  // present but fails verification means tampering, which fails closed
+  // (treated as expired) rather than being coerced/trusted like a raw
+  // client-supplied timestamp would be.
   const now = Date.now();
-  const lastSeen = Number(request.cookies.get(IDLE_COOKIE)?.value ?? now);
-  if (now - lastSeen > IDLE_TIMEOUT_MS) {
+  const cookieValue = request.cookies.get(IDLE_COOKIE)?.value;
+  const lastSeen = cookieValue === undefined ? now : verifyIdleTimestamp(cookieValue, signingSecret);
+  const expired = lastSeen === null || now - lastSeen > IDLE_TIMEOUT_MS;
+  if (expired) {
     await supabase.auth.signOut();
     const expiredUrl = new URL("/admin/login", request.url);
     expiredUrl.searchParams.set("expired", "1");
     return withCookiesFrom(response, NextResponse.redirect(expiredUrl));
   }
-  response.cookies.set(IDLE_COOKIE, String(now), { path: "/admin", sameSite: "lax", httpOnly: true });
+  response.cookies.set(IDLE_COOKIE, signIdleTimestamp(now, signingSecret), { path: "/admin", sameSite: "lax", httpOnly: true });
 
   if (pathname === "/admin/login") {
     return withCookiesFrom(response, NextResponse.redirect(new URL("/admin", request.url)));

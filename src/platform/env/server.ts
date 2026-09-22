@@ -11,6 +11,10 @@ const serverEnvSchema = z.object({
   PREVIEW_SECRET: optionalNonEmpty(),
   RESEND_API_KEY: optionalNonEmpty(),
   RESEND_FROM_EMAIL: optionalNonEmpty(),
+  // Signs the admin idle-session cookie (src/platform/auth/idle-token.ts) so
+  // it can't be forged or extended client-side. Generate with
+  // `openssl rand -base64 32`.
+  SESSION_SIGNING_SECRET: optionalNonEmpty(),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
@@ -25,6 +29,7 @@ export function getServerEnv(): ServerEnv {
     PREVIEW_SECRET: process.env.PREVIEW_SECRET,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL,
+    SESSION_SIGNING_SECRET: process.env.SESSION_SIGNING_SECRET,
   });
   if (!parsed.success) {
     throw new Error(`Invalid server environment:\n${parsed.error.issues.map((i) => `  ${i.path.join(".")}: ${i.message}`).join("\n")}`);

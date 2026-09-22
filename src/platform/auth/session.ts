@@ -6,13 +6,17 @@
 // many places call it (ports the MEMEX requireMember() pattern).
 import "server-only";
 import { cache } from "react";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/platform/supabase/server";
+import { requireSecret } from "@/platform/env/server";
 import { resolveDirectory } from "./directory";
+import { IDLE_COOKIE, IDLE_TIMEOUT_MS, verifyIdleTimestamp } from "./idle-token";
 import type { AdminSession } from "./types";
 
 type ResolvedAdminSession =
   | { kind: "no_user" }
+  | { kind: "idle_expired" }
   | { kind: "no_profile" }
   | { kind: "disabled" }
   | { kind: "needs_mfa_enroll" }
@@ -25,6 +29,23 @@ const resolve = cache(async (): Promise<ResolvedAdminSession> => {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return { kind: "no_user" };
+
+  // Re-verify the signed idle cookie here too, not just in proxy.ts
+  // (admin-session.ts) — Next's own guidance is that Proxy is an optimistic
+  // pre-check, never the sole line of defense, and a future matcher change
+  // could skip a route without anyone noticing. No cookie at all is treated
+  // as "first request this session" (proxy hasn't round-tripped it to the
+  // browser yet on this exact request) rather than expired.
+  try {
+    const signingSecret = requireSecret("SESSION_SIGNING_SECRET");
+    const cookieValue = (await cookies()).get(IDLE_COOKIE)?.value;
+    if (cookieValue !== undefined) {
+      const lastSeen = verifyIdleTimestamp(cookieValue, signingSecret);
+      if (lastSeen === null || Date.now() - lastSeen > IDLE_TIMEOUT_MS) return { kind: "idle_expired" };
+    }
+  } catch {
+    return { kind: "no_user" }; // signing secret unset — can't trust anything; fail closed
+  }
 
   // Mandatory MFA (readiness-report §10): every admin route requires aal2,
   // no exceptions. nextLevel "aal1" means no factor is enrolled yet;
@@ -69,6 +90,8 @@ export const requireAdminSession = cache(async (): Promise<AdminSession> => {
       return resolved.session;
     case "no_user":
       redirect("/admin/login");
+    case "idle_expired":
+      redirect("/admin/login?expired=1");
     case "needs_mfa_enroll":
       redirect("/admin/mfa-enroll");
     case "needs_mfa_verify":
