@@ -105,11 +105,19 @@ export interface PublicMetric {
   /** Only true when the DB governance chain passed; gates count-up animation. */
   verified: boolean;
   sourceLabel?: string;
+  /** Longer descriptive line under the figure (additive; impact page cells). */
+  description?: string;
 }
 
 export interface Programme {
   id: string;
-  site: Extract<SiteId, "vti" | "startup">;
+  /**
+   * Site hosting the programme's public detail page. VC and Hospitality
+   * programmes are listed by the corporate site (world-tagged) even though
+   * their detail page may live on vti/startup — see ADR 003.
+   * (Additive change: widened from Extract<SiteId,"vti"|"startup">.)
+   */
+  site: SiteId;
   world: World;
   slug: string;
   /** Design reference code, e.g. "P/001". */
@@ -153,7 +161,18 @@ export interface Opportunity {
   slug: string;
   code?: string;
   title: string;
-  category: "residency" | "grant" | "programme" | "competition" | "other";
+  /** Additive widening: design categories challenge/partnership/call/funding/mentor. */
+  category:
+    | "residency"
+    | "grant"
+    | "programme"
+    | "competition"
+    | "challenge"
+    | "partnership"
+    | "call"
+    | "funding"
+    | "mentor"
+    | "other";
   status: "open" | "closing_soon" | "upcoming" | "expired";
   deadline?: string;
   opensAt?: string;
@@ -193,6 +212,10 @@ export interface Partner {
   logo?: MediaRef;
   website?: string;
   relationship?: string;
+  /** Optional sub-tag within a wall, e.g. university-wall "Applied" / "Research" / "Public". */
+  tag?: string;
+  /** Optional location line, e.g. "Yaoundé · Central". */
+  location?: string;
   provenance: Provenance;
 }
 
@@ -211,6 +234,8 @@ export interface Venture {
   listingStatus: "pipeline" | "active" | "alumni" | "exited";
   relatedProgrammeId?: string;
   logo?: MediaRef;
+  /** Detail-page fact rows (Stage/Sector/Founded/…); tbc flags unverified values. */
+  facts?: { label: string; value: string; tbc?: boolean }[];
   seo?: Seo;
   provenance: Provenance;
 }
