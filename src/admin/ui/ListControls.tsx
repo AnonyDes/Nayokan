@@ -71,9 +71,12 @@ export interface FilterSpec {
  * actual filtering (and the state is shareable). Existing params — notably
  * ?site= from nav links — are preserved.
  */
-export function ListControls({ tabs, activeTab = "all", searchPlaceholder, filters }: {
+export function ListControls({ tabs, activeTab = "all", tabsParam = "status", searchPlaceholder, filters }: {
   tabs?: TabItem[];
   activeTab?: string;
+  /** URL param the tabs write — "status" by default; e.g. "tab" when the
+   *  tab row isn't a status filter (programmes world/kind tabs). */
+  tabsParam?: string;
   searchPlaceholder?: string;
   filters?: FilterSpec[];
 }) {
@@ -97,7 +100,7 @@ export function ListControls({ tabs, activeTab = "all", searchPlaceholder, filte
 
   return (
     <Toolbar>
-      {tabs && <Tabs items={tabs} active={activeTab} onChange={(k) => setParam("status", k)} />}
+      {tabs && <Tabs items={tabs} active={activeTab} onChange={(k) => setParam(tabsParam, k)} />}
       <div style={{ flex: 1 }} />
       {searchPlaceholder && (
         <InlineSearch

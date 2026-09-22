@@ -2,7 +2,7 @@
 // the mock layer today, in SQL tomorrow) so each area's data.ts exposes a
 // single listAreaRows(query) seam rather than bespoke filter code.
 import type { SiteFilter } from "@/admin/shell/SiteSelector";
-import type { SiteId } from "@/platform/sites/types";
+import { isSiteId, type SiteId } from "@/platform/sites/types";
 
 export interface ListQuery {
   site?: SiteFilter;
@@ -71,4 +71,20 @@ export function parseListQuery(params: Record<string, string | string[] | undefi
     q: one("q") ?? "",
     page: Number.isFinite(page) && page > 0 ? page : 1,
   };
+}
+
+/** First string value of a searchParam. */
+export function param(params: Record<string, string | string[] | undefined>, key: string): string | undefined {
+  const v = params[key];
+  return Array.isArray(v) ? v[0] : v;
+}
+
+/**
+ * ?site= display filter from the URL (nav links carry it explicitly, e.g.
+ * /admin/programmes?site=vti). Display narrowing only — never authorization.
+ * Returns null when absent/invalid so callers fall back to the cookie filter.
+ */
+export function siteFromParams(params: Record<string, string | string[] | undefined>): SiteId | null {
+  const v = param(params, "site");
+  return isSiteId(v) ? v : null;
 }
