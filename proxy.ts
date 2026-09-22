@@ -39,9 +39,32 @@ export async function proxy(request: NextRequest) {
       return NextResponse.rewrite(new URL("/__not-found", request.url));
 
     case "admin": {
-      // Session refresh + login redirect are added by the admin workstream
-      // (src/platform/auth/admin-session.ts). Keep this branch thin.
-      return NextResponse.next();
+      // Refresh the Supabase session cookie and bounce unauthenticated users
+      // to /admin/login. Authorization itself is server-side + RLS — the host
+      // check only decides where the login screen lives.
+      const { createServerClient } = await import("@supabase/ssr");
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      const isAuthRoute = pathname === "/admin/login" || pathname.startsWith("/admin/login/");
+      if (!url || !key) {
+        return isAuthRoute ? NextResponse.next() : NextResponse.redirect(new URL("/admin/login", request.url));
+      }
+      let response = NextResponse.next({ request });
+      const supabase = createServerClient(url, key, {
+        cookies: {
+          getAll: () => request.cookies.getAll(),
+          setAll: (list) => {
+            for (const { name, value } of list) request.cookies.set(name, value);
+            response = NextResponse.next({ request });
+            for (const { name, value, options } of list) response.cookies.set(name, value, options);
+          },
+        },
+      });
+      const { data } = await supabase.auth.getClaims();
+      if (!data?.claims && !isAuthRoute) {
+        return NextResponse.redirect(new URL("/admin/login", request.url));
+      }
+      return response;
     }
 
     case "rewrite": {

@@ -31,6 +31,12 @@ describe("routeRequest", () => {
     expect(route("nayokan.org", "/hospitality/properties/a")).toMatchObject({ site: "corporate", pathname: "/corporate/hospitality/properties/a" });
   });
 
+  test("robots.txt passes through un-prefixed (app-root handler resolves the site)", () => {
+    expect(route("nayokan.org", "/robots.txt")).toEqual({ action: "rewrite", site: "corporate", pathname: "/robots.txt" });
+    expect(route("vti.nayokan.org", "/robots.txt")).toEqual({ action: "rewrite", site: "vti", pathname: "/robots.txt" });
+    expect(route("startup.nayokan.org", "/robots.txt")).toEqual({ action: "rewrite", site: "startup", pathname: "/robots.txt" });
+  });
+
   test("internal prefixes are not directly addressable (double-prefixed, so 404)", () => {
     expect(route("vti.nayokan.org", "/vti/programmes")).toMatchObject({ pathname: "/vti/vti/programmes" });
     expect(route("nayokan.org", "/vti")).toMatchObject({ pathname: "/corporate/vti" });

@@ -82,6 +82,13 @@ export function routeRequest(input: {
     }
   }
 
+  // robots.ts is root-only in Next 16 (unlike sitemap, which nests). Pass the
+  // path through un-prefixed so app/robots.ts serves it; it resolves the site
+  // from the x-nayokan-site header / Host.
+  if (pathname === "/robots.txt") {
+    return { action: "rewrite", site: kind.site, pathname: "/robots.txt" };
+  }
+
   // Internal route-tree prefixes are never directly addressable: `/vti/x` on
   // the vti host becomes `/vti/vti/x`, which does not exist, so it 404s.
   return { action: "rewrite", site: kind.site, pathname: `/${kind.site}${pathname === "/" ? "" : pathname}` };
