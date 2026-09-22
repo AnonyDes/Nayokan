@@ -1,0 +1,29 @@
+{
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "superpowers@superpowers-dev": true,
+    "caveman@caveman": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "superpowers-dev": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "juliusbrussee/caveman"
+      }
+    }
+  }
+}

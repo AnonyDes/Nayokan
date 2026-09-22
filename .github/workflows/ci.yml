@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests
+        run: npm run test
+      - name: Block service-role key outside server-only modules
+        run: |
+          violations=0
+          for f in $(grep -rl "SUPABASE_SERVICE_ROLE_KEY" app/ src/ 2>/dev/null || true); do
+            if ! grep -qE "^import [\"']server-only[\"']" "$f"; then
+              echo "::error file=$f::references SUPABASE_SERVICE_ROLE_KEY without import 'server-only'"
+              violations=1
+            fi
+          done
+          exit $violations
+      - name: Production build
+        run: npm run build
+        env:
+          CONTENT_SOURCE: fixtures

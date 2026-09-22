@@ -1,0 +1,70 @@
+/* Nayokan shared design tokens. Ported verbatim from Designs/styles/system.css
+   (the approved source). Site-specific and world-specific tokens live in each
+   site's own stylesheet under src/sites/<site>/ and are scoped by the site
+   theme class (.site-corporate, .site-vti, .site-startup) or world class. */
+
+:root {
+  /* Brand (handoff + brief). */
+  --brand-green: #12B82A;
+  --brand-green-deep: #08751A;
+  --brand-black: #000000;
+  --brand-navy: #071A46;
+  --brand-soft: #F3F6F3;
+  --brand-white: #FFFFFF;
+
+  /* Design surface palette (as rendered in Designs/styles/system.css). */
+  --ink: #0A0A0A;
+  --ink-2: #171717;
+  --navy: #071A46;
+  --navy-2: #0E2559;
+  --navy-3: #1B3573;
+  --green: #12B82A;
+  --green-deep: #08751A;
+  --green-glow: #4FE066;
+  --bone: #F3F2ED;
+  --bone-2: #EAE8DF;
+  --paper: #FFFFFF;
+  --line: rgba(10, 10, 10, 0.12);
+  --line-strong: rgba(10, 10, 10, 0.32);
+  --line-invert: rgba(255, 255, 255, 0.14);
+  --line-invert-strong: rgba(255, 255, 255, 0.4);
+  --muted: rgba(10, 10, 10, 0.6);
+  --muted-invert: rgba(255, 255, 255, 0.62);
+
+  /* Fonts (next/font variables set in app/layout.tsx). */
+  --font-heading: var(--font-manrope), "Manrope", sans-serif;
+  --font-body: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Type scale */
+  --f-display: clamp(3.6rem, 8.5vw, 8.4rem);
+  --f-hero: clamp(2.8rem, 5.6vw, 5rem);
+  --f-h1: clamp(2.2rem, 3.8vw, 3.4rem);
+  --f-h2: clamp(1.6rem, 2.4vw, 2.2rem);
+  --f-h3: 1.25rem;
+  --f-body: 1rem;
+  --f-small: 0.875rem;
+  --f-meta: 0.72rem;
+
+  /* Spacing (4px base) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 160px;
+
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-lg: 8px;
+  --radius-chip: 100px;
+
+  --easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 620ms;
+
+  --container: 1440px;
+  --container-narrow: 1120px;
+  --gutter: clamp(20px, 4vw, 56px);
+
+  --focus-ring: 2px solid var(--green);
+  --focus-offset: 2px;
+}
