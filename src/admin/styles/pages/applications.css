@@ -1,0 +1,21 @@
+.apps-kb { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+  .apps-kb__col {
+    background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg);
+    padding: 12px 12px 14px; min-height: 200px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .apps-kb__head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .apps-kb__label { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em; color: var(--text-3); text-transform: uppercase; }
+  .apps-kb__count { font-family: var(--f-head); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+  .apps-kb__card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 3px; padding: 10px;
+    cursor: pointer; transition: all var(--dur-fast);
+    position: relative;
+  }
+  .apps-kb__card:hover { border-color: var(--ink); transform: translateY(-1px); }
+  .apps-kb__id { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--text-3); }
+  .apps-kb__name { font-weight: 600; font-size: 12.5px; margin-top: 2px; line-height: 1.25; }
+  .apps-kb__meta { display: flex; gap: 6px; margin-top: 8px; align-items: center; font-size: 10.5px; color: var(--text-3); }
+  @media (max-width: 1200px) { .apps-kb { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 800px) { .apps-kb { grid-template-columns: 1fr; } }

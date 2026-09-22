@@ -1,0 +1,11 @@
+.pe-tabs { display: flex; border-bottom: 1px solid var(--line-2); margin-bottom: 20px; gap: 2px; }
+  .pe-tabs button {
+    padding: 10px 14px;
+    font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-3);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .pe-tabs button.is-active { color: var(--ink); border-bottom-color: var(--ink); }
+  .pe-tabs button:hover:not(.is-active) { color: var(--ink); }

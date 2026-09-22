@@ -1,0 +1,37 @@
+.ds-sec { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; }
+  .ds-sec__head { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: end; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--line-2); }
+  .ds-sec__num { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--text-3); text-transform: uppercase; }
+  .ds-sec__title { font-family: var(--f-head); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+  .ds-sec__lede { color: var(--text-3); font-size: 13px; margin-top: 6px; max-width: 60ch; }
+
+  .ds-swatch {
+    height: 90px; border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.06em;
+    position: relative;
+    border: 1px solid var(--line-2);
+  }
+  .ds-swatch__name { font-weight: 600; font-size: 12px; letter-spacing: 0; }
+  .ds-swatch__hex { opacity: 0.7; text-transform: uppercase; }
+
+  .ds-type-row {
+    display: grid; grid-template-columns: 160px 1fr auto;
+    gap: 20px; align-items: baseline;
+    padding: 14px 0; border-bottom: 1px solid var(--line);
+  }
+  .ds-type-row:last-child { border-bottom: none; }
+  .ds-type-row__meta { font-family: var(--f-mono); font-size: 10.5px; color: var(--text-3); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .ds-comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .ds-comp-grid { grid-template-columns: 1fr; } }
+  .ds-comp {
+    background: var(--ws); border: 1px solid var(--line-2);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .ds-comp__lb { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--text-3); text-transform: uppercase; margin-bottom: 12px; }
+  .ds-comp__demo { padding: 20px 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 20px; }
+
+  .ds-spacing-row { display: flex; align-items: center; gap: 20px; padding: 10px 0; }
+  .ds-spacing-row__meta { font-family: var(--f-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.06em; width: 80px; }
+  .ds-spacing-row__bar { background: var(--ink); height: 24px; }
