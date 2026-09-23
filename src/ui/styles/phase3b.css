@@ -1054,7 +1054,6 @@ body.nav-open { overflow: hidden; }
   letter-spacing: 0.16em;
   color: var(--muted);
   text-transform: uppercase;
-  opacity: 0.7;
 }
 
 /* =========================================================================

@@ -154,9 +154,7 @@ export function SystemSection() {
             <span className="meta on-dark" ref={idxRef}>
               01
             </span>
-            <span className="meta on-dark" style={{ opacity: 0.5 }}>
-              / 06
-            </span>
+            <span className="meta on-dark">/ 06</span>
           </div>
           <div className="system-hint">
             <span className="meta on-dark">Scroll to advance ↓</span>

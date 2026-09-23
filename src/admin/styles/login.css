@@ -15,7 +15,7 @@
   .login__brand { display: flex; align-items: center; gap: 12px; }
   .login__brand img { width: 32px; height: 32px; filter: brightness(1.05); }
   .login__brand-name { font-family: var(--f-head); font-weight: 800; font-size: 17px; letter-spacing: -0.01em; }
-  .login__brand-sub { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.42); text-transform: uppercase; }
+  .login__brand-sub { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.62); text-transform: uppercase; }
   .login__brand-col { display: flex; flex-direction: column; gap: 2px; }
 
   .login__lede {
@@ -51,7 +51,7 @@
   .login__foot {
     display: flex; justify-content: space-between;
     font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.14em;
-    color: rgba(255,255,255,0.42); text-transform: uppercase;
+    color: rgba(255,255,255,0.62); text-transform: uppercase;
     padding-top: 32px;
   }
 
@@ -75,7 +75,7 @@
   }
   .login__card-eyebrow {
     font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.18em;
-    color: var(--text-3); text-transform: uppercase; margin-bottom: 8px;
+    color: var(--text-2); text-transform: uppercase; margin-bottom: 8px;
   }
   .login__card-title {
     font-family: var(--f-head); font-weight: 700; font-size: 26px;

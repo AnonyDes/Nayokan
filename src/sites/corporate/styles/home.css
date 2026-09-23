@@ -243,10 +243,12 @@
   flex: 0 0 min(560px, 82vw);
   padding: 48px 0;
   color: var(--paper);
-  opacity: 0.28;
-  transition: opacity 700ms var(--easing);
 }
-.system-stage.active { opacity: 1; }
+/* WCAG: dimming via opacity breaks text contrast; dim only the numeral and
+   drop inactive copy to muted-invert instead. */
+.system-stage .stage-num { opacity: 0.35; transition: opacity 700ms var(--easing); }
+.system-stage.active .stage-num { opacity: 1; }
+.system-stage:not(.active) .stage-title { color: var(--muted-invert); }
 .stage-num {
   font-family: var(--font-heading);
   font-weight: 800;

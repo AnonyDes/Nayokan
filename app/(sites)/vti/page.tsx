@@ -152,7 +152,7 @@ export default async function VtiHome() {
             title="Current programmes."
             lead="A live directory. Programmes marked open are currently accepting applications; details are managed inside VTI."
           />
-          <div className="prog-table" role="table" aria-label="VTI programmes">
+          <div className="prog-table">
             {programmes.map((p) => (
               <div className="prog-row" key={p.id}>
                 <span className="pnum">{p.code}</span>

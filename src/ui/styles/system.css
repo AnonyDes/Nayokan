@@ -40,11 +40,11 @@ p { max-width: 62ch; text-wrap: pretty; }
   font-size: 10px;
   font-style: italic;
   color: var(--muted);
-  opacity: 0.55;
   letter-spacing: 0.06em;
   vertical-align: super;
   margin-left: 6px;
 }
+.placeholder-tag.on-dark { color: var(--muted-invert); }
 .placeholder-tag::before { content: '['; }
 .placeholder-tag::after  { content: ']'; }
 
@@ -260,6 +260,7 @@ p { max-width: 62ch; text-wrap: pretty; }
   border-bottom: 1px solid var(--line);
 }
 .section-header h2 { max-width: 20ch; }
+.section-header .meta-num.on-dark { color: var(--muted-invert); }
 .section-header .meta-num {
   font-family: var(--font-mono);
   font-size: 0.72rem; font-weight: 500;

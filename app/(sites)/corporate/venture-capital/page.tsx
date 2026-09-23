@@ -175,7 +175,7 @@ export default async function VentureCapital() {
               </div>
             ))}
           </div>
-          <p className="meta on-dark" style={{ color: "var(--muted-invert)", marginTop: 24, opacity: 0.7 }}>
+          <p className="meta on-dark" style={{ color: "var(--muted-invert)", marginTop: 24 }}>
             All pipeline entries subject to editorial and legal review before public disclosure.
           </p>
         </div>

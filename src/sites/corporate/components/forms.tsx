@@ -214,15 +214,15 @@ export function BookingForm({ compact = false }: { compact?: boolean }) {
   return (
     <form className="hosp-booking-card" action={action}>
       <div className="booking-row">
-        <Field label="Property" error={fieldErr(state, "property")}>
-          <select name="property">
+        <Field label="Property" htmlFor="bk-property" error={fieldErr(state, "property")}>
+          <select name="property" id="bk-property">
             <option>Guesthouse — 001</option>
             <option>Long-stay Residence — 002</option>
             <option>Workspace — 003</option>
           </select>
         </Field>
-        <Field label="Guests" error={fieldErr(state, "guests")}>
-          <select name="guests">
+        <Field label="Guests" htmlFor="bk-guests" error={fieldErr(state, "guests")}>
+          <select name="guests" id="bk-guests">
             <option>1 Guest</option>
             <option>2 Guests</option>
             <option>3+ Guests</option>
@@ -230,21 +230,21 @@ export function BookingForm({ compact = false }: { compact?: boolean }) {
         </Field>
       </div>
       <div className="booking-row">
-        <Field label="Arrival" error={fieldErr(state, "arrival")}>
-          <input name="arrival" type="date" />
+        <Field label="Arrival" htmlFor="bk-arrival" error={fieldErr(state, "arrival")}>
+          <input name="arrival" id="bk-arrival" type="date" />
         </Field>
-        <Field label="Departure" error={fieldErr(state, "departure")}>
-          <input name="departure" type="date" />
+        <Field label="Departure" htmlFor="bk-departure" error={fieldErr(state, "departure")}>
+          <input name="departure" id="bk-departure" type="date" />
         </Field>
       </div>
       <div className="booking-row" style={{ gridTemplateColumns: "1fr" }}>
-        <Field label="Purpose (optional)">
-          <input name="purpose" type="text" placeholder="Institutional visit, research, family, ..." />
+        <Field label="Purpose (optional)" htmlFor="bk-purpose">
+          <input name="purpose" id="bk-purpose" type="text" placeholder="Institutional visit, research, family, ..." />
         </Field>
       </div>
       <div className="booking-row" style={{ gridTemplateColumns: "1fr", borderBottom: "none" }}>
-        <Field label="Contact email" required error={fieldErr(state, "email")}>
-          <input name="email" type="email" placeholder="you@email.com" autoComplete="email" />
+        <Field label="Contact email" htmlFor="bk-email" required error={fieldErr(state, "email")}>
+          <input name="email" id="bk-email" type="email" placeholder="you@email.com" autoComplete="email" />
         </Field>
       </div>
       {!compact && (

@@ -24,6 +24,7 @@ export default defineConfig({
     { name: "startup", testMatch: /startup\/.*\.spec\.ts/, use: { ...devices["Desktop Chrome"], baseURL: host("startup") } },
     { name: "admin", testMatch: /admin\/.*\.spec\.ts/, use: { ...devices["Desktop Chrome"], baseURL: host("admin") } },
     { name: "routing", testMatch: /routing\/.*\.spec\.ts/, use: { ...devices["Desktop Chrome"] } },
+    { name: "a11y", testMatch: /a11y\/.*\.spec\.ts/, use: { ...devices["Desktop Chrome"] } },
     // Mobile runs the corporate spec on the corporate host at a phone viewport.
     { name: "mobile", testMatch: /corporate\/.*\.spec\.ts/, use: { ...devices["Pixel 7"], baseURL: host("") } },
   ],

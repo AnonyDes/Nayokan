@@ -1,7 +1,7 @@
 /* Hospitality — Refined · Calm · Premium
    Warm neutrals, generous whitespace, editorial travel-magazine feel. */
 
-:root { --terracotta: #B87950; --clay: #E8D9C5; --sand: #F5EFE4; }
+:root { --terracotta: #B87950; --terracotta-deep: #8F5630; --clay: #E8D9C5; --sand: #F5EFE4; }
 
 body[data-world="hospitality"] { background: var(--sand); }
 body[data-world="hospitality"] .nav { background: rgba(245,239,228,0.86); }
@@ -160,7 +160,7 @@ body[data-world="hospitality"] .btn-primary:hover { background: var(--terracotta
 .hosp-property-num {
   font-family: var(--font-mono);
   font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--terracotta-deep);
   margin-bottom: 20px;
 }
 .hosp-property-title {

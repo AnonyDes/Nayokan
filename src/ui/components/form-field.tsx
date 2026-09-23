@@ -26,7 +26,7 @@ export function Field({
     <div className={`ff${error ? " err" : ""} ${className}`.trim()}>
       <label htmlFor={htmlFor}>
         {label}
-        {optional && <span style={{ textTransform: "none", opacity: 0.6 }}> (optional)</span>}
+        {optional && <span style={{ textTransform: "none", color: "var(--muted)" }}> (optional)</span>}
         {required && <span className="req"> *</span>}
       </label>
       {children}

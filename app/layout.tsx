@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import "./globals.css";
@@ -6,6 +7,10 @@ import "./globals.css";
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-manrope", display: "swap" });
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: "--font-inter", display: "swap" });
 const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex-mono", display: "swap" });
+
+// Fallback title so not-found/edge renders always produce a <title>;
+// each site layout overrides via buildSiteMetadata.
+export const metadata: Metadata = { title: "Nayokan" };
 
 // Root layout is shared by all three public sites and the admin. Each site
 // layout (app/(sites)/<site>/layout.tsx) sets its own metadata, theme, nav

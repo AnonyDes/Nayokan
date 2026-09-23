@@ -22,7 +22,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         Skip to content
       </a>
       <SiteNav items={nav.primary} cta={nav.cta} homeHref="/" homeLabel="NAYOKAN · VTI" />
-      <main id="main">{children}</main>
+      <main id="main" tabIndex={-1}>{children}</main>
       <SiteFooter nav={nav} settings={settings} />
     </div>
   );
