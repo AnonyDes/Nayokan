@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createServerReadClient } from "@/platform/auth/server";
 import { PageHead, Panel, DataTable, StatusPill, WorldTag, FilterTabs, fmtDate } from "@/admin/components/kit";
 
@@ -46,7 +47,7 @@ export default async function ProgrammesPage({ searchParams }: { searchParams: P
           empty="No programmes in this state."
           rows={(rows ?? []).map((p) => [
             <div key="t">
-              <div className="ax-table__title">{p.name}</div>
+              <div className="ax-table__title"><Link href={`/admin/programmes/${p.id}`}>{p.name}</Link></div>
               <div className="ax-table__sub">/{p.site}/programmes/{p.slug}</div>
             </div>,
             <span key="c" className="ax-mono ax-mono--sm">{p.code ?? "—"}</span>,

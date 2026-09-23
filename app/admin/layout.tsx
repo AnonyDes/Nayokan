@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "@/admin/styles/admin.css";
 import "@/admin/styles/login.css";
+import "@/admin/styles/editor.css";
 
 // Admin is served only on ADMIN_ORIGIN (proxy.ts) and is never indexed.
 export const metadata: Metadata = {

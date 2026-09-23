@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createServerReadClient } from "@/platform/auth/server";
 import { PageHead, Panel, DataTable, StatusPill, WorldTag, fmtDate } from "@/admin/components/kit";
 
@@ -21,7 +22,7 @@ export default async function ImpactMetricsPage() {
           empty="No metrics yet."
           rows={(rows ?? []).map((m) => [
             <div key="n">
-              <div className="ax-table__title">{m.name}</div>
+              <div className="ax-table__title"><Link href={`/admin/impact-metrics/${m.id}`}>{m.name}</Link></div>
               <div className="ax-table__sub ax-mono ax-mono--sm">{m.slug}</div>
             </div>,
             <span key="u">{m.unit ?? "—"}</span>,

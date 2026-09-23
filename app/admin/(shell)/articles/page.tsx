@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createServerReadClient } from "@/platform/auth/server";
 import { PageHead, Panel, DataTable, StatusPill, WorldTag, FilterTabs, Avatar, fmtDate } from "@/admin/components/kit";
 
@@ -47,7 +48,7 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
           rows={(rows ?? []).map((a) => [
             <div key="t">
               <div className="ax-table__title">
-                {a.title}
+                <Link href={`/admin/articles/${a.id}`}>{a.title}</Link>
                 {(a as { provenance?: { isDemo?: boolean } }).provenance?.isDemo && <span className="ax-demo-tag">Demo</span>}
               </div>
               <div className="ax-table__sub">/insights/{a.slug}</div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createServerReadClient } from "@/platform/auth/server";
 import { PageHead, Panel, DataTable, StatusPill, WorldTag, FilterTabs, fmtDate } from "@/admin/components/kit";
 
@@ -46,7 +47,7 @@ export default async function PagesPage({ searchParams }: { searchParams: Promis
           empty="No pages in this state."
           rows={(rows ?? []).map((p) => [
             <div key="t">
-              <div className="ax-table__title">{p.title}</div>
+              <div className="ax-table__title"><Link href={`/admin/pages/${p.id}`}>{p.title}</Link></div>
               <div className="ax-table__sub">{p.path}</div>
             </div>,
             <WorldTag key="w" world={p.world} site={p.site} />,
