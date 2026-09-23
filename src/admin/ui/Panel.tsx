@@ -1,7 +1,11 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
-export function Panel({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={`ax-panel${className ? ` ${className}` : ""}`}>{children}</div>;
+export function Panel({ children, className, id, style }: { children: ReactNode; className?: string; id?: string; style?: CSSProperties }) {
+  return (
+    <div id={id} style={style} className={`ax-panel${className ? ` ${className}` : ""}`}>
+      {children}
+    </div>
+  );
 }
 
 export function PanelHead({ title, titleNum, actions }: { title: ReactNode; titleNum?: string; actions?: ReactNode }) {
@@ -16,6 +20,6 @@ export function PanelHead({ title, titleNum, actions }: { title: ReactNode; titl
   );
 }
 
-export function PanelBody({ children, flush }: { children: ReactNode; flush?: boolean }) {
-  return <div className={flush ? "ax-panel__body--flush" : "ax-panel__body"}>{children}</div>;
+export function PanelBody({ children, flush, className }: { children: ReactNode; flush?: boolean; className?: string }) {
+  return <div className={`${flush ? "ax-panel__body--flush" : "ax-panel__body"}${className ? ` ${className}` : ""}`}>{children}</div>;
 }

@@ -1,0 +1,24 @@
+/* Workspace surfaces — notifications row grid (notifications.html inline
+   styles hoisted here so the <button> port resets cleanly) and search rows. */
+
+.ws-notif {
+  display: grid; grid-template-columns: 20px 100px 1fr auto; gap: 14px;
+  padding: 14px 20px; border-bottom: 1px solid var(--line); align-items: center;
+  width: 100%; background: none; border-top: none; border-left: none; border-right: none;
+  font: inherit; color: inherit; text-align: left; cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.ws-notif:hover { background: var(--ws-2); }
+
+.ws-result {
+  display: grid; grid-template-columns: 130px 1fr auto auto; gap: 18px;
+  padding: 14px 20px; border-bottom: 1px solid var(--line); align-items: center;
+}
+.ws-result:last-child { border-bottom: none; }
+
+@media (max-width: 720px) {
+  .ws-notif { grid-template-columns: 14px 1fr auto; }
+  .ws-notif > .ax-mono { display: none; }
+  .ws-result { grid-template-columns: 1fr auto; }
+  .ws-result > .ax-pill:first-child { display: none; }
+}
