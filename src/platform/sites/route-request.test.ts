@@ -66,6 +66,8 @@ describe("routeRequest", () => {
     expect(route("x.vercel.app", "/programmes", dev, "vti")).toMatchObject({ site: "vti", pathname: "/vti/programmes" });
     expect(route("localhost:3000", "/", dev)).toMatchObject({ site: "corporate" });
     expect(route("localhost:3000", "/", dev, "bogus")).toMatchObject({ site: "corporate" });
+    expect(route("x.vercel.app", "/admin", dev)).toEqual({ action: "admin" });
+    expect(route("x.vercel.app", "/admin/users", dev, "admin")).toEqual({ action: "admin" });
   });
 
   test("dev hosts resolve", () => {

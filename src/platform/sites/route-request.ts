@@ -60,7 +60,11 @@ export function routeRequest(input: {
 
   // Preview deployments serve every site from one hostname.
   if (kind.kind === "unknown" && !cfg.isProduction) {
-    kind = { kind: "site", site: isSiteId(input.siteOverride) ? input.siteOverride : "corporate" };
+    if (input.siteOverride === "admin" || (isAdminPath(pathname) && input.siteOverride !== "corporate" && input.siteOverride !== "vti" && input.siteOverride !== "startup")) {
+      kind = { kind: "admin" };
+    } else {
+      kind = { kind: "site", site: isSiteId(input.siteOverride) ? input.siteOverride : "corporate" };
+    }
   }
 
   if (kind.kind === "unknown") return { action: "notFound" };

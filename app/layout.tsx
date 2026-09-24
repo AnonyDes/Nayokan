@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
+import { ScrollReveal } from "@/ui/components/reveal";
 import "./globals.css";
 
 // Fonts via next/font (not CSS @import, which Tailwind v4 does not support).
@@ -18,7 +19,10 @@ export const metadata: Metadata = { title: "Nayokan" };
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} ${plexMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <ScrollReveal />
+        {children}
+      </body>
     </html>
   );
 }
