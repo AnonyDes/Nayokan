@@ -60,9 +60,58 @@ export function routeRequest(input: {
 
   // Preview deployments (and *.vercel.app deployment hosts) serve every site from one hostname.
   const isVercelHost = host.endsWith(".vercel.app") || host.includes(".vercel.app:");
-  if (kind.kind === "unknown" && (!cfg.isProduction || isVercelHost)) {
-    if (input.siteOverride === "admin" || (isAdminPath(pathname) && input.siteOverride !== "corporate" && input.siteOverride !== "vti" && input.siteOverride !== "startup")) {
-      kind = { kind: "admin" };
+  const isPreviewHost = kind.kind === "unknown" && (!cfg.isProduction || isVercelHost);
+
+  if (isPreviewHost) {
+    if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+      return { action: "admin" };
+    }
+
+    // Direct path prefixes for preview testing: /vti and /startup
+    if (pathname === "/vti") {
+      return { action: "rewrite", site: "vti", pathname: "/vti" };
+    }
+    if (pathname.startsWith("/vti/")) {
+      return { action: "rewrite", site: "vti", pathname };
+    }
+    if (pathname === "/startup") {
+      return { action: "rewrite", site: "startup", pathname: "/startup" };
+    }
+    if (pathname.startsWith("/startup/")) {
+      return { action: "rewrite", site: "startup", pathname };
+    }
+
+    // Route disambiguation: do not allow a sticky preview cookie to trap
+    // routes that strictly exist on only one site.
+    const CORPORATE_EXCLUSIVE = [
+      "/what-we-do",
+      "/about",
+      "/impact",
+      "/insights",
+      "/venture-capital",
+      "/hospitality",
+      "/contact",
+      "/partners",
+      "/application",
+    ];
+    const STARTUP_EXCLUSIVE = [
+      "/commercialization",
+      "/mentors",
+      "/opportunities",
+      "/portfolio",
+      "/university-partnerships",
+      "/programme",
+    ];
+    const VTI_EXCLUSIVE = [
+      "/clusters",
+    ];
+
+    if (CORPORATE_EXCLUSIVE.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+      kind = { kind: "site", site: "corporate" };
+    } else if (STARTUP_EXCLUSIVE.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+      kind = { kind: "site", site: "startup" };
+    } else if (VTI_EXCLUSIVE.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+      kind = { kind: "site", site: "vti" };
     } else {
       kind = { kind: "site", site: isSiteId(input.siteOverride) ? input.siteOverride : "corporate" };
     }

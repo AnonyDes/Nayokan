@@ -63,6 +63,14 @@ describe("routeRequest", () => {
     expect(route("nayokan.vercel.app", "/", prod)).toMatchObject({ action: "rewrite", site: "corporate", pathname: "/corporate" });
     expect(route("nayokan.vercel.app", "/programmes", prod, "vti")).toMatchObject({ action: "rewrite", site: "vti", pathname: "/vti/programmes" });
     expect(route("nayokan.vercel.app", "/admin", prod)).toEqual({ action: "admin" });
+    // Preview prefixes on vercel.app
+    expect(route("nayokan.vercel.app", "/vti", prod)).toMatchObject({ action: "rewrite", site: "vti", pathname: "/vti" });
+    expect(route("nayokan.vercel.app", "/vti/programmes", prod)).toMatchObject({ action: "rewrite", site: "vti", pathname: "/vti/programmes" });
+    expect(route("nayokan.vercel.app", "/startup", prod)).toMatchObject({ action: "rewrite", site: "startup", pathname: "/startup" });
+    expect(route("nayokan.vercel.app", "/startup/programme", prod)).toMatchObject({ action: "rewrite", site: "startup", pathname: "/startup/programme" });
+    // Disambiguation: corporate-exclusive routes are not trapped by vti/startup overrides
+    expect(route("nayokan.vercel.app", "/what-we-do", prod, "startup")).toMatchObject({ action: "rewrite", site: "corporate", pathname: "/corporate/what-we-do" });
+    expect(route("nayokan.vercel.app", "/about", prod, "vti")).toMatchObject({ action: "rewrite", site: "corporate", pathname: "/corporate/about" });
   });
 
   test("non-production unknown hosts honour the site override (preview deployments)", () => {

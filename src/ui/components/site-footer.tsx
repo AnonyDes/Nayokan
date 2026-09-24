@@ -1,4 +1,7 @@
+"use client";
+
 import type { SiteNavigation, SiteSettings } from "@/platform/content/types";
+import { handlePreviewClick } from "@/platform/sites/preview-nav";
 
 // Site footer — ports the shared design footer (brand + columns + bottom bar).
 export function SiteFooter({ nav, settings }: { nav: SiteNavigation; settings: SiteSettings }) {
@@ -21,7 +24,7 @@ export function SiteFooter({ nav, settings }: { nav: SiteNavigation; settings: S
               <ul>
                 {col.links.map((l) => (
                   <li key={l.id}>
-                    <a href={l.href}>
+                    <a href={l.href} onClick={(e) => handlePreviewClick(e, l.href)}>
                       {l.label}
                       {l.crossSite ? " ↗" : ""}
                     </a>

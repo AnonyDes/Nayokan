@@ -74,7 +74,9 @@ export async function proxy(request: NextRequest) {
       const response = NextResponse.rewrite(new URL(`${decision.pathname}${search}`, request.url), {
         request: { headers },
       });
-      if (overrideParam) response.cookies.set(PREVIEW_SITE_COOKIE, decision.site, { path: "/", sameSite: "lax" });
+      if (overrideParam || (isVercelHost && siteOverride && siteOverride !== decision.site)) {
+        response.cookies.set(PREVIEW_SITE_COOKIE, decision.site, { path: "/", sameSite: "lax" });
+      }
       return response;
     }
   }

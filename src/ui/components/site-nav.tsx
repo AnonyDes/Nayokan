@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import type { Cta, NavItem } from "@/platform/content/types";
+import { handlePreviewClick } from "@/platform/sites/preview-nav";
 
 // Site navigation — ports Designs/partials/nav.html + scripts/system.js
 // (scrolled state) + scripts/mobile-nav.js (off-canvas panel), upgraded for
@@ -130,6 +131,7 @@ export function SiteNav({
                 href={item.href}
                 className={`nav-link${isActive(item) ? " active" : ""}`}
                 aria-current={isActive(item) ? "page" : undefined}
+                onClick={(e) => handlePreviewClick(e, item.href)}
               >
                 {item.label}
                 {item.crossSite ? " ↗" : ""}
@@ -139,7 +141,7 @@ export function SiteNav({
           <div className="nav-actions">
             {langToggle}
             {cta && (
-              <a href={cta.href} className="nav-cta">
+              <a href={cta.href} className="nav-cta" onClick={(e) => handlePreviewClick(e, cta.href)}>
                 {cta.label}
               </a>
             )}
@@ -177,6 +179,7 @@ export function SiteNav({
               key={item.id}
               href={item.href}
               aria-current={isActive(item) ? "page" : undefined}
+              onClick={(e) => handlePreviewClick(e, item.href)}
             >
               <span>
                 {item.label}
@@ -188,7 +191,7 @@ export function SiteNav({
         </nav>
         {cta && (
           <div style={{ paddingTop: 24 }}>
-            <a href={cta.href} className="btn btn-primary" style={{ width: "100%", justifyContent: "center", padding: "18px 22px" }}>
+            <a href={cta.href} className="btn btn-primary" style={{ width: "100%", justifyContent: "center", padding: "18px 22px" }} onClick={(e) => handlePreviewClick(e, cta.href)}>
               {cta.label} <span className="arrow">→</span>
             </a>
           </div>
