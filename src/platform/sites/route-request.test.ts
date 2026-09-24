@@ -58,8 +58,11 @@ describe("routeRequest", () => {
     expect(route("vti.nayokan.org", "/admin/login")).toEqual({ action: "notFound" });
   });
 
-  test("unknown hosts 404 in production and the site override is ignored", () => {
+  test("unknown hosts 404 in production and the site override is ignored, except vercel.app hosts", () => {
     expect(route("evil.example", "/", prod, "vti")).toEqual({ action: "notFound" });
+    expect(route("nayokan.vercel.app", "/", prod)).toMatchObject({ action: "rewrite", site: "corporate", pathname: "/corporate" });
+    expect(route("nayokan.vercel.app", "/programmes", prod, "vti")).toMatchObject({ action: "rewrite", site: "vti", pathname: "/vti/programmes" });
+    expect(route("nayokan.vercel.app", "/admin", prod)).toEqual({ action: "admin" });
   });
 
   test("non-production unknown hosts honour the site override (preview deployments)", () => {

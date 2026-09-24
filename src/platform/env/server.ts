@@ -6,7 +6,7 @@ import { z } from "zod";
 const optionalNonEmpty = () => z.preprocess((v) => (v === "" ? undefined : v), z.string().min(1).optional());
 
 const serverEnvSchema = z.object({
-  CONTENT_SOURCE: z.enum(["fixtures", "supabase"]).default("fixtures"),
+  CONTENT_SOURCE: z.preprocess((v) => (v === "" || v === undefined ? "fixtures" : v), z.enum(["fixtures", "supabase"]).default("fixtures")),
   SUPABASE_SERVICE_ROLE_KEY: optionalNonEmpty(),
   PREVIEW_SECRET: optionalNonEmpty(),
   RESEND_API_KEY: optionalNonEmpty(),

@@ -25,8 +25,9 @@ export async function proxy(request: NextRequest) {
   const { pathname, search, searchParams } = request.nextUrl;
   const host = request.headers.get("host") ?? "";
 
-  const overrideParam = isProduction ? null : searchParams.get(PREVIEW_SITE_PARAM);
-  const siteOverride = overrideParam ?? (isProduction ? null : request.cookies.get(PREVIEW_SITE_COOKIE)?.value);
+  const isVercelHost = host.endsWith(".vercel.app") || host.includes(".vercel.app:");
+  const overrideParam = (isProduction && !isVercelHost) ? null : searchParams.get(PREVIEW_SITE_PARAM);
+  const siteOverride = overrideParam ?? ((isProduction && !isVercelHost) ? null : request.cookies.get(PREVIEW_SITE_COOKIE)?.value);
 
   const decision = routeRequest({ host, pathname, search, siteOverride, cfg: routingConfig });
 

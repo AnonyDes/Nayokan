@@ -58,8 +58,9 @@ export function routeRequest(input: {
 
   let kind = classifyHost(host, cfg);
 
-  // Preview deployments serve every site from one hostname.
-  if (kind.kind === "unknown" && !cfg.isProduction) {
+  // Preview deployments (and *.vercel.app deployment hosts) serve every site from one hostname.
+  const isVercelHost = host.endsWith(".vercel.app") || host.includes(".vercel.app:");
+  if (kind.kind === "unknown" && (!cfg.isProduction || isVercelHost)) {
     if (input.siteOverride === "admin" || (isAdminPath(pathname) && input.siteOverride !== "corporate" && input.siteOverride !== "vti" && input.siteOverride !== "startup")) {
       kind = { kind: "admin" };
     } else {
