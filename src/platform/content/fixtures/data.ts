@@ -761,8 +761,12 @@ export const properties: Property[] = [
       },
     ],
     amenities: ["06 rooms", "Boutique", "24h reception", "Working library"],
-    gallery: [],
-    provenance: demo(["amenities", "gallery"]),
+    gallery: [
+      photo("m-gh-1", "hospitality/prop-guesthouse-ext.jpg", "The Nayokan Guesthouse exterior garden courtyard, Bastos, Yaoundé."),
+      photo("m-gh-2", "hospitality/prop-guesthouse-room.jpg", "The Nayokan Guesthouse refined guest room."),
+      photo("m-gh-3", "hospitality/prop-guesthouse-lib.jpg", "The Nayokan Guesthouse working library."),
+    ],
+    provenance: demo(["amenities"]),
   },
   {
     id: "prop-002",
@@ -774,8 +778,10 @@ export const properties: Property[] = [
     summary:
       "Extended-stay apartments for corporate visitors, embassy secondments and multi-week research trips. Serviced, professional, quiet.",
     amenities: ["04 units", "14-night min.", "Weekly housekeeping", "Workspace"],
-    gallery: [],
-    provenance: demo(["amenities", "gallery"]),
+    gallery: [
+      photo("m-ls-1", "hospitality/prop-residence.jpg", "Long-stay serviced residence apartment, Nsimeyong, Yaoundé."),
+    ],
+    provenance: demo(["amenities"]),
   },
   {
     id: "prop-003",
@@ -787,8 +793,10 @@ export const properties: Property[] = [
     summary:
       "Dedicated meeting and event rooms for Nayokan cohorts, partner visits and workshops. Available to external partners on request.",
     amenities: ["60 capacity", "Boardroom + event", "On request", "Catering"],
-    gallery: [],
-    provenance: demo(["amenities", "gallery"]),
+    gallery: [
+      photo("m-ws-1", "hospitality/prop-workspace.jpg", "Workspace & Reception boardroom facility, Central Yaoundé."),
+    ],
+    provenance: demo(["amenities"]),
   },
 ];
 
