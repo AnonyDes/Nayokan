@@ -114,6 +114,9 @@ p { max-width: 62ch; text-wrap: pretty; }
 /* ---------- Navigation ---------- */
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
   z-index: 100;
   background: rgba(255,255,255,0.86);
   backdrop-filter: blur(20px) saturate(160%);
@@ -123,7 +126,9 @@ p { max-width: 62ch; text-wrap: pretty; }
 }
 .nav.scrolled { background: rgba(255,255,255,0.96); border-bottom-color: var(--line); }
 .nav-inner {
+  width: 100%;
   max-width: var(--container);
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 18px var(--gutter);
   display: flex; align-items: center; justify-content: space-between;

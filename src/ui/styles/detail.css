@@ -252,7 +252,9 @@
 .appl-progress {
   display: flex; gap: 2px;
   background: var(--line);
-  min-width: 320px;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .appl-step {
   padding: 12px 14px;
@@ -261,10 +263,22 @@
   font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted);
   flex: 1;
+  white-space: nowrap;
   text-align: center;
 }
 .appl-step.active { background: var(--ink); color: var(--paper); }
 .appl-step.done { background: var(--green); color: var(--ink); }
+
+@media (max-width: 640px) {
+  .appl-progress {
+    width: 100%;
+    min-width: 0;
+  }
+  .appl-step {
+    padding: 8px 10px;
+    font-size: 0.62rem;
+  }
+}
 
 .appl-body {
   max-width: 900px;
@@ -588,3 +602,76 @@
   letter-spacing: -0.01em;
 }
 @media (max-width: 900px) { .portv-hero-inner { grid-template-columns: 1fr; } }
+
+/* Responsive grid utilities for sub-pages */
+.sub-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 900px) {
+  .sub-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .sub-stats-grid { grid-template-columns: 1fr; }
+}
+
+.sub-split-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  padding: 40px;
+  background: var(--bone);
+  border: 1px solid var(--line);
+}
+@media (max-width: 800px) {
+  .sub-split-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px var(--gutter);
+  }
+}
+
+.sub-mentor-preview {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  padding: 40px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .sub-mentor-preview {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px var(--gutter);
+  }
+}
+
+.sub-2col-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 680px) {
+  .sub-2col-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.sub-3col-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 768px) {
+  .sub-3col-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+

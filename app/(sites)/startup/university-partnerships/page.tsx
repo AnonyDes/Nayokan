@@ -59,7 +59,7 @@ export default async function UniversityPartnerships() {
                 from partnering with Nayokan.
               </h3>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 24 }}>
+            <div className="sub-2col-grid">
               {GAINS.map((g) => (
                 <div className="deliver-card" key={g.tag}>
                   <span className="meta">{g.tag}</span>

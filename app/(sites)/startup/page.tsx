@@ -258,7 +258,7 @@ export default async function StartupHome() {
       {/* Innovator CTA */}
       <section className="apply" id="apply" style={{ background: "var(--ink)" }}>
         <div className="wrap">
-          <div className="cta-grid" style={{ gridTemplateColumns: "1.2fr 1fr" }}>
+          <div className="cta-grid">
             <div>
               <span className="meta on-dark">§ 05 — Innovator application</span>
               <h2

@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import type { Cta, NavItem } from "@/platform/content/types";
 import { handlePreviewClick } from "@/platform/sites/preview-nav";
+import { siteUrl } from "@/platform/sites/registry";
+import type { SiteId } from "@/platform/sites/types";
 
 // Site navigation — ports Designs/partials/nav.html + scripts/system.js
 // (scrolled state) + scripts/mobile-nav.js (off-canvas panel), upgraded for
@@ -13,11 +15,13 @@ export function SiteNav({
   cta,
   homeHref = "/",
   homeLabel = "NAYOKAN",
+  siteId = "corporate",
 }: {
   items: NavItem[];
   cta?: Cta;
   homeHref?: string;
   homeLabel?: string;
+  siteId?: SiteId;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -119,7 +123,7 @@ export function SiteNav({
     <>
       <header className={`nav${scrolled ? " scrolled" : ""}`} role="banner">
         <div className="nav-inner">
-          <a href={homeHref} className="nav-logo" aria-label="Nayokan — home">
+          <a href={homeHref} className="nav-logo" aria-label="Nayokan — home" onClick={(e) => handlePreviewClick(e, homeHref)}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/logo-mark.svg" alt="" width={34} height={34} />
             <span className="wordmark">{homeLabel}</span>
@@ -190,12 +194,50 @@ export function SiteNav({
           ))}
         </nav>
         {cta && (
-          <div style={{ paddingTop: 24 }}>
-            <a href={cta.href} className="btn btn-primary" style={{ width: "100%", justifyContent: "center", padding: "18px 22px" }} onClick={(e) => handlePreviewClick(e, cta.href)}>
+          <div style={{ paddingTop: 20 }}>
+            <a href={cta.href} className="btn btn-primary" style={{ width: "100%", justifyContent: "center", padding: "16px 20px" }} onClick={(e) => handlePreviewClick(e, cta.href)}>
               {cta.label} <span className="arrow">→</span>
             </a>
           </div>
         )}
+
+        {/* Four Worlds / Ecosystem cross-navigation on mobile */}
+        <div className="nav-mobile-worlds" style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid var(--line)" }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 12 }}>
+            NAYOKAN ECOSYSTEM
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            {[
+              { label: "Main / Corporate", href: siteUrl("corporate", "/"), active: siteId === "corporate" },
+              { label: "VTI ↗", href: siteUrl("vti", "/"), active: siteId === "vti" },
+              { label: "Startup Centre ↗", href: siteUrl("startup", "/"), active: siteId === "startup" },
+              { label: "Venture Capital", href: siteUrl("corporate", "/venture-capital"), active: false },
+              { label: "Hospitality", href: siteUrl("corporate", "/hospitality"), active: false },
+              { label: "Impact", href: siteUrl("corporate", "/impact"), active: false },
+            ].map((eco) => (
+              <a
+                key={eco.label}
+                href={eco.href}
+                style={{
+                  padding: "10px 12px",
+                  fontSize: "0.82rem",
+                  fontFamily: "var(--font-heading)",
+                  fontWeight: 600,
+                  background: eco.active ? "var(--ink)" : "var(--bone)",
+                  color: eco.active ? "var(--paper)" : "var(--ink)",
+                  borderRadius: "var(--radius)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+                onClick={(e) => handlePreviewClick(e, eco.href)}
+              >
+                {eco.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
         <div className="nav-mobile-foot">
           {langToggle}
           <span>© Nayokan · 2026</span>

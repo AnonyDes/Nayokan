@@ -44,7 +44,7 @@ export default async function VtiProgrammes() {
 
       <section className="section">
         <div className="wrap">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "var(--line)", border: "1px solid var(--line)", marginBottom: 48 }}>
+          <div className="sub-stats-grid" style={{ marginBottom: 48 }}>
             {[
               ["Categories", "04", "Digital · Agri · Craft · Hospitality", false],
               ["Active programmes", "—", "Count updated per cohort", true],
@@ -64,14 +64,14 @@ export default async function VtiProgrammes() {
 
           <VtiProgrammeGrid programmes={programmes} />
 
-          <div style={{ marginTop: 64, padding: 40, background: "var(--bone)", border: "1px solid var(--line)", display: "grid", gridTemplateColumns: "220px 1fr", gap: 48 }}>
+          <div className="sub-split-card" style={{ marginTop: 64 }}>
             <div>
               <span className="meta">§ Every programme</span>
               <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.4rem", letterSpacing: "-0.02em", lineHeight: 1.1, marginTop: 8 }}>
                 Four common components.
               </h3>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "32px 40px" }}>
+            <div className="sub-2col-grid">
               {COMPONENTS.map((c) => (
                 <div key={c.num}>
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--green-deep)", letterSpacing: "0.14em" }}>

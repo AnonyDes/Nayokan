@@ -23,7 +23,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         Skip to content
       </a>
       <WorldScope />
-      <SiteNav items={nav.primary} cta={nav.cta} homeHref="/" homeLabel="NAYOKAN" />
+      <SiteNav items={nav.primary} cta={nav.cta} homeHref="/" homeLabel="NAYOKAN" siteId={SITE} />
       <main id="main" tabIndex={-1}>{children}</main>
       <SiteFooter nav={nav} settings={settings} />
     </div>

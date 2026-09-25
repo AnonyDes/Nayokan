@@ -42,18 +42,7 @@ export default async function Mentors() {
 
           {/* Mentor detail preview */}
           {preview && (
-            <div
-              style={{
-                marginTop: 64,
-                padding: 40,
-                border: "1px solid var(--line)",
-                background: "var(--paper)",
-                display: "grid",
-                gridTemplateColumns: "160px 1fr",
-                gap: 40,
-                alignItems: "start",
-              }}
-            >
+            <div className="sub-mentor-preview" style={{ marginTop: 64 }}>
               <div>
                 <div className="dc-portrait" style={{ width: 120, height: 120, fontSize: "1.6rem" }}>
                   {preview.initials}
@@ -93,11 +82,9 @@ export default async function Mentors() {
                   <Tbc>content tbc</Tbc>
                 </p>
                 <div
+                  className="sub-3col-grid"
                   style={{
                     marginTop: 24,
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3,1fr)",
-                    gap: 16,
                     paddingTop: 20,
                     borderTop: "1px solid var(--line)",
                   }}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { buildSiteMetadata } from "@/platform/seo/site-metadata";
-import { SITES } from "@/platform/sites/registry";
+import { SITES, siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { SiteNav } from "@/ui/components/site-nav";
 import { SiteFooter } from "@/ui/components/site-footer";
@@ -21,7 +21,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteNav items={nav.primary} cta={nav.cta} homeHref="/" homeLabel="NAYOKAN · STARTUP" />
+      <SiteNav items={nav.primary} cta={nav.cta} homeHref={siteUrl(SITE)} homeLabel="NAYOKAN · STARTUP" siteId={SITE} />
       <main id="main" tabIndex={-1}>{children}</main>
       <SiteFooter nav={nav} settings={settings} />
     </div>

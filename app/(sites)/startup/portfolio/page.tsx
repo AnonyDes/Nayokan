@@ -54,16 +54,7 @@ export default async function Portfolio() {
       <section className="section">
         <div className="wrap">
           {/* Overview strip */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4,1fr)",
-              gap: 1,
-              background: "var(--line)",
-              border: "1px solid var(--line)",
-              marginBottom: 40,
-            }}
-          >
+          <div className="sub-stats-grid" style={{ marginBottom: 40 }}>
             <div style={overviewCell}>
               <span className="meta">In the pathway</span>
               <div style={overviewNum}>

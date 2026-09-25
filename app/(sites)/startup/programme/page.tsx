@@ -95,7 +95,7 @@ export default function StartupProgramme() {
                 university teams.
               </h3>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 24 }}>
+            <div className="sub-2col-grid">
               {COHORTS.map((c) => (
                 <div className="deliver-card" key={c.tag}>
                   <span className="meta">{c.tag}</span>
@@ -146,9 +146,8 @@ export default function StartupProgramme() {
               </h3>
             </div>
             <div
+              className="sub-2col-grid"
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2,1fr)",
                 gap: 1,
                 background: "var(--line)",
                 border: "1px solid var(--line)",
@@ -166,13 +165,10 @@ export default function StartupProgramme() {
 
           {/* Next intake CTA */}
           <div
+            className="sub-split-card"
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
-              padding: "56px 40px",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 48,
               alignItems: "center",
             }}
           >
