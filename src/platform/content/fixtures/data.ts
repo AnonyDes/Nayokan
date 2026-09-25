@@ -904,6 +904,84 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    ...article(
+      "art-010",
+      "training-lab-day-one",
+      "The training lab in operation — day one.",
+      "First cohort onboarding session inside the VTI computer lab in Yaoundé.",
+      "VTI Note",
+      "vti",
+      "VTI Editorial",
+      "2026-09-05",
+      5,
+    ),
+    cover: photo(
+      "m-art-010",
+      "nayokan-08.jpg",
+      "Trainees at the Nayokan VTI computer lab.",
+      "Fig. 001 — VTI trainees during the first digital skills module.",
+    ),
+    body: [
+      {
+        type: "paragraph",
+        text: "The computers were powered on at 08:30 in Yaoundé, marking day one of practical instruction for the first VTI cohort. Forty workstations, fully connected, dedicated to technical skills and digital workflow routines.",
+      },
+      {
+        type: "paragraph",
+        text: "The objective of the first week is immersion: establishing coding standards, collaborative version control, and problem decomposition. Trainees work in paired stations designed to encourage direct peer review and technical dialogue.",
+      },
+      { type: "quote", text: "Theory becomes capability only when hands touch the tools." },
+      { type: "heading", level: 2, text: "Curriculum architecture" },
+      {
+        type: "paragraph",
+        text: "The digital curriculum is built backwards from the needs of small productive enterprises and tech ventures across Central Africa. Rather than abstract computer literacy, participants build real-world software modules, automation tools, and web-based business infrastructure from day one.",
+      },
+      {
+        type: "paragraph",
+        text: "By month three, these trainees will begin integrating directly with entrepreneurial clusters, contributing working digital assets to active local businesses.",
+      },
+    ],
+  },
+  {
+    ...article(
+      "art-011",
+      "commercialization-playbook-central-africa",
+      "Building a commercialization playbook for Central Africa.",
+      "How the Startup Centre structures the path from research to market across a six-milestone framework.",
+      "Startup Feature",
+      "startup",
+      "Startup Centre Editorial",
+      "2026-08-20",
+      7,
+    ),
+    cover: photo(
+      "m-art-011",
+      "nayokan-04.jpg",
+      "Nayokan leadership and innovation team.",
+      "Fig. 001 — Startup Centre steering committee review session.",
+    ),
+    body: [
+      {
+        type: "paragraph",
+        text: "Central African universities and technical institutes produce substantial research, but very little of it crosses into commercial deployment. The Nayokan Startup Centre was founded to bridge that specific fracture.",
+      },
+      {
+        type: "paragraph",
+        text: "The commercialization playbook is a 26-week milestone-driven framework. It takes validated technical concepts and guides founding teams through unit economics, customer validation, intellectual property structuring, and pilot deployment.",
+      },
+      { type: "quote", text: "Innovation is only completed when a customer derives repeatable value from it." },
+      { type: "heading", level: 2, text: "The six milestones" },
+      {
+        type: "paragraph",
+        text: "Each cohort moves through six milestones: Onboarding & Mentor Pairing, Model & Unit Economics, Market Pilots, Product & Distribution, Investment Readiness, and Handover to the Venture Capital pipeline or alumni network.",
+      },
+      {
+        type: "paragraph",
+        text: "Teams are paired with sector-specific mentors and granted direct access to Nayokan ecosystem infrastructure, ensuring ventures solve real market constraints within Cameroon and the wider CEMAC region.",
+      },
+    ],
+  },
   article(
     "art-002",
     "commercializing-university-research-central-africa",

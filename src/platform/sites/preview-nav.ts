@@ -1,6 +1,6 @@
 "use client";
 
-import type { MouseEvent } from "react";
+import { useEffect, type MouseEvent } from "react";
 
 /**
  * On single-hostname preview deployments (*.vercel.app or localhost without
@@ -30,4 +30,42 @@ export function handlePreviewClick(e: MouseEvent<HTMLAnchorElement>, href: strin
       // Fallback to normal browser link navigation
     }
   }
+}
+
+/**
+ * Global click interceptor mounted in RootLayout to catch all cross-site
+ * anchors across any server component or page on preview hosts.
+ */
+export function PreviewLinkInterceptor() {
+  useEffect(() => {
+    const onClick = (e: globalThis.MouseEvent) => {
+      const a = (e.target as HTMLElement)?.closest?.("a");
+      if (!a || !a.href) return;
+      const host = window.location.hostname;
+      if (host.endsWith(".vercel.app") || host.includes("localhost")) {
+        try {
+          const u = new URL(a.href, window.location.origin);
+          if (u.hostname.startsWith("vti.") || u.hostname === "vti.nayokan.org") {
+            e.preventDefault();
+            window.location.href = `/vti${u.pathname === "/" ? "" : u.pathname}${u.search}`;
+          } else if (u.hostname.startsWith("startup.") || u.hostname === "startup.nayokan.org") {
+            e.preventDefault();
+            window.location.href = `/startup${u.pathname === "/" ? "" : u.pathname}${u.search}`;
+          } else if (u.hostname.startsWith("admin.") || u.hostname === "admin.nayokan.org") {
+            e.preventDefault();
+            window.location.href = `/admin${u.pathname === "/" ? "" : u.pathname}${u.search}`;
+          } else if (u.hostname === "nayokan.org" || u.hostname === "nayokan.localhost") {
+            e.preventDefault();
+            window.location.href = `${u.pathname}${u.search}`;
+          }
+        } catch {
+          // ignore
+        }
+      }
+    };
+    document.addEventListener("click", onClick, { capture: true });
+    return () => document.removeEventListener("click", onClick, { capture: true });
+  }, []);
+
+  return null;
 }
