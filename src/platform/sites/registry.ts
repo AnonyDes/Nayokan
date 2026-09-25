@@ -56,8 +56,33 @@ export const SITES: Record<SiteId, SiteConfig> = {
   },
 };
 
+export function previewSiteUrl(site: SiteId, path = "/"): string {
+  const p = path.startsWith("/") ? path : `/${path}`;
+  if (site === "corporate") {
+    return p;
+  }
+  return p === "/" ? `/${site}` : `/${site}${p}`;
+}
+
 /** Absolute URL on a given site. Use for every cross-site link and canonical URL. */
 export function siteUrl(site: SiteId, path = "/"): string {
   const p = path.startsWith("/") ? path : `/${path}`;
+
+  // When custom domains have not yet been purchased or activated,
+  // or when browsing on preview / single-hostname environments (*.vercel.app or localhost),
+  // return safe relative/preview paths so links never navigate to unbought domains.
+  const customDomainsActive = process.env.NEXT_PUBLIC_ENABLE_CUSTOM_DOMAINS === "true";
+
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    const isSingleHost = host.endsWith(".vercel.app") || host === "localhost" || host.includes(".localhost");
+    if (!customDomainsActive || isSingleHost) {
+      return previewSiteUrl(site, p);
+    }
+  } else if (!customDomainsActive) {
+    return previewSiteUrl(site, p);
+  }
+
   return p === "/" ? SITES[site].origin : `${SITES[site].origin}${p}`;
 }
+

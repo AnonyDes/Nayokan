@@ -82,8 +82,10 @@ export function routeRequest(input: {
     }
 
     // Route disambiguation: do not allow a sticky preview cookie to trap
-    // routes that strictly exist on only one site.
+    // routes that strictly exist on only one site. The apex homepage (/)
+    // and corporate directories are strictly corporate on preview hosts.
     const CORPORATE_EXCLUSIVE = [
+      "/",
       "/what-we-do",
       "/about",
       "/impact",
@@ -106,11 +108,14 @@ export function routeRequest(input: {
       "/clusters",
     ];
 
-    if (CORPORATE_EXCLUSIVE.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    const matchesPrefix = (list: string[]) =>
+      list.some((p) => pathname === p || (p !== "/" && pathname.startsWith(`${p}/`)));
+
+    if (matchesPrefix(CORPORATE_EXCLUSIVE)) {
       kind = { kind: "site", site: "corporate" };
-    } else if (STARTUP_EXCLUSIVE.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    } else if (matchesPrefix(STARTUP_EXCLUSIVE)) {
       kind = { kind: "site", site: "startup" };
-    } else if (VTI_EXCLUSIVE.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    } else if (matchesPrefix(VTI_EXCLUSIVE)) {
       kind = { kind: "site", site: "vti" };
     } else {
       kind = { kind: "site", site: isSiteId(input.siteOverride) ? input.siteOverride : "corporate" };

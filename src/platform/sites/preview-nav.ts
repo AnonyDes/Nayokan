@@ -14,16 +14,16 @@ export function resolvePreviewUrl(href: string, currentPath: string): string | n
 
     // 1. Cross-site absolute URLs (e.g. https://vti.nayokan.org or http://vti.nayokan.localhost:3000)
     if (u.hostname.startsWith("vti.") || u.hostname === "vti.nayokan.org") {
-      return `/vti${u.pathname === "/" ? "" : u.pathname}${u.search}`;
+      return `/vti${u.pathname === "/" ? "" : u.pathname}${u.search}${u.hash}`;
     }
     if (u.hostname.startsWith("startup.") || u.hostname === "startup.nayokan.org") {
-      return `/startup${u.pathname === "/" ? "" : u.pathname}${u.search}`;
+      return `/startup${u.pathname === "/" ? "" : u.pathname}${u.search}${u.hash}`;
     }
     if (u.hostname.startsWith("admin.") || u.hostname === "admin.nayokan.org") {
-      return `/admin${u.pathname === "/" ? "" : u.pathname}${u.search}`;
+      return `/admin${u.pathname === "/" ? "" : u.pathname}${u.search}${u.hash}`;
     }
-    if (u.hostname === "nayokan.org" || u.hostname === "nayokan.localhost") {
-      return `${u.pathname}${u.search}`;
+    if (u.hostname === "nayokan.org" || u.hostname === "www.nayokan.org" || u.hostname === "nayokan.localhost") {
+      return `${u.pathname}${u.search}${u.hash}`;
     }
 
     // 2. Relative URLs when currently browsing inside /vti on a preview host
@@ -34,10 +34,10 @@ export function resolvePreviewUrl(href: string, currentPath: string): string | n
       }
       // If clicking root "/" while in VTI, stay in VTI
       if (u.pathname === "/") {
-        return `/vti${u.search}`;
+        return `/vti${u.search}${u.hash}`;
       }
       // Internal VTI pages
-      return `/vti${u.pathname}${u.search}`;
+      return `/vti${u.pathname}${u.search}${u.hash}`;
     }
 
     // 3. Relative URLs when currently browsing inside /startup on a preview host
@@ -46,9 +46,9 @@ export function resolvePreviewUrl(href: string, currentPath: string): string | n
         return null;
       }
       if (u.pathname === "/") {
-        return `/startup${u.search}`;
+        return `/startup${u.search}${u.hash}`;
       }
-      return `/startup${u.pathname}${u.search}`;
+      return `/startup${u.pathname}${u.search}${u.hash}`;
     }
 
     return null;
@@ -65,9 +65,14 @@ export function handlePreviewClick(e: MouseEvent<HTMLAnchorElement>, href: strin
   const host = window.location.hostname;
   if (host.endsWith(".vercel.app") || host.includes("localhost")) {
     const target = resolvePreviewUrl(href, window.location.pathname);
-    if (target && target !== window.location.pathname) {
+    if (target !== null) {
       e.preventDefault();
-      window.location.href = target;
+      const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      if (target !== current && target !== window.location.pathname) {
+        window.location.href = target;
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     }
   }
 }
@@ -92,9 +97,14 @@ export function PreviewLinkInterceptor() {
       const host = window.location.hostname;
       if (host.endsWith(".vercel.app") || host.includes("localhost")) {
         const target = resolvePreviewUrl(a.href, window.location.pathname);
-        if (target && target !== `${window.location.pathname}${window.location.search}`) {
+        if (target !== null) {
           e.preventDefault();
-          window.location.href = target;
+          const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+          if (target !== current && target !== window.location.pathname) {
+            window.location.href = target;
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
         }
       }
     };

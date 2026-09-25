@@ -27,7 +27,9 @@ export async function proxy(request: NextRequest) {
 
   const isVercelHost = host.endsWith(".vercel.app") || host.includes(".vercel.app:");
   const overrideParam = (isProduction && !isVercelHost) ? null : searchParams.get(PREVIEW_SITE_PARAM);
-  const siteOverride = overrideParam ?? ((isProduction && !isVercelHost) ? null : request.cookies.get(PREVIEW_SITE_COOKIE)?.value);
+  const rawCookie = (isProduction && !isVercelHost) ? null : request.cookies.get(PREVIEW_SITE_COOKIE)?.value;
+  // A stale preview cookie must never hijack the apex homepage (/). Only an explicit ?__site= param can.
+  const siteOverride = overrideParam ?? (pathname === "/" ? null : rawCookie);
 
   const decision = routeRequest({ host, pathname, search, siteOverride, cfg: routingConfig });
 
@@ -74,8 +76,13 @@ export async function proxy(request: NextRequest) {
       const response = NextResponse.rewrite(new URL(`${decision.pathname}${search}`, request.url), {
         request: { headers },
       });
-      if (overrideParam || (isVercelHost && decision.site)) {
-        response.cookies.set(PREVIEW_SITE_COOKIE, decision.site, { path: "/", sameSite: "lax" });
+      // Set preview cookie ONLY when an explicit ?__site= query parameter is passed.
+      // Normal page navigation (e.g. visiting /startup or /vti) must NEVER set a global cookie.
+      if (overrideParam) {
+        response.cookies.set(PREVIEW_SITE_COOKIE, overrideParam, { path: "/", sameSite: "lax" });
+      } else if (request.cookies.has(PREVIEW_SITE_COOKIE)) {
+        // Clear any stale legacy cookie so affected browsers are immediately cured.
+        response.cookies.set(PREVIEW_SITE_COOKIE, "", { path: "/", maxAge: 0 });
       }
       return response;
     }

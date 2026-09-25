@@ -63,6 +63,9 @@ describe("routeRequest", () => {
     expect(route("nayokan.vercel.app", "/", prod)).toMatchObject({ action: "rewrite", site: "corporate", pathname: "/corporate" });
     expect(route("nayokan.vercel.app", "/programmes", prod, "vti")).toMatchObject({ action: "rewrite", site: "vti", pathname: "/vti/programmes" });
     expect(route("nayokan.vercel.app", "/admin", prod)).toEqual({ action: "admin" });
+    // Apex route (/) must ALWAYS resolve to corporate on preview hosts
+    expect(route("nayokan.vercel.app", "/", prod, "startup")).toMatchObject({ action: "rewrite", site: "corporate", pathname: "/corporate" });
+    expect(route("nayokan.vercel.app", "/", prod, "vti")).toMatchObject({ action: "rewrite", site: "corporate", pathname: "/corporate" });
     // Preview prefixes on vercel.app
     expect(route("nayokan.vercel.app", "/vti", prod)).toMatchObject({ action: "rewrite", site: "vti", pathname: "/vti" });
     expect(route("nayokan.vercel.app", "/vti/programmes", prod)).toMatchObject({ action: "rewrite", site: "vti", pathname: "/vti/programmes" });
