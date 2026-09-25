@@ -129,7 +129,7 @@ export const navigation: Record<SiteId, SiteNavigation> = {
     site: "vti",
     pendingConfirmation: true,
     primary: [
-      { id: "n-home", label: "Overview", href: "/" },
+      { id: "n-home", label: "Overview", href: siteUrl("vti", "/") },
       { id: "n-programmes", label: "Programmes", href: "/programmes" },
       { id: "n-clusters", label: "Clusters", href: "/clusters" },
       { id: "n-sc", label: "Startup Centre", href: siteUrl("startup"), crossSite: true },
@@ -140,7 +140,7 @@ export const navigation: Record<SiteId, SiteNavigation> = {
       {
         heading: "Institute",
         links: [
-          { id: "f-overview", label: "Overview", href: "/" },
+          { id: "f-overview", label: "Overview", href: siteUrl("vti", "/") },
           { id: "f-programmes", label: "Programmes", href: "/programmes" },
           { id: "f-clusters", label: "Clusters", href: "/clusters" },
           { id: "f-apply", label: "Apply", href: "/apply" },
@@ -168,7 +168,7 @@ export const navigation: Record<SiteId, SiteNavigation> = {
     site: "startup",
     pendingConfirmation: true,
     primary: [
-      { id: "n-home", label: "Overview", href: "/" },
+      { id: "n-home", label: "Overview", href: siteUrl("startup", "/") },
       { id: "n-programme", label: "Programme", href: "/programme" },
       { id: "n-portfolio", label: "Portfolio", href: "/portfolio" },
       { id: "n-opps", label: "Opportunities", href: "/opportunities" },

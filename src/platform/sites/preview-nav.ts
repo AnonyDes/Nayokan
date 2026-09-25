@@ -32,9 +32,9 @@ export function resolvePreviewUrl(href: string, currentPath: string): string | n
       if (u.pathname.startsWith("/vti") || u.pathname.startsWith("/startup") || u.pathname.startsWith("/admin")) {
         return null;
       }
-      // If clicking root "/" while in VTI, stay in VTI
+      // If clicking root "/", navigate to the main Corporate site
       if (u.pathname === "/") {
-        return `/vti${u.search}${u.hash}`;
+        return `/${u.search}${u.hash}`;
       }
       // Internal VTI pages
       return `/vti${u.pathname}${u.search}${u.hash}`;
@@ -45,8 +45,9 @@ export function resolvePreviewUrl(href: string, currentPath: string): string | n
       if (u.pathname.startsWith("/startup") || u.pathname.startsWith("/vti") || u.pathname.startsWith("/admin")) {
         return null;
       }
+      // If clicking root "/", navigate to the main Corporate site
       if (u.pathname === "/") {
-        return `/startup${u.search}${u.hash}`;
+        return `/${u.search}${u.hash}`;
       }
       return `/startup${u.pathname}${u.search}${u.hash}`;
     }
