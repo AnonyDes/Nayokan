@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
-import { SubHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
 import { ClusterGrid } from "@/sites/vti/components/cluster-grid";
 
 export const metadata: Metadata = {
@@ -24,20 +24,20 @@ export default async function VtiClusters() {
 
   return (
     <>
-      <SubHero
-        sec="§ VTI · Entrepreneurial Clusters"
-        refPath="/clusters"
+      <EditorialHero
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "VTI", href: "/" },
-          { label: "Entrepreneurial Clusters" },
+          { label: "Entrepreneurial clusters" },
         ]}
+        eyebrow="§ VTI · Entrepreneurial clusters"
         title={
           <>
             From <em>training</em> to production to market.
           </>
         }
-        lede="Clusters turn VTI graduates into productive enterprises — grouped by sector, sharing tools, market access and mentorship. This is where capability becomes economic value inside the Nayokan System."
+        lede="Clusters turn VTI graduates into productive enterprises: grouped by sector, sharing tools, market access and mentorship. This is where capability becomes economic value inside the Nayokan System."
+        slot="vti-clusters-hero"
       />
 
       <section className="section">

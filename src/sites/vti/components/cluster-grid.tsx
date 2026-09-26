@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Cluster } from "@/platform/content/types";
 import { Tbc } from "@/ui/components/tbc";
+import { MediaSlot } from "@/ui/components/media-slot";
 
 // Cluster directory grid with sector chips (vti-clusters.html).
 export function ClusterGrid({ clusters }: { clusters: Cluster[] }) {
@@ -26,7 +27,8 @@ export function ClusterGrid({ clusters }: { clusters: Cluster[] }) {
 
       <div className="pgrid">
         {visible.map((c) => (
-          <article className="pcard" key={c.id}>
+          <article className="pcard pcard--media" key={c.id}>
+            <MediaSlot slot="cluster-detail" media={c.heroImage} ratio="16:9" variant="compact" className="pcard-media" />
             <div className="pcard-head">
               <span className="pcard-ref">
                 {c.code} · {c.sector}
@@ -50,7 +52,7 @@ export function ClusterGrid({ clusters }: { clusters: Cluster[] }) {
               </div>
               <div>
                 <span className="meta">Anchor</span>
-                <span className="val">{c.location ?? "Yaoundé"}</span>
+                <span className="val">{c.location ?? <Tbc>location tbc</Tbc>}</span>
               </div>
               <div>
                 <span className="meta">Feeds into</span>

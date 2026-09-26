@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
-import { SubHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
+import { MediaSlot } from "@/ui/components/media-slot";
+import { programmeStatus } from "@/ui/components/programme-card";
 import { Tbc } from "@/ui/components/tbc";
 import { VtiProgrammeGrid } from "@/sites/vti/components/programme-grid";
 
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const COMPONENTS = [
-  { num: "01", tag: "Practical", title: "Hands-on curriculum", desc: "A minimum ratio of 60% practical to 40% theory across every VTI programme." },
+  { num: "01", tag: "Practical", title: "Hands-on curriculum", desc: "Practical work leads every VTI programme; the practical-to-theory ratio is published per programme.", tbc: true },
   { num: "02", tag: "Certification", title: "Recognised outputs", desc: "Endorsement pathway with Ministry of Employment & Vocational Training (subject to confirmation).", tbc: true },
   { num: "03", tag: "Entrepreneurial", title: "Cluster onboarding", desc: "Every graduate is offered a place in an entrepreneurial cluster aligned with their training track." },
   { num: "04", tag: "Eligibility", title: "Open, structured intake", desc: "Applications reviewed by a VTI selection panel. Cohorts kept small for quality of instruction." },
@@ -23,45 +25,49 @@ const COMPONENTS = [
 export default async function VtiProgrammes() {
   const repo = await getContentRepository();
   const programmes = await repo.listProgrammes({ site: "vti" });
+  const featured = programmes.find((p) => programmeStatus(p).open) ?? programmes[0];
 
   return (
     <>
-      <SubHero
-        sec="§ VTI · Programme directory"
-        refPath="/programmes"
+      <EditorialHero
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "VTI", href: "/" },
           { label: "Programmes" },
         ]}
+        eyebrow="§ VTI · Programme catalogue"
         title={
           <>
             The programme <em>catalogue</em>.
           </>
         }
-        lede="A live directory of the Vocational Training Institute's programmes — organised by track, with certification, practical component and entrepreneurial pathway for each. Applications open across cohorts throughout the year."
+        lede="Every programme at the Vocational Training Institute combines practical training with a route into an entrepreneurial cluster. Applications open by cohort through the year."
+        slot="vti-programmes-hero"
+        figure="Fig. — Session in the VTI computer lab · Yaoundé"
       />
 
-      <section className="section">
-        <div className="wrap">
-          <div className="sub-stats-grid" style={{ marginBottom: 48 }}>
-            {[
-              ["Categories", "04", "Digital · Agri · Craft · Hospitality", false],
-              ["Active programmes", "—", "Count updated per cohort", true],
-              ["Certification", "MINEFOP", "Recognition pending confirmation", true],
-              ["Cluster onboarding", "Included", "Every programme feeds a cluster", false],
-            ].map(([k, v, sub, tbc]) => (
-              <div key={k as string} style={{ background: "var(--paper)", padding: "24px 20px" }}>
-                <span className="meta">{k}</span>
-                <div style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.6rem", letterSpacing: "-0.03em", marginTop: 6 }}>
-                  {v}
-                  {tbc && <Tbc />}
-                </div>
-                <small style={{ color: "var(--muted)", fontSize: "0.82rem" }}>{sub}</small>
+      {featured && (
+        <section className="ed-featured">
+          <div className="wrap">
+            <a href={`/programmes/${featured.slug}`} className="ed-featured-card">
+              <MediaSlot slot="programme-vti" media={featured.heroImage} ratio="16:9" tone="dark" variant="compact" />
+              <div className="ed-featured-body">
+                <span className="meta">
+                  Featured · {featured.code} · {programmeStatus(featured).label}
+                </span>
+                <h2>{featured.name}</h2>
+                <p>{featured.summary}</p>
+                <span className="link-inline">
+                  Programme details <span className="arrow">→</span>
+                </span>
               </div>
-            ))}
+            </a>
           </div>
+        </section>
+      )}
 
+      <section className="section ed-directory">
+        <div className="wrap">
           <VtiProgrammeGrid programmes={programmes} />
 
           <div className="sub-split-card" style={{ marginTop: 64 }}>

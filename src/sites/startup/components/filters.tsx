@@ -3,7 +3,11 @@
 import { useState } from "react";
 import type { Mentor, Opportunity, Venture } from "@/platform/content/types";
 import { Tbc } from "@/ui/components/tbc";
+import { MediaSlot } from "@/ui/components/media-slot";
+
 import { trackEvent } from "@/platform/analytics";
+
+const LISTING_LABEL: Record<Venture["listingStatus"], string> = { pipeline: "Pipeline", active: "Active", alumni: "Alumni", exited: "Exited" };
 
 // Startup Centre directory components — chip filters + search mirroring
 // startup-mentors.html, startup-opportunities.html, startup-portfolio.html.
@@ -331,13 +335,14 @@ export function PortfolioDirectory({ ventures }: { ventures: Venture[] }) {
 
       <div className="pf-grid">
         {visible.map((v) => (
-          <article className="pf-card" key={v.id}>
+          <article className="pf-card pf-card--media" key={v.id}>
+            <MediaSlot slot="startup-portfolio" media={v.logo} ratio="16:9" variant="compact" className="pf-media" />
             <div className="pf-head">
               <div className="pf-logo">
                 {v.code}
                 <Tbc>tbc</Tbc>
               </div>
-              <span className="pf-status">Active</span>
+              <span className="pf-status">{LISTING_LABEL[v.listingStatus]}</span>
             </div>
             <h4>{v.name}</h4>
             <p>{v.description}</p>

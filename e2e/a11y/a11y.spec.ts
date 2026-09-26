@@ -23,6 +23,7 @@ const ROUTES: { name: string; url: string }[] = [
   { name: "vti-home", url: `${host("vti")}/` },
   { name: "vti-programmes", url: `${host("vti")}/programmes` },
   { name: "vti-clusters", url: `${host("vti")}/clusters` },
+  { name: "vti-programme-detail", url: `${host("vti")}/programmes/professional-growth-engineering` },
   { name: "vti-apply", url: `${host("vti")}/apply` },
   { name: "startup-home", url: `${host("startup")}/` },
   { name: "startup-programme", url: `${host("startup")}/programme` },

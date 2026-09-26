@@ -5,6 +5,7 @@ import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { SectionHeader } from "@/ui/components/section-header";
 import { Tbc } from "@/ui/components/tbc";
+import { MediaSlot } from "@/ui/components/media-slot";
 import { RelatedStrip } from "@/ui/components/strips";
 import type { Cluster } from "@/platform/content/types";
 
@@ -146,8 +147,7 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
               </ul>
             </div>
             <div className="feature-media">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/photos/nayokan-08.jpg" alt="VTI training environment." />
+              <MediaSlot slot="cluster-detail" media={cluster.heroImage} ratio="4:5" />
             </div>
           </div>
         </div>

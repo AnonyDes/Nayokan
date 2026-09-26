@@ -3,35 +3,10 @@
 import { useState } from "react";
 import type { Property } from "@/platform/content/types";
 import { Tbc } from "@/ui/components/tbc";
+import { MediaSlot } from "@/ui/components/media-slot";
 
 // Property card grid with type filter (hospitality-properties.html).
 const MONO = { fontFamily: "var(--font-mono)" } as const;
-
-function CardArt({ code, location, i }: { code: string; location: string; i: number }) {
-  return (
-    <div style={{ height: 200, background: "linear-gradient(135deg, var(--bone-2) 0%, var(--bone) 100%)", position: "relative", display: "flex", alignItems: "flex-end", padding: 20, overflow: "hidden" }}>
-      <div aria-hidden="true" style={{ position: "absolute", top: 24, left: 24, ...MONO, fontSize: "0.7rem", letterSpacing: "0.14em", color: "var(--muted)", textTransform: "uppercase" }}>
-        {code} · Photo tbc
-      </div>
-      <svg aria-hidden="true" viewBox="0 0 400 200" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-        <defs>
-          <pattern id={`hp${i}`} width="24" height="24" patternUnits="userSpaceOnUse">
-            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(10,10,10,0.05)" strokeWidth="1" />
-          </pattern>
-        </defs>
-        <rect width="400" height="200" fill={`url(#hp${i})`} />
-        <g fill="none" stroke="rgba(10,10,10,0.35)" strokeWidth="1">
-          <path d="M40 160 Q 40 90 100 90 Q 160 90 160 160 Z" />
-          <path d="M180 160 Q 180 90 240 90 Q 300 90 300 160 Z" />
-          <path d="M320 160 Q 320 110 360 110 Q 400 110 400 160" />
-        </g>
-      </svg>
-      <div style={{ position: "relative", fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.05rem", letterSpacing: "-0.02em", color: "var(--ink)" }}>
-        {location}
-      </div>
-    </div>
-  );
-}
 
 export function PropertyGrid({ properties }: { properties: Property[] }) {
   const types = [...new Set(properties.map((p) => p.type).filter((t): t is string => Boolean(t)))];
@@ -56,9 +31,9 @@ export function PropertyGrid({ properties }: { properties: Property[] }) {
       </div>
 
       <div className="pgrid">
-        {visible.map((p, i) => (
+        {visible.map((p) => (
           <article className="pcard" key={p.id} style={{ gridColumn: "span 1", minHeight: "auto", padding: 0 }}>
-            <CardArt code={p.code ?? "P/—"} location={p.location ?? "Yaoundé"} i={i} />
+            <MediaSlot slot="property" media={p.gallery[0]} ratio="3:2" tone="sand" variant="compact" />
             <div style={{ padding: 24 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingBottom: 12, borderBottom: "1px solid var(--line)", marginBottom: 12 }}>
                 <span style={{ ...MONO, fontSize: "0.72rem", color: "var(--muted)", letterSpacing: "0.14em" }}>{p.code}</span>

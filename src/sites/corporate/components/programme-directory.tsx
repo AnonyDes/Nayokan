@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 import type { Programme } from "@/platform/content/types";
-import { Tbc } from "@/ui/components/tbc";
-import { siteUrl } from "@/platform/sites/registry";
 import { trackEvent } from "@/platform/analytics";
+import { ProgrammeCard } from "@/ui/components/programme-card";
+import { programmeHref } from "@/sites/corporate/programme-href";
 
-// Programmes directory — filterable card grid (programmes.html).
-// Programme detail pages live on the owning site: VTI/Startup programmes link
-// cross-site via siteUrl(); corporate-world programmes link to the world page.
+// Programmes directory: filterable image-card grid (programmes.html).
 
 const FILTERS = [
   { label: "All divisions", world: undefined },
@@ -18,47 +16,17 @@ const FILTERS = [
   { label: "Hospitality", world: "hospitality" },
 ] as const;
 
-const WORLD_LABEL: Record<Programme["world"], string> = {
-  corporate: "Nayokan",
-  vti: "VTI",
-  startup: "Startup Centre",
-  venture_capital: "Venture Capital",
-  hospitality: "Hospitality",
-};
-
-function programmeHref(p: Programme): string {
-  if (p.site === "vti") return siteUrl("vti", `/programmes/${p.slug}`);
-  if (p.site === "startup") return siteUrl("startup", `/programme`);
-  return p.world === "hospitality" ? "/hospitality" : "/venture-capital";
-}
-
-function footText(p: Programme): { location: string; window: string; windowTbc: boolean } {
-  const windowText: Record<string, string> = {
-    "professional-growth-engineering": "Rolling · reviewed monthly",
-    "skills-for-industrialisation": "Cohort · Sept 2026",
-    "cluster-formation-programme": "Opens Q1 2027",
-    "innovation-commercialization": "Rolling · monthly review",
-    "university-research-commercialization": "Rolling",
-    "founder-fellowship": "Opens 2027",
-    "seed-ticket-programme": "Continuous",
-    "growth-co-investment-vehicle": "Structuring · 2027",
-    "long-stay-residency": "Continuous",
-  };
-  const tbcSlugs = new Set(["skills-for-industrialisation", "cluster-formation-programme", "founder-fellowship", "growth-co-investment-vehicle"]);
-  return {
-    location: p.location ?? "—",
-    window: windowText[p.slug] ?? (p.applicationOpen ? "Rolling" : "Upcoming"),
-    windowTbc: tbcSlugs.has(p.slug),
-  };
-}
-
 export function ProgrammeDirectory({ programmes }: { programmes: Programme[] }) {
   const [world, setWorld] = useState<(typeof FILTERS)[number]["world"]>(undefined);
   const [openOnly, setOpenOnly] = useState(false);
 
   const visible = programmes.filter(
-    (p) => (!world || p.world === world) && (!openOnly || p.status === "open"),
+    (p) => (!world || p.world === world) && (!openOnly || p.status === "open" || p.status === "closing_soon"),
   );
+  const reset = () => {
+    setWorld(undefined);
+    setOpenOnly(false);
+  };
 
   return (
     <>
@@ -66,11 +34,10 @@ export function ProgrammeDirectory({ programmes }: { programmes: Programme[] }) 
         {FILTERS.map((f) => (
           <button
             key={f.label}
-            className={`prog-directory-filter${world === f.world && !openOnly ? " active" : ""}`}
-            aria-pressed={world === f.world && !openOnly}
+            className={`prog-directory-filter${world === f.world ? " active" : ""}`}
+            aria-pressed={world === f.world}
             onClick={() => {
               setWorld(f.world);
-              setOpenOnly(false);
               trackEvent("filter", { site: "corporate", world: "corporate", list: "programmes", value: f.label });
             }}
           >
@@ -87,36 +54,25 @@ export function ProgrammeDirectory({ programmes }: { programmes: Programme[] }) 
         >
           Open only
         </button>
-        <span className="prog-count">
-          {visible.length} programmes · {visible.filter((p) => p.status === "open").length} open
+        <span className="prog-count" aria-live="polite">
+          {visible.length} of {programmes.length} shown
         </span>
       </div>
 
-      <div className="prog-directory-grid">
-        {visible.map((p) => {
-          const foot = footText(p);
-          return (
-            <a key={p.id} href={programmeHref(p)} className="prog-directory-card">
-              <div className="head">
-                <span className="world">
-                  {p.code} · {WORLD_LABEL[p.world]}
-                </span>
-                <span className={`status${p.status === "open" ? "" : " upcoming"}`}>
-                  {p.status === "open" ? "● Open" : "○ Upcoming"}
-                </span>
-              </div>
-              <h3>{p.name}</h3>
-              <p>{p.summary}</p>
-              <div className="foot">
-                <span>{foot.location}</span>
-                <span>
-                  {foot.window} {foot.windowTbc && <Tbc />}
-                </span>
-              </div>
-            </a>
-          );
-        })}
-      </div>
+      {visible.length > 0 ? (
+        <div className="ed-grid">
+          {visible.map((p) => (
+            <ProgrammeCard key={p.id} programme={p} href={programmeHref(p)} showWorld />
+          ))}
+        </div>
+      ) : (
+        <div className="ed-empty">
+          <p>No programmes match these filters.</p>
+          <button type="button" className="link-inline" onClick={reset}>
+            Show all programmes <span className="arrow">→</span>
+          </button>
+        </div>
+      )}
     </>
   );
 }

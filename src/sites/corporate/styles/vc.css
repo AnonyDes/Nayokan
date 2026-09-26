@@ -293,3 +293,10 @@ body[data-world="vc"] .related-card { background: var(--navy); color: var(--pape
 body[data-world="vc"] .related-card:hover { background: var(--paper); color: var(--navy); }
 body[data-world="vc"] .related-card .meta { color: var(--muted-invert); }
 body[data-world="vc"] .related-card:hover .meta { color: var(--navy); opacity: 0.6; }
+
+/* The mobile menu panel is white: keep its text ink on navy pages (was
+   inheriting the body's white text and rendering invisible links). */
+body[data-world="vc"] .nav-mobile-panel { color: var(--ink); }
+body[data-world="vc"] .nav-mobile-panel .lang-toggle { border-color: var(--line-strong); }
+body[data-world="vc"] .nav-mobile-panel .lang-toggle button { color: var(--muted); }
+body[data-world="vc"] .nav-mobile-panel .lang-toggle button.active { background: var(--ink); color: var(--paper); }

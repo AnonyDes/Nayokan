@@ -5,6 +5,7 @@ import { getContentRepository } from "@/platform/content";
 import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
 import { Tbc } from "@/ui/components/tbc";
+import { MediaSlot } from "@/ui/components/media-slot";
 import { RelatedStrip } from "@/ui/components/strips";
 import { VcEnquiryForm } from "@/sites/corporate/components/vc";
 
@@ -71,14 +72,14 @@ export default async function VentureCapital() {
         figure={
           <div className="vc-hero-panel">
             <div className="vc-hero-panel-head">
-              <span>Fund overview · v1.0</span>
-              <span className="live">Live</span>
+              <span>Fund structure · working draft</span>
+              <Tbc onDark>content to be confirmed</Tbc>
             </div>
             {[
-              ["Stage focus", "Seed · Growth", false],
-              ["Geographic", "Cameroon · CEMAC", false],
+              ["Stage focus", "Seed · Growth", true],
+              ["Geographic", "Cameroon · CEMAC", true],
               ["Ticket range", "— — —", true],
-              ["Sectors", "Agri · Tech · Prod.", false],
+              ["Sectors", "Agri · Tech · Prod.", true],
               ["Portfolio", "— — —", true],
             ].map(([label, val, tbc]) => (
               <div className="vc-hero-metric" key={label as string}>
@@ -89,14 +90,8 @@ export default async function VentureCapital() {
                 </span>
               </div>
             ))}
-            <div className="vc-hero-chart" aria-hidden="true">
-              {[22, 34, 48, 62, 78, 92, 71, 58].map((h, i) => (
-                <div
-                  key={i}
-                  className={`bar${i < 2 ? " faded" : i === 4 || i === 5 ? " accent" : ""}`}
-                  style={{ height: `${h}%` }}
-                />
-              ))}
+            <div className="vc-hero-photo">
+              <MediaSlot slot="vc-hero" ratio="16:9" tone="navy" variant="compact" />
             </div>
           </div>
         }
@@ -147,7 +142,7 @@ export default async function VentureCapital() {
                 and portfolio.
               </>
             }
-            lead="A working view of ventures in review or portfolio. Full financial detail is published only after venture and investor consent."
+            lead={<>Illustrative entries only: named ventures are published once each venture consents. Financial detail is never shown without investor and venture consent. <Tbc onDark>content to be confirmed</Tbc></>}
             
           />
           <div className="vc-table">

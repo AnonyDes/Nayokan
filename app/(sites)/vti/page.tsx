@@ -61,7 +61,7 @@ export default async function VtiHome() {
           <>
             <figure className="world-hero-figure">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/photos/nayokan-06.jpg" alt="Nayokan Vocational Training Institute inauguration, Yaoundé." />
+              <img src="/assets/photos/nayokan-06.jpg" alt="Nayokan leadership and staff at the launch of the VTI computer lab, Yaoundé." />
               <figcaption>
                 Nayokan VTI · Inauguration · Yaoundé, 2024. <Tbc onDark>date tbc</Tbc>
               </figcaption>
@@ -92,18 +92,18 @@ export default async function VtiHome() {
         <div className="vti-strip-inner">
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/photos/nayokan-08.jpg" alt="Nayokan trainees at computer lab." />
-            <figcaption>001 · Training Lab</figcaption>
+            <img src="/assets/photos/nayokan-08.jpg" alt="Trainees in a session at the Nayokan VTI computer lab, Yaoundé." />
+            <figcaption>001 · Computer lab session</figcaption>
           </figure>
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/photos/nayokan-01.jpg" alt="Nayokan members at inauguration." />
-            <figcaption>002 · Institute Launch</figcaption>
+            <img src="/assets/photos/nayokan-01.jpg" alt="Nayokan leadership and staff at the launch of the VTI computer lab." />
+            <figcaption>002 · Computer lab launch</figcaption>
           </figure>
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/photos/nayokan-05.jpg" alt="Nayokan leadership." />
-            <figcaption>003 · Handover Ceremony</figcaption>
+            <img src="/assets/photos/nayokan-05.jpg" alt="Nayokan leadership and staff in the VTI computer lab." />
+            <figcaption>003 · Nayokan leadership at the lab</figcaption>
           </figure>
         </div>
       </section>
