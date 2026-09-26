@@ -41,3 +41,9 @@ Nothing below may be presented publicly as fact until confirmed. Until then it s
 - Nayokan System stage wording (Build Capability… vs Capability…). Implementation uses the prompt/Spec wording: Build Capability, Organize Production, Create Demand, Commercialize Innovation, Mobilize Capital, Build Productive Assets.
 - Response-time promises (24h, one business day, 5–10 business days, 4 weeks) differ between forms.
 - Reference number formats. Implementation: `APP/<SITE>/<YYYY>/<NNNN>`, `ENQ/<SITE>/<YYYY>/<NNNN>`.
+
+## Photography (added September 2026)
+- The only approved photographs are the nine taken at the launch of the VTI computer lab in Yaoundé (`public/assets/photos/nayokan-0*.jpg`). Generated images that had replaced them were removed; see `docs/architecture/ux-refinement-2026-09.md` §0.
+- Every other photographic slot renders an art-directed placeholder. The shot list, with role, subject, location, composition, ratio and treatment for each slot, is `src/ui/media/image-briefs.ts`. Supplying a photograph means adding it as that slot's `asset` (or as a CMS media override); layouts do not change.
+- Four Worlds headlines and activity lists on the home page and What We Do are directional and flagged CONTENT TO BE CONFIRMED (`src/platform/content/worlds.ts`).
+- Venture Capital fund structure (stage focus, geography, sectors) is now flagged as unconfirmed, and the pipeline table is labelled illustrative.
