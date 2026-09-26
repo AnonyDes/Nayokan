@@ -6,6 +6,7 @@ import { getContentRepository } from "@/platform/content";
 import { SiteNav } from "@/ui/components/site-nav";
 import { SiteFooter } from "@/ui/components/site-footer";
 import { WorldScope } from "@/ui/components/world-scope";
+import { WorldTransition } from "@/ui/components/world-transition";
 
 const SITE = "corporate" as const;
 
@@ -26,6 +27,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
       <SiteNav items={nav.primary} cta={nav.cta} homeHref="/" homeLabel="NAYOKAN" siteId={SITE} />
       <main id="main" tabIndex={-1}>{children}</main>
       <SiteFooter nav={nav} settings={settings} />
+      <WorldTransition />
     </div>
   );
 }

@@ -7,6 +7,8 @@ import { SectionHeader } from "@/ui/components/section-header";
 import { SystemSection } from "@/sites/corporate/components/system-section";
 import { ImpactCell } from "@/sites/corporate/components/metrics";
 import { CtaBand } from "@/ui/components/strips";
+import { MediaSlot } from "@/ui/components/media-slot";
+import { FourWorlds } from "@/ui/components/four-worlds";
 
 export const metadata: Metadata = {
   title: "Nayokan — Building people, enterprises and productive systems for Cameroon.",
@@ -50,49 +52,49 @@ export default async function Home() {
               — connecting human capability to productive enterprise across four institutional worlds.
             </p>
             <div className="hero-actions reveal d3">
-              <a href="#what-we-do" className="btn btn-primary">
+              <a href="/what-we-do" className="btn btn-primary">
                 Explore what we do
                 <span className="arrow" aria-hidden="true">
                   →
                 </span>
               </a>
-              <a href="#cta" className="btn btn-ghost">
+              <a href="/partners" className="btn btn-ghost">
                 Partner with Nayokan
               </a>
             </div>
-            <div className="hero-worlds reveal d4">
-              <span className="meta">Four worlds ·</span>
+            <nav className="hero-worlds reveal d4" aria-label="The four worlds">
+              <span className="meta">Four worlds</span>
               <ol>
                 <li>
-                  <span>01</span> VTI
+                  <a href={siteUrl("vti")} data-world-transition="vti">
+                    <span>01</span> VTI ↗
+                  </a>
                 </li>
                 <li>
-                  <span>02</span> Startup Centre
+                  <a href={siteUrl("startup")} data-world-transition="startup">
+                    <span>02</span> Startup Centre ↗
+                  </a>
                 </li>
                 <li>
-                  <span>03</span> Venture Capital
+                  <a href="/venture-capital">
+                    <span>03</span> Venture Capital
+                  </a>
                 </li>
                 <li>
-                  <span>04</span> Hospitality
+                  <a href="/hospitality">
+                    <span>04</span> Hospitality
+                  </a>
                 </li>
               </ol>
-            </div>
+            </nav>
           </div>
           <div className="hero-right">
-            <figure className="hero-figure reveal">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/photos/nayokan-06.jpg"
-                alt="Nayokan Association members at the Vocational Training Institute inauguration, Yaoundé."
-              />
-              <figcaption>
+            <div className="hero-figure reveal">
+              <MediaSlot slot="home-hero" fill eager tone="dark" />
+              <div className="hero-figure-cap">
                 <span className="meta">Fig. 001 —</span>
-                Nayokan Vocational Training Institute · Inauguration · Yaoundé.
-              </figcaption>
-            </figure>
-            <div className="hero-mark" aria-hidden="true">
-              <span className="meta">N/A</span>
-              <span className="hero-mark-num">01 / 04</span>
+                Nayokan VTI computer lab · Yaoundé
+              </div>
             </div>
           </div>
         </div>
@@ -108,12 +110,51 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* THE IDEA */}
+      {/* WHAT NAYOKAN IS */}
+      <section className="about-intro section">
+        <div className="wrap">
+          <div className="about-intro-grid">
+            <div className="about-intro-copy">
+              <span className="meta-num">§ 01 — What Nayokan is</span>
+              <h2 className="about-intro-title reveal">
+                A Cameroonian development institution building the whole chain, not one link.
+              </h2>
+              <p className="about-intro-lede reveal d1">
+                Nayokan brings vocational training, a startup centre, venture capital and productive
+                hospitality assets under one institution, so that people, enterprises and capital
+                grow together rather than in isolated programmes.
+              </p>
+              <dl className="about-intro-facts reveal d2">
+                <div>
+                  <dt>Institution</dt>
+                  <dd>One</dd>
+                </div>
+                <div>
+                  <dt>Worlds</dt>
+                  <dd>Four</dd>
+                </div>
+                <div>
+                  <dt>System stages</dt>
+                  <dd>Six</dd>
+                </div>
+              </dl>
+              <a href="/about" className="link-inline reveal d3">
+                About Nayokan <span className="arrow">→</span>
+              </a>
+            </div>
+            <div className="about-intro-media reveal d1">
+              <MediaSlot slot="home-about" ratio="4:3" caption />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY SYSTEMS MATTER */}
       <section className="idea section">
         <div className="wrap">
           <div className="idea-grid">
             <div className="idea-left">
-              <span className="meta">§ 01 — The Idea</span>
+              <span className="meta">§ 02 — Why systems matter</span>
             </div>
             <div className="idea-right">
               <p className="idea-statement reveal">
@@ -134,11 +175,11 @@ export default async function Home() {
       {/* THE NAYOKAN SYSTEM — sticky scroll */}
       <SystemSection />
 
-      {/* FOUR WORLDS */}
-      <section className="worlds section" id="worlds">
+      {/* FOUR WORLDS: the ecosystem's visual anchor */}
+      <section className="worlds-anchor" id="worlds">
         <div className="wrap">
           <SectionHeader
-            num="§ 03 — Four Worlds"
+            num="§ 04 — Four Worlds"
             title={
               <>
                 One institution.
@@ -146,160 +187,12 @@ export default async function Home() {
                 Four distinct worlds.
               </>
             }
-            lead="Each Nayokan division carries its own personality and focus, but shares the same institutional standards and connects into the same productive system."
+            lead="Each world has its own character and its own front door, and all four share the same institutional standards and the same productive system."
           />
-          <div className="worlds-grid">
-            <a href={siteUrl("vti")} className="world world-vti">
-              <div className="world-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/photos/nayokan-08.jpg"
-                  alt="Trainees at the Nayokan Vocational Training Institute computer lab."
-                />
-              </div>
-              <div className="world-content">
-                <div className="world-index">
-                  <span className="meta">World 01</span>
-                  <span className="meta world-personality">Practical · Human · Energetic</span>
-                </div>
-                <h3 className="world-title">Vocational Training Institute</h3>
-                <p className="world-desc">
-                  Practical skills, certification and entrepreneurial clusters — the foundation of
-                  productive capability.
-                </p>
-                <span className="link-inline">
-                  Enter VTI <span className="arrow">→</span>
-                </span>
-              </div>
-            </a>
-
-            <a href={siteUrl("startup")} className="world world-startup">
-              <div className="world-media">
-                <div className="world-diagram" aria-hidden="true">
-                  <svg viewBox="0 0 400 280" width="100%" height="100%">
-                    <defs>
-                      <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(10,10,10,0.06)" strokeWidth="1" />
-                      </pattern>
-                    </defs>
-                    <rect width="400" height="280" fill="url(#grid)" />
-                    <g stroke="#0A0A0A" strokeWidth="1.4" fill="none">
-                      <circle cx="60" cy="80" r="8" fill="#12B82A" />
-                      <circle cx="180" cy="60" r="6" />
-                      <circle cx="180" cy="150" r="6" />
-                      <circle cx="300" cy="100" r="6" />
-                      <circle cx="300" cy="200" r="6" />
-                      <circle cx="360" cy="150" r="12" fill="#0A0A0A" />
-                      <line x1="68" y1="80" x2="174" y2="60" />
-                      <line x1="68" y1="80" x2="174" y2="150" />
-                      <line x1="186" y1="60" x2="294" y2="100" />
-                      <line x1="186" y1="150" x2="294" y2="100" />
-                      <line x1="186" y1="150" x2="294" y2="200" />
-                      <line x1="306" y1="100" x2="348" y2="150" />
-                      <line x1="306" y1="200" x2="348" y2="150" />
-                    </g>
-                    <text x="20" y="270" fontFamily="IBM Plex Mono" fontSize="10" fill="rgba(10,10,10,0.5)" letterSpacing="2">
-                      IDEA → VALIDATION → COMMERCIALIZATION
-                    </text>
-                  </svg>
-                </div>
-              </div>
-              <div className="world-content">
-                <div className="world-index">
-                  <span className="meta">World 02</span>
-                  <span className="meta world-personality">Innovative · Experimental</span>
-                </div>
-                <h3 className="world-title">Startup Centre</h3>
-                <p className="world-desc">
-                  University innovation, commercialization and venture creation. Where research becomes
-                  enterprise.
-                </p>
-                <span className="link-inline">
-                  Enter Startup Centre <span className="arrow">→</span>
-                </span>
-              </div>
-            </a>
-
-            <a href="/venture-capital" className="world world-vc">
-              <div className="world-media">
-                <div className="vc-panel" aria-hidden="true">
-                  <div className="vc-panel-row">
-                    <span>Ticket size</span>
-                    <span className="mono">
-                      — — —<Tbc onDark />
-                    </span>
-                  </div>
-                  <div className="vc-panel-row">
-                    <span>Stage focus</span>
-                    <span className="mono">Seed · Growth</span>
-                  </div>
-                  <div className="vc-panel-row">
-                    <span>Sectors</span>
-                    <span className="mono">Agri · Tech · Prod.</span>
-                  </div>
-                  <div className="vc-panel-row">
-                    <span>Portfolio</span>
-                    <span className="mono">
-                      — — —<Tbc onDark />
-                    </span>
-                  </div>
-                  <div className="vc-panel-row">
-                    <span>Geographic</span>
-                    <span className="mono">Cameroon · Region</span>
-                  </div>
-                  <div className="vc-panel-viz">
-                    {[24, 38, 52, 72, 88, 64].map((h, i) => (
-                      <div key={i} className="vc-bar" style={{ height: `${h}%` }} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="world-content">
-                <div className="world-index">
-                  <span className="meta on-dark">World 03</span>
-                  <span className="meta on-dark world-personality">Analytical · Institutional</span>
-                </div>
-                <h3 className="world-title on-dark">Venture Capital</h3>
-                <p className="world-desc on-dark" style={{ color: "var(--muted-invert)" }}>
-                  Capital pathways, investment readiness and venture growth for enterprises with
-                  productive potential.
-                </p>
-                <span className="link-inline on-dark">
-                  Enter Venture Capital <span className="arrow">→</span>
-                </span>
-              </div>
-            </a>
-
-            <a href="/hospitality" className="world world-hospitality">
-              <div className="world-media">
-                <div className="hosp-illust" aria-hidden="true">
-                  <div className="hosp-swatch" />
-                  <div className="hosp-detail">
-                    <span className="meta">Property 001</span>
-                    <div className="hosp-detail-title">
-                      Guesthouse
-                      <br />
-                      Yaoundé
-                    </div>
-                    <div className="hosp-detail-tag">Productive Asset · Hospitality</div>
-                  </div>
-                </div>
-              </div>
-              <div className="world-content">
-                <div className="world-index">
-                  <span className="meta">World 04</span>
-                  <span className="meta world-personality">Refined · Calm · Premium</span>
-                </div>
-                <h3 className="world-title">Hospitality</h3>
-                <p className="world-desc">
-                  Refined properties, guesthouses and long-term productive assets — hospitality as
-                  economic infrastructure.
-                </p>
-                <span className="link-inline">
-                  Enter Hospitality <span className="arrow">→</span>
-                </span>
-              </div>
-            </a>
+          <FourWorlds variant="home" />
+          <div className="worlds-anchor-foot">
+            <span>VTI and Startup Centre open as dedicated Nayokan sites</span>
+            <a href="/what-we-do">The full ecosystem map →</a>
           </div>
         </div>
       </section>
@@ -308,12 +201,13 @@ export default async function Home() {
       <section className="programmes section bg-bone">
         <div className="wrap">
           <SectionHeader
-            num="§ 04 — Flagship Programmes"
+            num="§ 05 — Flagship Programmes"
             title="Programmes currently in motion."
             lead="A selection of programmes across the Nayokan ecosystem. Full details, dates and application windows are managed inside each division."
           />
           <div className="prog-grid">
             <article className="prog-card reveal">
+              <MediaSlot slot="programme-vti" ratio="3:2" variant="compact" className="prog-media" />
               <div className="prog-tag">
                 <span className="meta">VTI · Vocational</span>
                 <span className="prog-status open">● Open</span>
@@ -322,7 +216,7 @@ export default async function Home() {
               <p className="prog-desc">
                 Practical skills training for young Cameroonians combined with an entrepreneurial
                 cluster model — ensuring graduates are not only knowledgeable but capable of creating
-                impactful job solutions and opportunities. <Tbc>source: Nayokan brief</Tbc>
+                impactful job solutions and opportunities.
               </p>
               <div className="prog-meta">
                 <div>
@@ -342,6 +236,7 @@ export default async function Home() {
             </article>
 
             <article className="prog-card reveal d1 prog-card-featured">
+              <MediaSlot slot="programme-startup" ratio="3:2" variant="compact" tone="dark" className="prog-media" />
               <div className="prog-tag">
                 <span className="meta on-dark">Startup Centre</span>
                 <span className="prog-status on-dark open">● Open</span>
@@ -349,8 +244,7 @@ export default async function Home() {
               <h3 className="prog-title on-dark">Innovation Commercialization — Industry Application Focus</h3>
               <p className="prog-desc on-dark" style={{ color: "var(--muted-invert)" }}>
                 An industry-application-focused programme helping ventures and innovations move from
-                research to validated commercial product, with mentorship and market access.{" "}
-                <Tbc onDark>source: Nayokan brief</Tbc>
+                research to validated commercial product, with mentorship and market access.
               </p>
               <div className="prog-meta on-dark">
                 <div>
@@ -361,7 +255,9 @@ export default async function Home() {
                 </div>
                 <div>
                   <span className="meta on-dark">Partners</span>
-                  <span>Universities · Industry</span>
+                  <span>
+                    Universities · Industry <Tbc onDark />
+                  </span>
                 </div>
               </div>
               <a href={siteUrl("startup")} className="link-inline on-dark">
@@ -370,6 +266,7 @@ export default async function Home() {
             </article>
 
             <article className="prog-card reveal d2">
+              <MediaSlot slot="vti-clusters-hero" ratio="3:2" variant="compact" className="prog-media" />
               <div className="prog-tag">
                 <span className="meta">VTI · Enterprise</span>
                 <span className="prog-status upcoming">○ Upcoming</span>
@@ -377,8 +274,7 @@ export default async function Home() {
               <h3 className="prog-title">Entrepreneurial Clusters</h3>
               <p className="prog-desc">
                 Structured groups where graduates and enterprises collaborate around a common
-                productive activity — sharing tools, market access and support.{" "}
-                <Tbc>source: Nayokan brief</Tbc>
+                productive activity — sharing tools, market access and support.
               </p>
               <div className="prog-meta">
                 <div>
@@ -389,7 +285,9 @@ export default async function Home() {
                 </div>
                 <div>
                   <span className="meta">Format</span>
-                  <span>In-person + Mentoring</span>
+                  <span>
+                    In-person + mentoring <Tbc />
+                  </span>
                 </div>
               </div>
               <a href={siteUrl("vti")} className="link-inline">
@@ -409,7 +307,7 @@ export default async function Home() {
       <section className="impact section" id="impact">
         <div className="wrap">
           <SectionHeader
-            num="§ 05 — Impact"
+            num="§ 06 — Impact"
             title="Evidence over exaggeration."
             lead="We only publish verified figures. Where a metric is being reconciled with our divisions, we mark it as such rather than overstating."
           />
@@ -431,32 +329,32 @@ export default async function Home() {
       <section className="stories section bg-bone">
         <div className="wrap">
           <SectionHeader
-            num="§ 06 — Stories"
+            num="§ 07 — Stories"
             title="Ideas becoming enterprises."
             lead="The Nayokan ecosystem in practice — the people, ventures and moments that connect capability to production."
           />
           <div className="stories-grid">
             {stories[0] && (
               <a href={`/insights/${stories[0].slug}`} className="story story-featured reveal">
-                <figure>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={stories[0].cover?.src ?? "/assets/photos/nayokan-01.jpg"} alt={stories[0].cover?.alt ?? ""} />
-                  <figcaption>
+                <div className="story-featured-frame">
+                  <MediaSlot slot="story-startup" media={stories[0].cover} fill tone="dark" variant="compact" />
+                  <div className="story-featured-cap">
                     <span className="meta">Story 001 · Nayokan Association</span>
                     <h3>{stories[0].title}</h3>
                     <p className="story-lede">{stories[0].excerpt}</p>
                     <span className="link-inline on-dark">
                       Read the story <span className="arrow">→</span>
                     </span>
-                  </figcaption>
-                </figure>
+                  </div>
+                </div>
               </a>
             )}
             <div className="stories-side">
               {stories.slice(1).map((s, i) => (
                 <a key={s.id} href={`/insights/${s.slug}`} className={`story story-small reveal d${i + 1}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.cover?.src ?? "/assets/photos/nayokan-04.jpg"} alt={s.cover?.alt ?? ""} />
+                  <div className="story-small-media">
+                    <MediaSlot slot="story-startup" media={s.cover} fill variant="compact" />
+                  </div>
                   <div className="story-small-body">
                     <span className="meta">Story {String(i + 2).padStart(3, "0")}</span>
                     <h4>{s.title}</h4>
@@ -474,7 +372,7 @@ export default async function Home() {
         <div className="wrap">
           <div className="partners-inner">
             <div className="partners-head">
-              <span className="meta-num">§ 07 — Partners</span>
+              <span className="meta-num">§ 08 — Partners</span>
               <h2>Institutional partners across the ecosystem.</h2>
               <p className="lead">
                 Universities, ministries, development organizations and private sector — approved
@@ -494,7 +392,7 @@ export default async function Home() {
 
       {/* FINAL CTA */}
       <CtaBand
-        sec="§ 08 — Build with us"
+        sec="§ 09 — Build with us"
         title={
           <>
             Build the next

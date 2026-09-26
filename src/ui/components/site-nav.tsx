@@ -16,12 +16,15 @@ export function SiteNav({
   homeHref = "/",
   homeLabel = "NAYOKAN",
   siteId = "corporate",
+  ecosystem,
 }: {
   items: NavItem[];
   cta?: Cta;
   homeHref?: string;
   homeLabel?: string;
   siteId?: SiteId;
+  /** Sub-sites: thin bar above the nav that ties the site back to Nayokan. */
+  ecosystem?: { href: string; label: string };
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -99,8 +102,18 @@ export function SiteNav({
     return () => document.removeEventListener("keydown", onKey);
   }, [open, close]);
 
-  const isActive = (item: NavItem) =>
-    !item.crossSite && (item.href === "/" ? pathname === "/" : pathname.startsWith(item.href));
+  // Compare paths, not raw hrefs: a sub-site's home link ("/" on its own
+  // domain, "/vti" on preview hosts) must only be active on that exact page,
+  // never as a prefix of every other page.
+  const homePath = toPath(homeHref);
+  const isActive = (item: NavItem) => {
+    if (item.crossSite) return false;
+    const target = toPath(item.href);
+    if (target === homePath || target === "/") return pathname === target;
+    return pathname === target || pathname.startsWith(`${target}/`);
+  };
+  // Corporate links into VTI / Startup Centre play the world-entry transition.
+  const transitionFor = (item: NavItem) => (siteId === "corporate" && item.crossSite ? worldOf(item.href) : undefined);
 
   const langToggle = (
     <div className="lang-toggle" role="group" aria-label="Language">
@@ -121,7 +134,18 @@ export function SiteNav({
 
   return (
     <>
-      <header className={`nav${scrolled ? " scrolled" : ""}`} role="banner">
+      <header className={`nav${scrolled ? " scrolled" : ""}${ecosystem ? " nav--eco" : ""}`} role="banner">
+        {ecosystem && (
+          <div className="eco-bar">
+            <div className="eco-bar-inner">
+              <span className="eco-bar-mark">A Nayokan institution</span>
+              <a href={ecosystem.href} onClick={(e) => handlePreviewClick(e, ecosystem.href)}>
+                ← {ecosystem.label}
+                <span className="eco-bar-note"> · the Nayokan ecosystem</span>
+              </a>
+            </div>
+          </div>
+        )}
         <div className="nav-inner">
           <a href={homeHref} className="nav-logo" aria-label="Nayokan — home" onClick={(e) => handlePreviewClick(e, homeHref)}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -135,6 +159,7 @@ export function SiteNav({
                 href={item.href}
                 className={`nav-link${isActive(item) ? " active" : ""}`}
                 aria-current={isActive(item) ? "page" : undefined}
+                data-world-transition={transitionFor(item)}
                 onClick={(e) => handlePreviewClick(e, item.href)}
               >
                 {item.label}
@@ -183,6 +208,7 @@ export function SiteNav({
               key={item.id}
               href={item.href}
               aria-current={isActive(item) ? "page" : undefined}
+              data-world-transition={transitionFor(item)}
               onClick={(e) => handlePreviewClick(e, item.href)}
             >
               <span>
@@ -245,4 +271,25 @@ export function SiteNav({
       </aside>
     </>
   );
+}
+
+function toPath(href: string): string {
+  try {
+    const p = new URL(href, "http://nayokan.local").pathname;
+    return p.length > 1 ? p.replace(/\/+$/, "") : p;
+  } catch {
+    return href;
+  }
+}
+
+/** Which sub-site a cross-site href points at (subdomain or preview path). */
+function worldOf(href: string): "vti" | "startup" | undefined {
+  try {
+    const u = new URL(href, "http://nayokan.local");
+    if (u.hostname.startsWith("vti.") || u.pathname === "/vti" || u.pathname.startsWith("/vti/")) return "vti";
+    if (u.hostname.startsWith("startup.") || u.pathname === "/startup" || u.pathname.startsWith("/startup/")) return "startup";
+  } catch {
+    // fall through
+  }
+  return undefined;
 }

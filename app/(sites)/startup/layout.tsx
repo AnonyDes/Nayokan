@@ -21,7 +21,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteNav items={nav.primary} cta={nav.cta} homeHref={siteUrl(SITE)} homeLabel="NAYOKAN · STARTUP" siteId={SITE} />
+      <SiteNav items={nav.primary} cta={nav.cta} homeHref={siteUrl(SITE)} homeLabel="NAYOKAN · STARTUP" siteId={SITE} ecosystem={{ href: siteUrl("corporate"), label: "nayokan.org" }} />
       <main id="main" tabIndex={-1}>{children}</main>
       <SiteFooter nav={nav} settings={settings} />
     </div>

@@ -122,7 +122,7 @@ export function SystemSection() {
     <section className="system bg-ink" id="what-we-do" ref={sectionRef}>
       <div className="system-header wrap">
         <div>
-          <span className="meta on-dark">§ 02 — The Nayokan System</span>
+          <span className="meta on-dark">§ 03 — The Nayokan System</span>
           <h2 className="on-dark" style={{ marginTop: 16 }}>
             Six stages. One connected pathway.
           </h2>
