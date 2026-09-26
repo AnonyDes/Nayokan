@@ -27,12 +27,20 @@ const demo = (unconfirmedFields: string[] = []): Provenance => ({
   unconfirmedFields,
 });
 
+// Real Nayokan photographs (VTI computer-lab launch, Yaoundé). 01–05 are
+// portrait 563x1000; 06–08 landscape 1024x768. No other photography exists
+// yet: never reference generated or stock images here.
+const PHOTO_SIZE: Record<string, [number, number]> = {
+  "nayokan-06.jpg": [1024, 768],
+  "nayokan-07.jpg": [1024, 768],
+  "nayokan-08.jpg": [1024, 768],
+};
 const photo = (id: string, file: string, alt: string, caption?: string) => ({
   id,
   src: `/assets/photos/${file}`,
   alt,
-  width: 1600,
-  height: 1000,
+  width: PHOTO_SIZE[file]?.[0] ?? 563,
+  height: PHOTO_SIZE[file]?.[1] ?? 1000,
   caption,
 });
 
@@ -763,11 +771,7 @@ export const properties: Property[] = [
       },
     ],
     amenities: ["06 rooms", "Boutique", "24h reception", "Working library"],
-    gallery: [
-      photo("m-gh-1", "hospitality/prop-guesthouse-ext.jpg", "The Nayokan Guesthouse exterior garden courtyard, Bastos, Yaoundé."),
-      photo("m-gh-2", "hospitality/prop-guesthouse-room.jpg", "The Nayokan Guesthouse refined guest room."),
-      photo("m-gh-3", "hospitality/prop-guesthouse-lib.jpg", "The Nayokan Guesthouse working library."),
-    ],
+    gallery: [], // No approved photography yet; pages render the property image brief.
     provenance: demo(["amenities"]),
   },
   {
@@ -780,9 +784,7 @@ export const properties: Property[] = [
     summary:
       "Extended-stay apartments for corporate visitors, embassy secondments and multi-week research trips. Serviced, professional, quiet.",
     amenities: ["04 units", "14-night min.", "Weekly housekeeping", "Workspace"],
-    gallery: [
-      photo("m-ls-1", "hospitality/prop-residence.jpg", "Long-stay serviced residence apartment, Nsimeyong, Yaoundé."),
-    ],
+    gallery: [], // No approved photography yet; pages render the property image brief.
     provenance: demo(["amenities"]),
   },
   {
@@ -795,9 +797,7 @@ export const properties: Property[] = [
     summary:
       "Dedicated meeting and event rooms for Nayokan cohorts, partner visits and workshops. Available to external partners on request.",
     amenities: ["60 capacity", "Boardroom + event", "On request", "Catering"],
-    gallery: [
-      photo("m-ws-1", "hospitality/prop-workspace.jpg", "Workspace & Reception boardroom facility, Central Yaoundé."),
-    ],
+    gallery: [], // No approved photography yet; pages render the property image brief.
     provenance: demo(["amenities"]),
   },
 ];
@@ -957,12 +957,7 @@ export const articles: Article[] = [
       "2026-08-20",
       7,
     ),
-    cover: photo(
-      "m-art-011",
-      "nayokan-04.jpg",
-      "Nayokan leadership and innovation team.",
-      "Fig. 001 — Startup Centre steering committee review session.",
-    ),
+    // No approved Startup Centre photography yet; the article renders its image brief.
     body: [
       {
         type: "paragraph",
@@ -1088,7 +1083,7 @@ export const stories: Story[] = [
     excerpt:
       "A documentary look at the launch of VTI and the first cohort of trainees to walk through its doors.",
     type: "cohort",
-    cover: photo("m-story-001", "nayokan-06.jpg", "Nayokan VTI inauguration."),
+    cover: photo("m-story-001", "nayokan-06.jpg", "Nayokan leadership and staff at the launch of the VTI computer lab, Yaoundé."),
     provenance: demo(),
   },
   {
@@ -1099,7 +1094,7 @@ export const stories: Story[] = [
     title: "The training lab in operation — day one.",
     excerpt: "First cohort onboarding session inside the VTI computer lab.",
     type: "beneficiary",
-    cover: photo("m-story-002", "nayokan-08.jpg", "VTI trainees at computer lab."),
+    cover: photo("m-story-002", "nayokan-08.jpg", "Trainees in a session at the Nayokan VTI computer lab, Yaoundé."),
     provenance: demo(),
   },
   {
@@ -1110,7 +1105,6 @@ export const stories: Story[] = [
     title: "Building a commercialization playbook for Central Africa.",
     excerpt: "How the Startup Centre structures the path from research to market.",
     type: "enterprise",
-    cover: photo("m-story-003", "nayokan-04.jpg", "Nayokan leadership."),
     provenance: demo(),
   },
 ];
