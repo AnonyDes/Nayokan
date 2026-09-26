@@ -20,6 +20,7 @@ export interface ImageAsset {
   /** CSS object-position, for art-directed crops of the same file. */
   position?: string;
   caption?: string;
+  isIllustrative?: boolean;
 }
 
 export interface ImageBrief {
@@ -33,6 +34,7 @@ export interface ImageBrief {
   ratio: ImageRatio;
   treatment: string;
   asset?: ImageAsset;
+  illustrative?: ImageAsset;
 }
 
 const LAB_SESSION: ImageAsset = {
@@ -97,6 +99,14 @@ const briefs = {
     composition: "Over-the-shoulder on the prototype, whiteboard or bench behind",
     ratio: "16:9",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/world-startup.jpg",
+      alt: "Cameroonian student founders testing a hardware prototype on a workbench with a mentor in Yaoundé.",
+      width: 1792,
+      height: 1024,
+      isIllustrative: true,
+      caption: "Startup Centre · Prototyping workshop",
+    },
   },
   "world-vc": {
     role: "Four Worlds panel 03: Venture Capital",
@@ -105,6 +115,14 @@ const briefs = {
     composition: "Business in operation in the foreground, conversation behind",
     ratio: "16:9",
     treatment: `${DOCUMENTARY} Cooler grade to sit on deep green.`,
+    illustrative: {
+      src: "/assets/photos/illustrative/world-vc.jpg",
+      alt: "A founder and investment analysts reviewing an operating enterprise in Cameroon.",
+      width: 1792,
+      height: 1024,
+      isIllustrative: true,
+      caption: "Venture Capital · Enterprise site review",
+    },
   },
   "world-hospitality": {
     role: "Four Worlds panel 04: Hospitality",
@@ -113,6 +131,14 @@ const briefs = {
     composition: "Calm architectural frame, dusk or early morning light",
     ratio: "16:9",
     treatment: "Architectural, warm and quiet. Real property only.",
+    illustrative: {
+      src: "/assets/photos/illustrative/world-hospitality.jpg",
+      alt: "Quiet arrival courtyard of a modern hospitality property in Yaoundé.",
+      width: 1792,
+      height: 1024,
+      isIllustrative: true,
+      caption: "Hospitality · Bastos residence arrival",
+    },
   },
   "programme-vti": {
     role: "VTI programme card and detail hero",
@@ -121,6 +147,13 @@ const briefs = {
     composition: "Activity-led: tools, screens or materials in use",
     ratio: "3:2",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/programme-vti.jpg",
+      alt: "Vocational trainees working with tools and equipment in a practical workshop in Yaoundé.",
+      width: 1536,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "programme-startup": {
     role: "Startup Centre programme card and detail hero",
@@ -129,6 +162,13 @@ const briefs = {
     composition: "Group around a surface covered in work",
     ratio: "3:2",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/programme-startup.jpg",
+      alt: "Startup founders mapping a venture on a wall during a cohort working session.",
+      width: 1536,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "programme-vc": {
     role: "Venture Capital programme card",
@@ -137,6 +177,13 @@ const briefs = {
     composition: "Documents and people at a table, natural window light",
     ratio: "3:2",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/programme-vc.jpg",
+      alt: "Investment review meeting between an entrepreneur and investment analysts in Yaoundé.",
+      width: 1536,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "programme-hospitality": {
     role: "Hospitality programme card",
@@ -145,6 +192,13 @@ const briefs = {
     composition: "Service in progress, guest area in background",
     ratio: "3:2",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/programme-hospitality.jpg",
+      alt: "Hospitality trainees and staff at work preparing a dining area in Yaoundé.",
+      width: 1536,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "programmes-hero": {
     role: "Programme directory hero: the breadth of Nayokan programmes",
@@ -182,6 +236,13 @@ const briefs = {
     composition: "Production in progress, product visible",
     ratio: "4:3",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/vti-clusters-hero.jpg",
+      alt: "Artisanal production cluster members manufacturing interlocking earth blocks in Cameroon.",
+      width: 1365,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "cluster-detail": {
     role: "Cluster detail hero",
@@ -190,6 +251,13 @@ const briefs = {
     composition: "Wide establishing shot, then product close-up",
     ratio: "16:9",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/cluster-detail.jpg",
+      alt: "Members of an artisanal cluster crafting woodwork and fabrication products in Cameroon.",
+      width: 1792,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
 
   // ── Startup Centre ─────────────────────────────────────────────────────────
@@ -200,6 +268,13 @@ const briefs = {
     composition: "Presenter and audience, work on screen or wall",
     ratio: "4:3",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/startup-programme-hero.jpg",
+      alt: "A young entrepreneur presenting milestone progress to mentors in a modern workspace.",
+      width: 1365,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "startup-commercialization": {
     role: "Commercialization pathway illustration photo",
@@ -208,6 +283,13 @@ const briefs = {
     composition: "Product in the customer's hands",
     ratio: "16:9",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/startup-commercialization.jpg",
+      alt: "An entrepreneur demonstrating a hardware product prototype to a customer in Yaoundé.",
+      width: 1792,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "startup-opportunities-hero": {
     role: "Opportunities index hero",
@@ -216,6 +298,13 @@ const briefs = {
     composition: "Audience facing the speaker, notes and laptops",
     ratio: "4:3",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/startup-opportunities-hero.jpg",
+      alt: "Aspiring entrepreneurs and students at a programme briefing session in Cameroon.",
+      width: 1365,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "startup-portfolio": {
     role: "Portfolio venture card and detail hero",
@@ -224,6 +313,13 @@ const briefs = {
     composition: "Team in their environment, product visible",
     ratio: "3:2",
     treatment: `${DOCUMENTARY} Consent from the venture required.`,
+    illustrative: {
+      src: "/assets/photos/illustrative/startup-portfolio.jpg",
+      alt: "A clean technology startup team gathered around their prototype in their workshop in Yaoundé.",
+      width: 1536,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "startup-mentor": {
     role: "Mentor portrait",
@@ -232,6 +328,14 @@ const briefs = {
     composition: "Eye level, plain background",
     ratio: "4:5",
     treatment: "Consistent portrait set: same light, same crop, consent recorded.",
+    illustrative: {
+      src: "/assets/photos/illustrative/startup-mentor.jpg",
+      alt: "Portrait of a startup mentor and enterprise advisor in Cameroon.",
+      width: 1365,
+      height: 1024,
+      position: "85% 60%",
+      isIllustrative: true,
+    },
   },
 
   // ── Corporate worlds ──────────────────────────────────────────────────────
@@ -242,6 +346,13 @@ const briefs = {
     composition: "Operation in progress, no identifiable financial documents",
     ratio: "4:3",
     treatment: `${DOCUMENTARY} Cool grade for navy pages.`,
+    illustrative: {
+      src: "/assets/photos/illustrative/vc-hero.jpg",
+      alt: "A productive enterprise manufacturing building materials in Cameroon.",
+      width: 1365,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "hospitality-hero": {
     role: "Hospitality page hero",
@@ -250,6 +361,14 @@ const briefs = {
     composition: "Entrance or courtyard, human scale",
     ratio: "4:5",
     treatment: "Architectural, warm and quiet. Real property only.",
+    illustrative: {
+      src: "/assets/photos/illustrative/hospitality-hero.jpg",
+      alt: "Courtyard and entrance of a quiet boutique property in Yaoundé.",
+      width: 1792,
+      height: 1024,
+      position: "50% 50%",
+      isIllustrative: true,
+    },
   },
   "property": {
     role: "Property listing and detail image",
@@ -258,6 +377,13 @@ const briefs = {
     composition: "Three frames: arrival, room, shared space",
     ratio: "3:2",
     treatment: "Architectural, warm and quiet. Real property only; no renders.",
+    illustrative: {
+      src: "/assets/photos/illustrative/property.jpg",
+      alt: "Refined dining and guest reception space at a Nayokan hospitality property.",
+      width: 1536,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
 
   // ── Editorial ─────────────────────────────────────────────────────────────
@@ -268,6 +394,13 @@ const briefs = {
     composition: "Environmental portrait",
     ratio: "3:2",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/story-startup.jpg",
+      alt: "The founder team in their workshop developing early-stage technology in Yaoundé.",
+      width: 1536,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
   "article-default": {
     role: "Insight article cover",
@@ -276,6 +409,13 @@ const briefs = {
     composition: "Environmental, landscape",
     ratio: "16:9",
     treatment: DOCUMENTARY,
+    illustrative: {
+      src: "/assets/photos/illustrative/article-default.jpg",
+      alt: "Artisans and technicians working on fabrication inside a cooperative workshop.",
+      width: 1792,
+      height: 1024,
+      isIllustrative: true,
+    },
   },
 } satisfies Record<string, Omit<ImageBrief, "id">>;
 

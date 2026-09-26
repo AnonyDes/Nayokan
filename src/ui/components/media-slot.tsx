@@ -38,8 +38,8 @@ export function MediaSlot({
   const r = ratio ?? brief.ratio;
   const style: CSSProperties = fill ? {} : { aspectRatio: RATIO_CSS[r] };
   const image = media
-    ? { src: media.src, alt: media.alt, width: media.width, height: media.height, position: undefined, caption: media.caption }
-    : brief.asset;
+    ? { src: media.src, alt: media.alt, width: media.width, height: media.height, position: undefined, caption: media.caption, isIllustrative: false }
+    : (brief.asset ?? brief.illustrative);
   const classes = ["media-slot", fill ? "media-slot--fill" : "", className].filter(Boolean).join(" ");
 
   if (image) {
@@ -56,6 +56,9 @@ export function MediaSlot({
           decoding="async"
           style={image.position ? { objectPosition: image.position } : undefined}
         />
+        {image.isIllustrative && (
+          <span className="media-slot-badge media-slot-badge--illustrative">Illustrative image</span>
+        )}
         {caption && image.caption && <figcaption className="media-slot-cap">{image.caption}</figcaption>}
       </figure>
     );

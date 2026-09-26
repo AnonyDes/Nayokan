@@ -29,6 +29,23 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+.media-slot-badge {
+  position: absolute;
+  top: var(--s-2);
+  right: var(--s-2);
+  padding: 3px 7px;
+  background: rgba(10, 10, 10, 0.68);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  z-index: 2;
+  pointer-events: none;
+}
 
 /* Placeholder: deliberate, art-directed, obviously not a photograph. */
 .media-slot--placeholder {

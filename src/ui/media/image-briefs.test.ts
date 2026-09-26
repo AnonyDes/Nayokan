@@ -38,6 +38,14 @@ describe("image briefs", () => {
       expect(getImageBrief(slot).asset).toBeUndefined();
     }
   });
+
+  test.each(SLOTS)("%s has an authentic asset or an illustrative fallback on disk", (slot) => {
+    const brief = getImageBrief(slot);
+    const image = brief.asset ?? brief.illustrative;
+    expect(image).toBeDefined();
+    expect(existsSync(path.join(process.cwd(), "public", image!.src))).toBe(true);
+    expect(image!.alt.length).toBeGreaterThan(15);
+  });
 });
 
 describe("four worlds", () => {
