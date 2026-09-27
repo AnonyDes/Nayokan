@@ -1,4 +1,22 @@
 {
+  "article-default-2": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 38726
+      },
+      {
+        "w": 800,
+        "bytes": 88784
+      },
+      {
+        "w": 1264,
+        "bytes": 182642
+      }
+    ]
+  },
   "article-default": {
     "width": 1376,
     "height": 768,
@@ -14,6 +32,60 @@
       {
         "w": 1280,
         "bytes": 127084
+      }
+    ]
+  },
+  "cluster-agri-food-production": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 34536
+      },
+      {
+        "w": 800,
+        "bytes": 73828
+      },
+      {
+        "w": 1264,
+        "bytes": 138820
+      }
+    ]
+  },
+  "cluster-craft-manufacturing": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 32784
+      },
+      {
+        "w": 800,
+        "bytes": 70072
+      },
+      {
+        "w": 1264,
+        "bytes": 131044
+      }
+    ]
+  },
+  "cluster-creative-economy": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 28936
+      },
+      {
+        "w": 800,
+        "bytes": 58680
+      },
+      {
+        "w": 1264,
+        "bytes": 109530
       }
     ]
   },
@@ -35,6 +107,60 @@
       }
     ]
   },
+  "cluster-digital-technology": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 24890
+      },
+      {
+        "w": 800,
+        "bytes": 49886
+      },
+      {
+        "w": 1264,
+        "bytes": 87144
+      }
+    ]
+  },
+  "cluster-health-wellness": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 14598
+      },
+      {
+        "w": 800,
+        "bytes": 33062
+      },
+      {
+        "w": 1264,
+        "bytes": 68366
+      }
+    ]
+  },
+  "cluster-hospitality-services": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 25784
+      },
+      {
+        "w": 800,
+        "bytes": 51376
+      },
+      {
+        "w": 1264,
+        "bytes": 92758
+      }
+    ]
+  },
   "hospitality-hero": {
     "width": 1376,
     "height": 768,
@@ -50,6 +176,96 @@
       {
         "w": 1280,
         "bytes": 111162
+      }
+    ]
+  },
+  "programme-agri-food-post-harvest": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 18332
+      },
+      {
+        "w": 800,
+        "bytes": 36044
+      },
+      {
+        "w": 1264,
+        "bytes": 64788
+      }
+    ]
+  },
+  "programme-cluster-formation-programme": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 31006
+      },
+      {
+        "w": 800,
+        "bytes": 65028
+      },
+      {
+        "w": 1264,
+        "bytes": 125634
+      }
+    ]
+  },
+  "programme-founder-fellowship": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 13916
+      },
+      {
+        "w": 800,
+        "bytes": 26422
+      },
+      {
+        "w": 1264,
+        "bytes": 46944
+      }
+    ]
+  },
+  "programme-growth-co-investment-vehicle": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 14308
+      },
+      {
+        "w": 800,
+        "bytes": 29974
+      },
+      {
+        "w": 1264,
+        "bytes": 63062
+      }
+    ]
+  },
+  "programme-hospitality-operations": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 14498
+      },
+      {
+        "w": 800,
+        "bytes": 31446
+      },
+      {
+        "w": 1264,
+        "bytes": 61456
       }
     ]
   },
@@ -71,6 +287,114 @@
       }
     ]
   },
+  "programme-industry-application-certification": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 17904
+      },
+      {
+        "w": 800,
+        "bytes": 36622
+      },
+      {
+        "w": 1264,
+        "bytes": 70138
+      }
+    ]
+  },
+  "programme-innovation-commercialization": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 23138
+      },
+      {
+        "w": 800,
+        "bytes": 49458
+      },
+      {
+        "w": 1264,
+        "bytes": 93626
+      }
+    ]
+  },
+  "programme-long-stay-residency": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 11014
+      },
+      {
+        "w": 800,
+        "bytes": 22910
+      },
+      {
+        "w": 1264,
+        "bytes": 42334
+      }
+    ]
+  },
+  "programme-professional-growth-engineering": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 23338
+      },
+      {
+        "w": 800,
+        "bytes": 47570
+      },
+      {
+        "w": 1264,
+        "bytes": 86972
+      }
+    ]
+  },
+  "programme-seed-ticket-programme": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 26880
+      },
+      {
+        "w": 800,
+        "bytes": 52648
+      },
+      {
+        "w": 1264,
+        "bytes": 94514
+      }
+    ]
+  },
+  "programme-skills-for-industrialisation": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 28554
+      },
+      {
+        "w": 800,
+        "bytes": 59808
+      },
+      {
+        "w": 1264,
+        "bytes": 112526
+      }
+    ]
+  },
   "programme-startup": {
     "width": 1264,
     "height": 848,
@@ -86,6 +410,24 @@
       {
         "w": 1264,
         "bytes": 78000
+      }
+    ]
+  },
+  "programme-university-research-commercialization": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 17074
+      },
+      {
+        "w": 800,
+        "bytes": 33922
+      },
+      {
+        "w": 1264,
+        "bytes": 61930
       }
     ]
   },
@@ -122,6 +464,96 @@
       {
         "w": 1264,
         "bytes": 84956
+      }
+    ]
+  },
+  "property-long-stay-residence": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 22960
+      },
+      {
+        "w": 800,
+        "bytes": 54136
+      },
+      {
+        "w": 1264,
+        "bytes": 116058
+      }
+    ]
+  },
+  "property-nayokan-guesthouse-2": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 13572
+      },
+      {
+        "w": 800,
+        "bytes": 28906
+      },
+      {
+        "w": 1264,
+        "bytes": 54722
+      }
+    ]
+  },
+  "property-nayokan-guesthouse-3": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 24616
+      },
+      {
+        "w": 800,
+        "bytes": 51218
+      },
+      {
+        "w": 1264,
+        "bytes": 94694
+      }
+    ]
+  },
+  "property-nayokan-guesthouse": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 33978
+      },
+      {
+        "w": 800,
+        "bytes": 81658
+      },
+      {
+        "w": 1264,
+        "bytes": 171438
+      }
+    ]
+  },
+  "property-workspace-reception": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 19162
+      },
+      {
+        "w": 800,
+        "bytes": 41642
+      },
+      {
+        "w": 1264,
+        "bytes": 81998
       }
     ]
   },
@@ -230,6 +662,24 @@
       {
         "w": 1200,
         "bytes": 86774
+      }
+    ]
+  },
+  "story-startup-2": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 19716
+      },
+      {
+        "w": 800,
+        "bytes": 41428
+      },
+      {
+        "w": 1264,
+        "bytes": 74864
       }
     ]
   },
