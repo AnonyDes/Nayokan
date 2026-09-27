@@ -121,39 +121,26 @@ body[data-world="hospitality"] .btn-primary:hover { background: var(--terracotta
 
 .hosp-property-media {
   aspect-ratio: 4/3;
+  /* Tone behind the photo/placeholder while it loads. */
   background: linear-gradient(135deg, var(--clay), #C89B7B);
   position: relative;
   overflow: hidden;
 }
-.hosp-property-media::before {
-  content: '';
-  position: absolute; inset: 24px;
-  border: 1px solid rgba(255,255,255,0.5);
-}
+.hosp-property-media.p2 { background: linear-gradient(135deg, #D4B896, #8B5A3C); }
+.hosp-property-media.p3 { background: linear-gradient(135deg, #E8D2B4, #B87950); }
+.hosp-property-media .media-slot--fill { z-index: 0; }
 .hosp-property-media::after {
   content: attr(data-label);
   position: absolute;
-  top: 40px; left: 40px;
+  z-index: 1;
+  top: 24px; left: 24px;
+  padding: 6px 10px;
+  background: rgba(10,10,10,0.6);
+  backdrop-filter: blur(6px);
   font-family: var(--font-mono);
-  font-size: 0.72rem; letter-spacing: 0.16em;
-  color: rgba(255,255,255,0.85);
+  font-size: 0.68rem; letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.92);
   text-transform: uppercase;
-}
-.hosp-property-media .hosp-arch-detail {
-  position: absolute;
-  bottom: 24%; left: 24%; right: 24%;
-  height: 55%;
-  background: rgba(10,10,10,0.7);
-  border-radius: 60% 60% 0 0 / 40% 40% 0 0;
-}
-.hosp-property-media.p2 { background: linear-gradient(135deg, #D4B896, #8B5A3C); }
-.hosp-property-media.p2 .hosp-arch-detail { background: rgba(255,255,255,0.55); border-radius: 0; }
-.hosp-property-media.p3 { background: linear-gradient(135deg, #E8D2B4, #B87950); }
-.hosp-property-media.p3 .hosp-arch-detail {
-  border-radius: 0;
-  height: 40%;
-  background: rgba(10,10,10,0.5);
-  left: 30%; right: 30%; bottom: 30%;
 }
 
 .hosp-property-body { padding: 20px 0; }

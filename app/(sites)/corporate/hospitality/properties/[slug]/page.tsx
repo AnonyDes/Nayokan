@@ -6,6 +6,8 @@ import { RichBlocks } from "@/ui/components/rich-blocks";
 import { Tbc } from "@/ui/components/tbc";
 import { RelatedStrip } from "@/ui/components/strips";
 import { BookingForm } from "@/sites/corporate/components/forms";
+import { MediaSlot } from "@/ui/components/media-slot";
+import { getPropertyGallery } from "@/ui/media/image-briefs";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -41,16 +43,29 @@ export default async function PropertyDetail({ params }: { params: Promise<{ slu
 
   const others = (await repo.listProperties()).filter((p) => p.id !== property.id);
   const features = FEATURES[property.slug];
+  const gallery = getPropertyGallery(property.slug, property.name);
+  const [hero, ...moreFrames] = gallery;
 
   return (
     <>
       <section className="property-detail-hero">
         <div className="property-hero-image">
+          <MediaSlot slot="property" fill media={property.gallery[0]} illustrative={hero} tone="sand" variant="compact" />
           <span className="property-hero-caption">
             {property.code ?? "—"} · {property.location ?? "Yaoundé"}
           </span>
         </div>
       </section>
+
+      {moreFrames.length > 0 && (
+        <section className="property-gallery-strip">
+          <div className="wrap">
+            {moreFrames.map((frame) => (
+              <MediaSlot key={frame.src} slot="property" illustrative={frame} ratio="4:3" tone="sand" variant="compact" />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="property-detail-body">
         <div className="wrap">

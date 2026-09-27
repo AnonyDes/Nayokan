@@ -489,3 +489,16 @@ export function getNamedIllustrative(name: string, alt: string): ImageAsset | un
     isIllustrative: true,
   });
 }
+
+/**
+ * Up to 3 illustrative frames for one property: property-<slug>,
+ * property-<slug>-2, property-<slug>-3. Returns only the frames that exist,
+ * in order; empty when the property has none.
+ */
+export function getPropertyGallery(slug: string, propertyName: string): ImageAsset[] {
+  const frames = [`property-${slug}`, `property-${slug}-2`, `property-${slug}-3`];
+  const labels = ["Arrival", "Interior", "Shared space"];
+  return frames
+    .map((name, i) => getNamedIllustrative(name, `Illustrative image of ${propertyName}: ${labels[i].toLowerCase()}.`))
+    .filter((img): img is ImageAsset => Boolean(img));
+}

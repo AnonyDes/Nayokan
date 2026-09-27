@@ -1,7 +1,7 @@
 import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
-import { getImageBrief, type ImageSlotId } from "./image-briefs";
+import { getImageBrief, getNamedIllustrative, getPropertyGallery, type ImageSlotId } from "./image-briefs";
 import { WORLDS_DIRECTORY } from "@/platform/content/worlds";
 
 // Governance guard: the only approved photographs are the real Nayokan
@@ -80,5 +80,31 @@ describe("illustrative image weight", () => {
 
   test("original sources are not served from public/", () => {
     expect(existsSync(path.join(process.cwd(), "public/assets/photos/illustrative/world-vc.jpg"))).toBe(false);
+  });
+});
+
+describe("named illustrative images", () => {
+  test("VTI programmes resolve their own generated photo, not the generic slot fallback", () => {
+    const img = getNamedIllustrative("programme-professional-growth-engineering", "alt text goes here");
+    expect(img).toBeDefined();
+    expect(img!.src).toContain("programme-professional-growth-engineering");
+    expect(img!.srcSet).toBeDefined();
+  });
+
+  test("an unknown name has no illustrative fallback", () => {
+    expect(getNamedIllustrative("programme-does-not-exist", "alt")).toBeUndefined();
+  });
+
+  test("the guesthouse gallery returns its 3 generated frames in order", () => {
+    const gallery = getPropertyGallery("nayokan-guesthouse", "The Nayokan Guesthouse");
+    expect(gallery).toHaveLength(3);
+    expect(gallery[0].src).toMatch(/property-nayokan-guesthouse-\d+\.webp$/);
+    expect(gallery[1].src).toMatch(/property-nayokan-guesthouse-2-\d+\.webp$/);
+    expect(gallery[2].src).toMatch(/property-nayokan-guesthouse-3-\d+\.webp$/);
+  });
+
+  test("a property with a single generated frame returns just that frame", () => {
+    const gallery = getPropertyGallery("workspace-reception", "Workspace & Reception");
+    expect(gallery).toHaveLength(1);
   });
 });

@@ -7,6 +7,8 @@ import { SectionHeader } from "@/ui/components/section-header";
 import { Tbc } from "@/ui/components/tbc";
 import { RelatedStrip } from "@/ui/components/strips";
 import { BookingForm } from "@/sites/corporate/components/forms";
+import { MediaSlot } from "@/ui/components/media-slot";
+import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
 export const metadata: Metadata = {
   title: "Hospitality",
@@ -134,7 +136,14 @@ export default async function Hospitality() {
                 className={`hosp-property-media${i === 1 ? " p2" : i === 2 ? " p3" : ""}`}
                 data-label={`${p.code ?? "P/—"} · YAOUNDÉ · ${(p.type ?? "Property").toUpperCase()}`}
               >
-                <div className="hosp-arch-detail" />
+                <MediaSlot
+                  slot="property"
+                  fill
+                  media={p.gallery[0]}
+                  illustrative={getNamedIllustrative(`property-${p.slug}`, `Illustrative image of ${p.name}.`)}
+                  tone="sand"
+                  variant="compact"
+                />
               </div>
               <div className="hosp-property-body">
                 <div className="hosp-property-num">Property {(p.code ?? "").replace("P/", "") || "—"} · Yaoundé</div>
