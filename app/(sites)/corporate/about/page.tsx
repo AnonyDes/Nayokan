@@ -4,7 +4,7 @@ import { getContentRepository } from "@/platform/content";
 import { CorpHero } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
 import { CtaBand } from "@/ui/components/strips";
-import { Tbc } from "@/ui/components/tbc";
+import { Tbc, isTbc } from "@/ui/components/tbc";
 
 export const metadata: Metadata = {
   title: "About",
@@ -146,18 +146,23 @@ export default async function About() {
           <SectionHeader
             num="§ 04 — Leadership"
             title="The people leading Nayokan."
-            lead="Named leadership is published only after individual approval. Portraits and full biographies will be added as the team confirms."
+            lead="Confirmed leadership is named below. The remaining operational-lead roles are published only after individual approval."
           />
           <div className="leadership-grid">
             {leaders.map((p) => (
               <article className="leader-card" key={p.id}>
-                <div className="leader-portrait" data-tag="Portrait tbc">
-                  {p.initials}
-                </div>
+                {p.photo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img className="leader-portrait leader-portrait--photo" src={p.photo.src} alt={p.photo.alt} width={p.photo.width} height={p.photo.height} loading="lazy" />
+                ) : (
+                  <div className="leader-portrait" data-tag="Portrait tbc">
+                    {p.initials}
+                  </div>
+                )}
                 <div>
                   <div className="leader-name">
                     {p.name}
-                    <Tbc />
+                    {isTbc(p.provenance, "name") && <Tbc />}
                   </div>
                   <div className="leader-role">{p.position}</div>
                 </div>

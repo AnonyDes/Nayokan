@@ -13,6 +13,7 @@
     "test:rls": "vitest run --config vitest.rls.config.ts",
     "test:e2e": "playwright test",
     "images:optimize": "node scripts/optimize-illustrative.mjs",
+    "images:optimize:people": "node scripts/optimize-people.mjs",
     "design-compare": "tsx scripts/design-compare.ts"
   },
   "dependencies": {

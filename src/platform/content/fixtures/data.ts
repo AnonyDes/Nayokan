@@ -16,6 +16,7 @@ import type {
   Venture,
 } from "../types";
 import { siteUrl } from "@/platform/sites/registry";
+import { getPersonPhoto } from "@/ui/media/people";
 
 // All content below is sourced verbatim from the approved Genspark design
 // package (Designs/*.html) and the Copy doc. Every record is demo content:
@@ -26,6 +27,12 @@ const demo = (unconfirmedFields: string[] = []): Provenance => ({
   isDemo: true,
   unconfirmedFields,
 });
+
+// For the rare record that is genuine, confirmed Nayokan content supplied
+// directly by the site owner (not a design/Copy-doc placeholder). Renders
+// with no "tbc" tag and no demo marker. Use sparingly and only once a name,
+// role, figure or photo has actually been confirmed — see docs/content-gaps.md.
+const confirmed = (): Provenance => ({ isDemo: false });
 
 // Real Nayokan photographs (VTI computer-lab launch, Yaoundé). 01–05 are
 // portrait 563x1000; 06–08 landscape 1024x768. No other photography exists
@@ -1152,10 +1159,33 @@ export const partners: Partner[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// People (about.html leadership — names withheld pending approval)
+// People (about.html leadership). Two entries below are real, named
+// individuals confirmed directly by Nayokan (name, role and photo supplied
+// by the site owner) — not demo content, and not placeholders. The
+// remaining operational-lead roles are still withheld pending approval.
 // ---------------------------------------------------------------------------
 
 export const people: Person[] = [
+  {
+    id: "ppl-cofounder-yogo-melo",
+    name: "Yogo Melo",
+    initials: "YM",
+    position: "Co-Founder",
+    division: "Nayokan · Founding",
+    bio: "Senior Systems Engineer at Ameris Bank, previously in infrastructure engineering at Disney Signature Experiences and AAA. Bachelor's degree in Economics and Management from the Catholic University of Central Africa. Based in Atlanta; specializes in enterprise infrastructure, cloud technologies and automation.",
+    photo: getPersonPhoto("yogo-melo", "Portrait of Yogo Melo, Co-Founder of Nayokan."),
+    provenance: confirmed(),
+  },
+  {
+    id: "ppl-board-kanjo",
+    name: "Kanjo",
+    initials: "K",
+    position: "Board Member / Advisor",
+    division: "Governance",
+    bio: "Associate at McKinsey & Company, previously in Sales Strategy at Kenvue. MBA from Rotman, Master of Engineering from the University of Waterloo, and BEng from the University of Sheffield. Based in Toronto; bilingual in English and French.",
+    photo: getPersonPhoto("kanjo", "Portrait of Kanjo, Board Member and Advisor to Nayokan."),
+    provenance: confirmed(),
+  },
   {
     id: "ppl-founder",
     name: "Founder / President",

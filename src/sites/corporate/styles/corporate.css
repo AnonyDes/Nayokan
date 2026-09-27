@@ -169,6 +169,14 @@
   border: 1px solid var(--line);
   position: relative;
 }
+/* A confirmed, named leader's real photo replaces the initials box — same
+   frame, no "Portrait tbc" tag, no placeholder gradient. */
+.leader-portrait--photo {
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
+  background: none;
+}
 .leader-portrait::after {
   content: attr(data-tag);
   position: absolute;
