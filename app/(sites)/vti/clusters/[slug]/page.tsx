@@ -8,6 +8,7 @@ import { Tbc } from "@/ui/components/tbc";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { RelatedStrip } from "@/ui/components/strips";
 import type { Cluster } from "@/platform/content/types";
+import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -147,7 +148,7 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
               </ul>
             </div>
             <div className="feature-media">
-              <MediaSlot slot="cluster-detail" media={cluster.heroImage} ratio="4:5" />
+              <MediaSlot slot="cluster-detail" media={cluster.heroImage} illustrative={getNamedIllustrative(`cluster-${cluster.slug}`, `Illustrative image for the ${cluster.name} cluster.`)} ratio="4:5" />
             </div>
           </div>
         </div>

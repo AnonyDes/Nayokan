@@ -1,6 +1,7 @@
 import type { Programme } from "@/platform/content/types";
 import type { ImageSlotId } from "@/ui/media/image-briefs";
 import { MediaSlot } from "@/ui/components/media-slot";
+import { getNamedIllustrative } from "@/ui/media/image-briefs";
 import { Tbc, isTbc } from "@/ui/components/tbc";
 
 // Programme image card used by every programme listing (corporate directory,
@@ -45,7 +46,7 @@ export function ProgrammeCard({ programme: p, href, showWorld = false }: { progr
   const deadlineTbc = isTbc(p.provenance, "applicationDeadline");
   return (
     <a href={href} className="ed-card">
-      <MediaSlot slot={programmeSlot(p)} media={p.heroImage} ratio="3:2" variant="compact" />
+      <MediaSlot slot={programmeSlot(p)} media={p.heroImage} illustrative={getNamedIllustrative(`programme-${p.slug}`, `Illustrative image for ${p.name}.`)} ratio="3:2" variant="compact" />
       <div className="ed-card-body">
         <div className="ed-card-head">
           <span>

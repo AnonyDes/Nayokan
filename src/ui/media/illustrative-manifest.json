@@ -1,0 +1,344 @@
+{
+  "article-default": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 30116
+      },
+      {
+        "w": 800,
+        "bytes": 65974
+      },
+      {
+        "w": 1280,
+        "bytes": 127084
+      }
+    ]
+  },
+  "cluster-detail": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 30116
+      },
+      {
+        "w": 800,
+        "bytes": 65974
+      },
+      {
+        "w": 1280,
+        "bytes": 127084
+      }
+    ]
+  },
+  "hospitality-hero": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 21850
+      },
+      {
+        "w": 800,
+        "bytes": 52560
+      },
+      {
+        "w": 1280,
+        "bytes": 111162
+      }
+    ]
+  },
+  "programme-hospitality": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 17118
+      },
+      {
+        "w": 800,
+        "bytes": 31362
+      },
+      {
+        "w": 1264,
+        "bytes": 54154
+      }
+    ]
+  },
+  "programme-startup": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 15280
+      },
+      {
+        "w": 800,
+        "bytes": 36378
+      },
+      {
+        "w": 1264,
+        "bytes": 78000
+      }
+    ]
+  },
+  "programme-vc": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 15470
+      },
+      {
+        "w": 800,
+        "bytes": 32530
+      },
+      {
+        "w": 1264,
+        "bytes": 61924
+      }
+    ]
+  },
+  "programme-vti": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 23782
+      },
+      {
+        "w": 800,
+        "bytes": 46360
+      },
+      {
+        "w": 1264,
+        "bytes": 84956
+      }
+    ]
+  },
+  "property": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 17118
+      },
+      {
+        "w": 800,
+        "bytes": 31362
+      },
+      {
+        "w": 1264,
+        "bytes": 54154
+      }
+    ]
+  },
+  "startup-commercialization": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 23680
+      },
+      {
+        "w": 800,
+        "bytes": 51252
+      },
+      {
+        "w": 1280,
+        "bytes": 97688
+      }
+    ]
+  },
+  "startup-mentor": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 23402
+      },
+      {
+        "w": 800,
+        "bytes": 47710
+      },
+      {
+        "w": 1200,
+        "bytes": 86774
+      }
+    ]
+  },
+  "startup-opportunities-hero": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 16630
+      },
+      {
+        "w": 800,
+        "bytes": 36580
+      },
+      {
+        "w": 1200,
+        "bytes": 66044
+      }
+    ]
+  },
+  "startup-portfolio": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 19958
+      },
+      {
+        "w": 800,
+        "bytes": 42372
+      },
+      {
+        "w": 1264,
+        "bytes": 81448
+      }
+    ]
+  },
+  "startup-programme-hero": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 23402
+      },
+      {
+        "w": 800,
+        "bytes": 47710
+      },
+      {
+        "w": 1200,
+        "bytes": 86774
+      }
+    ]
+  },
+  "story-startup": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 19958
+      },
+      {
+        "w": 800,
+        "bytes": 42372
+      },
+      {
+        "w": 1264,
+        "bytes": 81448
+      }
+    ]
+  },
+  "vc-hero": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 35378
+      },
+      {
+        "w": 800,
+        "bytes": 81498
+      },
+      {
+        "w": 1200,
+        "bytes": 153600
+      }
+    ]
+  },
+  "vti-clusters-hero": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 35378
+      },
+      {
+        "w": 800,
+        "bytes": 81498
+      },
+      {
+        "w": 1200,
+        "bytes": 153600
+      }
+    ]
+  },
+  "world-hospitality": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 21850
+      },
+      {
+        "w": 800,
+        "bytes": 52560
+      },
+      {
+        "w": 1280,
+        "bytes": 111162
+      }
+    ]
+  },
+  "world-startup": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 20612
+      },
+      {
+        "w": 800,
+        "bytes": 41702
+      },
+      {
+        "w": 1280,
+        "bytes": 75868
+      }
+    ]
+  },
+  "world-vc": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 20808
+      },
+      {
+        "w": 800,
+        "bytes": 47052
+      },
+      {
+        "w": 1280,
+        "bytes": 96782
+      }
+    ]
+  }
+}

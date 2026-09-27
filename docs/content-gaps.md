@@ -47,3 +47,9 @@ Nothing below may be presented publicly as fact until confirmed. Until then it s
 - Every other photographic slot renders an art-directed placeholder. The shot list, with role, subject, location, composition, ratio and treatment for each slot, is `src/ui/media/image-briefs.ts`. Supplying a photograph means adding it as that slot's `asset` (or as a CMS media override); layouts do not change.
 - Four Worlds headlines and activity lists on the home page and What We Do are directional and flagged CONTENT TO BE CONFIRMED (`src/platform/content/worlds.ts`).
 - Venture Capital fund structure (stage focus, geography, sectors) is now flagged as unconfirmed, and the pipeline table is labelled illustrative.
+
+### Illustrative images: workflow (added 27 September 2026)
+- Sources live in `art-source/illustrative/<name>.jpg` and are **not served**. `npm run images:optimize` writes responsive WebP variants (480/800/1280 px, 15-150 KB each) to `public/assets/photos/illustrative/` plus `src/ui/media/illustrative-manifest.json`. Commit the sources, the variants and the manifest together.
+- Generic slot images are named after the slot in `src/ui/media/image-briefs.ts`. Per-record images use the convention `programme-<slug>`, `cluster-<slug>`, `property-<slug>`; a matching file is picked up automatically, with no code change.
+- Every illustrative image renders an "Illustrative image" badge. Real photography replaces an illustrative image by setting the slot's `asset` (or a CMS media override); the badge then disappears.
+- Do not create illustrative portraits for named or "tbc" people (mentors, leadership, portfolio founders). An AI face next to a real person's role is a fabricated fact. Those cards keep initials until real portraits exist.

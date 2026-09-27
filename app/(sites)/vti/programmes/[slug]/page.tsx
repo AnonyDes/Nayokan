@@ -9,6 +9,7 @@ import { MediaSlot } from "@/ui/components/media-slot";
 import { MetaRail, type MetaRailItem } from "@/ui/components/meta-rail";
 import { ProgrammeCard, programmeStatus } from "@/ui/components/programme-card";
 import { Tbc, isTbc } from "@/ui/components/tbc";
+import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -131,7 +132,7 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
             </div>
           </div>
           <div className="pdx-media">
-            <MediaSlot slot="programme-vti" media={p.heroImage} ratio="21:9" eager tone="light" />
+            <MediaSlot slot="programme-vti" media={p.heroImage} illustrative={getNamedIllustrative(`programme-${p.slug}`, `Illustrative image for ${p.name}.`)} ratio="21:9" eager tone="light" sizes="100vw" />
           </div>
           <div className="pdx-rail-wrap">
             <MetaRail items={railItems(p)} />

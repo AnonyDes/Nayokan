@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Property } from "@/platform/content/types";
 import { Tbc } from "@/ui/components/tbc";
 import { MediaSlot } from "@/ui/components/media-slot";
+import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
 // Property card grid with type filter (hospitality-properties.html).
 const MONO = { fontFamily: "var(--font-mono)" } as const;
@@ -33,7 +34,7 @@ export function PropertyGrid({ properties }: { properties: Property[] }) {
       <div className="pgrid">
         {visible.map((p) => (
           <article className="pcard" key={p.id} style={{ gridColumn: "span 1", minHeight: "auto", padding: 0 }}>
-            <MediaSlot slot="property" media={p.gallery[0]} ratio="3:2" tone="sand" variant="compact" />
+            <MediaSlot slot="property" media={p.gallery[0]} illustrative={getNamedIllustrative(`property-${p.slug}`, `Illustrative image of ${p.name}.`)} ratio="3:2" tone="sand" variant="compact" />
             <div style={{ padding: 24 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingBottom: 12, borderBottom: "1px solid var(--line)", marginBottom: 12 }}>
                 <span style={{ ...MONO, fontSize: "0.72rem", color: "var(--muted)", letterSpacing: "0.14em" }}>{p.code}</span>

@@ -10,6 +10,8 @@
 //   - The only approved photographs today are the nine taken at the launch of
 //     the VTI computer lab in Yaoundé (public/assets/photos/nayokan-0*.jpg).
 
+import manifestJson from "./illustrative-manifest.json";
+
 export type ImageRatio = "16:9" | "21:9" | "3:2" | "4:3" | "4:5" | "1:1" | "3:4";
 
 export interface ImageAsset {
@@ -21,6 +23,8 @@ export interface ImageAsset {
   position?: string;
   caption?: string;
   isIllustrative?: boolean;
+  /** Responsive candidates ("url 480w, url 800w"); generated for illustrative images. */
+  srcSet?: string;
 }
 
 export interface ImageBrief {
@@ -422,7 +426,8 @@ const briefs = {
 export type ImageSlotId = keyof typeof briefs;
 
 export function getImageBrief(id: ImageSlotId): ImageBrief {
-  return { id, ...briefs[id] } as ImageBrief;
+  const b = briefs[id] as Omit<ImageBrief, "id">;
+  return { id, ...b, illustrative: resolveIllustrative(b.illustrative) };
 }
 
 export const RATIO_CSS: Record<ImageRatio, string> = {
@@ -434,3 +439,53 @@ export const RATIO_CSS: Record<ImageRatio, string> = {
   "1:1": "1 / 1",
   "3:4": "3 / 4",
 };
+
+// ── Illustrative image resolution ─────────────────────────────────────────────
+// Sources live in art-source/illustrative (not served). `npm run images:optimize`
+// writes responsive WebP variants and illustrative-manifest.json. A brief refers
+// to "/assets/photos/illustrative/<name>.jpg"; that reference is resolved here to
+// the served variants and the file's true dimensions.
+
+type Manifest = Record<string, { width: number; height: number; variants: { w: number; bytes: number }[] }>;
+const MANIFEST = manifestJson as Manifest;
+const ILLUSTRATIVE_PREFIX = "/assets/photos/illustrative/";
+
+function resolveIllustrative(asset: ImageAsset | undefined): ImageAsset | undefined {
+  if (!asset || !asset.src.startsWith(ILLUSTRATIVE_PREFIX)) return asset;
+  const name = asset.src.slice(ILLUSTRATIVE_PREFIX.length).replace(/\.[a-z]+$/i, "");
+  const entry = MANIFEST[name];
+  if (!entry) return asset;
+  const url = (w: number) => `${ILLUSTRATIVE_PREFIX}${name}-${w}.webp`;
+  // Default src: the smallest variant at least 800px wide, else the largest.
+  const fallback = entry.variants.find((v) => v.w >= 800) ?? entry.variants[entry.variants.length - 1];
+  return {
+    ...asset,
+    src: url(fallback.w),
+    width: entry.width,
+    height: entry.height,
+    srcSet: entry.variants.map((v) => `${url(v.w)} ${v.w}w`).join(", "),
+  };
+}
+
+export function hasIllustrativeVariants(name: string): boolean {
+  return name in MANIFEST;
+}
+
+/**
+ * Per-record illustrative image, by convention: drop `<name>.jpg` into
+ * art-source/illustrative, run `npm run images:optimize`, and the matching
+ * record picks it up with no code change. Names:
+ *   programme-<slug>   (VTI, Startup, VC and Hospitality programmes)
+ *   cluster-<slug>     property-<slug>, property-<slug>-2, property-<slug>-3
+ * Returns undefined when no file exists, so the slot's generic image applies.
+ */
+export function getNamedIllustrative(name: string, alt: string): ImageAsset | undefined {
+  if (!hasIllustrativeVariants(name)) return undefined;
+  return resolveIllustrative({
+    src: `${ILLUSTRATIVE_PREFIX}${name}.jpg`,
+    alt,
+    width: 0,
+    height: 0,
+    isIllustrative: true,
+  });
+}

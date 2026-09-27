@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { getImageBrief, type ImageSlotId } from "./image-briefs";
@@ -61,5 +61,24 @@ describe("four worlds", () => {
 
   test("directional headlines stay flagged until confirmed", () => {
     for (const w of WORLDS_DIRECTORY) expect(w.provenance.unconfirmedFields).toContain("headline");
+  });
+});
+
+describe("illustrative image weight", () => {
+  test.each(SLOTS)("%s serves responsive WebP variants, none over 200 KB", (slot) => {
+    const img = getImageBrief(slot).illustrative;
+    if (!img) return;
+    expect(img.srcSet).toBeDefined();
+    const urls = img.srcSet!.split(",").map((c) => c.trim().split(" ")[0]);
+    expect(urls.length).toBeGreaterThanOrEqual(2);
+    for (const u of urls) {
+      expect(u).toMatch(/\.webp$/);
+      const size = statSync(path.join(process.cwd(), "public", u)).size;
+      expect(size).toBeLessThan(200 * 1024);
+    }
+  });
+
+  test("original sources are not served from public/", () => {
+    expect(existsSync(path.join(process.cwd(), "public/assets/photos/illustrative/world-vc.jpg"))).toBe(false);
   });
 });

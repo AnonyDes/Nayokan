@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "test:rls": "vitest run --config vitest.rls.config.ts",
     "test:e2e": "playwright test",
+    "images:optimize": "node scripts/optimize-illustrative.mjs",
     "design-compare": "tsx scripts/design-compare.ts"
   },
   "dependencies": {
@@ -37,6 +38,7 @@
     "eslint-config-next": "16.3.2",
     "pixelmatch": "^7.2.0",
     "pngjs": "^7.0.0",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4",
     "tsx": "^4",
     "typescript": "^5",

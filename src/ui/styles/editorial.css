@@ -648,3 +648,6 @@
 .story-small-media .media-slot-ph-ratio { display: none; }
 .story-small-media .media-slot-ph { padding: 10px; }
 .story-small-media .media-slot-ph-tag { font-size: 0.56rem; letter-spacing: 0.1em; padding: 4px 6px; }
+
+/* While a panel photo loads, show the panel's own colour, not the pale slot background. */
+.fw-media .media-slot { background: var(--fw-bg); }
