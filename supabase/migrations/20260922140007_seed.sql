@@ -35,23 +35,27 @@ on conflict (site) do nothing;
 -- Navigation (seeded per readiness report §5; editable in the CMS)
 -- ---------------------------------------------------------------------------
 
+-- Corporate navigation is the approved ecosystem-gateway structure
+-- (docs/architecture/ux-refinement-2026-09.md §11): VTI and the Startup
+-- Centre are never corporate top-level tabs. What We Do introduces both
+-- worlds and links on to their dedicated sites via contextual CTAs, so the
+-- corporate site never needs a cross-site primary nav item. Do not add VTI
+-- or Startup Centre back here — see supabase/seed.test.ts.
 insert into public.navigation_items (site, area, sort_order, label, href, cross_site)
 select * from (values
   -- Corporate
   ('corporate'::public.site_id, 'primary', 1, 'What we do', '/what-we-do', false),
-  ('corporate', 'primary', 2, 'VTI', 'https://vti.nayokan.org', true),
-  ('corporate', 'primary', 3, 'Startup Centre', 'https://startup.nayokan.org', true),
-  ('corporate', 'primary', 4, 'Venture Capital', '/venture-capital', false),
-  ('corporate', 'primary', 5, 'Hospitality', '/hospitality', false),
-  ('corporate', 'primary', 6, 'Impact', '/impact', false),
-  ('corporate', 'primary', 7, 'Insights', '/insights', false),
-  ('corporate', 'primary', 8, 'About', '/about', false),
+  ('corporate', 'primary', 2, 'Venture Capital', '/venture-capital', false),
+  ('corporate', 'primary', 3, 'Hospitality', '/hospitality', false),
+  ('corporate', 'primary', 4, 'Impact', '/impact', false),
+  ('corporate', 'primary', 5, 'Insights', '/insights', false),
+  ('corporate', 'primary', 6, 'About', '/about', false),
   ('corporate', 'cta', 1, 'Contact', '/contact', false),
-  -- VTI (flagged pending confirmation in site_settings)
+  -- VTI (flagged pending confirmation in site_settings). No cross-site
+  -- primary tabs: the ecosystem bar + footer already link back to Nayokan.
   ('vti', 'primary', 1, 'Programmes', '/programmes', false),
   ('vti', 'primary', 2, 'Clusters', '/clusters', false),
   ('vti', 'primary', 3, 'How it works', '/#approach', false),
-  ('vti', 'primary', 4, 'Nayokan', 'https://nayokan.org', true),
   ('vti', 'cta', 1, 'Apply', '/apply', false),
   -- Startup
   ('startup', 'primary', 1, 'Programme', '/programme', false),
@@ -60,7 +64,6 @@ select * from (values
   ('startup', 'primary', 4, 'Mentors', '/mentors', false),
   ('startup', 'primary', 5, 'Opportunities', '/opportunities', false),
   ('startup', 'primary', 6, 'Portfolio', '/portfolio', false),
-  ('startup', 'primary', 7, 'Nayokan', 'https://nayokan.org', true),
   ('startup', 'cta', 1, 'Apply', '/apply', false)
 ) as v(site, area, sort_order, label, href, cross_site)
 where not exists (
