@@ -171,20 +171,24 @@ function seedHomeSections(): AdminPageSection[] {
 }
 
 const NAV_SEED: Record<SiteId, SiteNav> = {
-  // navigation.html's corporate nav, verbatim.
+  // Approved ecosystem-gateway structure (docs/architecture/
+  // ux-refinement-2026-09.md §11): VTI and the Startup Centre are never
+  // corporate top-level tabs. What We Do introduces both worlds and links on
+  // to their dedicated sites via contextual CTAs — do not add them back here
+  // as primary items. See data.test.ts.
   corporate: {
     site: "corporate",
     primary: [
       { id: "n1", label: "What we do", href: "/what-we-do", enabled: true },
-      { id: "n2", label: "VTI", href: "/vti", enabled: true },
-      { id: "n3", label: "Startup Centre", href: "/startup-centre", enabled: true },
-      { id: "n4", label: "Venture Capital", href: "/venture-capital", enabled: true },
-      { id: "n5", label: "Hospitality", href: "/hospitality", enabled: true },
-      { id: "n6", label: "Impact", href: "/impact", enabled: true },
+      { id: "n2", label: "Venture Capital", href: "/venture-capital", enabled: true },
+      { id: "n3", label: "Hospitality", href: "/hospitality", enabled: true },
+      { id: "n4", label: "Impact", href: "/impact", enabled: true },
     ],
     footerColumns: [
       { heading: "Nayokan", links: [{ label: "About", href: "/about" }, { label: "What we do", href: "/what-we-do" }, { label: "Impact", href: "/impact" }, { label: "Contact", href: "/contact" }] },
-      { heading: "Worlds", links: [{ label: "VTI", href: "/vti" }, { label: "Startup Centre", href: "/startup-centre" }, { label: "Venture Capital", href: "/venture-capital" }, { label: "Hospitality", href: "/hospitality" }] },
+      // VTI / Startup Centre are contextual CTAs inside What We Do, never
+      // standalone footer tabs either — the links route there, not off-site.
+      { heading: "Worlds", links: [{ label: "VTI", href: "/what-we-do#vti" }, { label: "Startup Centre", href: "/what-we-do#startup" }, { label: "Venture Capital", href: "/venture-capital" }, { label: "Hospitality", href: "/hospitality" }] },
       { heading: "Institution", links: [{ label: "Partners", href: "/partners" }, { label: "Insights", href: "/insights" }, { label: "Sitemap", href: "/sitemap" }, { label: "Legal", href: "/privacy" }] },
     ],
     headerCta: { label: "Partner with us", href: "/contact" },
