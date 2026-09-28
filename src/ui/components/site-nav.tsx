@@ -16,15 +16,12 @@ export function SiteNav({
   homeHref = "/",
   homeLabel = "NAYOKAN",
   siteId = "corporate",
-  ecosystem,
 }: {
   items: NavItem[];
   cta?: Cta;
   homeHref?: string;
   homeLabel?: string;
   siteId?: SiteId;
-  /** Sub-sites: thin bar above the nav that ties the site back to Nayokan. */
-  ecosystem?: { href: string; label: string };
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -101,18 +98,7 @@ export function SiteNav({
 
   return (
     <>
-      <header className={`nav${scrolled ? " scrolled" : ""}${ecosystem ? " nav--eco" : ""}`} role="banner">
-        {ecosystem && (
-          <div className="eco-bar">
-            <div className="eco-bar-inner">
-              <span className="eco-bar-mark">A Nayokan institution</span>
-              <a href={ecosystem.href} onClick={(e) => handlePreviewClick(e, ecosystem.href)}>
-                ← {ecosystem.label}
-                <span className="eco-bar-note"> · the Nayokan ecosystem</span>
-              </a>
-            </div>
-          </div>
-        )}
+      <header className={`nav${scrolled ? " scrolled" : ""}`} role="banner">
         <div className="nav-inner">
           <a href={homeHref} className="nav-logo" aria-label="Nayokan — home" onClick={(e) => handlePreviewClick(e, homeHref)}>
             {/* eslint-disable-next-line @next/next/no-img-element */}

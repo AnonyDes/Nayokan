@@ -43,8 +43,8 @@ const SUPPORT = [
   { title: "Follow-on capital", desc: "Co-investor introductions and follow-on capital preparation on a rolling basis." },
 ];
 
-const MONO = { fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--green-glow)", letterSpacing: "0.14em" } as const;
-const H4 = { fontFamily: "var(--font-heading)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--paper)" } as const;
+const MONO = { fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--green-deep)", letterSpacing: "0.14em" } as const;
+const H4 = { fontFamily: "var(--font-heading)", fontWeight: 700, letterSpacing: "-0.02em" } as const;
 
 export default function VcApproach() {
   return (
@@ -66,23 +66,23 @@ export default function VcApproach() {
         lede="Nayokan Venture Capital deploys structured capital into enterprises with productive potential — sourced from within our ecosystem, aligned with development partners, and structured for the reality of African markets."
       />
 
-      <section className="section" style={{ background: "var(--navy)", color: "var(--paper)" }}>
+      <section className="section">
         <div className="wrap">
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <h3 style={{ color: "var(--paper)" }}>
+              <h3>
                 Three principles.
                 <br />
                 Long horizons.
               </h3>
             </div>
             <div>
-              <div style={{ borderTop: "1px solid var(--line-invert)" }}>
+              <div style={{ borderTop: "1px solid var(--line)" }}>
                 {PRINCIPLES.map((p, i) => (
-                  <div key={p.num} style={{ padding: "24px 0", borderBottom: i < PRINCIPLES.length - 1 ? "1px solid var(--line-invert)" : undefined }}>
+                  <div key={p.num} style={{ padding: "24px 0", borderBottom: i < PRINCIPLES.length - 1 ? "1px solid var(--line)" : undefined }}>
                     <div style={MONO}>PRINCIPLE {p.num}</div>
                     <h4 style={{ ...H4, fontSize: "1.4rem", margin: "8px 0" }}>{p.title}</h4>
-                    <p style={{ color: "var(--muted-invert)", fontSize: "1rem" }}>{p.desc}</p>
+                    <p style={{ color: "var(--muted)", fontSize: "1rem" }}>{p.desc}</p>
                   </div>
                 ))}
               </div>
@@ -91,16 +91,16 @@ export default function VcApproach() {
 
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <h3 style={{ color: "var(--paper)" }}>
+              <h3>
                 Where we
                 <br />
                 deploy capital.
               </h3>
             </div>
             <div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "var(--line-invert)", border: "1px solid var(--line-invert)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "var(--line)", border: "1px solid var(--line)" }}>
                 {SECTORS.map((s, i) => (
-                  <div key={s} style={{ background: "var(--navy-2)", padding: "32px 24px" }}>
+                  <div key={s} style={{ background: "var(--bone)", padding: "32px 24px" }}>
                     <div style={{ ...MONO, fontSize: "0.7rem" }}>SECTOR {String(i + 1).padStart(2, "0")}</div>
                     <h4 style={{ ...H4, fontSize: "1.15rem", marginTop: 8 }}>{s}</h4>
                   </div>
@@ -111,10 +111,10 @@ export default function VcApproach() {
 
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <h3 style={{ color: "var(--paper)" }}>Seed to growth.</h3>
+              <h3>Seed to growth.</h3>
             </div>
             <div>
-              <div style={{ border: "1px solid var(--line-invert)", background: "var(--navy-2)", padding: 32 }}>
+              <div style={{ border: "1px solid var(--line)", background: "var(--bone)", padding: 32 }}>
                 <div className="vc-spec-row">
                   {[
                     ["Stage focus", "Seed · Growth"],
@@ -122,14 +122,14 @@ export default function VcApproach() {
                     ["Geography", "Cameroon · CEMAC"],
                   ].map(([k, v]) => (
                     <div key={k}>
-                      <span className="meta" style={{ color: "var(--muted-invert)" }}>{k}</span>
-                      <div style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.4rem", letterSpacing: "-0.03em", color: "var(--paper)", marginTop: 6 }}>
+                      <span className="meta" style={{ color: "var(--muted)" }}>{k}</span>
+                      <div style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.4rem", letterSpacing: "-0.03em", marginTop: 6 }}>
                         {v}
                       </div>
                     </div>
                   ))}
                 </div>
-                <p style={{ marginTop: 24, color: "var(--muted-invert)", fontSize: "0.92rem", lineHeight: 1.55, maxWidth: "64ch" }}>
+                <p style={{ marginTop: 24, color: "var(--muted)", fontSize: "0.92rem", lineHeight: 1.55, maxWidth: "64ch" }}>
                   Precise ticket ranges and instrument terms are agreed at term-sheet stage and vary
                   by venture.
                 </p>
@@ -139,7 +139,7 @@ export default function VcApproach() {
 
           <div className="spec-grid" style={{ alignItems: "start" }}>
             <div className="spec-head">
-              <h3 style={{ color: "var(--paper)" }}>
+              <h3>
                 Capital
                 <br />
                 plus the ecosystem.
@@ -148,10 +148,10 @@ export default function VcApproach() {
             <div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 24 }}>
                 {SUPPORT.map((s, i) => (
-                  <div key={s.title} style={{ padding: 24, border: "1px solid var(--line-invert)", background: "var(--navy-2)" }}>
-                    <span className="meta" style={{ color: "var(--green-glow)" }}>Support {String(i + 1).padStart(2, "0")}</span>
+                  <div key={s.title} style={{ padding: 24, border: "1px solid var(--line)", background: "var(--bone)" }}>
+                    <span className="meta" style={{ color: "var(--green-deep)" }}>Support {String(i + 1).padStart(2, "0")}</span>
                     <h4 style={{ ...H4, fontSize: "1.1rem", marginTop: 6 }}>{s.title}</h4>
-                    <p style={{ color: "var(--muted-invert)", fontSize: "0.92rem" }}>{s.desc}</p>
+                    <p style={{ color: "var(--muted)", fontSize: "0.92rem" }}>{s.desc}</p>
                   </div>
                 ))}
               </div>

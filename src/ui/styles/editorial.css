@@ -451,22 +451,6 @@
 }
 @media (max-width: 640px) { .pdx-section { grid-template-columns: 1fr; gap: var(--s-2); } }
 
-/* ---------- Sub-site ecosystem bar ---------- */
-.eco-bar {
-  position: relative; z-index: 101;
-  background: var(--ink); color: rgba(255, 255, 255, 0.72);
-  font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase;
-}
-.eco-bar-inner {
-  max-width: var(--container); margin: 0 auto; padding: 8px var(--gutter);
-  display: flex; justify-content: space-between; align-items: center; gap: var(--s-4);
-}
-.eco-bar a { color: var(--paper); }
-.eco-bar a:hover { color: var(--green-glow); }
-.eco-bar-mark { display: inline-flex; align-items: center; gap: 8px; }
-.eco-bar-mark::before { content: ""; width: 6px; height: 6px; background: var(--green); }
-@media (max-width: 480px) { .eco-bar-note { display: none; } }
-
 /* ---------- World transition (corporate → sub-site) ---------- */
 .world-transition {
   position: fixed; inset: 0; z-index: 2000;
@@ -487,10 +471,6 @@
   .world-transition { display: none; }
   .fw-media, .fw-media .media-slot-img, .fw-media .media-slot-ph, .fw-rule, .fw-arrow, .fw-num { transition: none; }
 }
-
-/* The ecosystem bar sits inside the fixed header; offset content below it. */
-.nav--eco ~ main { padding-top: 31px; }
-.nav--eco ~ .nav-mobile-panel { padding-top: 120px; }
 
 /* ---------- Home: hero refinements ---------- */
 .hero-figure .media-slot--fill { position: absolute; inset: 0; }

@@ -80,7 +80,7 @@ export default async function VentureCapital() {
         lede="Nayokan Venture Capital provides structured capital pathways for Cameroonian enterprises with productive potential, sourced from within our ecosystem and from selected institutional partnerships."
         actions={
           <>
-            <a href="#approach" className="btn btn-ghost on-dark">
+            <a href="#approach" className="btn btn-ghost">
               Investment approach <span className="arrow">→</span>
             </a>
             <a href="#enquiry" className="btn btn-accent">
@@ -116,7 +116,6 @@ export default async function VentureCapital() {
         <div className="wrap">
           <SectionHeader
             num="§ 01 — Investment Approach"
-            onDark
             title={
               <>
                 Three principles.
@@ -147,7 +146,6 @@ export default async function VentureCapital() {
         <div className="wrap">
           <SectionHeader
             num="§ 02 — How we invest"
-            onDark
             title={
               <>
                 From referral

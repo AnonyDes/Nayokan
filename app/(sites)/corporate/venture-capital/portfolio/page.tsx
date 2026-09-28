@@ -33,20 +33,19 @@ export default async function VcPortfolio() {
         }
         lede="A curated view of the Nayokan VC portfolio."
       />
-      <section className="section" style={{ background: "var(--navy)", color: "var(--paper)" }}>
+      <section className="section">
         <div className="wrap">
           {ventures.length > 0 ? (
             <VcPortfolioGrid ventures={ventures} />
           ) : (
             <PublishingNote
-              onDark
               title="Portfolio coming soon."
               actions={
                 <>
                   <a href="/venture-capital/approach" className="btn btn-accent">
                     Investment approach <span className="arrow">→</span>
                   </a>
-                  <a href="/venture-capital/partner" className="btn btn-ghost on-dark">
+                  <a href="/venture-capital/partner" className="btn btn-ghost">
                     Partnership enquiry
                   </a>
                 </>

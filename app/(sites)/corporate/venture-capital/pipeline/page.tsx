@@ -44,10 +44,10 @@ export default function VcPipeline() {
         lede="How Nayokan VC moves ventures from ecosystem sourcing to portfolio support — six stages, honest gates."
       />
 
-      <section className="section" style={{ background: "var(--navy)", color: "var(--paper)" }}>
+      <section className="section">
         <div className="wrap">
           <div style={{ marginBottom: 48 }}>
-            <div className="stage-rail stage-rail-dark">
+            <div className="stage-rail">
               {STAGES.map((s, i) => (
                 <div className="rail-step" key={s.title}>
                   <span className="rs-num">STAGE {String(i + 1).padStart(2, "0")}</span>
@@ -59,25 +59,25 @@ export default function VcPipeline() {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, paddingTop: 32, borderTop: "1px solid var(--line-invert)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, paddingTop: 32, borderTop: "1px solid var(--line)" }}>
             <div>
-              <span className="meta on-dark">Governance</span>
-              <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.4rem", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--paper)", marginTop: 12 }}>
+              <span className="meta">Governance</span>
+              <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.4rem", letterSpacing: "-0.02em", lineHeight: 1.1, marginTop: 12 }}>
                 Pipeline is a{" "}
-                <em style={{ fontStyle: "italic", fontWeight: 500, color: "var(--green-glow)" }}>
+                <em style={{ fontStyle: "italic", fontWeight: 500, color: "var(--green-deep)" }}>
                   working view
                 </em>
                 , not a public deal board.
               </h3>
-              <p style={{ color: "var(--muted-invert)", marginTop: 12, fontSize: "0.95rem", lineHeight: 1.55 }}>
+              <p style={{ color: "var(--muted)", marginTop: 12, fontSize: "0.95rem", lineHeight: 1.55 }}>
                 Only ventures that have consented to disclosure appear publicly by name. Others are
                 represented by an internal reference only. Financial detail is never published
                 pre-close.
               </p>
             </div>
             <div>
-              <div style={{ background: "var(--navy-2)", padding: 32, border: "1px solid var(--line-invert)" }}>
-                <span className="meta on-dark">What we publish, and when</span>
+              <div style={{ background: "var(--bone)", padding: 32, border: "1px solid var(--line)" }}>
+                <span className="meta">What we publish, and when</span>
                 <dl className="vc-disclosure">
                   {DISCLOSURE.map(([k, v]) => (
                     <div key={k}>
