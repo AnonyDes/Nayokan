@@ -1,38 +1,10 @@
-/* Venture Capital — Confident · Analytical · Institutional
-   Navy-dominant, data-forward, dark surfaces. */
+/* Venture Capital — same light theme as the rest of the site.
+   Structure only: no navy surfaces, no invert palette. */
 
-body[data-world="vc"] { background: var(--navy); color: var(--paper); }
-/* The nav bar stays the shared light theme on every page, VC included —
-   it never adopts the page's dark surface (see also .nav-mobile-panel
-   below, which still needs its own ink override for the same reason). */
-
-body[data-world="vc"] .world-hero { background: var(--navy); border-bottom-color: var(--line-invert); }
-body[data-world="vc"] .world-hero-crumbs { border-bottom-color: var(--line-invert); color: var(--muted-invert); }
-body[data-world="vc"] .world-hero-crumbs a { color: var(--muted-invert); }
-body[data-world="vc"] .world-hero-crumbs a:hover { color: var(--paper); }
-body[data-world="vc"] .world-hero-crumbs .current { color: var(--paper); }
-body[data-world="vc"] .world-badge { border-color: var(--paper); color: var(--paper); }
-body[data-world="vc"] .world-badge .num { color: var(--green-glow); }
-body[data-world="vc"] .world-hero-title { color: var(--paper); }
-body[data-world="vc"] .world-hero-title em { color: var(--green-glow); }
-body[data-world="vc"] .world-hero-lede { color: var(--muted-invert); }
-
-body[data-world="vc"] .world-hero-figure { background: var(--navy-2); }
-body[data-world="vc"] .world-hero-stats { background: var(--line-invert); border-color: var(--line-invert); }
-body[data-world="vc"] .world-hero-stat { background: var(--navy); }
-body[data-world="vc"] .world-hero-stat .meta { color: var(--muted-invert); }
-body[data-world="vc"] .world-hero-stat .num { color: var(--paper); }
-
-body[data-world="vc"] .world-locator { background: var(--navy-2); border-bottom-color: var(--line-invert); }
-body[data-world="vc"] .world-locator-inner { color: var(--muted-invert); }
-body[data-world="vc"] .world-locator-stage { border-color: var(--line-invert-strong); color: var(--muted-invert); }
-body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color: var(--navy); border-color: var(--paper); }
-
-/* VC hero graphic: a data panel */
 .vc-hero-panel {
   aspect-ratio: 4/5;
-  background: var(--navy-2);
-  border: 1px solid var(--line-invert);
+  background: var(--bone);
+  border: 1px solid var(--line);
   padding: 28px;
   display: flex; flex-direction: column;
   gap: 20px;
@@ -41,18 +13,18 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
 .vc-hero-panel-head {
   display: flex; justify-content: space-between;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--line-invert);
+  border-bottom: 1px solid var(--line);
   font-family: var(--font-mono);
   font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted-invert);
+  color: var(--muted);
 }
 .vc-hero-panel-head .live {
   display: inline-flex; gap: 6px; align-items: center;
-  color: var(--green-glow);
+  color: var(--green-deep);
 }
 .vc-hero-panel-head .live::before {
   content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--green-glow);
+  background: var(--green-deep);
   animation: pulse 1.4s ease-in-out infinite;
 }
 @keyframes pulse {
@@ -63,18 +35,18 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
 .vc-hero-metric {
   display: flex; justify-content: space-between; align-items: baseline;
   padding: 8px 0;
-  border-bottom: 1px dashed var(--line-invert);
+  border-bottom: 1px dashed var(--line);
 }
 .vc-hero-metric-label {
   font-family: var(--font-mono);
-  font-size: 0.75rem; color: var(--muted-invert);
+  font-size: 0.75rem; color: var(--muted);
   letter-spacing: 0.06em;
 }
 .vc-hero-metric-val {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.4rem;
-  color: var(--paper);
+  color: var(--ink);
   letter-spacing: -0.02em;
 }
 
@@ -82,16 +54,16 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
   flex: 1;
   display: flex; align-items: flex-end; gap: 6px;
   padding-top: 16px;
-  border-top: 1px solid var(--line-invert);
+  border-top: 1px solid var(--line);
 }
 .vc-hero-chart .bar {
   flex: 1;
-  background: var(--paper);
+  background: var(--ink);
   opacity: 0.85;
   min-height: 12px;
   position: relative;
 }
-.vc-hero-chart .bar.accent { background: var(--green-glow); opacity: 1; }
+.vc-hero-chart .bar.accent { background: var(--green-deep); opacity: 1; }
 .vc-hero-chart .bar.faded { opacity: 0.3; }
 .vc-hero-chart-label {
   position: absolute;
@@ -99,50 +71,42 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
   text-align: center;
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  color: var(--muted-invert);
+  color: var(--muted);
   letter-spacing: 0.06em;
 }
 
 /* Approach — 3 pillar columns */
 .vc-approach {
   padding: clamp(80px, 10vw, 128px) 0;
-  background: var(--navy);
-  border-bottom: 1px solid var(--line-invert);
 }
-.vc-approach .section-header {
-  border-bottom-color: var(--line-invert);
-}
-.vc-approach h2 { color: var(--paper); }
-.vc-approach .lead { color: var(--muted-invert); }
 .vc-pillars {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: var(--line-invert);
-  border: 1px solid var(--line-invert);
+  background: var(--line);
+  border: 1px solid var(--line);
 }
 .vc-pillar {
-  background: var(--navy);
+  background: var(--paper);
   padding: 40px 32px;
   min-height: 320px;
   display: flex; flex-direction: column; gap: 16px;
   transition: background var(--dur-fast);
 }
-.vc-pillar:hover { background: var(--navy-2); }
+.vc-pillar:hover { background: var(--bone); }
 .vc-pillar .num {
   font-family: var(--font-mono);
   font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--green-glow);
+  color: var(--green-deep);
 }
 .vc-pillar h4 {
   font-family: var(--font-heading);
   font-weight: 700; font-size: 1.6rem;
   letter-spacing: -0.02em; line-height: 1.1;
-  color: var(--paper);
   max-width: 16ch;
 }
 .vc-pillar p {
-  color: var(--muted-invert);
+  color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.55;
   flex: 1;
@@ -150,9 +114,9 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
 .vc-pillar-detail {
   font-family: var(--font-mono);
   font-size: 0.72rem; letter-spacing: 0.08em;
-  color: var(--paper);
+  color: var(--ink);
   padding-top: 16px;
-  border-top: 1px solid var(--line-invert);
+  border-top: 1px solid var(--line);
   display: flex; justify-content: space-between;
 }
 @media (max-width: 900px) { .vc-pillars { grid-template-columns: 1fr; } }
@@ -160,15 +124,11 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
 /* Pipeline table */
 .vc-pipeline {
   padding: clamp(80px, 10vw, 128px) 0;
-  background: var(--navy-2);
-  border-bottom: 1px solid var(--line-invert);
+  background: var(--bone);
 }
-.vc-pipeline .section-header { border-bottom-color: var(--line-invert); }
-.vc-pipeline h2 { color: var(--paper); }
-.vc-pipeline .lead { color: var(--muted-invert); }
 .vc-table {
-  border-top: 1px solid var(--paper);
-  border-bottom: 1px solid var(--paper);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
 }
 .vc-thead, .vc-trow {
   display: grid;
@@ -180,37 +140,37 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
 .vc-thead {
   font-family: var(--font-mono);
   font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted-invert);
-  border-bottom: 1px solid var(--line-invert);
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
 }
 .vc-trow {
-  border-top: 1px solid var(--line-invert);
+  border-top: 1px solid var(--line);
   transition: background var(--dur-fast);
 }
 .vc-trow:first-child { border-top: none; }
-.vc-trow:hover { background: rgba(255,255,255,0.03); }
+.vc-trow:hover { background: rgba(10,10,10,0.03); }
 .vc-trow .vid {
   font-family: var(--font-mono);
-  color: var(--green-glow);
+  color: var(--green-deep);
   font-size: 0.82rem;
   letter-spacing: 0.05em;
 }
 .vc-trow .vname {
   font-family: var(--font-heading);
-  font-weight: 600; color: var(--paper);
+  font-weight: 600; color: var(--ink);
   font-size: 1.05rem;
   letter-spacing: -0.015em;
 }
 .vc-trow .vname small {
   display: block; margin-top: 4px;
   font-family: var(--font-body); font-weight: 400;
-  color: var(--muted-invert); font-size: 0.82rem;
+  color: var(--muted); font-size: 0.82rem;
   letter-spacing: 0;
 }
 .vc-trow .vcol {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--paper);
+  color: var(--ink);
   letter-spacing: 0.04em;
 }
 .vc-trow .vstage {
@@ -218,18 +178,18 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
   font-family: var(--font-mono);
   font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 4px 10px;
-  border: 1px solid var(--line-invert-strong);
-  color: var(--muted-invert);
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
   width: max-content;
 }
-.vc-trow .vstage.seed { color: var(--green-glow); border-color: var(--green-glow); }
-.vc-trow .vstage.growth { color: var(--paper); border-color: var(--paper); }
+.vc-trow .vstage.seed { color: var(--green-deep); border-color: var(--green-deep); }
+.vc-trow .vstage.growth { color: var(--ink); border-color: var(--ink); }
 @media (max-width: 900px) {
   .vc-thead { display: none; }
   .vc-trow { grid-template-columns: 1fr; gap: 8px; padding: 20px 4px; }
 }
 
-/* Enquiry CTA */
+/* Enquiry CTA — same dark band used elsewhere on the site */
 .vc-enquiry {
   padding: clamp(80px, 10vw, 128px) 0;
   background: var(--ink);
@@ -278,14 +238,7 @@ body[data-world="vc"] .world-locator-stage.on { background: var(--paper); color:
 .vc-enquiry-form textarea { min-height: 60px; }
 .vc-enquiry-form .btn { margin-top: 24px; width: 100%; justify-content: center; }
 @media (max-width: 900px) { .vc-enquiry-grid { grid-template-columns: 1fr; } }
-body[data-world="vc"] .related { background: var(--navy-2); border-top-color: var(--line-invert); }
-body[data-world="vc"] .related h3 { color: var(--muted-invert); }
-body[data-world="vc"] .related-grid { background: var(--line-invert); }
-body[data-world="vc"] .related-card { background: var(--navy); color: var(--paper); }
-body[data-world="vc"] .related-card:hover { background: var(--paper); color: var(--navy); }
-body[data-world="vc"] .related-card .meta { color: var(--muted-invert); }
-body[data-world="vc"] .related-card:hover .meta { color: var(--navy); opacity: 0.6; }
 
-/* The mobile menu panel is white: keep its text ink on navy pages (was
-   inheriting the body's white text and rendering invisible links). */
-body[data-world="vc"] .nav-mobile-panel { color: var(--ink); }
+/* The mobile menu panel is white: keep its text ink (was inheriting the
+   body's default text color and rendering invisible links on some pages). */
+.nav-mobile-panel { color: var(--ink); }
