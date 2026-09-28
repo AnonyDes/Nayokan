@@ -8,7 +8,7 @@ import { RichBlocks } from "@/ui/components/rich-blocks";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { MetaRail, type MetaRailItem } from "@/ui/components/meta-rail";
 import { ProgrammeCard, programmeStatus } from "@/ui/components/programme-card";
-import { Tbc, isTbc } from "@/ui/components/tbc";
+import { isUnconfirmed } from "@/platform/content/governance";
 import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 // Editorial section order for a programme page. CMS headings map onto these
-// keys; sections the CMS does not supply yet render a "to be confirmed" block
-// rather than invented content.
+// keys; a section the CMS does not supply yet is left out rather than filled
+// with invented content, so the numbering always runs without gaps.
 const SECTION_ORDER = [
   { key: "overview", title: "Overview", match: ["overview"] },
   { key: "learn", title: "What participants learn", match: ["objectives", "what participants learn", "learning outcomes", "curriculum"] },
@@ -60,16 +60,17 @@ function toSections(p: Programme): Section[] {
   const body = found.filter((s) => !s.key.startsWith("related"));
   const ordered: Section[] = [];
   for (const s of SECTION_ORDER) {
-    ordered.push(body.find((b) => b.key === s.key) ?? { key: s.key, title: s.title, blocks: [] });
+    const section = body.find((b) => b.key === s.key);
+    if (section && section.blocks.length > 0) ordered.push(section);
   }
-  return [...ordered, ...body.filter((b) => !SECTION_ORDER.some((s) => s.key === b.key))];
+  return [...ordered, ...body.filter((b) => b.blocks.length > 0 && !SECTION_ORDER.some((s) => s.key === b.key))];
 }
 
 function railItems(p: Programme): MetaRailItem[] {
   const fact = (label: string, value: string | undefined, field: string): MetaRailItem => ({
     label,
     value,
-    unconfirmed: isTbc(p.provenance, field),
+    unconfirmed: isUnconfirmed(p.provenance, field),
   });
   const status = programmeStatus(p);
   const intake = p.applicationDeadline
@@ -80,7 +81,7 @@ function railItems(p: Programme): MetaRailItem[] {
     fact("Location", p.location, "location"),
     fact("Format", p.deliveryMode, "deliveryMode"),
     fact("Certification", p.certification, "certification"),
-    { label: "Intake", value: intake, unconfirmed: isTbc(p.provenance, "applicationDeadline") },
+    { label: "Intake", value: isUnconfirmed(p.provenance, "applicationDeadline") ? status.label : intake },
   ];
 }
 
@@ -137,12 +138,6 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
           <div className="pdx-rail-wrap">
             <MetaRail items={railItems(p)} />
           </div>
-          {p.provenance.isDemo && (
-            <p className="pdx-provenance">
-              <Tbc>content to be confirmed</Tbc> Programme details on this page are provisional until
-              confirmed by the Vocational Training Institute.
-            </p>
-          )}
         </div>
       </section>
 
@@ -155,11 +150,7 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
                   <span className="pdx-section-num">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h2 id={`pdx-${i}`}>{s.title}</h2>
-                    {s.blocks.length > 0 ? (
-                      <RichBlocks blocks={s.blocks} />
-                    ) : (
-                      <p className="pdx-tbc-block">Content to be confirmed</p>
-                    )}
+                    <RichBlocks blocks={s.blocks} />
                   </div>
                 </section>
               ))}
@@ -171,8 +162,7 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
                 </span>
                 <h3>{p.applicationOpen ? "Ready to apply?" : "Applications open soon"}</h3>
                 <p>
-                  Applications are reviewed by the VTI team, who will contact you about next steps.{" "}
-                  <Tbc onDark>response time tbc</Tbc>
+                  Applications are reviewed by the VTI team, who will contact you about next steps.
                 </p>
                 {p.applicationOpen ? (
                   <a href={`/apply?programme=${p.slug}`} className="btn btn-accent">
@@ -187,7 +177,9 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
               <div className="pdx-contact">
                 <span className="meta">Questions</span>
                 <p>
-                  Contact the VTI admissions team. <Tbc>contact tbc</Tbc>
+                  <a href="/#apply" className="link-inline">
+                    Ask the VTI admissions team <span className="arrow">→</span>
+                  </a>
                 </p>
               </div>
             </aside>
@@ -199,7 +191,6 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
           <div className="wrap">
             <header className="section-header">
               <div>
-                <span className="meta-num">§ After the programme</span>
                 <h2>Where graduates can go next.</h2>
               </div>
               <p className="lead">
@@ -233,7 +224,6 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
           <div className="wrap">
             <header className="section-header">
               <div>
-                <span className="meta-num">§ Related programmes</span>
                 <h2>Other VTI programmes.</h2>
               </div>
               <a href="/programmes" className="link-inline">

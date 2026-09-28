@@ -4,7 +4,9 @@ import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { SectionHeader } from "@/ui/components/section-header";
-import { Tbc } from "@/ui/components/tbc";
+import { confirmedValue } from "@/platform/content/governance";
+import { Pending } from "@/ui/components/pending";
+import { PublishingNote } from "@/ui/components/publishing-note";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { RelatedStrip } from "@/ui/components/strips";
 import type { Cluster } from "@/platform/content/types";
@@ -24,7 +26,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 // Designed cluster page (cluster-detail.html) is built around Agri-Food —
 // its copy is used verbatim for that cluster; other clusters get the same
-// structure with tbc markers rather than invented content.
+// structure, and unconfirmed facts (member counts, members, outputs) are left
+// out rather than invented.
 const AGRI_FEATURES = [
   { num: "01", title: "Shared productive infrastructure", desc: "Members share access to processing equipment, cold-chain logistics and technical tools that no single small enterprise could sustain alone." },
   { num: "02", title: "Joint market access", desc: "Structured relationships with buyers, distributors and export partners — negotiated at cluster level, not enterprise-by-enterprise." },
@@ -32,18 +35,18 @@ const AGRI_FEATURES = [
   { num: "04", title: "Pathway to capital", desc: "Cluster members with growth traction are eligible for referral into the Startup Centre commercialization pathway and, subsequently, Venture Capital." },
 ];
 
-const AGRI_PARTICIPANTS = [
-  ["Post-harvest processing", "Central Region"],
-  ["Cold-chain logistics", "Yaoundé"],
-  ["Small-batch food processing", "Central Region"],
-  ["Agri-input distribution", "Regional"],
-  ["Cocoa & coffee finishing", "South Region"],
-  ["Speciality food export", "National"],
-  ["Packaging & labelling", "Yaoundé"],
-  ["Farm-to-hospitality supply", "Cross-cluster"],
+// The kinds of enterprise the Agri-Food cluster is designed to bring together
+// (scope, not a membership list).
+const AGRI_SCOPE = [
+  "Post-harvest processing",
+  "Cold-chain logistics",
+  "Small-batch food processing",
+  "Agri-input distribution",
+  "Cocoa & coffee finishing",
+  "Packaging & labelling",
 ];
 
-function ClusterViz({ code, count }: { code: string; count: number }) {
+function ClusterViz({ code, count }: { code: string; count?: number }) {
   const nodes: [number, number][] = [
     [80, 80], [200, 60], [320, 80],
     [60, 200], [340, 200],
@@ -67,7 +70,7 @@ function ClusterViz({ code, count }: { code: string; count: number }) {
           ))}
         </g>
         <text x="20" y="380" fontFamily="IBM Plex Mono" fontSize="8" fill="rgba(10,10,10,0.5)" letterSpacing="1.5">
-          FIG. {code} — CLUSTER TOPOLOGY · {count} ENTERPRISES
+          FIG. {code} — CLUSTER TOPOLOGY · {count ? `${count} ENTERPRISES` : "WORKING SCHEMATIC"}
         </text>
       </svg>
     </div>
@@ -82,7 +85,7 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
 
   const isAgri = cluster.slug === "agri-food-production";
   const others = (await repo.listClusters()).filter((c) => c.id !== cluster.id).slice(0, 3);
-  const memberCount = cluster.memberCount ?? 8;
+  const memberCount = confirmedValue(cluster.provenance, "memberCount", cluster.memberCount);
   const code = cluster.code ?? "C/—";
 
   return (
@@ -160,33 +163,26 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
             num="§ 02 — Participants"
             title={
               <>
-                {memberCount} enterprises,
+                {memberCount ? `${memberCount} enterprises,` : "Many enterprises,"}
                 <br />
                 one cluster.
               </>
             }
-            lead="Cluster composition is refreshed at each VTI cohort. Full participant profiles are published after individual enterprise consent."
+            lead="Cluster composition is refreshed at each VTI cohort."
           />
-          <div className="cluster-participants-grid">
-            {(isAgri ? AGRI_PARTICIPANTS : []).map(([name, loc], i) => (
-              <div className="cluster-part" key={i}>
-                <span className="num">E/{String(i + 1).padStart(2, "0")}</span>
-                <h4>
-                  {name} <Tbc />
-                </h4>
-                <small>{loc}</small>
-              </div>
-            ))}
-            {!isAgri && (
-              <div className="cluster-part" style={{ gridColumn: "1 / -1" }}>
-                <span className="num">—</span>
-                <h4>
-                  Participant list pending confirmation <Tbc>member details tbc</Tbc>
-                </h4>
-                <small>Published after enterprise consent.</small>
-              </div>
-            )}
-          </div>
+          {isAgri && (
+            <ul className="cluster-scope" aria-label="Kinds of enterprise in this cluster">
+              {AGRI_SCOPE.map((kind) => (
+                <li key={kind}>{kind}</li>
+              ))}
+            </ul>
+          )}
+          <PublishingNote title="Member enterprises coming soon.">
+            <p>
+              Each enterprise joins through VTI training or a cluster referral, and works with the others
+              on shared tools, market access and mentorship.
+            </p>
+          </PublishingNote>
         </div>
       </section>
 
@@ -201,7 +197,7 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
                 producing.
               </>
             }
-            lead="Working outputs — not decorative activity. Metrics reviewed quarterly by cluster members and the VTI programme lead."
+            lead="Working outputs, not decorative activity."
           />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "var(--line)", border: "1px solid var(--line)" }}>
             {[
@@ -211,8 +207,9 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
             ].map(([k, sub]) => (
               <div key={k} style={{ background: "var(--paper)", padding: 32, display: "flex", flexDirection: "column", gap: 8, minHeight: 200 }}>
                 <span className="meta">{k}</span>
-                <div style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "3rem", letterSpacing: "-0.04em", color: "var(--ink)", lineHeight: 0.9 }}>
-                  —<Tbc />
+                <div className="num-pending" style={{ fontSize: "3rem", lineHeight: 0.9 }}>
+                  <span className="impact-pending-rule" aria-hidden="true" />
+                  <Pending>Published once verified</Pending>
                 </div>
                 <p style={{ color: "var(--muted)", fontSize: "0.9rem", marginTop: "auto" }}>{sub}</p>
               </div>

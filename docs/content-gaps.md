@@ -1,6 +1,6 @@
 # Content gaps: facts Nayokan must confirm before launch
 
-Nothing below may be presented publicly as fact until confirmed. Until then it ships as a placeholder ("tbc" tag, em-dash, or CONTENT TO BE CONFIRMED) or stays as an unpublished draft.
+Nothing below may be presented publicly as fact until confirmed. Until then the field is withheld from public pages (see `src/platform/content/governance.ts`), a listing shows a neutral publishing note, or the record stays an unpublished draft. Editorial notation such as "tbc" is never rendered publicly.
 
 ## Institution
 - Current registration number and date (the association was declared in Cameroon in April 2015 per the Architecture Spec; the designs' "EST. 2019" was removed and the About timeline years 2019/2022/2024/2025 are unconfirmed).

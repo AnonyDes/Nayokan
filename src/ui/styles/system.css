@@ -35,18 +35,17 @@ p { max-width: 62ch; text-wrap: pretty; }
   transform: translateY(-1px);
 }
 
-.placeholder-tag {
+/* Neutral public note for data not yet published (governance.ts). Never
+   bracketed or italicised: it must read as a finished label, not a draft. */
+.pending-note {
   font-family: var(--font-mono);
-  font-size: 10px;
-  font-style: italic;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--muted);
-  letter-spacing: 0.06em;
-  vertical-align: super;
-  margin-left: 6px;
 }
-.placeholder-tag.on-dark { color: var(--muted-invert); }
-.placeholder-tag::before { content: '['; }
-.placeholder-tag::after  { content: ']'; }
+.pending-note.on-dark { color: var(--muted-invert); }
 
 /* ---------- Container & layout ---------- */
 .wrap {
@@ -163,21 +162,6 @@ p { max-width: 62ch; text-wrap: pretty; }
 .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
 
 .nav-actions { display: flex; align-items: center; gap: var(--s-4); }
-.lang-toggle {
-  display: inline-flex; gap: 2px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem; font-weight: 500;
-  letter-spacing: 0.06em;
-  border: 1px solid var(--line-strong);
-  padding: 2px;
-  border-radius: var(--radius);
-}
-.lang-toggle button {
-  padding: 4px 8px;
-  border-radius: 2px;
-  color: var(--muted);
-}
-.lang-toggle button.active { background: var(--ink); color: var(--paper); }
 
 .nav-cta {
   padding: 10px 16px;
@@ -191,7 +175,7 @@ p { max-width: 62ch; text-wrap: pretty; }
 .nav-burger { display: none; }
 
 @media (max-width: 960px) {
-  .nav-links, .nav-actions .lang-toggle { display: none; }
+  .nav-links { display: none; }
   .nav-burger {
     display: flex; flex-direction: column; gap: 5px;
     padding: 8px;

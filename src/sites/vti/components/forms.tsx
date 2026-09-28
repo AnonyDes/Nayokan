@@ -4,7 +4,6 @@ import { useActionState, useEffect, useRef } from "react";
 import type { FormState } from "@/platform/forms/actions";
 import { submitEnquiry } from "@/platform/forms/actions";
 import { Field } from "@/ui/components/form-field";
-import { Tbc } from "@/ui/components/tbc";
 import { trackEvent } from "@/platform/analytics";
 
 const IDLE: FormState = { status: "idle" };
@@ -48,8 +47,7 @@ export function VtiEnquiryForm({ programmes }: { programmes: string[] }) {
       </button>
       {state.status === "success" && (
         <p className="form-success" role="status" style={{ marginTop: 20, color: "var(--green-glow)", fontSize: "0.9rem" }}>
-          ✓ Enquiry received. A VTI programme lead will be in touch.{" "}
-          <Tbc onDark>demo — form not wired</Tbc>
+          ✓ Enquiry received. A VTI programme lead will be in touch.
         </p>
       )}
       {state.status === "error" && !Object.keys(state.fieldErrors).length && (

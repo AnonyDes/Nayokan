@@ -4,7 +4,10 @@ import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
-import { Tbc } from "@/ui/components/tbc";
+import { onlyConfirmed } from "@/platform/content/governance";
+import { MediaSlot } from "@/ui/components/media-slot";
+import { PublishingNote } from "@/ui/components/publishing-note";
+import { MentorKinds } from "@/sites/startup/components/mentor-kinds";
 import { RelatedStrip, WORLD_LINKS } from "@/ui/components/strips";
 
 export const metadata: Metadata = {
@@ -22,13 +25,21 @@ const PIPELINE = [
   { num: "05", title: "Scale", desc: "Handover into Nayokan Venture Capital for growth funding, or into strategic partnerships for continued expansion.", tag: "→ Venture Capital" },
 ];
 
-const UNIVERSITIES = [
-  "University of Yaoundé I",
-  "University of Douala",
-  "University of Buea",
-  "University of Bamenda",
-  "MINRESI",
-  "MINESUP",
+// What a university partnership covers. Framework, not a partner list:
+// institutions are named only once a partnership is confirmed.
+const UNIVERSITY_FRAMEWORK = [
+  { title: "Research into ventures", desc: "A route for research outputs with productive potential into the commercialization pipeline." },
+  { title: "Shared IP framework", desc: "Clear, agreed terms for intellectual property before any venture is formed." },
+  { title: "Revenue and equity", desc: "Revenue sharing and long-term equity stakes in the ventures that result." },
+  { title: "Students and researchers", desc: "Access to mentorship, programmes and opportunities for the university's innovators." },
+];
+
+// Innovation in practice: illustrative photography for the Startup Centre's
+// world (founders, prototypes, mentoring), until Nayokan's own is supplied.
+const PRACTICE: { slot: "startup-programme-hero" | "startup-commercialization" | "world-startup"; label: string }[] = [
+  { slot: "startup-programme-hero", label: "001 · Founders at work" },
+  { slot: "startup-commercialization", label: "002 · Prototype to product" },
+  { slot: "world-startup", label: "003 · Mentorship" },
 ];
 
 // Decorative commercialization schematic (startup-centre.html hero figure).
@@ -81,6 +92,9 @@ function Blueprint() {
 export default async function StartupHome() {
   const repo = await getContentRepository();
   const [mentors, ventures] = await Promise.all([repo.listMentors(), repo.listVentures("startup")]);
+  // Mentors and ventures are named only with their consent.
+  const confirmedMentors = onlyConfirmed(mentors, "name");
+  const confirmedVentures = onlyConfirmed(ventures, "name");
 
   return (
     <>
@@ -114,6 +128,16 @@ export default async function StartupHome() {
       />
 
       <WorldLocator on={[2, 3, 4]} />
+
+      {/* Innovation in practice */}
+      <section className="sc-practice" aria-label="Innovation in practice">
+        {PRACTICE.map((f) => (
+          <figure key={f.slot} className="sc-practice-frame">
+            <MediaSlot slot={f.slot} fill variant="compact" tone="dark" sizes="(max-width: 699px) 100vw, 34vw" />
+            <figcaption>{f.label}</figcaption>
+          </figure>
+        ))}
+      </section>
 
       {/* Commercialization pipeline */}
       <section className="pipeline" id="pipeline">
@@ -157,21 +181,22 @@ export default async function StartupHome() {
                 who have built.
               </>
             }
-            lead="Nayokan Startup Centre mentors are researchers, founders, operators and investors — with lived experience in African markets. Full profiles are published after approval."
+            lead="Nayokan Startup Centre mentors are researchers, founders, operators and investors with lived experience in African markets."
           />
-          <div className="mentors-grid">
-            {mentors.slice(0, 4).map((m) => (
-              <article className="mentor-card" key={m.id}>
-                <div className="mentor-portrait">{m.initials}</div>
-                <div className="mentor-name">
-                  {m.name}
-                  <Tbc>tbc</Tbc>
-                </div>
-                <div className="mentor-role">{m.role}</div>
-                <div className="mentor-tag">{m.expertise.join(" · ")}</div>
-              </article>
-            ))}
-          </div>
+          {confirmedMentors.length > 0 ? (
+            <div className="mentors-grid">
+              {confirmedMentors.slice(0, 4).map((m) => (
+                <article className="mentor-card" key={m.id}>
+                  <div className="mentor-portrait">{m.initials}</div>
+                  <div className="mentor-name">{m.name}</div>
+                  <div className="mentor-role">{m.role}</div>
+                  <div className="mentor-tag">{m.expertise.join(" · ")}</div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <MentorKinds />
+          )}
           <div style={{ textAlign: "right", marginTop: 32 }}>
             <a href="/mentors" className="link-inline">
               All mentors <span className="arrow">→</span>
@@ -185,7 +210,6 @@ export default async function StartupHome() {
         <div className="wrap">
           <div className="univ-grid">
             <div>
-              <span className="meta on-dark">§ 03 — University Partnerships</span>
               <h2 style={{ marginTop: 16 }}>
                 A structured
                 <br />
@@ -206,15 +230,16 @@ export default async function StartupHome() {
             </div>
             <div>
               <span className="meta on-dark" style={{ display: "block", marginBottom: 16 }}>
-                Active & in-conversation partners
+                What a partnership covers
               </span>
-              <div className="univ-list">
-                {UNIVERSITIES.map((u) => (
-                  <div className="univ-cell" key={u}>
-                    {u} <Tbc onDark>tbc</Tbc>
-                  </div>
+              <ul className="univ-framework">
+                {UNIVERSITY_FRAMEWORK.map((f) => (
+                  <li key={f.title}>
+                    <h3>{f.title}</h3>
+                    <p>{f.desc}</p>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </div>
@@ -226,32 +251,47 @@ export default async function StartupHome() {
           <SectionHeader
             num="§ 04 — Portfolio"
             title="Ventures in the ecosystem."
-            lead="A curated selection of ventures currently working with the Startup Centre. Portfolio details are published only after venture consent."
+            lead="Ventures working with the Startup Centre."
           />
-          <div className="portfolio-grid">
-            {ventures.slice(0, 6).map((v) => (
-              <article className="port-card" key={v.id}>
-                <div className="port-header">
-                  <div className="port-logo">
-                    {v.code}
-                    <Tbc>tbc</Tbc>
-                  </div>
-                  <span className="port-status">● Active</span>
-                </div>
-                <h4>{v.name}</h4>
-                <p>{v.description}</p>
-                <div className="port-tags">
-                  <span className="port-tag">{v.sector}</span>
-                  <span className="port-tag">{v.stage}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div style={{ textAlign: "right", marginTop: 32 }}>
-            <a href="/portfolio" className="link-inline">
-              Full portfolio <span className="arrow">→</span>
-            </a>
-          </div>
+          {confirmedVentures.length > 0 ? (
+            <>
+              <div className="portfolio-grid">
+                {confirmedVentures.slice(0, 6).map((v) => (
+                  <article className="port-card" key={v.id}>
+                    <div className="port-header">
+                      <div className="port-logo">{v.code}</div>
+                      {v.listingStatus === "active" && <span className="port-status">● Active</span>}
+                    </div>
+                    <h4>{v.name}</h4>
+                    <p>{v.description}</p>
+                    <div className="port-tags">
+                      <span className="port-tag">{v.sector}</span>
+                      <span className="port-tag">{v.stage}</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <div style={{ textAlign: "right", marginTop: 32 }}>
+                <a href="/portfolio" className="link-inline">
+                  Full portfolio <span className="arrow">→</span>
+                </a>
+              </div>
+            </>
+          ) : (
+            <PublishingNote
+              title="Portfolio coming soon."
+              actions={
+                <a href="/portfolio" className="btn btn-ghost">
+                  How the portfolio works <span className="arrow">→</span>
+                </a>
+              }
+            >
+              <p>
+                The Centre works with ventures at every stage of the pipeline, from research outputs to
+                ventures ready for Nayokan Venture Capital.
+              </p>
+            </PublishingNote>
+          )}
         </div>
       </section>
 
@@ -260,7 +300,6 @@ export default async function StartupHome() {
         <div className="wrap">
           <div className="cta-grid">
             <div>
-              <span className="meta on-dark">§ 05 — Innovator application</span>
               <h2
                 className="on-dark"
                 style={{
@@ -296,13 +335,11 @@ export default async function StartupHome() {
               <div className="cta-contact">
                 <div>
                   <span className="meta on-dark">Applications</span>
-                  <span>
-                    innovators@nayokan.org <Tbc onDark>tbc</Tbc>
-                  </span>
+                  <a href="/apply">Apply online →</a>
                 </div>
                 <div>
                   <span className="meta on-dark">Cycle</span>
-                  <span>Rolling · Reviewed monthly</span>
+                  <span>Rolling</span>
                 </div>
               </div>
             </div>

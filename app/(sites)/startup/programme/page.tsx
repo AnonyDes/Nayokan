@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
-import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
+import { EditorialHero } from "@/ui/components/editorial-hero";
+import { MediaSlot } from "@/ui/components/media-slot";
 
 export const metadata: Metadata = {
   title: "Programme",
@@ -19,27 +19,28 @@ const COHORTS = [
 ];
 
 const MILESTONES = [
-  { num: "M1 · Week 1", title: "Onboarding", desc: "Venture mapped onto the Nayokan commercialization framework. Milestones agreed.", tag: "Mentor pairing" },
-  { num: "M2 · Week 4", title: "Model & economics", desc: "Business model designed, unit economics validated, venture architecture defined.", tag: "Model design" },
-  { num: "M3 · Week 10", title: "Market pilots", desc: "First customer pilots or letters of intent secured. Technical feasibility confirmed.", tag: "Pilots" },
-  { num: "M4 · Week 16", title: "Product & distribution", desc: "Product build against pilot feedback. Distribution partners engaged.", tag: "Product" },
-  { num: "M5 · Week 22", title: "Investment readiness", desc: "Financials, cap table, governance and data room prepared for capital conversations.", tag: "Readiness" },
-  { num: "M6 · Week 26", title: "Handover", desc: "Venture moves into Nayokan VC pipeline or continues as Startup Centre alumni.", tag: "→ VC · Alumni" },
+  { num: "M1", title: "Onboarding", desc: "Venture mapped onto the Nayokan commercialization framework. Milestones agreed.", tag: "Mentor pairing" },
+  { num: "M2", title: "Model & economics", desc: "Business model designed, unit economics validated, venture architecture defined.", tag: "Model design" },
+  { num: "M3", title: "Market pilots", desc: "First customer pilots or letters of intent secured. Technical feasibility confirmed.", tag: "Pilots" },
+  { num: "M4", title: "Product & distribution", desc: "Product build against pilot feedback. Distribution partners engaged.", tag: "Product" },
+  { num: "M5", title: "Investment readiness", desc: "Financials, cap table, governance and data room prepared for capital conversations.", tag: "Readiness" },
+  { num: "M6", title: "Handover", desc: "Venture moves into Nayokan VC pipeline or continues as Startup Centre alumni.", tag: "→ VC · Alumni" },
 ];
 
 const SUPPORT = [
-  { num: "01", title: "Mentorship", desc: "Weekly 1:1 with a paired mentor. Group critique sessions with cohort peers." },
+  { num: "01", title: "Mentorship", desc: "Regular 1:1 sessions with a paired mentor, and group critique with cohort peers." },
   { num: "02", title: "Framework & tooling", desc: "Access to the Nayokan commercialization framework, templates, and back-office tooling." },
-  { num: "03", title: "Market validation", desc: "Structured pilot programme with pre-vetted enterprise and public-sector customers." },
+  { num: "03", title: "Market validation", desc: "Structured pilots with enterprise and public-sector customers." },
   { num: "04", title: "Legal & governance", desc: "Corporate structuring support, IP framework, and governance templates." },
   { num: "05", title: "Capital pathway", desc: "Priority access to Nayokan VC and co-investor introductions on programme completion." },
   { num: "06", title: "Ecosystem access", desc: "Introductions across VTI clusters, hospitality assets and institutional partners." },
 ];
 
+// Confirmed-only intake facts. Cohort size and duration are published with
+// each cohort once confirmed.
 const INTAKE_FACTS = [
-  { label: "Cohort size", value: "10–12 ventures" },
-  { label: "Duration", value: "26 weeks" },
-  { label: "Format", value: "Hybrid · Yaoundé" },
+  { label: "Applications", value: "Open" },
+  { label: "Location", value: "Yaoundé + partner sites" },
 ];
 
 const specCell = {
@@ -67,9 +68,7 @@ const specDesc = { color: "var(--muted)", fontSize: "0.9rem", lineHeight: 1.55 }
 export default function StartupProgramme() {
   return (
     <>
-      <SubHero
-        sec="§ Startup Centre · Programme"
-        refPath="/startup-centre/programme"
+      <EditorialHero
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -81,6 +80,12 @@ export default function StartupProgramme() {
           </>
         }
         lede="The Startup Centre programme takes validated ideas and research through a six-month, six-milestone commercialization pathway — mentored, milestone-driven, market-tested."
+        facts={[
+          { label: "Applications", value: "Open" },
+          { label: "Location", value: "Yaoundé + partner sites" },
+        ]}
+        slot="startup-programme-hero"
+        figure="Fig. — A founder presenting milestone progress to mentors"
       />
 
       <section className="section">
@@ -88,7 +93,6 @@ export default function StartupProgramme() {
           {/* Who */}
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span>§ 01 — Who it is for</span>
               <h3>
                 Ventures, researchers,
                 <br />
@@ -109,11 +113,10 @@ export default function StartupProgramme() {
           {/* Milestones */}
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span>§ 02 — Programme stages</span>
               <h3>
-                Six months.
-                <br />
                 Six milestones.
+                <br />
+                One pathway.
               </h3>
               <p>
                 Each cohort progresses through six milestone reviews. Ventures that meet the
@@ -135,10 +138,15 @@ export default function StartupProgramme() {
             </div>
           </div>
 
+          {/* Milestone photography: market pilots (M3) through to product & distribution (M4) */}
+          <div className="programme-photo-band">
+            <MediaSlot slot="startup-commercialization" ratio="21:9" variant="compact" sizes="100vw" />
+            <p className="programme-photo-cap">Fig. — A founder demonstrating a prototype to a first customer, mid-pathway</p>
+          </div>
+
           {/* Support */}
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span>§ 03 — Support provided</span>
               <h3>
                 What the
                 <br />
@@ -173,7 +181,6 @@ export default function StartupProgramme() {
             }}
           >
             <div>
-              <span className="meta on-dark">§ 04 — Next intake</span>
               <h2
                 style={{
                   fontFamily: "var(--font-heading)",
@@ -221,21 +228,6 @@ export default function StartupProgramme() {
                     </div>
                   </div>
                 ))}
-                <div>
-                  <span className="meta on-dark">Next intake</span>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontWeight: 700,
-                      fontSize: "1.4rem",
-                      letterSpacing: "-0.02em",
-                      marginTop: 6,
-                      color: "var(--paper)",
-                    }}
-                  >
-                    —<Tbc onDark>date tbc</Tbc>
-                  </div>
-                </div>
               </div>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                 <a href="/apply" className="btn btn-accent">

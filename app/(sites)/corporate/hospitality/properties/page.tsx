@@ -20,7 +20,6 @@ export default async function Properties() {
     <>
       <SubHero
         sec="§ Hospitality · Properties"
-        refPath="/hospitality/properties"
         crumbs={[
           { label: "Nayokan", href: "/" },
           { label: "Hospitality", href: "/hospitality" },
@@ -50,16 +49,15 @@ export default async function Properties() {
                   Direct booking later.
                 </>
               }
-              lead="Today, bookings are managed directly by the hospitality team. A future release will add a Nayokan-operated booking system. Both paths are shown below so the UX supports the transition without redesign."
+              lead="Today, bookings are managed directly by the hospitality team. Direct online booking will follow."
             />
             <div className="booking-two">
               <div className="bt-card now">
                 <span className="bt-tag">● Active today · Direct enquiry</span>
-                <h3>Send an enquiry, we respond within 24h.</h3>
+                <h3>Send an enquiry, and the team confirms your stay.</h3>
                 <p>
-                  Today, the hospitality team confirms availability and pricing directly. Your
-                  enquiry routes to <em>hospitality@nayokan.org</em>. We hold quiet dates for
-                  institutional visitors and Nayokan cohorts.
+                  Today, the hospitality team confirms availability and pricing directly, and holds
+                  quiet dates for institutional visitors and Nayokan cohorts.
                 </p>
                 <div className="bt-actions">
                   <a href="/hospitality#booking" className="btn btn-primary">

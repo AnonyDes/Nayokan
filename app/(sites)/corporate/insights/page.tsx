@@ -3,6 +3,7 @@ import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
 import { CorpHero } from "@/ui/components/heroes";
 import { ArticleGrid } from "@/sites/corporate/components/article-grid";
+import { CtaBand } from "@/ui/components/strips";
 
 export const metadata: Metadata = {
   title: "Insights",
@@ -30,11 +31,19 @@ export default async function Insights() {
         lede="Working notes, briefings, case studies and editorial pieces on the making of productive capacity in Cameroon. Written by Nayokan and its partners."
       />
       <ArticleGrid articles={articles} />
-      <div style={{ display: "flex", justifyContent: "center", paddingBottom: 96 }}>
-        <a href="#" className="btn btn-ghost" aria-disabled="true">
-          Load more insights <span className="arrow">→</span>
-        </a>
-      </div>
+      <CtaBand
+        sec="§ Insights · Contribute"
+        title={
+          <>
+            Write with
+            <br />
+            <em>Nayokan.</em>
+          </>
+        }
+        lede="Researchers, founders, partners and practitioners are welcome to propose case studies and briefings on productive systems in Cameroon."
+        primary={{ label: "Propose a piece", href: "/contact" }}
+        secondary={{ label: "See what we do", href: "/what-we-do" }}
+      />
     </>
   );
 }

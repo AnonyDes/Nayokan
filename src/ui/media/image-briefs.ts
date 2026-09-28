@@ -65,6 +65,24 @@ const LAB_BANNER: ImageAsset = {
   caption: "Nayokan Association · VTI computer lab · Yaoundé",
 };
 
+const LAB_HANDSHAKE: ImageAsset = {
+  src: "/assets/photos/nayokan-03.jpg",
+  alt: "Nayokan leadership greeting guests at the launch of the VTI computer lab in Yaoundé.",
+  width: 563,
+  height: 1000,
+  position: "50% 60%",
+  caption: "Launch of the VTI computer lab · Yaoundé",
+};
+
+const LAB_TRAINEES: ImageAsset = {
+  src: "/assets/photos/nayokan-01.jpg",
+  alt: "Trainees at their workstations in the Nayokan VTI computer lab in Yaoundé, with Nayokan staff standing at the front.",
+  width: 563,
+  height: 1000,
+  position: "30% 60%",
+  caption: "Trainees at the VTI computer lab · Yaoundé",
+};
+
 const DOCUMENTARY = "Natural light, documentary. No staging, no retouching beyond exposure.";
 
 const briefs = {
@@ -141,7 +159,7 @@ const briefs = {
       width: 1792,
       height: 1024,
       isIllustrative: true,
-      caption: "Hospitality · Bastos residence arrival",
+      caption: "Hospitality · Arrival courtyard",
     },
   },
   "programme-vti": {
@@ -325,22 +343,10 @@ const briefs = {
       isIllustrative: true,
     },
   },
-  "startup-mentor": {
-    role: "Mentor portrait",
-    subject: "Head-and-shoulders portrait of the named mentor",
-    location: "Neutral indoor light",
-    composition: "Eye level, plain background",
-    ratio: "4:5",
-    treatment: "Consistent portrait set: same light, same crop, consent recorded.",
-    illustrative: {
-      src: "/assets/photos/illustrative/startup-mentor.jpg",
-      alt: "Portrait of a startup mentor and enterprise advisor in Cameroon.",
-      width: 1365,
-      height: 1024,
-      position: "85% 60%",
-      isIllustrative: true,
-    },
-  },
+  // Deliberately no "startup-mentor" slot: a mentor portrait would stand in
+  // for a specific named person, and AGENTS.md forbids an AI-generated face
+  // next to a real person's name or role. MentorDirectory (filters.tsx)
+  // renders initials only, never a photo, until real portraits exist.
 
   // ── Corporate worlds ──────────────────────────────────────────────────────
   "vc-hero": {
@@ -405,6 +411,42 @@ const briefs = {
       height: 1024,
       isIllustrative: true,
     },
+  },
+  "about-origin": {
+    role: "About: the institution at work, beside the origin story",
+    subject: "Nayokan leadership and staff at a Nayokan facility",
+    location: "Yaoundé",
+    composition: "Group at eye level, Nayokan signage legible",
+    ratio: "4:3",
+    treatment: DOCUMENTARY,
+    asset: LAB_LAUNCH,
+  },
+  "about-people": {
+    role: "About: people behind the institution",
+    subject: "Nayokan leadership meeting partners or guests",
+    location: "Yaoundé",
+    composition: "Portrait orientation, faces readable",
+    ratio: "3:4",
+    treatment: DOCUMENTARY,
+    asset: LAB_HANDSHAKE,
+  },
+  "impact-evidence": {
+    role: "Impact: documentary evidence beside the verified-figures statement",
+    subject: "Trainees at work in a Nayokan programme",
+    location: "Nayokan VTI, Yaoundé",
+    composition: "Portrait orientation, trainees in the foreground",
+    ratio: "3:4",
+    treatment: DOCUMENTARY,
+    asset: LAB_TRAINEES,
+  },
+  "contact-hero": {
+    role: "Contact: the institution the reader is writing to",
+    subject: "Nayokan leadership at a Nayokan facility, signage visible",
+    location: "Yaoundé",
+    composition: "Landscape, calm, room for the eye",
+    ratio: "4:3",
+    treatment: DOCUMENTARY,
+    asset: LAB_BANNER,
   },
   "article-default": {
     role: "Insight article cover",

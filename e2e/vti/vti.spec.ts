@@ -53,8 +53,8 @@ test.describe("vti routes", () => {
 test.describe("vti application flow", () => {
   test("six-step application renders and steps forward", async ({ page }) => {
     await go(page, "/apply");
-    await expect(page.getByText(/Step 01/i).first()).toBeVisible();
+    await expect(page.getByRole("region", { name: "Step 1 — Getting started" })).toBeVisible();
     await page.getByRole("button", { name: /Begin application/i }).click();
-    await expect(page.getByText(/Step 02 — About you/i).first()).toBeVisible();
+    await expect(page.getByRole("region", { name: "Step 2 — About you" })).toBeVisible();
   });
 });

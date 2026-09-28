@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
-import { siteUrl } from "@/platform/sites/registry";
-import { Tbc } from "@/ui/components/tbc";
+import { onlyConfirmed } from "@/platform/content/governance";
+import type { Partner } from "@/platform/content/types";
 import { SectionHeader } from "@/ui/components/section-header";
 import { SystemSection } from "@/sites/corporate/components/system-section";
 import { ImpactCell } from "@/sites/corporate/components/metrics";
 import { CtaBand } from "@/ui/components/strips";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { FourWorlds } from "@/ui/components/four-worlds";
+import { ProgrammeCard, programmeSlot, programmeStatus, PROGRAMME_WORLD_LABEL } from "@/ui/components/programme-card";
+import { programmeHref } from "@/sites/corporate/programme-href";
+import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
 export const metadata: Metadata = {
   title: "Nayokan — Building people, enterprises and productive systems for Cameroon.",
@@ -19,17 +22,32 @@ export const metadata: Metadata = {
 
 const MARQUEE = ["Capability", "Production", "Markets", "Innovation", "Capital", "Productive Assets"];
 
+// Flagship programmes, in display order: the first leads, the rest support it.
+const FLAGSHIP = ["professional-growth-engineering", "innovation-commercialization", "cluster-formation-programme"];
+
+// How Nayokan works with each kind of partner. Named partners appear only
+// once a partnership is confirmed (governance.ts); until then this section
+// describes the relationships Nayokan builds, never who it has them with.
+const PARTNER_KINDS: { category: Partner["category"]; label: string; desc: string }[] = [
+  { category: "university", label: "Universities & research", desc: "Research commercialization, student innovation and shared frameworks for IP." },
+  { category: "government", label: "Ministries & public sector", desc: "Vocational standards, enterprise policy and national skills priorities." },
+  { category: "development", label: "Development partners", desc: "Programme co-design, funding and evidence of impact." },
+  { category: "corporate", label: "Corporate & private sector", desc: "Industry placements, market access and co-investment." },
+];
+
 export default async function Home() {
   const repo = await getContentRepository();
-  const [metrics, stories, partners] = await Promise.all([
+  const [metrics, stories, partners, programmes] = await Promise.all([
     repo.listMetrics({ keys: ["m-people-trained", "m-programmes", "m-enterprises", "m-partners"] }),
     repo.listStories({ site: "corporate", limit: 3 }),
     repo.listPartners("corporate", "partners-wall"),
+    repo.listProgrammes({}),
   ]);
 
-  const homePartners = ["MINEFOP", "MINPMEESA", "i-DREAMS", "SCINO 360", "University of Yaoundé I", "MINRESI", "Conception X", "Enovation"]
-    .map((name) => partners.find((p) => p.name === name))
-    .filter((p) => p !== undefined);
+  const confirmedPartners = onlyConfirmed(partners, "name").slice(0, 8);
+  const [lead, ...supporting] = FLAGSHIP.map((slug) => programmes.find((p) => p.slug === slug)).filter(
+    (p) => p !== undefined,
+  );
 
   return (
     <>
@@ -39,9 +57,7 @@ export default async function Home() {
           <div className="hero-left">
             <div className="hero-meta reveal">
               <span className="eyebrow eyebrow-dot">A Cameroonian Development Institution</span>
-              <span className="hero-year">
-                Yaoundé · Cameroon <Tbc>est. date tbc</Tbc>
-              </span>
+              <span className="hero-year">Yaoundé · Cameroon</span>
             </div>
             <h1 className="hero-title reveal d1">
               Building <em>people</em>, enterprises&nbsp;and productive systems for{" "}
@@ -62,31 +78,6 @@ export default async function Home() {
                 Partner with Nayokan
               </a>
             </div>
-            <nav className="hero-worlds reveal d4" aria-label="The four worlds">
-              <span className="meta">Four worlds</span>
-              <ol>
-                <li>
-                  <a href={siteUrl("vti")} data-world-transition="vti">
-                    <span>01</span> VTI ↗
-                  </a>
-                </li>
-                <li>
-                  <a href={siteUrl("startup")} data-world-transition="startup">
-                    <span>02</span> Startup Centre ↗
-                  </a>
-                </li>
-                <li>
-                  <a href="/venture-capital">
-                    <span>03</span> Venture Capital
-                  </a>
-                </li>
-                <li>
-                  <a href="/hospitality">
-                    <span>04</span> Hospitality
-                  </a>
-                </li>
-              </ol>
-            </nav>
           </div>
           <div className="hero-right">
             <div className="hero-figure reveal">
@@ -115,7 +106,6 @@ export default async function Home() {
         <div className="wrap">
           <div className="about-intro-grid">
             <div className="about-intro-copy">
-              <span className="meta-num">§ 01 — What Nayokan is</span>
               <h2 className="about-intro-title reveal">
                 A Cameroonian development institution building the whole chain, not one link.
               </h2>
@@ -154,7 +144,6 @@ export default async function Home() {
         <div className="wrap">
           <div className="idea-grid">
             <div className="idea-left">
-              <span className="meta">§ 02 — Why systems matter</span>
             </div>
             <div className="idea-right">
               <p className="idea-statement reveal">
@@ -165,7 +154,7 @@ export default async function Home() {
               </p>
               <div className="idea-attrib reveal d1">
                 <span className="rule" style={{ width: 48 }} />
-                <span className="meta">Nayokan · Working Foundation, 2026</span>
+                <span className="meta">Nayokan · Founding principle</span>
               </div>
             </div>
           </div>
@@ -189,10 +178,10 @@ export default async function Home() {
             }
             lead="Each world has its own character and its own front door, and all four share the same institutional standards and the same productive system."
           />
-          <FourWorlds variant="home" />
+          <FourWorlds />
           <div className="worlds-anchor-foot">
-            <span>VTI and Startup Centre open as dedicated Nayokan sites</span>
-            <a href="/what-we-do">The full ecosystem map →</a>
+            <span>VTI and the Startup Centre each have a dedicated Nayokan site</span>
+            <a href="/what-we-do">How the four worlds connect →</a>
           </div>
         </div>
       </section>
@@ -205,95 +194,35 @@ export default async function Home() {
             title="Programmes currently in motion."
             lead="A selection of programmes across the Nayokan ecosystem. Full details, dates and application windows are managed inside each division."
           />
-          <div className="prog-grid">
-            <article className="prog-card reveal">
-              <MediaSlot slot="programme-vti" ratio="3:2" variant="compact" className="prog-media" />
-              <div className="prog-tag">
-                <span className="meta">VTI · Vocational</span>
-                <span className="prog-status open">● Open</span>
+          {lead && (
+            <a href={programmeHref(lead)} className="flagship-lead reveal">
+              <div className="flagship-lead-media">
+                <MediaSlot
+                  slot={programmeSlot(lead)}
+                  media={lead.heroImage}
+                  illustrative={getNamedIllustrative(`programme-${lead.slug}`, `Illustrative image for ${lead.name}.`)}
+                  fill
+                  variant="compact"
+                  tone="dark"
+                  sizes="(max-width: 899px) 100vw, 60vw"
+                />
               </div>
-              <h3 className="prog-title">Professional Growth Engineering Programme</h3>
-              <p className="prog-desc">
-                Practical skills training for young Cameroonians combined with an entrepreneurial
-                cluster model — ensuring graduates are not only knowledgeable but capable of creating
-                impactful job solutions and opportunities.
-              </p>
-              <div className="prog-meta">
-                <div>
-                  <span className="meta">Duration</span>
-                  <span>
-                    — — —<Tbc />
-                  </span>
-                </div>
-                <div>
-                  <span className="meta">Location</span>
-                  <span>Yaoundé · Cameroon</span>
-                </div>
+              <div className="flagship-lead-body">
+                <span className="meta on-dark">
+                  Flagship · {PROGRAMME_WORLD_LABEL[lead.world]} · {programmeStatus(lead).label}
+                </span>
+                <h3>{lead.name}</h3>
+                <p>{lead.summary}</p>
+                <span className="link-inline on-dark">
+                  Programme details <span className="arrow">→</span>
+                </span>
               </div>
-              <a href={siteUrl("vti")} className="link-inline">
-                Programme details <span className="arrow">→</span>
-              </a>
-            </article>
-
-            <article className="prog-card reveal d1 prog-card-featured">
-              <MediaSlot slot="programme-startup" ratio="3:2" variant="compact" tone="dark" className="prog-media" />
-              <div className="prog-tag">
-                <span className="meta on-dark">Startup Centre</span>
-                <span className="prog-status on-dark open">● Open</span>
-              </div>
-              <h3 className="prog-title on-dark">Innovation Commercialization — Industry Application Focus</h3>
-              <p className="prog-desc on-dark" style={{ color: "var(--muted-invert)" }}>
-                An industry-application-focused programme helping ventures and innovations move from
-                research to validated commercial product, with mentorship and market access.
-              </p>
-              <div className="prog-meta on-dark">
-                <div>
-                  <span className="meta on-dark">Duration</span>
-                  <span>
-                    — — —<Tbc onDark />
-                  </span>
-                </div>
-                <div>
-                  <span className="meta on-dark">Partners</span>
-                  <span>
-                    Universities · Industry <Tbc onDark />
-                  </span>
-                </div>
-              </div>
-              <a href={siteUrl("startup")} className="link-inline on-dark">
-                Programme details <span className="arrow">→</span>
-              </a>
-            </article>
-
-            <article className="prog-card reveal d2">
-              <MediaSlot slot="vti-clusters-hero" ratio="3:2" variant="compact" className="prog-media" />
-              <div className="prog-tag">
-                <span className="meta">VTI · Enterprise</span>
-                <span className="prog-status upcoming">○ Upcoming</span>
-              </div>
-              <h3 className="prog-title">Entrepreneurial Clusters</h3>
-              <p className="prog-desc">
-                Structured groups where graduates and enterprises collaborate around a common
-                productive activity — sharing tools, market access and support.
-              </p>
-              <div className="prog-meta">
-                <div>
-                  <span className="meta">Cohort</span>
-                  <span>
-                    — — —<Tbc />
-                  </span>
-                </div>
-                <div>
-                  <span className="meta">Format</span>
-                  <span>
-                    In-person + mentoring <Tbc />
-                  </span>
-                </div>
-              </div>
-              <a href={siteUrl("vti")} className="link-inline">
-                Cluster details <span className="arrow">→</span>
-              </a>
-            </article>
+            </a>
+          )}
+          <div className="flagship-support">
+            {supporting.map((p) => (
+              <ProgrammeCard key={p.id} programme={p} href={programmeHref(p)} showWorld />
+            ))}
           </div>
           <div className="prog-footer">
             <a href="/programmes" className="link-inline">
@@ -309,7 +238,7 @@ export default async function Home() {
           <SectionHeader
             num="§ 06 — Impact"
             title="Evidence over exaggeration."
-            lead="We only publish verified figures. Where a metric is being reconciled with our divisions, we mark it as such rather than overstating."
+            lead="We publish a figure only once it has been verified. Until then, the measure is named and left empty rather than estimated."
           />
           <div className="impact-grid">
             {metrics.map((m, i) => (
@@ -317,10 +246,9 @@ export default async function Home() {
             ))}
           </div>
           <div className="impact-footer">
-            <p className="meta">
-              All figures subject to editorial review · Content governance: draft → review → approved →
-              published.
-            </p>
+            <a href="/impact" className="link-inline">
+              Our approach to evidence <span className="arrow">→</span>
+            </a>
           </div>
         </div>
       </section>
@@ -372,19 +300,36 @@ export default async function Home() {
         <div className="wrap">
           <div className="partners-inner">
             <div className="partners-head">
-              <span className="meta-num">§ 08 — Partners</span>
               <h2>Institutional partners across the ecosystem.</h2>
               <p className="lead">
-                Universities, ministries, development organizations and private sector — approved
-                partners only.
+                Universities, ministries, development organisations and the private sector: long-term
+                institutional partnership is how the system scales.
               </p>
             </div>
-            <div className="partners-grid" aria-label="Partner wordmarks">
-              {homePartners.map((p) => (
-                <div className="partner-cell" key={p.id}>
-                  {p.name === "University of Yaoundé I" ? "Univ. Yaoundé I" : p.name} <Tbc />
-                </div>
-              ))}
+            <div className="partners-body">
+            {confirmedPartners.length > 0 ? (
+              <div className="partners-grid" aria-label="Partner wordmarks">
+                {confirmedPartners.map((p) => (
+                  <div className="partner-cell" key={p.id}>
+                    {p.name}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <ul className="partner-kinds" aria-label="How Nayokan works with partners">
+                {PARTNER_KINDS.map((k) => (
+                  <li key={k.category}>
+                    <h3>{k.label}</h3>
+                    <p>{k.desc}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div className="partners-foot">
+              <a href="/partners" className="link-inline">
+                Partner with Nayokan <span className="arrow">→</span>
+              </a>
+            </div>
             </div>
           </div>
         </div>
@@ -409,9 +354,7 @@ export default async function Home() {
           <>
             <div>
               <span className="meta on-dark">Enquiries</span>
-              <span>
-                partners@nayokan.org <Tbc onDark />
-              </span>
+              <a href="/contact">Contact the partnerships team →</a>
             </div>
             <div>
               <span className="meta on-dark">Yaoundé</span>

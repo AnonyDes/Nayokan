@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
 import { RichBlocks } from "@/ui/components/rich-blocks";
-import { Tbc } from "@/ui/components/tbc";
+import { isUnconfirmed } from "@/platform/content/governance";
 import { RelatedStrip } from "@/ui/components/strips";
 import { BookingForm } from "@/sites/corporate/components/forms";
 import { MediaSlot } from "@/ui/components/media-slot";
@@ -21,20 +21,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-// Design feature rows are per-property in property-detail.html; only the
-// Guesthouse carries a fully designed feature set. Others fall back to the
-// amenity list so nothing is fabricated.
-const FEATURES: Record<string, [string, string, boolean][]> = {
-  "nayokan-guesthouse": [
-    ["Rooms", "06", true],
-    ["Style", "Colonial · Refined", false],
-    ["Location", "Central Region · Yaoundé", false],
-    ["Nearest airport", "NSI · ~35 min", false],
-    ["On-site", "Library · Garden · WiFi", false],
-    ["Language", "EN · FR", false],
-  ],
-};
-
 export default async function PropertyDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const repo = await getContentRepository();
@@ -42,7 +28,14 @@ export default async function PropertyDetail({ params }: { params: Promise<{ slu
   if (!property) notFound();
 
   const others = (await repo.listProperties()).filter((p) => p.id !== property.id);
-  const features = FEATURES[property.slug];
+  // Physical facts appear only once confirmed; purpose and access always can.
+  const amenities = isUnconfirmed(property.provenance, "amenities") ? [] : property.amenities;
+  const features: [string, string][] = [
+    ["Type", property.type ?? "Property"],
+    ["City", property.location ?? "Yaoundé"],
+    ["Booking", "By enquiry"],
+    ...amenities.map((a): [string, string] => ["Feature", a]),
+  ];
   const gallery = getPropertyGallery(property.slug, property.name);
   const [hero, ...moreFrames] = gallery;
 
@@ -52,7 +45,8 @@ export default async function PropertyDetail({ params }: { params: Promise<{ slu
         <div className="property-hero-image">
           <MediaSlot slot="property" fill media={property.gallery[0]} illustrative={hero} tone="sand" variant="compact" />
           <span className="property-hero-caption">
-            {property.code ?? "—"} · {property.location ?? "Yaoundé"}
+            {property.code ? `${property.code} · ` : ""}
+            {property.location ?? "Yaoundé"}
           </span>
         </div>
       </section>
@@ -75,10 +69,11 @@ export default async function PropertyDetail({ params }: { params: Promise<{ slu
               <span style={{ opacity: 0.4 }}>/</span>
               <a href="/hospitality" style={{ color: "var(--muted)" }}>Hospitality</a>
               <span style={{ opacity: 0.4 }}>/</span>
-              <span style={{ color: "var(--ink)" }}>{property.code ?? "—"}</span>
+              <span style={{ color: "var(--ink)" }}>{property.name}</span>
             </div>
             <span className="meta">
-              Property {(property.code ?? "").replace("P/", "") || "—"} · {property.location ?? "Yaoundé"}
+              {property.code ? `Property ${property.code.replace("P/", "")} · ` : ""}
+              {property.location ?? "Yaoundé"}
             </span>
             <h1 className="property-detail-title">
               {property.name.split(" ").slice(0, -1).join(" ")}{" "}
@@ -88,51 +83,28 @@ export default async function PropertyDetail({ params }: { params: Promise<{ slu
               {property.summary}
             </p>
 
-            {features ? (
-              <div className="property-features">
-                {features.map(([k, v, tbc]) => (
-                  <div key={k}>
-                    <span className="meta">{k}</span>
-                    <span className="val">
-                      {v} {tbc && <Tbc />}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="property-features">
-                {property.amenities.map((a) => (
-                  <div key={a}>
-                    <span className="meta">Feature</span>
-                    <span className="val">
-                      {a} <Tbc />
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="property-features">
+              {features.map(([k, v]) => (
+                <div key={`${k}-${v}`}>
+                  <span className="meta">{k}</span>
+                  <span className="val">{v}</span>
+                </div>
+              ))}
+            </div>
 
-            {(property.body?.length ?? 0) > 0 ? (
-              <RichBlocks blocks={property.body ?? []} />
-            ) : (
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.7, color: "var(--ink)", maxWidth: "56ch", marginTop: 32 }}>
-                {property.summary} <Tbc>full description tbc</Tbc>
-              </p>
-            )}
+            {(property.body?.length ?? 0) > 0 && <RichBlocks blocks={property.body ?? []} />}
           </div>
 
           <aside className="property-book-card">
-            <span className="meta">Rates from</span>
-            <div className="rate">
-              — — — <small>/ night <Tbc /></small>
-            </div>
+            <span className="meta">Rates</span>
+            <div className="rate">On request</div>
             <p style={{ color: "var(--muted)", fontSize: "0.9rem", marginBottom: 20 }}>
-              Rates vary by room type, season and length of stay. Institutional and long-stay rates
-              on request.
+              Rates depend on the stay and are shared on enquiry, including institutional and
+              long-stay rates.
             </p>
             <BookingForm compact />
             <p style={{ marginTop: 16, fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: "var(--muted)", letterSpacing: "0.02em", textAlign: "center" }}>
-              Direct booking · Confirmed within 24h
+              Direct booking with the hospitality team
             </p>
           </aside>
         </div>

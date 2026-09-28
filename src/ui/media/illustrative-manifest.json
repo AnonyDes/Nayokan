@@ -593,24 +593,6 @@
       }
     ]
   },
-  "startup-mentor": {
-    "width": 1200,
-    "height": 896,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 23402
-      },
-      {
-        "w": 800,
-        "bytes": 47710
-      },
-      {
-        "w": 1200,
-        "bytes": 86774
-      }
-    ]
-  },
   "startup-opportunities-hero": {
     "width": 1200,
     "height": 896,
@@ -702,20 +684,20 @@
     ]
   },
   "vc-hero": {
-    "width": 1200,
-    "height": 896,
+    "width": 1376,
+    "height": 768,
     "variants": [
       {
         "w": 480,
-        "bytes": 35378
+        "bytes": 20808
       },
       {
         "w": 800,
-        "bytes": 81498
+        "bytes": 47052
       },
       {
-        "w": 1200,
-        "bytes": 153600
+        "w": 1280,
+        "bytes": 96782
       }
     ]
   },

@@ -4,7 +4,8 @@ import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
-import { Tbc } from "@/ui/components/tbc";
+import { MediaSlot } from "@/ui/components/media-slot";
+import { ProgrammeCard, programmeStatus } from "@/ui/components/programme-card";
 import { RelatedStrip } from "@/ui/components/strips";
 import { VtiEnquiryForm } from "@/sites/vti/components/forms";
 
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 const FEATURES = [
   { num: "01", title: "Skills for industrialisation", desc: "Curriculum designed around Cameroon's productive priorities and the reality of small-enterprise operations." },
-  { num: "02", title: "Certification & recognition", desc: "Officially recognised training, endorsed by the Ministry of Employment & Vocational Training.", tbc: "accreditation tbc" },
+  { num: "02", title: "Certification pathways", desc: "Each programme builds toward certification. Where a certificate is formally recognised, the programme page names the recognising body." },
   { num: "03", title: "Entrepreneurial clusters", desc: "Graduates are grouped into clusters that share tools, market access and mentorship — turning skills into enterprises." },
   { num: "04", title: "Pathway to production", desc: "Direct connections to Nayokan's Startup Centre, Venture Capital and Hospitality operations for graduates ready to scale." },
 ];
@@ -63,19 +64,17 @@ export default async function VtiHome() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/photos/nayokan-06.jpg" alt="Nayokan leadership and staff at the launch of the VTI computer lab, Yaoundé." />
               <figcaption>
-                Nayokan VTI · Inauguration · Yaoundé, 2024. <Tbc onDark>date tbc</Tbc>
+                Launch of the VTI computer lab · Yaoundé
               </figcaption>
             </figure>
             <div className="world-hero-stats">
               <div className="world-hero-stat">
-                <span className="meta">Cohorts</span>
-                <div className="num">
-                  02<Tbc />
-                </div>
+                <span className="meta">Programmes</span>
+                <div className="num">{String(programmes.length).padStart(2, "0")}</div>
               </div>
               <div className="world-hero-stat">
-                <span className="meta">Modules</span>
-                <div className="num">06</div>
+                <span className="meta">Open now</span>
+                <div className="num">{String(programmes.filter((p) => programmeStatus(p).open).length).padStart(2, "0")}</div>
               </div>
               <div className="world-hero-stat">
                 <span className="meta">Clusters</span>
@@ -130,16 +129,15 @@ export default async function VtiHome() {
                     <div className="fbody">
                       <h4>{f.title}</h4>
                       <p>
-                        {f.desc} {f.tbc && <Tbc>{f.tbc}</Tbc>}
+                        {f.desc}
                       </p>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="feature-media">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/photos/nayokan-08.jpg" alt="Trainees at Nayokan VTI computer lab." />
+            <div className="feature-media feature-media--slot">
+              <MediaSlot slot="programme-vti" ratio="4:5" variant="compact" sizes="(max-width: 899px) 100vw, 45vw" />
             </div>
           </div>
         </div>
@@ -150,29 +148,17 @@ export default async function VtiHome() {
           <SectionHeader
             num="§ 02 — Programmes"
             title="Current programmes."
-            lead="A live directory. Programmes marked open are currently accepting applications; details are managed inside VTI."
+            lead="Programmes marked open are accepting applications. Every programme pairs practical training with a route into an entrepreneurial cluster."
           />
-          <div className="prog-table">
-            {programmes.map((p) => (
-              <div className="prog-row" key={p.id}>
-                <span className="pnum">{p.code}</span>
-                <div className="pname">
-                  {p.name}
-                  <small>{p.summary}</small>
-                </div>
-                <span className="pmeta">
-                  — — —<Tbc>duration tbc</Tbc>
-                </span>
-                <span className={`pstatus${p.status === "open" ? "" : " up"}`}>
-                  {p.status === "open" ? "● Open" : "○ Upcoming"}
-                </span>
-                <span className="pgo">
-                  <a href={`/programmes/${p.slug}`} className="link-inline">
-                    Details →
-                  </a>
-                </span>
-              </div>
+          <div className="vti-prog-cards">
+            {programmes.slice(0, 3).map((p) => (
+              <ProgrammeCard key={p.id} programme={p} href={`/programmes/${p.slug}`} />
             ))}
+          </div>
+          <div className="prog-footer">
+            <a href="/programmes" className="link-inline">
+              All VTI programmes <span className="arrow">→</span>
+            </a>
           </div>
         </div>
       </section>
@@ -188,10 +174,7 @@ export default async function VtiHome() {
             {clusters.map((c, i) => (
               <a className="cluster-card" key={c.id} href={`/clusters/${c.slug}`}>
                 <span className="cnum">{String(i + 1).padStart(2, "0")}</span>
-                <h4>
-                  {c.name}
-                  <Tbc>cluster tbc</Tbc>
-                </h4>
+                <h4>{c.name}</h4>
                 <p>{c.summary}</p>
                 <span className="ctag">{c.sector}</span>
               </a>
@@ -204,7 +187,6 @@ export default async function VtiHome() {
         <div className="wrap">
           <div className="apply-grid">
             <div>
-              <span className="meta on-dark">§ 04 — Apply</span>
               <h2 className="on-dark" style={{ marginTop: 16 }}>
                 Ready to
                 <br />
@@ -217,9 +199,7 @@ export default async function VtiHome() {
               <div style={{ marginTop: 32 }} className="cta-contact">
                 <div>
                   <span className="meta on-dark">Admissions</span>
-                  <span>
-                    admissions@nayokan.org <Tbc onDark />
-                  </span>
+                  <span>Use the enquiry form</span>
                 </div>
                 <div>
                   <span className="meta on-dark">Location</span>

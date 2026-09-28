@@ -33,12 +33,15 @@ test.describe("startup routes", () => {
     expect(res?.status()).toBe(404);
   });
 
-  test("sitemap lists portfolio URLs", async ({ request, baseURL }) => {
+  test("sitemap lists the portfolio but no unconsented venture pages", async ({ request, baseURL }) => {
+    // Fixture ventures have unconfirmed names, so none may be published.
     const host = new URL(baseURL!).host;
     const ip = `http://127.0.0.1:${host.split(":")[1]}`;
     const res = await request.get(`${ip}/sitemap.xml`, { headers: { host } });
     expect(res.status()).toBe(200);
-    expect(await res.text()).toContain("/portfolio/");
+    const xml = await res.text();
+    expect(xml).toContain("/portfolio");
+    expect(xml).not.toContain("/portfolio/");
   });
 
   test("robots.txt points at the startup sitemap", async ({ request, baseURL }) => {
@@ -61,16 +64,12 @@ test.describe("startup journeys", () => {
     expect(filtered).toBeGreaterThan(0);
   });
 
-  test("portfolio detail renders anonymised venture", async ({ page }) => {
-    // Venture slugs come from the content repository — follow the first card.
+  test("unconsented ventures are not published", async ({ page }) => {
     await go(page, "/portfolio");
-    const first = page.locator('a[href^="/portfolio/"]').first();
-    await expect(first).toBeVisible();
-    const href = await first.getAttribute("href");
-    const res = await go(page, href!);
-    expect(res?.status()).toBe(200);
-    await expect(page.locator("h1").first()).toBeVisible();
-    await expect(page.locator(".portv-facts")).toBeVisible();
+    await expect(page.locator('a[href^="/portfolio/"]')).toHaveCount(0);
+    await expect(page.getByText("Published with consent").first()).toBeVisible();
+    const res = await go(page, "/portfolio/agri-processing-venture");
+    expect(res?.status()).toBe(404);
   });
 
   test("six-step innovator application renders", async ({ page }) => {

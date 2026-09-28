@@ -28,7 +28,8 @@ Start here:
 
 Rules:
 - Do not redesign. Port designs into React components; never iframe or ship the static HTML.
-- Never fabricate institutional facts. Demo content carries `provenance.isDemo` and renders "tbc" tags. Unverified impact metrics render an em-dash.
+- Never fabricate institutional facts. Demo content carries `provenance.isDemo`; fields in `unconfirmedFields` are withheld from public pages (`src/platform/content/governance.ts`), never tagged "tbc". Unverified metrics show no number, only "Published once verified". Unconfirmed partners, mentors and ventures are not listed; a `PublishingNote` explains what will appear.
+- Corporate navigation never links to VTI or the Startup Centre. What We Do (`/what-we-do`) introduces every world and carries the contextual CTAs to the sub-sites.
 - Hostnames and the admin site selector are never security boundaries; authorization is server-side + RLS.
 - Imports: `@/` maps to `src/`. Sites must not import other sites (`src/sites/<site>`); shared code goes to `src/ui` or `src/platform`.
 - Commands: `npm run dev`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run test:e2e`, `npm run build`.

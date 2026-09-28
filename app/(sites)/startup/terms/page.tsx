@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 import { siteUrl } from "@/platform/sites/registry";
 
 export const metadata: Metadata = {
@@ -20,7 +19,7 @@ const SECTIONS = [
   {
     h: "Content accuracy",
     paras: [
-      "Programme details, intake dates, partner names, mentor profiles and portfolio entries are marked where they remain to be confirmed. Written confirmations from the Startup Centre team supersede website copy.",
+      "Programme details, intake dates, partner names, mentor profiles and portfolio entries may change. Written confirmations from the Startup Centre team supersede website copy.",
       "Venture names, logos and financial details are published only after venture consent.",
     ],
   },
@@ -43,7 +42,6 @@ export default function StartupTerms() {
     <>
       <SubHero
         sec="§ Legal"
-        refPath="/terms"
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -56,8 +54,7 @@ export default function StartupTerms() {
         }
         lede={
           <>
-            The terms governing use of the Nayokan Startup Centre website.{" "}
-            <Tbc>working terms · pending legal review</Tbc>
+            The terms governing use of the Nayokan Startup Centre website.
           </>
         }
       />
@@ -91,9 +88,6 @@ export default function StartupTerms() {
               ))}
             </div>
           ))}
-          <p className="meta" style={{ marginTop: 32 }}>
-            Last updated: <Tbc>date tbc</Tbc>
-          </p>
         </div>
       </section>
     </>

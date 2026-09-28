@@ -34,7 +34,6 @@ export default async function Programmes() {
     <>
       <EditorialHero
         crumbs={[{ label: "Nayokan", href: "/" }, { label: "Programmes" }]}
-        eyebrow="§ Programme directory · All four worlds"
         title={
           <>
             All Nayokan <em>programmes,</em> in one place.
@@ -69,13 +68,9 @@ export default async function Programmes() {
         <div className="wrap">
           <header className="section-header">
             <div>
-              <span className="meta-num">§ 01 — Directory</span>
               <h2 id="directory-title">Browse by world.</h2>
             </div>
-            <p className="lead">
-              Filter by division or show only programmes open for applications. Dates, fees and
-              durations are published on each programme once confirmed.
-            </p>
+            <p className="lead">Filter by division or show only programmes open for applications.</p>
           </header>
           <ProgrammeDirectory programmes={programmes} />
         </div>
@@ -85,7 +80,6 @@ export default async function Programmes() {
         <div className="wrap">
           <div className="ed-band-inner">
             <div>
-              <span className="meta-num">§ 02 — How programmes connect</span>
               <h2>One pathway, not isolated courses.</h2>
             </div>
             <ol className="ed-steps">

@@ -30,7 +30,6 @@ export default async function VtiClusters() {
           { label: "VTI", href: "/" },
           { label: "Entrepreneurial clusters" },
         ]}
-        eyebrow="§ VTI · Entrepreneurial clusters"
         title={
           <>
             From <em>training</em> to production to market.
@@ -44,7 +43,6 @@ export default async function VtiClusters() {
         <div className="wrap">
           <div className="spec-grid" style={{ alignItems: "end", marginBottom: 48 }}>
             <div className="spec-head">
-              <span>§ 01 — How clusters work</span>
               <h3>
                 Structured groups.
                 <br />
@@ -77,7 +75,6 @@ export default async function VtiClusters() {
           <div style={{ marginTop: 64, padding: "40px 32px", background: "var(--ink)", color: "var(--paper)" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
               <div>
-                <span className="meta on-dark">§ System position</span>
                 <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.6rem", letterSpacing: "-0.025em", lineHeight: 1.1, color: "var(--paper)", marginTop: 12 }}>
                   Clusters sit between capability and markets.
                 </h3>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 import { siteUrl } from "@/platform/sites/registry";
 
 export const metadata: Metadata = {
@@ -34,7 +33,7 @@ const SECTIONS = [
   {
     h: "Your choices",
     paras: [
-      "You may withdraw consent, request a copy of your data, or ask for deletion at any time by writing to innovators@nayokan.org.",
+      "You may withdraw consent, request a copy of your data, or ask for deletion at any time by writing to the Startup Centre team through the application or contact forms on this website.",
     ],
   },
 ];
@@ -44,7 +43,6 @@ export default function StartupPrivacy() {
     <>
       <SubHero
         sec="§ Legal"
-        refPath="/privacy"
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -57,8 +55,7 @@ export default function StartupPrivacy() {
         }
         lede={
           <>
-            How the Nayokan Startup Centre handles personal information on this website.{" "}
-            <Tbc>working notice · pending legal review</Tbc>
+            How the Nayokan Startup Centre handles personal information on this website.
           </>
         }
       />
@@ -92,9 +89,6 @@ export default function StartupPrivacy() {
               ))}
             </div>
           ))}
-          <p className="meta" style={{ marginTop: 32 }}>
-            Last updated: <Tbc>date tbc</Tbc>
-          </p>
         </div>
       </section>
     </>

@@ -16,7 +16,6 @@ export default function StartupApply() {
     <>
       <SubHero
         sec="§ Apply · Innovator"
-        refPath="/startup-centre/apply"
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },

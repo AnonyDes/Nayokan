@@ -31,7 +31,6 @@ export default async function Opportunities() {
           { label: "Startup Centre", href: "/" },
           { label: "Opportunities" },
         ]}
-        eyebrow="§ Startup Centre · Opportunities"
         title={
           <>
             Programmes, challenges, <em>calls</em>.
@@ -45,7 +44,6 @@ export default async function Opportunities() {
         <div className="wrap">
           <header className="section-header">
             <div>
-              <span className="meta-num">§ 01 — Index</span>
               <h2 id="opp-title">Every open door, in one list.</h2>
             </div>
             <p className="lead">Filter by type or search by name. Status and deadlines are updated as each call changes.</p>
@@ -58,7 +56,6 @@ export default async function Opportunities() {
         <div className="wrap">
           <div className="ed-band-inner">
             <div>
-              <span className="meta-num">§ 02 — How to apply</span>
               <h2>From call to conversation.</h2>
             </div>
             <ol className="ed-steps">

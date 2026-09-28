@@ -8,7 +8,6 @@ import {
   submitVcPartnerEnquiry,
 } from "@/platform/forms/actions";
 import { Field } from "@/ui/components/form-field";
-import { Tbc } from "@/ui/components/tbc";
 import { trackEvent } from "@/platform/analytics";
 
 const IDLE: FormState = { status: "idle" };
@@ -81,12 +80,12 @@ export function EnquiryForm() {
         <a href="/privacy" style={{ borderBottom: "1px solid var(--line-strong)" }}>
           privacy notice
         </a>
-        . <Tbc>policy tbc</Tbc>
+        .
       </p>
       {state.status === "success" && (
         <p className="form-success" role="status" style={{ marginTop: 20, padding: 16, background: "var(--bone)", borderLeft: "3px solid var(--green-deep)", color: "var(--ink)", fontSize: "0.95rem" }}>
-          ✓ Thank you. Your enquiry has been logged — reference {state.reference}. Expect a response
-          within one business day. <Tbc>demo · form not wired</Tbc>
+          ✓ Thank you. Your enquiry has been logged — reference {state.reference}. The right team will be
+          in touch.
         </p>
       )}
       {state.status === "error" && !Object.keys(state.fieldErrors).length && (
@@ -188,8 +187,8 @@ export function VcPartnerForm() {
 
       {state.status === "success" && (
         <p className="form-success" role="status" style={{ marginTop: 24, padding: 16, background: "var(--bone)", borderLeft: "3px solid var(--green-deep)", color: "var(--ink)", fontSize: "0.95rem" }}>
-          ✓ Thank you. Your enquiry has been logged with Investor Relations. Expect a response within
-          5 business days. <Tbc>demo · form not wired</Tbc>
+          ✓ Thank you. Your enquiry has been logged with Investor Relations. The team will be in
+          touch.
         </p>
       )}
     </form>
@@ -250,15 +249,12 @@ export function BookingForm({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <div className="booking-actions">
           <SubmitButton pending={pending} label="Send enquiry" />
-          <a href="mailto:hospitality@nayokan.org" className="btn btn-ghost">
-            Email us directly
-          </a>
         </div>
       )}
       {compact && <SubmitButton pending={pending} label="Send enquiry" />}
       {state.status === "success" && (
         <p className="form-success" role="status" style={{ marginTop: 20, color: "var(--green-deep)", fontSize: "0.9rem" }}>
-          ✓ Enquiry received. Our hospitality team will respond within 24h. <Tbc>demo</Tbc>
+          ✓ Enquiry received. Our hospitality team will confirm availability with you.
         </p>
       )}
     </form>

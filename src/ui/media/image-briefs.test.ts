@@ -1,4 +1,5 @@
-import { existsSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { getImageBrief, getNamedIllustrative, getPropertyGallery, type ImageSlotId } from "./image-briefs";
@@ -13,8 +14,9 @@ const SLOTS: ImageSlotId[] = [
   "home-hero", "home-about", "world-vti", "world-startup", "world-vc", "world-hospitality",
   "programme-vti", "programme-startup", "programme-vc", "programme-hospitality", "programmes-hero",
   "vti-hero", "vti-programmes-hero", "vti-clusters-hero", "cluster-detail",
-  "startup-programme-hero", "startup-commercialization", "startup-opportunities-hero", "startup-portfolio", "startup-mentor",
+  "startup-programme-hero", "startup-commercialization", "startup-opportunities-hero", "startup-portfolio",
   "vc-hero", "hospitality-hero", "property", "story-startup", "article-default",
+  "about-origin", "about-people", "impact-evidence", "contact-hero",
 ];
 
 describe("image briefs", () => {
@@ -46,6 +48,32 @@ describe("image briefs", () => {
     expect(existsSync(path.join(process.cwd(), "public", image!.src))).toBe(true);
     expect(image!.alt.length).toBeGreaterThan(15);
   });
+
+  // Each world's landmark slots (its Four Worlds panel, plus its own site's
+  // hero) must show that world, not a copy of another world's photo. A prior
+  // generation batch left "vc-hero" byte-identical to "vti-clusters-hero" —
+  // Venture Capital's own hero rendering VTI's cluster workshop — which is
+  // exactly the kind of mix-up this guards against.
+  const WORLD_LANDMARK_SLOTS: Record<string, ImageSlotId[]> = {
+    vti: ["world-vti", "vti-hero"],
+    startup: ["world-startup", "startup-programme-hero"],
+    venture_capital: ["world-vc", "vc-hero"],
+    hospitality: ["world-hospitality", "hospitality-hero"],
+  };
+
+  test("no two different worlds' landmark photos are the same file", () => {
+    const hashOf = (slot: ImageSlotId) => {
+      const image = getImageBrief(slot).asset ?? getImageBrief(slot).illustrative!;
+      return createHash("md5").update(readFileSync(path.join(process.cwd(), "public", image.src))).digest("hex");
+    };
+    const bySlot = Object.entries(WORLD_LANDMARK_SLOTS).flatMap(([world, slots]) => slots.map((slot) => ({ world, slot, hash: hashOf(slot) })));
+    for (let i = 0; i < bySlot.length; i++) {
+      for (let j = i + 1; j < bySlot.length; j++) {
+        if (bySlot[i].world === bySlot[j].world) continue; // same world may reuse its own photo
+        expect(bySlot[i].hash, `${bySlot[i].slot} (${bySlot[i].world}) vs ${bySlot[j].slot} (${bySlot[j].world})`).not.toBe(bySlot[j].hash);
+      }
+    }
+  });
 });
 
 describe("four worlds", () => {
@@ -59,8 +87,23 @@ describe("four worlds", () => {
     expect(byWorld.hospitality).toMatchObject({ crossSite: false, destination: { site: "corporate", path: "/hospitality" } });
   });
 
-  test("directional headlines stay flagged until confirmed", () => {
-    for (const w of WORLDS_DIRECTORY) expect(w.provenance.unconfirmedFields).toContain("headline");
+  test("tones alternate black / green in reading order", () => {
+    expect(WORLDS_DIRECTORY.map((w) => w.tone)).toEqual(["black", "green", "black", "green"]);
+  });
+
+  test("every world explains itself before its CTA: what, why, who, offers and system fit", () => {
+    for (const w of WORLDS_DIRECTORY) {
+      for (const text of [w.positioning, w.whatItIs, w.why, w.audience, w.systemFit]) expect(text.length).toBeGreaterThan(10);
+      expect(w.offers.length).toBeGreaterThanOrEqual(3);
+      expect(w.anchor).toMatch(/^[a-z-]+$/);
+    }
+  });
+
+  test("world copy carries no figures", () => {
+    for (const w of WORLDS_DIRECTORY) {
+      const copy = [w.positioning, w.description, w.whatItIs, w.why, w.audience, w.systemFit, ...w.offers].join(" ");
+      expect(copy).not.toMatch(/\d/);
+    }
   });
 });
 

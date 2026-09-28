@@ -15,7 +15,6 @@ export interface EditorialCrumb {
 
 export function EditorialHero({
   crumbs,
-  eyebrow,
   title,
   lede,
   facts,
@@ -26,7 +25,6 @@ export function EditorialHero({
   children,
 }: {
   crumbs: EditorialCrumb[];
-  eyebrow: string;
   title: ReactNode;
   lede: ReactNode;
   /** Confirmed facts only. */
@@ -55,7 +53,6 @@ export function EditorialHero({
               </span>
             ))}
           </nav>
-          <span className="ed-hero-eyebrow">{eyebrow}</span>
           <h1 className="ed-hero-title">{title}</h1>
           <p className="ed-hero-lede">{lede}</p>
           {facts && facts.length > 0 && (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
 import { SubHero } from "@/ui/components/heroes";
+import { onlyConfirmed } from "@/platform/content/governance";
 
 export const metadata: Metadata = {
   title: "Partners",
@@ -25,35 +26,34 @@ const WAYS = [
 ];
 
 const WALLS = [
-  { num: "01", heading: "Universities & research", desc: "Academic and research institutions collaborating on commercialization pathways.", category: "university" },
-  { num: "02", heading: "Ministries & public sector", desc: "Ministries and public bodies supporting productive-sector development.", category: "government" },
-  { num: "03", heading: "Development partners", desc: "Development finance institutions, foundations and multilaterals.", category: "development" },
-  { num: "04", heading: "Corporate & private sector", desc: "Corporates partnering on distribution, market access and co-investment.", category: "corporate" },
+  { num: "01", heading: "Universities & research", desc: "Academic and research institutions collaborating on commercialization pathways.", category: "university", approach: "Research commercialization with the Startup Centre, student innovation, and a shared framework for IP and revenue in resulting ventures." },
+  { num: "02", heading: "Ministries & public sector", desc: "Ministries and public bodies supporting productive-sector development.", category: "government", approach: "Vocational standards and recognition for VTI programmes, enterprise policy, and alignment with national skills priorities." },
+  { num: "03", heading: "Development partners", desc: "Development finance institutions, foundations and multilaterals.", category: "development", approach: "Programme co-design and funding across the four worlds, with reporting built on verified evidence." },
+  { num: "04", heading: "Corporate & private sector", desc: "Corporates partnering on distribution, market access and co-investment.", category: "corporate", approach: "Industry placements for VTI graduates, market access for cluster enterprises, and co-investment alongside Nayokan VC." },
 ] as const;
 
 export default async function Partners() {
   const repo = await getContentRepository();
-  const partners = await repo.listPartners("corporate", "partners-wall");
+  // Named partners appear only once a partnership is formally confirmed.
+  const partners = onlyConfirmed(await repo.listPartners("corporate", "partners-wall"), "name");
 
   return (
     <>
       <SubHero
         sec="§ Corporate · Partners"
-        refPath="/partners"
         crumbs={[{ label: "Nayokan", href: "/" }, { label: "Partners" }]}
         title={
           <>
             Institutional <em>partnerships</em> across four worlds.
           </>
         }
-        lede="Nayokan is designed for long-term institutional partnership. Below: the categories of partners we work with, why organisations collaborate with us, and how to begin a conversation. All logos and named partners require written confirmation before publication."
+        lede="Nayokan is designed for long-term institutional partnership. Below: the kinds of partners we work with, why organisations collaborate with us, and how to begin a conversation."
       />
 
       <section className="section">
         <div className="wrap">
           <div className="spec-grid" style={{ alignItems: "start", paddingBottom: 32, borderBottom: "1px solid var(--line)", marginBottom: 16 }}>
             <div className="spec-head">
-              <span>§ 01 — Why partner with Nayokan</span>
               <h3>
                 Four reasons
                 <br />
@@ -79,24 +79,26 @@ export default async function Partners() {
                 <p>{w.desc}</p>
               </div>
               <div>
-                <div className="partner-wall">
-                  {partners
-                    .filter((p) => p.category === w.category)
-                    .map((p) => (
-                      <div className="pw-cell" key={p.id}>
-                        <span className="pw-tag">Partner</span>
-                        <span className="pw-name">{p.name}</span>
-                        <span className="pw-placeholder">Logo — tbc</span>
-                      </div>
-                    ))}
-                </div>
+                {partners.some((p) => p.category === w.category) ? (
+                  <div className="partner-wall">
+                    {partners
+                      .filter((p) => p.category === w.category)
+                      .map((p) => (
+                        <div className="pw-cell" key={p.id}>
+                          <span className="pw-tag">Partner</span>
+                          <span className="pw-name">{p.name}</span>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <p className="partner-wall-note">{w.approach}</p>
+                )}
               </div>
             </div>
           ))}
 
           <div className="spec-grid" style={{ alignItems: "start", padding: "32px 0", borderTop: "1px solid var(--line)" }}>
             <div className="spec-head">
-              <span>§ 03 — Partnership models</span>
               <h3>
                 Four ways to
                 <br />
@@ -123,7 +125,6 @@ export default async function Partners() {
       <section className="section" style={{ background: "var(--ink)", color: "var(--paper)", padding: "80px 0" }}>
         <div className="wrap" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           <div>
-            <span className="meta on-dark">§ 04 — Begin</span>
             <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2rem,3.2vw,3rem)", letterSpacing: "-0.04em", lineHeight: 1, color: "var(--paper)", marginTop: 16 }}>
               Begin a partnership
               <br />

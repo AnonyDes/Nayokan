@@ -4,7 +4,6 @@ import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
-import { Tbc } from "@/ui/components/tbc";
 import { RelatedStrip } from "@/ui/components/strips";
 import { BookingForm } from "@/sites/corporate/components/forms";
 import { MediaSlot } from "@/ui/components/media-slot";
@@ -17,29 +16,24 @@ export const metadata: Metadata = {
   alternates: canonical("/hospitality"),
 };
 
-// Per-property display rows (the "Rooms / Style / Rates" strip differs per asset).
-const PROP_META: Record<string, [string, string, boolean][]> = {
+// Per-property display rows. Purpose and access only: room counts, rates and
+// capacities are published once confirmed, never estimated.
+const PROP_META: Record<string, [string, string][]> = {
   "nayokan-guesthouse": [
-    ["Rooms", "06", true],
-    ["Style", "Colonial · Refined", false],
-    ["Rates from", "— — —", true],
+    ["Type", "Guesthouse"],
+    ["For", "Visitors & delegations"],
+    ["Booking", "By enquiry"],
   ],
   "long-stay-residence": [
-    ["Units", "04", true],
-    ["Min. stay", "14 nights", false],
-    ["Rates from", "— — —", true],
+    ["Type", "Long-stay"],
+    ["For", "Multi-week stays"],
+    ["Booking", "By enquiry"],
   ],
   "workspace-reception": [
-    ["Capacity", "60", true],
-    ["Format", "Boardroom · Event", false],
-    ["Access", "On request", false],
+    ["Type", "Meeting space"],
+    ["For", "Cohorts & partners"],
+    ["Access", "On request"],
   ],
-};
-
-const PROP_TITLES: Record<string, string> = {
-  "nayokan-guesthouse": "The Nayokan Guesthouse — Central Region.",
-  "long-stay-residence": "Long-stay Residence — Nsimeyong.",
-  "workspace-reception": "Workspace & Reception — Institutional Base.",
 };
 
 export default async function Hospitality() {
@@ -65,7 +59,7 @@ export default async function Hospitality() {
             return.
           </>
         }
-        lede="Nayokan Hospitality operates refined guesthouses and productive assets in Yaoundé and beyond — hospitality treated as economic infrastructure, not decoration."
+        lede="Nayokan Hospitality treats guesthouses and properties as productive assets: hospitality as economic infrastructure, not decoration."
         actions={
           <>
             <a href="#properties" className="btn btn-primary">
@@ -77,14 +71,8 @@ export default async function Hospitality() {
           </>
         }
         figure={
-          <div className="hosp-hero-figure" aria-hidden="true">
-            <div className="hosp-hero-sun" />
-            <div className="hosp-hero-arches">
-              <div className="hosp-hero-arch" />
-              <div className="hosp-hero-arch" />
-              <div className="hosp-hero-arch" />
-            </div>
-            <span className="hosp-hero-caption">Guesthouse 001 · Yaoundé</span>
+          <div className="hosp-hero-photo">
+            <MediaSlot slot="hospitality-hero" ratio="4:5" tone="sand" variant="compact" eager caption />
           </div>
         }
       />
@@ -95,7 +83,6 @@ export default async function Hospitality() {
         <div className="wrap">
           <div className="hosp-intro-inner">
             <div>
-              <span className="meta">§ 01 — The Idea</span>
               <p style={{ maxWidth: "24ch", marginTop: 12, color: "var(--muted)", fontSize: "0.92rem" }}>
                 Hospitality inside Nayokan is not lifestyle. It is <em>productive infrastructure</em> —
                 long-term assets that generate consistent value.
@@ -122,19 +109,19 @@ export default async function Hospitality() {
             num="§ 02 — Properties"
             title={
               <>
-                Three properties.
+                Places to stay,
                 <br />
-                All in Yaoundé.
+                work and meet.
               </>
             }
-            lead="A short, curated portfolio. Each property is operated to institutional standards and open to guests, partners and long-stay visitors."
+            lead="A short, curated portfolio, run to institutional standards and open to guests, partners and long-stay visitors. Property details are published as each one is confirmed."
           />
 
           {properties.map((p, i) => (
             <article className="hosp-property" key={p.id}>
               <div
                 className={`hosp-property-media${i === 1 ? " p2" : i === 2 ? " p3" : ""}`}
-                data-label={`${p.code ?? "P/—"} · YAOUNDÉ · ${(p.type ?? "Property").toUpperCase()}`}
+                data-label={`${p.code ?? "Property"} · ${(p.type ?? "Property").toUpperCase()}`}
               >
                 <MediaSlot
                   slot="property"
@@ -146,17 +133,17 @@ export default async function Hospitality() {
                 />
               </div>
               <div className="hosp-property-body">
-                <div className="hosp-property-num">Property {(p.code ?? "").replace("P/", "") || "—"} · Yaoundé</div>
-                <h3 className="hosp-property-title">{PROP_TITLES[p.slug] ?? p.name}</h3>
+                <div className="hosp-property-num">
+                  {p.code ? `Property ${p.code.replace("P/", "")} · ` : ""}
+                  {p.location}
+                </div>
+                <h3 className="hosp-property-title">{p.name}.</h3>
                 <p className="hosp-property-desc">{p.summary}</p>
                 <div className="hosp-property-meta">
-                  {(PROP_META[p.slug] ?? []).map(([k, v, tbc]) => (
+                  {(PROP_META[p.slug] ?? []).map(([k, v]) => (
                     <div key={k}>
                       <span className="meta">{k}</span>
-                      <span className="val">
-                        {v}
-                        {tbc && <Tbc />}
-                      </span>
+                      <span className="val">{v}</span>
                     </div>
                   ))}
                 </div>
@@ -173,7 +160,6 @@ export default async function Hospitality() {
         <div className="wrap">
           <div className="hosp-booking-grid">
             <div>
-              <span className="meta">§ 03 — Enquiries</span>
               <h2 style={{ marginTop: 16 }}>
                 Simple
                 <br />
@@ -181,11 +167,7 @@ export default async function Hospitality() {
               </h2>
               <p className="lead" style={{ marginTop: 24 }}>
                 Booking is managed directly by the hospitality team. Send an enquiry with your dates
-                and we will confirm availability within one business day.
-              </p>
-              <p className="hosp-booking-note">
-                Enquiries route to <em>hospitality@nayokan.org</em> <Tbc />. Direct booking
-                integrations are planned for a future release.
+                and the team will confirm availability with you.
               </p>
             </div>
             <BookingForm />

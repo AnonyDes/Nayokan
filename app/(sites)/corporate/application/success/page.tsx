@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
-import { Tbc } from "@/ui/components/tbc";
 
 export const metadata: Metadata = {
   title: "Application received",
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 const NEXT_STEPS = [
   { num: "01", title: "Confirmation email sent", desc: "You'll receive an email confirming your application with your reference number. Save this for future correspondence." },
   { num: "02", title: "Review by the programme team", desc: "The relevant Nayokan programme lead will review your application against programme fit and cohort availability." },
-  { num: "03", title: "Response within 5–10 business days", desc: "You'll receive a written response — whether next-step interview, cohort scheduling, or a considered decline with feedback." },
+  { num: "03", title: "A written response", desc: "You'll receive a written response — whether next-step interview, cohort scheduling, or a considered decline with feedback." },
 ];
 
 export default async function ApplicationSuccess({
@@ -33,15 +32,14 @@ export default async function ApplicationSuccess({
           </em>
         </h1>
         <p className="success-lede">
-          Thank you. Your application to Nayokan has been logged. A programme lead will be in touch
-          within 5–10 business days.
+          Thank you. Your application to Nayokan has been logged. A programme lead will be in touch.
         </p>
-        <div className="success-ref">
-          <span className="meta">Reference</span>
-          <span>
-            {ref ?? "NAY-2026-P001-000000"} <Tbc>demo ref</Tbc>
-          </span>
-        </div>
+        {ref && (
+          <div className="success-ref">
+            <span className="meta">Reference</span>
+            <span>{ref}</span>
+          </div>
+        )}
         <div className="success-actions">
           <a href="/" className="btn btn-primary">
             Back to home <span className="arrow">→</span>

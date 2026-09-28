@@ -25,13 +25,12 @@ export function Crumbs({ items, onDark = false }: { items: Crumb[]; onDark?: boo
   );
 }
 
-export function CorpHero({ sec, crumbs, title, lede }: { sec: string; crumbs: Crumb[]; title: ReactNode; lede: ReactNode }) {
+export function CorpHero({ crumbs, title, lede }: { sec?: string; crumbs: Crumb[]; title: ReactNode; lede: ReactNode }) {
   return (
     <section className="corp-hero">
       <div className="corp-hero-inner">
         <div>
           <Crumbs items={crumbs} />
-          <span className="corp-hero-sec">{sec}</span>
         </div>
         <div>
           <h1 className="corp-hero-title">{title}</h1>
@@ -43,14 +42,11 @@ export function CorpHero({ sec, crumbs, title, lede }: { sec: string; crumbs: Cr
 }
 
 export function SubHero({
-  sec,
-  refPath,
   crumbs,
   title,
   lede,
 }: {
-  sec: string;
-  refPath: string;
+  sec?: string;
   crumbs: Crumb[];
   title: ReactNode;
   lede: ReactNode;
@@ -67,8 +63,6 @@ export function SubHero({
               </span>
             ))}
           </div>
-          <span className="sec">{sec}</span>
-          <span className="ref">{refPath}</span>
         </div>
         <div className="sub-hero-body">
           <h1>{title}</h1>

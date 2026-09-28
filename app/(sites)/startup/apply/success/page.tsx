@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
-import { Tbc } from "@/ui/components/tbc";
 
 export const metadata: Metadata = {
   title: "Application received",
@@ -35,12 +34,12 @@ export default async function ApplySuccess({
           Thank you. Your submission has been logged with the Startup Centre selection panel. This
           is a demo — the application is validated but not yet persisted.
         </p>
-        <div className="success-ref">
-          <span className="meta">Reference</span>
-          <span>
-            {ref ?? "NAY-2026-SC-000000"} <Tbc>demo ref</Tbc>
-          </span>
-        </div>
+        {ref && (
+          <div className="success-ref">
+            <span className="meta">Reference</span>
+            <span>{ref}</span>
+          </div>
+        )}
         <div className="success-actions">
           <a href="/" className="btn btn-primary">
             Back to Startup Centre <span className="arrow">→</span>

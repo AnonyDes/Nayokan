@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
-import { SubHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
+import { onlyConfirmed } from "@/platform/content/governance";
+import { PublishingNote } from "@/ui/components/publishing-note";
 
 export const metadata: Metadata = {
   title: "University Partnerships",
@@ -19,7 +21,7 @@ const GAINS = [
 ];
 
 const PROVIDES = [
-  { num: "P/01", desc: "Programme delivery — the 26-week cohort, mentors, tooling, milestone reviews." },
+  { num: "P/01", desc: "Programme delivery — the structured commercialization cohort, mentors, tooling, milestone reviews." },
   { num: "P/02", desc: "Commercialization framework — the codified pathway from research to venture." },
   { num: "P/03", desc: "Ecosystem access — routes into Nayokan VC, VTI clusters, hospitality operations and partners." },
   { num: "P/04", desc: "Governance & reporting — transparent shared governance and periodic reporting to partner universities." },
@@ -27,13 +29,12 @@ const PROVIDES = [
 
 export default async function UniversityPartnerships() {
   const repo = await getContentRepository();
-  const partners = await repo.listPartners("startup", "university-wall");
+  // Universities are named only once a partnership is formally agreed.
+  const partners = onlyConfirmed(await repo.listPartners("startup", "university-wall"), "name");
 
   return (
     <>
-      <SubHero
-        sec="§ Startup Centre · University Partnerships"
-        refPath="/startup-centre/university-partnerships"
+      <EditorialHero
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -45,6 +46,8 @@ export default async function UniversityPartnerships() {
           </>
         }
         lede="Nayokan partners with Cameroonian universities and research institutions to turn academic outputs into ventures — with a common framework for IP, revenue, and long-term equity."
+        slot="world-startup"
+        figure="Fig. — Student founders testing a prototype with a mentor"
       />
 
       <section className="section">
@@ -52,7 +55,6 @@ export default async function UniversityPartnerships() {
           {/* The proposition */}
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span>§ 01 — The proposition</span>
               <h3>
                 What universities gain
                 <br />
@@ -73,7 +75,6 @@ export default async function UniversityPartnerships() {
           {/* What Nayokan provides */}
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span>§ 02 — What Nayokan provides</span>
               <h3>
                 The Startup Centre
                 <br />
@@ -116,33 +117,44 @@ export default async function UniversityPartnerships() {
           {/* Partner wall */}
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span>§ 03 — Active & in-conversation partners</span>
               <h3>
-                Approved partners
+                Partner
                 <br />
-                only.
+                institutions.
               </h3>
-              <p style={{ fontSize: "0.9rem", color: "var(--muted)", marginTop: 12 }}>
-                All partnerships listed publicly are subject to written confirmation. Placeholders
-                remain until confirmed.
-              </p>
             </div>
             <div>
-              <div className="partner-wall">
-                {partners.map((p) => (
-                  <div className="pw-cell" key={p.id}>
-                    <span className="pw-tag">{p.tag}</span>
-                    <span className="pw-name">{p.name}</span>
-                    <small style={{ color: "var(--muted)", fontSize: "0.78rem" }}>{p.location}</small>
-                    <span className="pw-placeholder">Partnership tbc</span>
-                  </div>
-                ))}
-              </div>
+              {partners.length > 0 ? (
+                <div className="partner-wall">
+                  {partners.map((p) => (
+                    <div className="pw-cell" key={p.id}>
+                      <span className="pw-tag">{p.tag}</span>
+                      <span className="pw-name">{p.name}</span>
+                      <small style={{ color: "var(--muted)", fontSize: "0.78rem" }}>{p.location}</small>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <PublishingNote
+                  title="Partner institutions coming soon."
+                  actions={
+                    <a href="#partner" className="btn btn-primary">
+                      Partner as a university <span className="arrow">→</span>
+                    </a>
+                  }
+                >
+                  <p>
+                    The Startup Centre works with public universities, applied institutions and research
+                    ministries on a shared framework for IP, revenue and equity.
+                  </p>
+                </PublishingNote>
+              )}
             </div>
           </div>
 
           {/* Partner CTA */}
           <div
+            id="partner"
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
@@ -154,7 +166,6 @@ export default async function UniversityPartnerships() {
             }}
           >
             <div>
-              <span className="meta on-dark">§ 04 — Partner as a university</span>
               <h2
                 style={{
                   fontFamily: "var(--font-heading)",

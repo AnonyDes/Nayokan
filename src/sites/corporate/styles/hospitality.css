@@ -4,8 +4,8 @@
 :root { --terracotta: #B87950; --terracotta-deep: #8F5630; --clay: #E8D9C5; --sand: #F5EFE4; }
 
 body[data-world="hospitality"] { background: var(--sand); }
-body[data-world="hospitality"] .nav { background: rgba(245,239,228,0.86); }
-body[data-world="hospitality"] .nav.scrolled { background: rgba(245,239,228,0.96); border-bottom-color: rgba(10,10,10,0.15); }
+/* The nav bar stays the shared light theme on every page, Hospitality
+   included — it never tints toward the page's sand surface. */
 body[data-world="hospitality"] .world-hero { background: var(--sand); }
 body[data-world="hospitality"] .world-badge { border-color: var(--terracotta); color: var(--terracotta); }
 body[data-world="hospitality"] .world-badge .num { color: var(--terracotta); }

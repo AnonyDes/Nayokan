@@ -2,11 +2,11 @@ import type { Programme } from "@/platform/content/types";
 import type { ImageSlotId } from "@/ui/media/image-briefs";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { getNamedIllustrative } from "@/ui/media/image-briefs";
-import { Tbc, isTbc } from "@/ui/components/tbc";
+import { confirmedValue } from "@/platform/content/governance";
 
 // Programme image card used by every programme listing (corporate directory,
-// VTI catalogue, related programmes). Shows only what the record states;
-// missing or unconfirmed facts render as "tbc", never as defaults.
+// VTI catalogue, related programmes). Shows only what the record states and
+// Nayokan has confirmed; anything else is left out, never defaulted.
 
 export const PROGRAMME_WORLD_LABEL: Record<Programme["world"], string> = {
   corporate: "Nayokan",
@@ -43,7 +43,9 @@ function formatDate(iso: string): string {
 
 export function ProgrammeCard({ programme: p, href, showWorld = false }: { programme: Programme; href: string; showWorld?: boolean }) {
   const status = programmeStatus(p);
-  const deadlineTbc = isTbc(p.provenance, "applicationDeadline");
+  const deadline = confirmedValue(p.provenance, "applicationDeadline", p.applicationDeadline);
+  const duration = confirmedValue(p.provenance, "duration", p.duration);
+  const location = confirmedValue(p.provenance, "location", p.location);
   return (
     <a href={href} className="ed-card">
       <MediaSlot slot={programmeSlot(p)} media={p.heroImage} illustrative={getNamedIllustrative(`programme-${p.slug}`, `Illustrative image for ${p.name}.`)} ratio="3:2" variant="compact" />
@@ -61,19 +63,9 @@ export function ProgrammeCard({ programme: p, href, showWorld = false }: { progr
         <h3>{p.name}</h3>
         <p>{p.summary}</p>
         <div className="ed-card-foot">
-          <span>{p.location ?? <Tbc>location tbc</Tbc>}</span>
+          <span>{location ?? PROGRAMME_WORLD_LABEL[p.world]}</span>
           <span>
-            {p.applicationDeadline ? (
-              <>
-                Deadline {formatDate(p.applicationDeadline)} {deadlineTbc && <Tbc />}
-              </>
-            ) : p.duration ? (
-              <>
-                {p.duration} {isTbc(p.provenance, "duration") && <Tbc />}
-              </>
-            ) : (
-              <span className="go">Details →</span>
-            )}
+            {deadline ? `Deadline ${formatDate(deadline)}` : duration ?? <span className="go">Details →</span>}
           </span>
         </div>
       </div>

@@ -129,3 +129,27 @@ Also required: every photograph for the placeholders above. Each brief is the sh
 - **MediaSlot placeholders** scale their text (mono, clamp) and hide the long brief below 480 px, keeping only the role and ratio.
 - **Programme detail:** the metadata rail becomes a 2-column grid below 900 px; the related grid goes 3 → 2 → 1 columns.
 - **Checked widths:** 320, 375, 390, 768, 1024, 1280 and 1440 px.
+
+## 11. Refinement pass 2: ecosystem gateway and content governance (late September 2026)
+
+This pass supersedes §9 (navigation) and the "tbc" rendering described in §4–§6 and §8.
+
+**Navigation.** The corporate navigation is What We Do · Venture Capital · Hospitality · Impact · Insights · About, with Contact as the CTA. VTI and the Startup Centre are not corporate tabs (desktop, mobile panel or footer). What We Do is the ecosystem gateway: hero, the Nayokan System (six stages), then one editorial section per world (what it is, why it exists, who it serves, what it offers, how it fits the system), each ending in a contextual CTA. VTI and Startup Centre CTAs open their dedicated sites; the footer "Divisions" links point to the What We Do anchors. The sub-sites keep their own navigation.
+
+**Four Worlds.** Home panels alternate black / green (VTI, Startup Centre, Venture Capital, Hospitality): large number, world name, positioning statement, short explanation, audience, CTA. World copy lives in `src/platform/content/worlds.ts` and is reused from each world's own approved pages; a unit test keeps figures out of it.
+
+**Content governance.** The `Tbc` component is removed. `src/platform/content/governance.ts` (`isUnconfirmed`, `confirmedValue`, `onlyConfirmed`) decides what is public:
+- Unconfirmed fields (durations, deadlines, member counts, emails, dates, bylines, amenities) are hidden, and empty metadata rows drop out.
+- Unverified metrics show a rule and "Published once verified", never a number.
+- Partners, mentors, ventures and university partners are listed only when their name is confirmed. Until then, `PublishingNote` explains what will be published and the page describes the relationship (partner kinds, mentor roles, the VC review path) instead of placeholder records. Unconfirmed venture detail pages return 404 and are not in the sitemap.
+- Hospitality properties are described by purpose and access; room counts, rates, neighbourhoods and architectural details are withheld until confirmed.
+- `Pending` ("Details coming soon", "Date coming soon") is used only where a slot must exist.
+- Unconfirmed email addresses, response-time promises and internal notes ("demo · form not wired", design reference paths) are removed; forms submit through the Supabase RPCs.
+
+**Cross-site links.** On per-site hosts (`*.nayokan.localhost` in development, custom domains in production) `siteUrl` returns absolute URLs and the preview-link interceptor stays out of the way. Path prefixes (`/vti`, `/startup`) are used only on single-hostname previews (`isSingleHostPreview`).
+
+**Photography.** New briefs `about-origin`, `about-people`, `impact-evidence` and `contact-hero` use only the real VTI lab-launch photographs.
+
+**Checked.** Every public page on the three hosts at 320, 390, 768, 1024 and 1440 px: no visible editorial notation, no horizontal overflow, no broken internal links, no console errors.
+
+**Still to confirm (data).** Supabase `navigation_items` seed (data-layer branch) still contains the corporate VTI / Startup Centre tabs; update it before switching `CONTENT_SOURCE` to `supabase`.

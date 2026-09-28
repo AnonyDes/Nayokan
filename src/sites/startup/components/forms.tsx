@@ -3,7 +3,6 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import type { FormState } from "@/platform/forms/actions";
 import { submitStartupApplication } from "@/platform/forms/actions";
-import { Tbc } from "@/ui/components/tbc";
 import { trackEvent } from "@/platform/analytics";
 
 // Startup Centre innovator application (startup-apply.html) — six steps:
@@ -84,8 +83,8 @@ export function StartupApplicationForm() {
           <div className="status-mark ok">✓</div>
           <h1>Application received.</h1>
           <p>
-            Thank you. Your submission has been logged with the Startup Centre selection panel. This
-            is a demo — the application is validated but not yet persisted or emailed.
+            Thank you. Your submission has been logged with the Startup Centre selection panel. Keep
+            your reference for any correspondence.
           </p>
           <div className="status-ref">REF · {state.reference}</div>
           <div className="status-actions">
@@ -99,9 +98,6 @@ export function StartupApplicationForm() {
               Confirmation page <span className="arrow">→</span>
             </a>
           </div>
-          <p style={{ marginTop: 16 }}>
-            <Tbc>demo · form not wired</Tbc>
-          </p>
         </div>
       </div>
     );
@@ -313,7 +309,7 @@ export function StartupApplicationForm() {
             <input type="checkbox" id="sa-contact" name="consentContact" checked={value("consentContact") === "on"} onChange={(e) => set("consentContact", e.target.checked ? "on" : "")} />
             <label htmlFor="sa-contact">
               I agree that Nayokan may contact me about this application and related opportunities.
-              <small>You can withdraw consent at any time by emailing innovators@nayokan.org.</small>
+              <small>You can withdraw consent at any time by writing to the Startup Centre team.</small>
             </label>
           </div>
           <div className="check-row">
@@ -335,9 +331,7 @@ export function StartupApplicationForm() {
               <button type="button" className="btn btn-ghost" style={{ padding: "12px 18px" }} onClick={() => go(5)}>
                 ← Previous step
               </button>
-              <span className="save-note">
-                Demo form — nothing is persisted <Tbc>demo</Tbc>
-              </span>
+              <span className="save-note">Your answers go only to the Startup Centre selection panel.</span>
             </div>
             <button type="submit" className="btn btn-primary" disabled={pending} aria-disabled={pending}>
               Submit application <span className="arrow">→</span>

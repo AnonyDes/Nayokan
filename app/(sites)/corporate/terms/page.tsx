@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { CorpHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
@@ -19,7 +18,7 @@ const SECTIONS: { h: string; paras: string[] }[] = [
   {
     h: "Content accuracy",
     paras: [
-      "We publish verified figures only. Where a fact, figure or partner name has not yet been confirmed, it is visibly marked rather than asserted. Programme details, dates and availability may change; written confirmations supersede website copy.",
+      "We publish verified figures only. Where a fact, figure or partner name has not yet been confirmed, it is not published. Programme details, dates and availability may change; written confirmations supersede website copy.",
     ],
   },
   {
@@ -49,8 +48,7 @@ export default function Terms() {
         }
         lede={
           <>
-            The terms governing use of Nayokan’s public websites.{" "}
-            <Tbc>working terms · pending legal review</Tbc>
+            The terms governing use of Nayokan’s public websites.
           </>
         }
       />
@@ -68,9 +66,6 @@ export default function Terms() {
               ))}
             </div>
           ))}
-          <p className="meta" style={{ marginTop: 32 }}>
-            Last updated: <Tbc>date tbc</Tbc>
-          </p>
         </div>
       </section>
     </>

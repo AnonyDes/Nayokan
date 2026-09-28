@@ -4,7 +4,7 @@ import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
-import { Tbc } from "@/ui/components/tbc";
+import { onlyConfirmed } from "@/platform/content/governance";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { RelatedStrip } from "@/ui/components/strips";
 import { VcEnquiryForm } from "@/sites/corporate/components/vc";
@@ -37,9 +37,28 @@ const PILLARS = [
   },
 ];
 
+// How capital moves through the Nayokan system. Structure, not fund terms:
+// ticket sizes, fund size and portfolio counts are published only once final.
+const PATHWAY = [
+  { num: "01", label: "Sourcing", desc: "VTI clusters, Startup Centre ventures and selected partners" },
+  { num: "02", label: "Readiness", desc: "Investment readiness with Nayokan mentors" },
+  { num: "03", label: "Instruments", desc: "Revenue-based · Convertible · Equity" },
+  { num: "04", label: "Support", desc: "Training, market access and productive assets" },
+];
+
+// The review path every venture follows. Process only; no named ventures.
+const REVIEW = [
+  { num: "01", title: "Referral or enquiry", desc: "Ventures arrive from the Startup Centre, VTI clusters or a direct enquiry from a founder or co-investor." },
+  { num: "02", title: "Screening", desc: "Fit with the productive-capacity thesis: what the enterprise builds, who it employs, which market it serves." },
+  { num: "03", title: "Readiness review", desc: "Business model, unit economics and governance, reviewed with the venture and its mentors." },
+  { num: "04", title: "Structuring", desc: "An instrument matched to the venture's stage and growth cycle, agreed with any co-investors." },
+  { num: "05", title: "Portfolio support", desc: "Continued access to training, mentorship, markets and hospitality assets across the ecosystem." },
+];
+
 export default async function VentureCapital() {
   const repo = await getContentRepository();
-  const ventures = await repo.listVentures("corporate", "venture_capital");
+  // Only ventures that have consented to being named are ever listed.
+  const ventures = onlyConfirmed(await repo.listVentures("corporate", "venture_capital"), "name");
 
   return (
     <>
@@ -58,7 +77,7 @@ export default async function VentureCapital() {
             <em>productive</em> enterprises.
           </>
         }
-        lede="Nayokan Venture Capital deploys structured capital into Cameroonian enterprises with productive potential — sourced from within our ecosystem and from selected institutional partnerships."
+        lede="Nayokan Venture Capital provides structured capital pathways for Cameroonian enterprises with productive potential, sourced from within our ecosystem and from selected institutional partnerships."
         actions={
           <>
             <a href="#approach" className="btn btn-ghost on-dark">
@@ -72,24 +91,18 @@ export default async function VentureCapital() {
         figure={
           <div className="vc-hero-panel">
             <div className="vc-hero-panel-head">
-              <span>Fund structure · working draft</span>
-              <Tbc onDark>content to be confirmed</Tbc>
+              <span>Capital pathway</span>
+              <span>Fig. 03</span>
             </div>
-            {[
-              ["Stage focus", "Seed · Growth", true],
-              ["Geographic", "Cameroon · CEMAC", true],
-              ["Ticket range", "— — —", true],
-              ["Sectors", "Agri · Tech · Prod.", true],
-              ["Portfolio", "— — —", true],
-            ].map(([label, val, tbc]) => (
-              <div className="vc-hero-metric" key={label as string}>
-                <span className="vc-hero-metric-label">{label}</span>
-                <span className="vc-hero-metric-val">
-                  {val}
-                  {tbc && <Tbc onDark />}
-                </span>
-              </div>
-            ))}
+            <ol className="vc-pathway">
+              {PATHWAY.map((step) => (
+                <li key={step.num}>
+                  <span className="vc-pathway-num">{step.num}</span>
+                  <span className="vc-pathway-label">{step.label}</span>
+                  <span className="vc-pathway-desc">{step.desc}</span>
+                </li>
+              ))}
+            </ol>
             <div className="vc-hero-photo">
               <MediaSlot slot="vc-hero" ratio="16:9" tone="navy" variant="compact" />
             </div>
@@ -133,46 +146,47 @@ export default async function VentureCapital() {
       <section className="vc-pipeline">
         <div className="wrap">
           <SectionHeader
-            num="§ 02 — Venture Pipeline"
+            num="§ 02 — How we invest"
             onDark
             title={
               <>
-                Current pipeline
+                From referral
                 <br />
-                and portfolio.
+                to portfolio.
               </>
             }
-            lead={<>Illustrative entries only: named ventures are published once each venture consents. Financial detail is never shown without investor and venture consent. <Tbc onDark>content to be confirmed</Tbc></>}
-            
+            lead="Every venture follows the same review path."
           />
-          <div className="vc-table">
-            <div className="vc-thead">
-              <span>Ref.</span>
-              <span>Venture</span>
-              <span>Sector</span>
-              <span>Stage</span>
-              <span>Ticket</span>
-              <span>Status</span>
-            </div>
-            {ventures.map((v, i) => (
-              <div className="vc-trow" key={v.id}>
-                <span className="vid">{v.code}</span>
-                <div className="vname">
-                  {v.name}
-                  <small>{v.description}</small>
-                </div>
-                <span className="vcol">{v.sector}</span>
-                <span className={`vstage ${v.stage === "Growth" ? "growth" : "seed"}`}>{v.stage}</span>
-                <span className="vcol">
-                  — — —<Tbc onDark />
-                </span>
-                <span className="vcol">{["In review", "In portfolio", "In pipeline"][i % 3]}</span>
-              </div>
+          <ol className="vc-review">
+            {REVIEW.map((r) => (
+              <li key={r.num}>
+                <span className="vc-review-num">{r.num}</span>
+                <h3>{r.title}</h3>
+                <p>{r.desc}</p>
+              </li>
             ))}
-          </div>
-          <p className="meta on-dark" style={{ color: "var(--muted-invert)", marginTop: 24 }}>
-            All pipeline entries subject to editorial and legal review before public disclosure.
-          </p>
+          </ol>
+          {ventures.length > 0 && (
+            <div className="vc-table vc-table--compact" style={{ marginTop: 56 }}>
+              <div className="vc-thead">
+                <span>Ref.</span>
+                <span>Venture</span>
+                <span>Sector</span>
+                <span>Stage</span>
+              </div>
+              {ventures.map((v) => (
+                <div className="vc-trow" key={v.id}>
+                  <span className="vid">{v.code}</span>
+                  <div className="vname">
+                    {v.name}
+                    <small>{v.description}</small>
+                  </div>
+                  <span className="vcol">{v.sector}</span>
+                  <span className={`vstage ${v.stage === "Growth" ? "growth" : "seed"}`}>{v.stage}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -180,7 +194,6 @@ export default async function VentureCapital() {
         <div className="wrap">
           <div className="vc-enquiry-grid">
             <div className="vc-enquiry-body">
-              <span className="meta on-dark">§ 03 — Partnership Enquiry</span>
               <h2 style={{ marginTop: 16 }}>
                 Deploy capital
                 <br />
@@ -195,9 +208,7 @@ export default async function VentureCapital() {
               <div className="cta-contact">
                 <div>
                   <span className="meta on-dark">Investor relations</span>
-                  <span>
-                    ir@nayokan.org <Tbc onDark />
-                  </span>
+                  <span>Use the enquiry form</span>
                 </div>
                 <div>
                   <span className="meta on-dark">Yaoundé</span>

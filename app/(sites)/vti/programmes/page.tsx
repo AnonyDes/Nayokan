@@ -5,7 +5,6 @@ import { getContentRepository } from "@/platform/content";
 import { EditorialHero } from "@/ui/components/editorial-hero";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { programmeStatus } from "@/ui/components/programme-card";
-import { Tbc } from "@/ui/components/tbc";
 import { VtiProgrammeGrid } from "@/sites/vti/components/programme-grid";
 
 export const metadata: Metadata = {
@@ -16,8 +15,8 @@ export const metadata: Metadata = {
 };
 
 const COMPONENTS = [
-  { num: "01", tag: "Practical", title: "Hands-on curriculum", desc: "Practical work leads every VTI programme; the practical-to-theory ratio is published per programme.", tbc: true },
-  { num: "02", tag: "Certification", title: "Recognised outputs", desc: "Endorsement pathway with Ministry of Employment & Vocational Training (subject to confirmation).", tbc: true },
+  { num: "01", tag: "Practical", title: "Hands-on curriculum", desc: "Practical work leads every VTI programme: workshops, labs and production settings, not only classrooms." },
+  { num: "02", tag: "Certification", title: "Certification pathways", desc: "Each programme builds toward certification. Where a certificate is formally recognised, the programme page names the recognising body." },
   { num: "03", tag: "Entrepreneurial", title: "Cluster onboarding", desc: "Every graduate is offered a place in an entrepreneurial cluster aligned with their training track." },
   { num: "04", tag: "Eligibility", title: "Open, structured intake", desc: "Applications reviewed by a VTI selection panel. Cohorts kept small for quality of instruction." },
 ];
@@ -35,7 +34,6 @@ export default async function VtiProgrammes() {
           { label: "VTI", href: "/" },
           { label: "Programmes" },
         ]}
-        eyebrow="§ VTI · Programme catalogue"
         title={
           <>
             The programme <em>catalogue</em>.
@@ -72,7 +70,6 @@ export default async function VtiProgrammes() {
 
           <div className="sub-split-card" style={{ marginTop: 64 }}>
             <div>
-              <span className="meta">§ Every programme</span>
               <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.4rem", letterSpacing: "-0.02em", lineHeight: 1.1, marginTop: 8 }}>
                 Four common components.
               </h3>
@@ -84,7 +81,7 @@ export default async function VtiProgrammes() {
                     {c.num} · {c.tag}
                   </div>
                   <h4 style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: "1.05rem", letterSpacing: "-0.015em", margin: "6px 0" }}>
-                    {c.title} {c.tbc && <Tbc />}
+                    {c.title}
                   </h4>
                   <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>{c.desc}</p>
                 </div>

@@ -2,17 +2,9 @@
    Navy-dominant, data-forward, dark surfaces. */
 
 body[data-world="vc"] { background: var(--navy); color: var(--paper); }
-body[data-world="vc"] .nav { background: rgba(7,26,70,0.86); }
-body[data-world="vc"] .nav.scrolled { background: rgba(7,26,70,0.96); border-bottom-color: var(--line-invert); }
-body[data-world="vc"] .nav-link { color: var(--paper); }
-body[data-world="vc"] .nav-link::after { background: var(--paper); }
-body[data-world="vc"] .nav-logo .wordmark { color: var(--paper); }
-body[data-world="vc"] .nav-logo img { filter: brightness(0) invert(1); }
-body[data-world="vc"] .lang-toggle { border-color: var(--line-invert-strong); }
-body[data-world="vc"] .lang-toggle button { color: var(--muted-invert); }
-body[data-world="vc"] .lang-toggle button.active { background: var(--paper); color: var(--navy); }
-body[data-world="vc"] .nav-cta { background: var(--green); color: var(--ink); }
-body[data-world="vc"] .nav-cta:hover { background: var(--paper); color: var(--ink); }
+/* The nav bar stays the shared light theme on every page, VC included —
+   it never adopts the page's dark surface (see also .nav-mobile-panel
+   below, which still needs its own ink override for the same reason). */
 
 body[data-world="vc"] .world-hero { background: var(--navy); border-bottom-color: var(--line-invert); }
 body[data-world="vc"] .world-hero-crumbs { border-bottom-color: var(--line-invert); color: var(--muted-invert); }
@@ -297,6 +289,3 @@ body[data-world="vc"] .related-card:hover .meta { color: var(--navy); opacity: 0
 /* The mobile menu panel is white: keep its text ink on navy pages (was
    inheriting the body's white text and rendering invisible links). */
 body[data-world="vc"] .nav-mobile-panel { color: var(--ink); }
-body[data-world="vc"] .nav-mobile-panel .lang-toggle { border-color: var(--line-strong); }
-body[data-world="vc"] .nav-mobile-panel .lang-toggle button { color: var(--muted); }
-body[data-world="vc"] .nav-mobile-panel .lang-toggle button.active { background: var(--ink); color: var(--paper); }

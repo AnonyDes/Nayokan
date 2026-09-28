@@ -4,7 +4,6 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import type { FormState } from "@/platform/forms/actions";
 import { submitVcEnquiry } from "@/platform/forms/actions";
 import { Field } from "@/ui/components/form-field";
-import { Tbc } from "@/ui/components/tbc";
 import { trackEvent } from "@/platform/analytics";
 import type { Venture } from "@/platform/content/types";
 
@@ -46,7 +45,7 @@ export function VcEnquiryForm() {
       </button>
       {state.status === "success" && (
         <p className="form-success" role="status" style={{ marginTop: 20, color: "var(--green-glow)", fontSize: "0.9rem" }}>
-          ✓ Enquiry received. IR will respond within 5 business days. <Tbc onDark>demo</Tbc>
+          ✓ Enquiry received. Investor relations will be in touch.
         </p>
       )}
       {state.status === "error" && !Object.keys(state.fieldErrors).length && (
@@ -103,11 +102,8 @@ export function VcPortfolioGrid({ ventures }: { ventures: Venture[] }) {
         {visible.map((v) => (
           <article className="pf-card pf-card-dark" key={v.id}>
             <div className="pf-head">
-              <div className="pf-logo">
-                {v.code}
-                <Tbc onDark />
-              </div>
-              <span className="pf-status">Active</span>
+              <div className="pf-logo">{v.code}</div>
+              {v.listingStatus === "active" && <span className="pf-status">Active</span>}
             </div>
             <h4>{v.name}</h4>
             <p>{v.description}</p>
@@ -123,12 +119,6 @@ export function VcPortfolioGrid({ ventures }: { ventures: Venture[] }) {
               <div>
                 <span className="meta on-dark">Region</span>
                 <span className="val">{v.location}</span>
-              </div>
-              <div>
-                <span className="meta on-dark">Ticket</span>
-                <span className="val">
-                  —<Tbc onDark />
-                </span>
               </div>
             </div>
           </article>

@@ -251,7 +251,6 @@
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px;
 }
-.univ-cell .placeholder-tag { color: var(--muted-invert); }
 @media (max-width: 900px) { .univ-grid { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .univ-list { grid-template-columns: 1fr; } }
 

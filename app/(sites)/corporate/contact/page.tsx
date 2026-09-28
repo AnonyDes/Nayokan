@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { CorpHero } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
-import { Tbc } from "@/ui/components/tbc";
+import { MediaSlot } from "@/ui/components/media-slot";
 import { EnquiryForm } from "@/sites/corporate/components/forms";
 
 export const metadata: Metadata = {
@@ -12,11 +12,19 @@ export const metadata: Metadata = {
   alternates: canonical("/contact"),
 };
 
+// Enquiry routes. Each sends the reader to the page built for that audience;
+// anything else comes through the general form below.
 const ROUTES = [
-  { num: "01", title: "Programme applicants", desc: "Prospective students and entrepreneurs applying to VTI or Startup Centre programmes.", email: "admissions@nayokan.org" },
-  { num: "02", title: "Institutional partners", desc: "Universities, ministries, development organizations and corporate partners.", email: "partners@nayokan.org" },
-  { num: "03", title: "Investors & funders", desc: "Institutional investors, DFIs and co-investors interested in Nayokan VC.", email: "ir@nayokan.org" },
-  { num: "04", title: "Media & press", desc: "Journalists, researchers and media outlets requesting information or interviews.", email: "media@nayokan.org" },
+  { num: "01", title: "Programme applicants", desc: "Prospective trainees and entrepreneurs applying to VTI or Startup Centre programmes.", action: "Find a programme and apply", href: "/programmes" },
+  { num: "02", title: "Institutional partners", desc: "Universities, ministries, development organisations and corporate partners.", action: "Partner with Nayokan", href: "/partners" },
+  { num: "03", title: "Investors & funders", desc: "Institutional investors, development finance partners and co-investors interested in Nayokan VC.", action: "Venture Capital enquiry", href: "/venture-capital/partner" },
+  { num: "04", title: "Media & press", desc: "Journalists, researchers and media outlets requesting information or interviews.", action: "Use the enquiry form", href: "#form" },
+];
+
+const NEXT_STEPS = [
+  { num: "01", title: "You send your enquiry", desc: "Tell us who you are and what you need. A few lines is enough." },
+  { num: "02", title: "We route it", desc: "Your enquiry goes to the Nayokan team responsible for that area." },
+  { num: "03", title: "The team replies", desc: "A member of that team replies to the email address you give us." },
 ];
 
 export default function Contact() {
@@ -32,7 +40,7 @@ export default function Contact() {
             Or send a serious enquiry.
           </>
         }
-        lede="Choose the route that matches your enquiry — we'll direct you to the right team. General enquiries reach us within one business day."
+        lede="Choose the route that matches your enquiry and we will direct you to the right team. Anything else comes through the general form."
       />
 
       <section className="contact-routes">
@@ -46,16 +54,16 @@ export default function Contact() {
                 Four direct routes.
               </>
             }
-            lead="Structured routing helps us respond faster. All routes are managed by real people inside the relevant Nayokan team."
+            lead="Structured routing helps us respond faster. Each route leads to the team, and the page, built for that audience."
           />
           <div className="routes-grid">
             {ROUTES.map((r) => (
-              <a key={r.num} href="#form" className="route-card">
+              <a key={r.num} href={r.href} className="route-card">
                 <span className="meta">Route {r.num}</span>
                 <h4>{r.title}</h4>
                 <p className="route-desc">{r.desc}</p>
                 <span className="route-email">
-                  {r.email} <Tbc />
+                  {r.action} <span aria-hidden="true">→</span>
                 </span>
               </a>
             ))}
@@ -67,7 +75,6 @@ export default function Contact() {
         <div className="wrap">
           <div className="contact-form-grid">
             <div>
-              <span className="meta">§ 02 — Send a general enquiry</span>
               <h2 style={{ marginTop: 16, fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2.2rem,4vw,3.4rem)", letterSpacing: "-0.03em", lineHeight: 1 }}>
                 General
                 <br />
@@ -77,20 +84,24 @@ export default function Contact() {
                 Use this form if your enquiry doesn’t fit a specific route above, or if you’re not
                 sure who to reach. We’ll route it internally.
               </p>
-              <div style={{ marginTop: 40, padding: "24px 0", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-                <div>
-                  <span className="meta">Yaoundé office</span>
-                  <div style={{ fontFamily: "var(--font-heading)", fontWeight: 600, marginTop: 6, letterSpacing: "-0.015em" }}>
-                    Central Region · Cameroon <Tbc>address tbc</Tbc>
-                  </div>
-                </div>
-                <div>
-                  <span className="meta">Hours</span>
-                  <div style={{ fontFamily: "var(--font-heading)", fontWeight: 600, marginTop: 6, letterSpacing: "-0.015em" }}>
-                    Mon–Fri · 08:00–18:00 WAT
-                  </div>
-                </div>
+              <div className="contact-photo">
+                <MediaSlot slot="contact-hero" ratio="4:3" caption />
               </div>
+              <div className="contact-office">
+                <span className="meta">Nayokan</span>
+                <div>Yaoundé · Cameroon</div>
+              </div>
+              <ol className="contact-steps" aria-label="What happens next">
+                {NEXT_STEPS.map((step) => (
+                  <li key={step.num}>
+                    <span>{step.num}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
             <EnquiryForm />
           </div>

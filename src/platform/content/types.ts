@@ -26,14 +26,15 @@ export const ENQUIRY_CATEGORIES = ["general", "partnership", "university", "vc",
 export type EnquiryCategory = (typeof ENQUIRY_CATEGORIES)[number];
 
 /**
- * Marks content that is not yet confirmed by Nayokan. Sites MUST render a
- * visible placeholder tag (design: `.placeholder-tag` "tbc") for any field
- * listed here, and must never present it as fact.
+ * Marks content that is not yet confirmed by Nayokan. Public sites must never
+ * present a listed field as fact: they hide it, or show a neutral pending
+ * note where the slot is essential (platform/content/governance.ts). Editorial
+ * notation such as "[tbc]" is never rendered publicly.
  */
 export interface Provenance {
-  /** true when the record is demo/placeholder content ([DEMO] / CONTENT TO BE CONFIRMED). */
+  /** true when the record is demo/placeholder content, not verified by Nayokan. */
   isDemo: boolean;
-  /** Field names whose values are unconfirmed and must show a "tbc" tag. */
+  /** Field names whose values are unconfirmed: public pages hide them (see governance.ts). */
   unconfirmedFields?: string[];
 }
 
@@ -97,7 +98,7 @@ export interface SiteSettings {
 export interface PublicMetric {
   id: string;
   label: string;
-  /** null → render em-dash + "Figure to be confirmed". Never fabricate. */
+  /** null → no number is shown, only "Published once verified". Never fabricate. */
   value: number | null;
   unit?: string;
   reportingPeriod?: string;
@@ -234,7 +235,7 @@ export interface Venture {
   listingStatus: "pipeline" | "active" | "alumni" | "exited";
   relatedProgrammeId?: string;
   logo?: MediaRef;
-  /** Detail-page fact rows (Stage/Sector/Founded/…); tbc flags unverified values. */
+  /** Detail-page fact rows (Stage/Sector/Founded/…); `tbc` flags unverified values, which pages withhold. */
   facts?: { label: string; value: string; tbc?: boolean }[];
   seo?: Seo;
   provenance: Provenance;

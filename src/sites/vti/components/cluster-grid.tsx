@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Cluster } from "@/platform/content/types";
-import { Tbc } from "@/ui/components/tbc";
+import { confirmedValue } from "@/platform/content/governance";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
@@ -38,23 +38,21 @@ export function ClusterGrid({ clusters }: { clusters: Cluster[] }) {
                 {c.statusLabel === "Active" ? "● Active" : `○ ${c.statusLabel ?? "Forming"}`}
               </span>
             </div>
-            <h3>
-              {c.name}
-              <Tbc>details tbc</Tbc>
-            </h3>
+            <h3>{c.name}</h3>
             <p className="pcard-desc">{c.summary}</p>
             <div className="pcard-meta">
-              <div>
-                <span className="meta">Members</span>
-                <span className="val">
-                  {c.memberCount ?? "—"}
-                  {c.memberCount == null && <Tbc />}
-                </span>
-              </div>
-              <div>
-                <span className="meta">Anchor</span>
-                <span className="val">{c.location ?? <Tbc>location tbc</Tbc>}</span>
-              </div>
+              {confirmedValue(c.provenance, "memberCount", c.memberCount) != null && (
+                <div>
+                  <span className="meta">Members</span>
+                  <span className="val">{c.memberCount}</span>
+                </div>
+              )}
+              {confirmedValue(c.provenance, "location", c.location) && (
+                <div>
+                  <span className="meta">Anchor</span>
+                  <span className="val">{c.location}</span>
+                </div>
+              )}
               <div>
                 <span className="meta">Feeds into</span>
                 <span className="val">Startup C. · VC</span>

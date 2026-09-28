@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type MouseEvent } from "react";
+import { isSingleHostPreview } from "./registry";
 
 /**
  * On single-hostname preview deployments (*.vercel.app or localhost without
@@ -64,7 +65,7 @@ export function resolvePreviewUrl(href: string, currentPath: string): string | n
 export function handlePreviewClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
   if (typeof window === "undefined") return;
   const host = window.location.hostname;
-  if (host.endsWith(".vercel.app") || host.includes("localhost")) {
+  if (isSingleHostPreview(host)) {
     const target = resolvePreviewUrl(href, window.location.pathname);
     if (target !== null) {
       e.preventDefault();
@@ -96,7 +97,7 @@ export function PreviewLinkInterceptor() {
       if (rawHref.startsWith("#")) return;
 
       const host = window.location.hostname;
-      if (host.endsWith(".vercel.app") || host.includes("localhost")) {
+      if (isSingleHostPreview(host)) {
         const target = resolvePreviewUrl(a.href, window.location.pathname);
         if (target !== null) {
           e.preventDefault();

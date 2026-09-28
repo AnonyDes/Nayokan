@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 // Verified-only count-up — ports Designs/scripts/system.js counter block.
 // Governance: unverified metrics never reach this component as numbers; the
-// caller renders the em-dash + "figure to be confirmed" instead.
+// caller renders the "published once verified" state instead.
 export function CountUp({ value, className }: { value: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
 

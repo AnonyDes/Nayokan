@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
 import { RichBlocks } from "@/ui/components/rich-blocks";
-import { Tbc, isTbc } from "@/ui/components/tbc";
+import { articleMeta } from "@/sites/corporate/article-meta";
+import { MediaSlot } from "@/ui/components/media-slot";
 
 // Article detail — ports Designs/article.html. For stubs (articles without a
 // body) the page still renders the editorial shell; the body region shows the
-// excerpt plus a demo marker rather than invented text.
+// excerpt and a neutral note, never invented text. Date and byline appear only
+// once confirmed.
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -28,7 +30,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!article) notFound();
 
   const related = (await repo.listArticles({ site: "corporate" })).filter((a) => a.id !== article.id).slice(0, 3);
-  const fmt = new Date(article.publishedAt).toLocaleDateString("en-GB", { month: "long", year: "numeric" });
+  const meta = articleMeta(article);
 
   return (
     <>
@@ -43,14 +45,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
           <span className="article-cat">{article.category ? `Feature · ${article.category}` : "Feature"}</span>
           <h1 className="article-hero-title">{article.title}</h1>
-          <div className="article-hero-meta">
-            <span>{fmt}{isTbc(article.provenance, "publishedAt") && <Tbc>date tbc</Tbc>}</span>
-            <span>{article.readingMinutes ?? "—"} min read</span>
-            <span>
-              By {article.authorName ?? "Nayokan"}
-              {isTbc(article.provenance, "authorName") && <Tbc>author tbc</Tbc>}
-            </span>
-          </div>
+          {meta.length > 0 && (
+            <div className="article-hero-meta">
+              {meta.map((m) => (
+                <span key={m}>{m}</span>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -72,10 +73,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         ) : (
           <>
             <p className="lede">{article.excerpt}</p>
-            <p>
-              <Tbc>full text tbc</Tbc> This article is a working placeholder — the editorial draft is
-              being prepared for publication.
-            </p>
+            <p className="pending-note">The full article will be published here.</p>
           </>
         )}
       </article>
@@ -91,20 +89,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       <section className="article-related">
         <div className="wrap">
-          <span className="meta">§ Related insights</span>
           <h2 style={{ marginTop: 12, marginBottom: 40 }}>Continue reading.</h2>
           <div className="article-related-grid">
-            {related.map((a, i) => (
-              <a key={a.id} href={`/insights/${a.slug}`} className="article-card">
-                <div className="article-thumb placeholder" data-num={String(i + 2).padStart(2, "0")} />
-                <span className="article-cat">{a.category}</span>
-                <h4 className="article-title">{a.title}</h4>
-                <span className="article-meta">
-                  <span>
-                    {new Date(a.publishedAt).toLocaleDateString("en-GB", { month: "short", year: "numeric" })} · {a.readingMinutes ?? "—"} min
-                  </span>
-                  <span>{a.authorName}</span>
-                </span>
+            {related.map((a) => (
+              <a key={a.id} href={`/insights/${a.slug}`} className="ins-card ins-card--large">
+                <div className="ins-card-media">
+                  <MediaSlot slot={a.world === "startup" ? "story-startup" : "article-default"} media={a.cover} fill variant="compact" />
+                </div>
+                <span className="ins-cat">{a.category}</span>
+                <h3>{a.title}</h3>
+                {articleMeta(a).length > 0 && <span className="ins-meta">{articleMeta(a).join(" · ")}</span>}
               </a>
             ))}
           </div>

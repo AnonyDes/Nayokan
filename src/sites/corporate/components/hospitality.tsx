@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { isUnconfirmed } from "@/platform/content/governance";
 import type { Property } from "@/platform/content/types";
-import { Tbc } from "@/ui/components/tbc";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
@@ -38,14 +38,14 @@ export function PropertyGrid({ properties }: { properties: Property[] }) {
             <div style={{ padding: 24 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingBottom: 12, borderBottom: "1px solid var(--line)", marginBottom: 12 }}>
                 <span style={{ ...MONO, fontSize: "0.72rem", color: "var(--muted)", letterSpacing: "0.14em" }}>{p.code}</span>
-                <span style={{ ...MONO, fontSize: "0.7rem", color: "var(--green-deep)", letterSpacing: "0.14em" }}>● Available</span>
+                <span style={{ ...MONO, fontSize: "0.7rem", color: "var(--green-deep)", letterSpacing: "0.14em" }}>{p.type}</span>
               </div>
               <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.2rem", letterSpacing: "-0.02em", lineHeight: 1.2 }}>
                 {p.name}
               </h3>
               <p style={{ color: "var(--muted)", fontSize: "0.92rem", marginTop: 10, lineHeight: 1.55 }}>{p.summary}</p>
               <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 4 }}>
-                {p.amenities.map((a) => (
+                {(isUnconfirmed(p.provenance, "amenities") ? [] : p.amenities).map((a) => (
                   <span key={a} style={{ ...MONO, fontSize: "0.66rem", letterSpacing: "0.12em", color: "var(--muted)", padding: "3px 8px", border: "1px solid var(--line)", textTransform: "uppercase" }}>
                     {a}
                   </span>
@@ -53,9 +53,9 @@ export function PropertyGrid({ properties }: { properties: Property[] }) {
               </div>
               <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid var(--line)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
                 <div>
-                  <span className="meta">From</span>
+                  <span className="meta">Rates</span>
                   <div style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1rem", letterSpacing: "-0.01em" }}>
-                    —<Tbc>rate tbc</Tbc>
+                    On request
                   </div>
                 </div>
                 <a href={`/hospitality/properties/${p.slug}`} className="link-inline">

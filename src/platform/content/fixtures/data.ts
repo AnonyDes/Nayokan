@@ -20,8 +20,9 @@ import { getPersonPhoto } from "@/ui/media/people";
 
 // All content below is sourced verbatim from the approved Genspark design
 // package (Designs/*.html) and the Copy doc. Every record is demo content:
-// provenance.isDemo = true, and unconfirmed fields are listed so the sites
-// render "tbc" tags. Nothing here is verified production data.
+// provenance.isDemo = true, and unconfirmed fields are listed so the public
+// sites leave them out (platform/content/governance.ts). Nothing here is
+// verified production data.
 
 const demo = (unconfirmedFields: string[] = []): Provenance => ({
   isDemo: true,
@@ -30,7 +31,7 @@ const demo = (unconfirmedFields: string[] = []): Provenance => ({
 
 // For the rare record that is genuine, confirmed Nayokan content supplied
 // directly by the site owner (not a design/Copy-doc placeholder). Renders
-// with no "tbc" tag and no demo marker. Use sparingly and only once a name,
+// in full, with no field withheld. Use sparingly and only once a name,
 // role, figure or photo has actually been confirmed — see docs/content-gaps.md.
 const confirmed = (): Provenance => ({ isDemo: false });
 
@@ -96,8 +97,8 @@ const corporateFooter = [
   {
     heading: "Divisions",
     links: [
-      { id: "f-vti", label: "Vocational Training Institute", href: siteUrl("vti"), crossSite: true },
-      { id: "f-sc", label: "Startup Centre", href: siteUrl("startup"), crossSite: true },
+      { id: "f-vti", label: "Vocational Training Institute", href: "/what-we-do#vti" },
+      { id: "f-sc", label: "Startup Centre", href: "/what-we-do#startup" },
       { id: "f-vc", label: "Venture Capital", href: "/venture-capital" },
       { id: "f-h", label: "Hospitality", href: "/hospitality" },
     ],
@@ -109,7 +110,7 @@ const corporateFooter = [
       { id: "f-wwd", label: "What we do", href: "/what-we-do" },
       { id: "f-impact", label: "Impact", href: "/impact" },
       { id: "f-insights", label: "Insights", href: "/insights" },
-      { id: "f-sitemap", label: "Sitemap", href: "/sitemap.xml" },
+      { id: "f-sitemap", label: "Sitemap", href: "/sitemap" },
     ],
   },
   {
@@ -127,9 +128,9 @@ export const navigation: Record<SiteId, SiteNavigation> = {
   corporate: {
     site: "corporate",
     primary: [
+      // VTI and the Startup Centre are introduced on What We Do, which links
+      // on to their dedicated sites. They are never standalone corporate tabs.
       { id: "n-wwd", label: "What we do", href: "/what-we-do" },
-      { id: "n-vti", label: "VTI", href: siteUrl("vti"), crossSite: true },
-      { id: "n-sc", label: "Startup Centre", href: siteUrl("startup"), crossSite: true },
       { id: "n-vc", label: "Venture Capital", href: "/venture-capital" },
       { id: "n-h", label: "Hospitality", href: "/hospitality" },
       { id: "n-impact", label: "Impact", href: "/impact" },
@@ -147,8 +148,6 @@ export const navigation: Record<SiteId, SiteNavigation> = {
       { id: "n-home", label: "Overview", href: siteUrl("vti", "/") },
       { id: "n-programmes", label: "Programmes", href: "/programmes" },
       { id: "n-clusters", label: "Clusters", href: "/clusters" },
-      { id: "n-sc", label: "Startup Centre", href: siteUrl("startup"), crossSite: true },
-      { id: "n-corp", label: "Nayokan", href: siteUrl("corporate"), crossSite: true },
     ],
     cta: { label: "Apply", href: "/apply" },
     footerColumns: [
@@ -188,8 +187,6 @@ export const navigation: Record<SiteId, SiteNavigation> = {
       { id: "n-portfolio", label: "Portfolio", href: "/portfolio" },
       { id: "n-opps", label: "Opportunities", href: "/opportunities" },
       { id: "n-mentors", label: "Mentors", href: "/mentors" },
-      { id: "n-vti", label: "VTI", href: siteUrl("vti"), crossSite: true },
-      { id: "n-corp", label: "Nayokan", href: siteUrl("corporate"), crossSite: true },
     ],
     cta: { label: "Apply", href: "/apply" },
     footerColumns: [
@@ -649,8 +646,8 @@ const startupVentures: Venture[] = [
       {
         type: "list",
         items: [
-          "Operational hub covering multiple producer villages (details to be confirmed).",
-          "Structured off-take agreements with regional buyers (to be confirmed).",
+          "Operational hub covering multiple producer villages.",
+          "Structured off-take agreements with regional buyers.",
           "Cross-cluster supply relationships with Nayokan Hospitality.",
           "Team drawn partly from VTI Agri-Food cluster graduates.",
         ],
@@ -758,23 +755,21 @@ export const properties: Property[] = [
     slug: "nayokan-guesthouse",
     code: "P/001",
     name: "The Nayokan Guesthouse",
-    location: "Yaoundé · Bastos",
+    // Physical facts (rooms, neighbourhood, architecture, rates) are published
+    // only once confirmed; until then the record describes purpose, not fabric.
+    location: "Yaoundé",
     type: "Guesthouse",
     summary:
-      "A restored residence with 6 refined rooms, a garden courtyard and a shared working library. Positioned for institutional visitors, long-stay researchers and partner delegations.",
+      "Guest rooms for institutional visitors, long-stay researchers and partner delegations: quiet, professional and run to institutional standards.",
     body: [
       {
         type: "paragraph",
-        text: "The Nayokan Guesthouse occupies a restored residence in one of Yaoundé's more settled residential quarters. The building carries its original architectural detail — high ceilings, arched windows, deep verandahs — refreshed with a calm contemporary sensibility and West African material accents.",
-      },
-      {
-        type: "paragraph",
-        text: "The property is designed to be quiet, professional and productive. Guests are typically institutional visitors, long-stay researchers and Nayokan partner delegations — with a small number of individually-booked stays.",
+        text: "The Nayokan Guesthouse is designed to be quiet, professional and productive: a calm base for institutional visitors, visiting researchers and Nayokan partner delegations.",
       },
       { type: "heading", level: 2, text: "The productive-asset angle" },
       {
         type: "paragraph",
-        text: "Every Nayokan property is designed to hold its own economically while contributing to Cameroon's productive-asset base. Revenue from the Guesthouse is reinvested into Nayokan operations, and staffing is drawn — where suitable — from the VTI Hospitality & Services cluster.",
+        text: "Every Nayokan property is designed to hold its own economically while contributing to Cameroon's productive-asset base, returning value to Nayokan's wider work.",
       },
     ],
     amenities: ["06 rooms", "Boutique", "24h reception", "Working library"],
@@ -786,10 +781,10 @@ export const properties: Property[] = [
     slug: "long-stay-residence",
     code: "P/002",
     name: "Long-stay Residence",
-    location: "Yaoundé · Nsimeyong",
+    location: "Yaoundé",
     type: "Long-stay",
     summary:
-      "Extended-stay apartments for corporate visitors, embassy secondments and multi-week research trips. Serviced, professional, quiet.",
+      "Extended stays for corporate visitors, secondments and multi-week research trips. Serviced, professional, quiet.",
     amenities: ["04 units", "14-night min.", "Weekly housekeeping", "Workspace"],
     gallery: [], // No approved photography yet; pages render the property image brief.
     provenance: demo(["amenities"]),
@@ -799,7 +794,7 @@ export const properties: Property[] = [
     slug: "workspace-reception",
     code: "P/003",
     name: "Workspace & Reception",
-    location: "Yaoundé · Central",
+    location: "Yaoundé",
     type: "Workspace",
     summary:
       "Dedicated meeting and event rooms for Nayokan cohorts, partner visits and workshops. Available to external partners on request.",
@@ -1363,7 +1358,7 @@ const universityPartner = (name: string, tag: string, location: string): Partner
   category: "university",
   tag,
   location,
-  relationship: "Partnership to be confirmed",
+  relationship: "University partnership",
   provenance: demo(["name", "relationship"]),
 });
 

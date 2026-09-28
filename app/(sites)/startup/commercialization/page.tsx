@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
-import { SubHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
 
 export const metadata: Metadata = {
   title: "Commercialization Pathway",
@@ -64,9 +64,7 @@ const stageDesc = {
 export default function Commercialization() {
   return (
     <>
-      <SubHero
-        sec="§ Startup Centre · Commercialization"
-        refPath="/startup-centre/commercialization"
+      <EditorialHero
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -78,6 +76,8 @@ export default function Commercialization() {
           </>
         }
         lede="The commercialization pathway describes how the Startup Centre moves an idea from validation through revenue and into scale — connected end-to-end to the Nayokan System."
+        slot="startup-commercialization"
+        figure="Fig. — A founder demonstrating a prototype to a first customer"
       />
 
       <section className="section">
@@ -124,7 +124,6 @@ export default function Commercialization() {
           {/* System connections */}
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span>§ 01 — Connected to the Nayokan System</span>
               <h3>
                 Where the pathway
                 <br />

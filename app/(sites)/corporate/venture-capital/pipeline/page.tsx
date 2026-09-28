@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 
 export const metadata: Metadata = {
   title: "Venture Pipeline",
@@ -19,14 +18,19 @@ const STAGES = [
   { title: "Portfolio Support", desc: "Board seat where appropriate. Follow-on capital preparation. Ecosystem support.", tag: "Ongoing" },
 ];
 
-const SNAPSHOT = ["Sourced (open)", "In screen", "In DD", "Closed YTD"];
+// What the public pipeline discloses, and when. Governance, not figures.
+const DISCLOSURE = [
+  ["Venture names", "With each venture's consent"],
+  ["Stage and sector", "Once a venture is named"],
+  ["Ticket sizes", "At close, with investor and venture consent"],
+  ["Pipeline figures", "Once verified"],
+];
 
 export default function VcPipeline() {
   return (
     <>
       <SubHero
         sec="§ Venture Capital · Pipeline"
-        refPath="/venture-capital/pipeline"
         crumbs={[
           { label: "Nayokan", href: "/" },
           { label: "Venture Capital", href: "/venture-capital" },
@@ -37,7 +41,7 @@ export default function VcPipeline() {
             A working <em>pipeline</em>. No fake numbers.
           </>
         }
-        lede="How Nayokan VC moves ventures from ecosystem sourcing to portfolio support — six stages, honest gates. We do not publish deal-level financials without written consent."
+        lede="How Nayokan VC moves ventures from ecosystem sourcing to portfolio support — six stages, honest gates."
       />
 
       <section className="section" style={{ background: "var(--navy)", color: "var(--paper)" }}>
@@ -73,17 +77,15 @@ export default function VcPipeline() {
             </div>
             <div>
               <div style={{ background: "var(--navy-2)", padding: 32, border: "1px solid var(--line-invert)" }}>
-                <span className="meta on-dark">Snapshot</span>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "20px 32px", marginTop: 16 }}>
-                  {SNAPSHOT.map((s) => (
-                    <div key={s}>
-                      <span className="meta on-dark">{s}</span>
-                      <div style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.6rem", letterSpacing: "-0.03em", color: "var(--paper)", marginTop: 4 }}>
-                        —<Tbc onDark />
-                      </div>
+                <span className="meta on-dark">What we publish, and when</span>
+                <dl className="vc-disclosure">
+                  {DISCLOSURE.map(([k, v]) => (
+                    <div key={k}>
+                      <dt>{k}</dt>
+                      <dd>{v}</dd>
                     </div>
                   ))}
-                </div>
+                </dl>
               </div>
             </div>
           </div>

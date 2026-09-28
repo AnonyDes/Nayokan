@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 import { siteUrl } from "@/platform/sites/registry";
 
 export const metadata: Metadata = {
@@ -33,7 +32,7 @@ const SECTIONS = [
   {
     h: "Your choices",
     paras: [
-      "You may withdraw consent, request a copy of your data, or ask for deletion at any time by writing to admissions@nayokan.org.",
+      "You may withdraw consent, request a copy of your data, or ask for deletion at any time by writing to the VTI admissions team through the enquiry form on this website.",
     ],
   },
 ];
@@ -43,10 +42,9 @@ export default function VtiPrivacy() {
     <>
       <SubHero
         sec="§ Legal"
-        refPath="/privacy"
         crumbs={[{ label: "Nayokan", href: siteUrl("corporate", "/") }, { label: "VTI", href: "/" }, { label: "Privacy" }]}
         title={<>Privacy <em>notice.</em></>}
-        lede={<>How Nayokan VTI handles personal information on this website. <Tbc>working notice · pending legal review</Tbc></>}
+        lede={<>How Nayokan VTI handles personal information on this website.</>}
       />
       <section className="section">
         <div className="wrap" style={{ maxWidth: 720 }}>
@@ -58,7 +56,6 @@ export default function VtiPrivacy() {
               ))}
             </div>
           ))}
-          <p className="meta" style={{ marginTop: 32 }}>Last updated: <Tbc>date tbc</Tbc></p>
         </div>
       </section>
     </>

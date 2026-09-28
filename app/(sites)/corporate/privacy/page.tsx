@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { CorpHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 
 export const metadata: Metadata = {
   title: "Privacy Notice",
@@ -51,8 +50,7 @@ export default function Privacy() {
         }
         lede={
           <>
-            How Nayokan handles personal information on this website.{" "}
-            <Tbc>working notice · pending legal review</Tbc>
+            How Nayokan handles personal information on this website.
           </>
         }
       />
@@ -70,9 +68,6 @@ export default function Privacy() {
               ))}
             </div>
           ))}
-          <p className="meta" style={{ marginTop: 32 }}>
-            Last updated: <Tbc>date tbc</Tbc>
-          </p>
         </div>
       </section>
     </>

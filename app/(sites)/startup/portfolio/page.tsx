@@ -3,7 +3,8 @@ import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
+import { onlyConfirmed } from "@/platform/content/governance";
+import { PublishingNote } from "@/ui/components/publishing-note";
 import { PortfolioDirectory } from "@/sites/startup/components/filters";
 
 export const metadata: Metadata = {
@@ -13,31 +14,23 @@ export const metadata: Metadata = {
   alternates: canonical("/portfolio"),
 };
 
-const overviewCell = {
-  background: "var(--paper)",
-  padding: "24px 20px",
-} as const;
-
-const overviewNum = {
-  fontFamily: "var(--font-heading)",
-  fontWeight: 800,
-  fontSize: "1.6rem",
-  letterSpacing: "-0.03em",
-  marginTop: 6,
-} as const;
-
-const overviewSub = { color: "var(--muted)", fontSize: "0.82rem" } as const;
+// What a venture in the portfolio receives, stage by stage. Process, not claims.
+const SUPPORT = [
+  { num: "01", title: "Model", desc: "Business-model design and venture architecture with Nayokan mentors." },
+  { num: "02", title: "Validate", desc: "Pilot customers, technical feasibility and first-revenue evidence." },
+  { num: "03", title: "Commercialize", desc: "A structured go-to-market with distribution and adoption partners." },
+  { num: "04", title: "Scale", desc: "Referral into Nayokan Venture Capital or strategic partnerships." },
+];
 
 export default async function Portfolio() {
   const repo = await getContentRepository();
-  const ventures = await repo.listVentures("startup");
-  const sectors = new Set(ventures.map((v) => v.sector?.split("·")[0].trim()).filter(Boolean));
+  // Ventures are listed only with their consent.
+  const ventures = onlyConfirmed(await repo.listVentures("startup"), "name");
 
   return (
     <>
       <SubHero
         sec="§ Startup Centre · Portfolio"
-        refPath="/startup-centre/portfolio"
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -48,45 +41,44 @@ export default async function Portfolio() {
             Ventures in the <em>ecosystem</em>.
           </>
         }
-        lede="A curated view of ventures currently working with the Startup Centre. Names, logos and financials are published only after venture consent — placeholders remain until then."
+        lede="A curated view of ventures currently working with the Startup Centre."
       />
 
       <section className="section">
         <div className="wrap">
-          {/* Overview strip */}
-          <div className="sub-stats-grid" style={{ marginBottom: 40 }}>
-            <div style={overviewCell}>
-              <span className="meta">In the pathway</span>
-              <div style={overviewNum}>
-                —
-                <Tbc>tbc</Tbc>
-              </div>
-              <small style={overviewSub}>Count updated per cohort</small>
-            </div>
-            <div style={overviewCell}>
-              <span className="meta">Sectors</span>
-              <div style={overviewNum}>{sectors.size}</div>
-              <small style={overviewSub}>Across productive economy</small>
-            </div>
-            <div style={overviewCell}>
-              <span className="meta">Handed to VC</span>
-              <div style={overviewNum}>
-                —
-                <Tbc>tbc</Tbc>
-              </div>
-              <small style={overviewSub}>Ventures graduated into VC</small>
-            </div>
-            <div style={overviewCell}>
-              <span className="meta">Alumni</span>
-              <div style={overviewNum}>
-                —
-                <Tbc>tbc</Tbc>
-              </div>
-              <small style={overviewSub}>Post-programme cohort</small>
-            </div>
-          </div>
-
-          <PortfolioDirectory ventures={ventures} />
+          {ventures.length > 0 ? (
+            <PortfolioDirectory ventures={ventures} />
+          ) : (
+            <>
+              <PublishingNote
+                title="Portfolio coming soon."
+                actions={
+                  <>
+                    <a href="/apply" className="btn btn-primary">
+                      Apply as an innovator <span className="arrow">→</span>
+                    </a>
+                    <a href="/commercialization" className="btn btn-ghost">
+                      The commercialization framework
+                    </a>
+                  </>
+                }
+              >
+                <p>
+                  The Startup Centre works with ventures from university research, independent
+                  innovators and VTI clusters, at every stage from model to scale.
+                </p>
+              </PublishingNote>
+              <ol className="sc-support">
+                {SUPPORT.map((s) => (
+                  <li key={s.num}>
+                    <span>{s.num}</span>
+                    <h3>{s.title}</h3>
+                    <p>{s.desc}</p>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
         </div>
       </section>
     </>

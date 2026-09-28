@@ -64,25 +64,39 @@ export function previewSiteUrl(site: SiteId, path = "/"): string {
   return p === "/" ? `/${site}` : `/${site}${p}`;
 }
 
+const SITE_HOSTNAMES = new Set(Object.values(ORIGINS).map((o) => new URL(o).hostname));
+
+// Local subdomain development (nayokan.localhost, vti.nayokan.localhost, …)
+// has a real host per site, exactly like production, so cross-site links can
+// be absolute there without buying domains. Never on a Vercel deployment,
+// where unset origins would otherwise fall back to the *.localhost defaults.
+const LOCAL_SUBDOMAINS = !process.env.VERCEL && [...SITE_HOSTNAMES].every((h) => h.endsWith(".localhost"));
+
+/**
+ * True on single-hostname environments (*.vercel.app, bare localhost, or an
+ * unconfigured *.localhost name), where every site is served under path
+ * prefixes (/vti, /startup). False on each site's own configured host.
+ */
+export function isSingleHostPreview(host: string): boolean {
+  return host.endsWith(".vercel.app") || host === "localhost" || (host.endsWith(".localhost") && !SITE_HOSTNAMES.has(host));
+}
+
 /** Absolute URL on a given site. Use for every cross-site link and canonical URL. */
 export function siteUrl(site: SiteId, path = "/"): string {
   const p = path.startsWith("/") ? path : `/${path}`;
 
-  // When custom domains have not yet been purchased or activated,
-  // or when browsing on preview / single-hostname environments (*.vercel.app or localhost),
-  // return safe relative/preview paths so links never navigate to unbought domains.
-  const customDomainsActive = process.env.NEXT_PUBLIC_ENABLE_CUSTOM_DOMAINS === "true";
+  // When custom domains have not yet been purchased or activated, or when
+  // browsing a single-hostname environment (*.vercel.app, bare localhost),
+  // return preview paths so links never navigate to unbought domains.
+  const multiHost = process.env.NEXT_PUBLIC_ENABLE_CUSTOM_DOMAINS === "true" || LOCAL_SUBDOMAINS;
 
   if (typeof window !== "undefined") {
-    const host = window.location.hostname;
-    const isSingleHost = host.endsWith(".vercel.app") || host === "localhost" || host.includes(".localhost");
-    if (!customDomainsActive || isSingleHost) {
+    if (!multiHost || isSingleHostPreview(window.location.hostname)) {
       return previewSiteUrl(site, p);
     }
-  } else if (!customDomainsActive) {
+  } else if (!multiHost) {
     return previewSiteUrl(site, p);
   }
 
   return p === "/" ? SITES[site].origin : `${SITES[site].origin}${p}`;
 }
-

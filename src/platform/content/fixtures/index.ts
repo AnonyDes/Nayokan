@@ -19,8 +19,8 @@ import {
 
 // Fixtures repository: demo/placeholder content for the public sites until
 // Supabase is connected. Owned by the public-sites workstream.
-// Every record carries provenance.isDemo = true; unconfirmed fields render
-// "tbc" tags. Metrics always return value: null until verified.
+// Every record carries provenance.isDemo = true; unconfirmed fields are
+// withheld from public pages. Metrics always return value: null until verified.
 export const fixturesRepository: PublicContentRepository = {
   async getSiteSettings(site) {
     return siteSettings[site];

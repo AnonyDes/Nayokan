@@ -1,5 +1,4 @@
 import type { RichBlock } from "@/platform/content/types";
-import { Tbc } from "./tbc";
 
 // Renders the CMS RichBlock contract — no raw HTML reaches the page.
 export function RichBlocks({ blocks }: { blocks: RichBlock[] }) {
@@ -29,7 +28,7 @@ export function RichBlocks({ blocks }: { blocks: RichBlock[] }) {
           case "callout":
             return (
               <p key={i} className={`callout callout-${b.tone ?? "info"}`}>
-                {b.text} <Tbc />
+                {b.text}
               </p>
             );
           case "list":

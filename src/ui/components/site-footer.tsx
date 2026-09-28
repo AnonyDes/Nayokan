@@ -36,8 +36,9 @@ export function SiteFooter({ nav, settings }: { nav: SiteNavigation; settings: S
         </div>
         <div className="footer-bottom">
           <span>© Nayokan 2026 · Yaoundé, Cameroon</span>
-          <span>Digital ecosystem · v1.0 · Working design</span>
-          <span>EN · FR</span>
+          <span className="footer-legal">
+            <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a>
+          </span>
         </div>
       </div>
     </footer>

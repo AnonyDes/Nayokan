@@ -4,7 +4,7 @@ import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { RichBlocks } from "@/ui/components/rich-blocks";
-import { Tbc } from "@/ui/components/tbc";
+import { isUnconfirmed, onlyConfirmed } from "@/platform/content/governance";
 import { RelatedStrip } from "@/ui/components/strips";
 
 export async function generateMetadata({
@@ -31,9 +31,10 @@ export default async function VentureDetail({
   const { slug } = await params;
   const repo = await getContentRepository();
   const venture = await repo.getVenture("startup", slug);
-  if (!venture) notFound();
+  // A venture page exists only once the venture has consented to being named.
+  if (!venture || isUnconfirmed(venture.provenance, "name")) notFound();
 
-  const others = (await repo.listVentures("startup")).filter((v) => v.id !== venture.id);
+  const others = onlyConfirmed(await repo.listVentures("startup"), "name").filter((v) => v.id !== venture.id);
 
   return (
     <>
@@ -73,7 +74,7 @@ export default async function VentureDetail({
               Portfolio venture {venture.code} · {venture.sector}
             </span>
             <h1 className="world-hero-title" style={{ marginTop: 20 }}>
-              {venture.name}. <Tbc>venture name tbc</Tbc>
+              {venture.name}.
             </h1>
             <p className="world-hero-lede" style={{ marginTop: 24 }}>
               {venture.description} Currently listed as {venture.listingStatus}.
@@ -96,15 +97,12 @@ export default async function VentureDetail({
                 { label: "Stage", value: venture.stage ?? "—" },
                 { label: "Sector", value: venture.sector ?? "—" },
                 { label: "Region", value: venture.location ?? "—" },
-                { label: "Founded", value: "—", tbc: true },
-                { label: "Round", value: "—", tbc: true },
-                { label: "Employees", value: "—", tbc: true },
-              ]).map((f) => (
+              ])
+                .filter((f) => !("tbc" in f && f.tbc) && f.value !== "—")
+                .map((f) => (
                 <div key={f.label}>
                   <span className="meta">{f.label}</span>
-                  <span className="val">
-                    {f.value} {f.tbc && <Tbc>tbc</Tbc>}
-                  </span>
+                  <span className="val">{f.value}</span>
                 </div>
               ))}
             </div>
@@ -121,10 +119,6 @@ export default async function VentureDetail({
               <>
                 <h2>What the venture does</h2>
                 <p>{venture.description}</p>
-                <p>
-                  A fuller public profile is published after venture consent and editorial review.
-                  Until then this page intentionally stays brief. <Tbc>profile tbc</Tbc>
-                </p>
               </>
             )}
           </div>

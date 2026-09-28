@@ -3,7 +3,6 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import type { FormState } from "@/platform/forms/actions";
 import { submitApplication } from "@/platform/forms/actions";
-import { Tbc } from "@/ui/components/tbc";
 import { trackEvent } from "@/platform/analytics";
 import type { SiteId, World } from "@/platform/sites/types";
 
@@ -123,7 +122,6 @@ export function ApplicationForm({
         <form action={action}>
           {/* STEP 1 — intro */}
           <section className="appl-step-content" hidden={step !== 1} aria-label="Step 1 — Getting started">
-            <span className="meta">§ Step 01 — Getting started</span>
             <h2 style={{ marginTop: 8 }}>Before you begin.</h2>
             <p className="step-hint">
               This application takes about 8 minutes. Your progress is saved locally after each step, so
@@ -144,7 +142,7 @@ export function ApplicationForm({
               <div style={{ padding: 20, border: "1px solid var(--line)", background: "var(--bone)" }}>
                 <span className="meta">You’ll hear back</span>
                 <p style={{ marginTop: 12, fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.5rem", letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-                  Within 5–10 business days.
+                  A written response from the programme team.
                 </p>
                 <p style={{ marginTop: 8, color: "var(--muted)", fontSize: "0.9rem" }}>
                   All applications are reviewed by a Nayokan programme lead.
@@ -163,7 +161,6 @@ export function ApplicationForm({
 
           {/* STEP 2 — you */}
           <section className="appl-step-content" hidden={step !== 2} aria-label="Step 2 — About you">
-            <span className="meta">§ Step 02 — About you</span>
             <h2 style={{ marginTop: 8 }}>Tell us who you are.</h2>
             <p className="step-hint">Basic contact information. We use this only to route and reply to your application.</p>
             <div className="appl-field">
@@ -205,7 +202,6 @@ export function ApplicationForm({
 
           {/* STEP 3 — programme */}
           <section className="appl-step-content" hidden={step !== 3} aria-label="Step 3 — Programme of interest">
-            <span className="meta">§ Step 03 — Programme of interest</span>
             <h2 style={{ marginTop: 8 }}>Which programme are you applying for?</h2>
             <p className="step-hint">Choose the primary programme. You can indicate secondary interests below.</p>
             <fieldset className="appl-field" style={{ border: "none", padding: 0, margin: "0 0 24px" }}>
@@ -243,7 +239,6 @@ export function ApplicationForm({
 
           {/* STEP 4 — motivation */}
           <section className="appl-step-content" hidden={step !== 4} aria-label="Step 4 — Motivation and background">
-            <span className="meta">§ Step 04 — Motivation & background</span>
             <h2 style={{ marginTop: 8 }}>Tell us your motivation.</h2>
             <p className="step-hint">This is the part programme leads read most carefully. Speak plainly, and in your own voice.</p>
             <div className="appl-field">
@@ -274,7 +269,6 @@ export function ApplicationForm({
 
           {/* STEP 5 — consent */}
           <section className="appl-step-content" hidden={step !== 5} aria-label="Step 5 — Consent">
-            <span className="meta">§ Step 05 — Consent</span>
             <h2 style={{ marginTop: 8 }}>A few permissions before we finish.</h2>
             <p className="step-hint">All standard. You can withdraw consent at any time by writing to us.</p>
             <div className="appl-field">
@@ -315,18 +309,17 @@ export function ApplicationForm({
 
           {/* STEP 6 — review */}
           <section className="appl-step-content" hidden={step !== 6} aria-label="Step 6 — Review">
-            <span className="meta">§ Step 06 — Review</span>
             <h2 style={{ marginTop: 8 }}>Review before submitting.</h2>
             <p className="step-hint">This is a demo — no real submission. In production, this becomes your signed summary.</p>
             <div className="appl-review-grid">
               <ReviewRow k="Programme" v={programmeLabel} />
-              <ReviewRow k="Cluster" v={value("cluster") || "—"} tbc={!value("cluster")} tag="from step 03" />
-              <ReviewRow k="Name" v={value("fullName") || "—"} tbc={!value("fullName")} tag="from step 02" />
-              <ReviewRow k="Email" v={value("email") || "—"} tbc={!value("email")} tag="from step 02" />
-              <ReviewRow k="Location" v={value("cityRegion") || "—"} tbc={!value("cityRegion")} tag="from step 02" />
-              <ReviewRow k="Education" v={value("education") || "—"} tbc={!value("education")} tag="from step 04" />
-              <ReviewRow k="Motivation" v={value("motivation") ? `${value("motivation").slice(0, 60)}${value("motivation").length > 60 ? "…" : ""}` : "—"} tbc={!value("motivation")} tag="from step 04" />
-              <ReviewRow k="Consent" v={value("confirmAccurate") && value("consentContact") ? "✓ Confirmed" : "—"} tbc={!(value("confirmAccurate") && value("consentContact"))} tag="required" />
+              <ReviewRow k="Cluster" v={value("cluster") || "—"} missing={!value("cluster")} tag="from step 03" />
+              <ReviewRow k="Name" v={value("fullName") || "—"} missing={!value("fullName")} tag="from step 02" />
+              <ReviewRow k="Email" v={value("email") || "—"} missing={!value("email")} tag="from step 02" />
+              <ReviewRow k="Location" v={value("cityRegion") || "—"} missing={!value("cityRegion")} tag="from step 02" />
+              <ReviewRow k="Education" v={value("education") || "—"} missing={!value("education")} tag="from step 04" />
+              <ReviewRow k="Motivation" v={value("motivation") ? `${value("motivation").slice(0, 60)}${value("motivation").length > 60 ? "…" : ""}` : "—"} missing={!value("motivation")} tag="from step 04" />
+              <ReviewRow k="Consent" v={value("confirmAccurate") && value("consentContact") ? "✓ Confirmed" : "—"} missing={!(value("confirmAccurate") && value("consentContact"))} tag="required" />
             </div>
             <div className="appl-actions">
               <button type="button" onClick={() => go(5)} className="link-inline">
@@ -349,8 +342,7 @@ export function ApplicationForm({
                 ✓ Application logged — reference {state.reference}.{" "}
                 <a href={`${successHref}?ref=${state.reference ?? ""}`} className="link-inline">
                   Continue <span className="arrow">→</span>
-                </a>{" "}
-                <Tbc>demo · form not wired</Tbc>
+                </a>
               </p>
             )}
           </section>
@@ -376,12 +368,12 @@ function StepNav({ step, onBack, onNext }: { step: number; onBack: () => void; o
   );
 }
 
-function ReviewRow({ k, v, tbc, tag }: { k: string; v: string; tbc?: boolean; tag?: string }) {
+function ReviewRow({ k, v, missing, tag }: { k: string; v: string; missing?: boolean; tag?: string }) {
   return (
     <div className="appl-review-row">
       <span className="meta">{k}</span>
       <span className="val">
-        {v} {tbc && <Tbc>{tag ?? "tbc"}</Tbc>}
+        {missing ? <span className="appl-review-missing">Not yet provided{tag ? ` · ${tag}` : ""}</span> : v}
       </span>
     </div>
   );

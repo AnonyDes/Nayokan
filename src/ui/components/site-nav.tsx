@@ -29,7 +29,6 @@ export function SiteNav({
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [lang, setLang] = useState<"EN" | "FR">("EN");
   const burgerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
 
@@ -39,21 +38,6 @@ export function SiteNav({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Restore the (visual-only) language preference, mirroring the design.
-  // Async so it stays a subscription to an external store, not a render-time
-  // setState (react-hooks/set-state-in-effect).
-  useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      const stored = window.localStorage.getItem("nayokan-lang");
-      if (stored === "FR") setLang("FR");
-    });
-    return () => cancelAnimationFrame(id);
-  }, []);
-  const pickLang = (l: "EN" | "FR") => {
-    setLang(l);
-    window.localStorage.setItem("nayokan-lang", l);
-  };
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -115,23 +99,6 @@ export function SiteNav({
   // Corporate links into VTI / Startup Centre play the world-entry transition.
   const transitionFor = (item: NavItem) => (siteId === "corporate" && item.crossSite ? worldOf(item.href) : undefined);
 
-  const langToggle = (
-    <div className="lang-toggle" role="group" aria-label="Language">
-      {(["EN", "FR"] as const).map((l) => (
-        <button
-          key={l}
-          type="button"
-          data-lang={l}
-          className={lang === l ? "active" : ""}
-          aria-pressed={lang === l}
-          onClick={() => pickLang(l)}
-        >
-          {l}
-        </button>
-      ))}
-    </div>
-  );
-
   return (
     <>
       <header className={`nav${scrolled ? " scrolled" : ""}${ecosystem ? " nav--eco" : ""}`} role="banner">
@@ -168,7 +135,6 @@ export function SiteNav({
             ))}
           </nav>
           <div className="nav-actions">
-            {langToggle}
             {cta && (
               <a href={cta.href} className="nav-cta" onClick={(e) => handlePreviewClick(e, cta.href)}>
                 {cta.label}
@@ -227,14 +193,17 @@ export function SiteNav({
           </div>
         )}
 
-        {/* Four Worlds / Ecosystem cross-navigation on mobile */}
+        {/* Sub-sites only: cross-navigation back into the wider ecosystem. The
+            corporate site introduces VTI and the Startup Centre on What We Do
+            instead of linking to them from its navigation. */}
+        {siteId !== "corporate" && (
         <div className="nav-mobile-worlds" style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid var(--line)" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 12 }}>
             NAYOKAN ECOSYSTEM
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
             {[
-              { label: "Main / Corporate", href: siteUrl("corporate", "/"), active: siteId === "corporate" },
+              { label: "Nayokan", href: siteUrl("corporate", "/"), active: false },
               { label: "VTI ↗", href: siteUrl("vti", "/"), active: siteId === "vti" },
               { label: "Startup Centre ↗", href: siteUrl("startup", "/"), active: siteId === "startup" },
               { label: "Venture Capital", href: siteUrl("corporate", "/venture-capital"), active: false },
@@ -263,9 +232,9 @@ export function SiteNav({
             ))}
           </div>
         </div>
+        )}
 
         <div className="nav-mobile-foot">
-          {langToggle}
           <span>© Nayokan · 2026</span>
         </div>
       </aside>

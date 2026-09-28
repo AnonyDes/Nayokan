@@ -4,7 +4,8 @@ import { getContentRepository } from "@/platform/content";
 import { CorpHero } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
 import { CtaBand } from "@/ui/components/strips";
-import { Tbc, isTbc } from "@/ui/components/tbc";
+import { onlyConfirmed } from "@/platform/content/governance";
+import { MediaSlot } from "@/ui/components/media-slot";
 
 export const metadata: Metadata = {
   title: "About",
@@ -22,17 +23,20 @@ const VALUES = [
   { num: "06", title: "Long horizon over short signal.", desc: "Building a productive economy takes decades. We are structured to be here for them." },
 ];
 
-const TIMELINE = [
-  { year: "2019", tbc: true, title: "Nayokan Association founded.", desc: "The founding team convenes around the conviction that Cameroon needs connected institutions for skills, enterprise and capital." },
-  { year: "2022", tbc: true, title: "First programme concepts.", desc: "Early curriculum design for the Vocational Training Institute; first partnership conversations with Cameroonian institutions." },
-  { year: "2024", tbc: true, title: "VTI inauguration.", desc: "The Nayokan Vocational Training Institute is inaugurated in Yaoundé. First cohort of trainees enters the programme." },
-  { year: "2025", tbc: true, title: "Startup Centre established.", desc: "The Startup Centre begins operations, formalising the commercialization pathway and first university partnerships." },
-  { year: "2026", tbc: false, title: "Ecosystem consolidation.", desc: "Venture Capital and Hospitality operations are structured as full divisions. The Nayokan Digital Ecosystem launches — this website." },
+// Milestones in order. A year is shown only once it is confirmed against
+// Nayokan's records; until then the milestone carries its phase number.
+const TIMELINE: { year?: string; title: string; desc: string }[] = [
+  { title: "Nayokan Association founded.", desc: "The founding team convenes around the conviction that Cameroon needs connected institutions for skills, enterprise and capital." },
+  { title: "First programme concepts.", desc: "Early curriculum design for the Vocational Training Institute, and first partnership conversations with Cameroonian institutions." },
+  { title: "The VTI opens its doors.", desc: "The Nayokan Vocational Training Institute launches its computer lab in Yaoundé." },
+  { title: "Startup Centre established.", desc: "The Startup Centre formalises the commercialization pathway from research to venture." },
+  { year: "2026", title: "Ecosystem consolidation.", desc: "Venture Capital and Hospitality are structured as full divisions, and the Nayokan digital ecosystem launches with this website." },
 ];
 
 export default async function About() {
   const repo = await getContentRepository();
-  const leaders = await repo.listPeople("corporate", "leadership");
+  // Only people Nayokan has confirmed by name are published.
+  const leaders = onlyConfirmed(await repo.listPeople("corporate", "leadership"), "name");
 
   return (
     <>
@@ -51,12 +55,14 @@ export default async function About() {
       <section className="two-col">
         <div className="two-col-inner">
           <aside className="two-col-side">
-            <span className="meta">§ 01 — Origin</span>
             <h3>Where Nayokan came from.</h3>
             <p>
               Nayokan was founded as an association with the conviction that Cameroon needed
               institutions capable of connecting capability, production and capital in one system.
             </p>
+            <div className="about-side-photo">
+              <MediaSlot slot="about-origin" ratio="4:3" caption />
+            </div>
           </aside>
           <div className="two-col-body">
             <p className="lede">
@@ -120,15 +126,14 @@ export default async function About() {
           <SectionHeader
             num="§ 03 — Story"
             title="A working timeline."
-            lead="Nayokan is a young institution with long-term intent. Milestones marked as [tbc] are being reconciled with our records before publication."
+            lead="Nayokan is a young institution with long-term intent."
             onDark
           />
           <div className="timeline-track">
-            {TIMELINE.map((t) => (
-              <div className="timeline-item" key={t.year}>
-                <span className="timeline-year">
-                  {t.year}
-                  {t.tbc && <Tbc onDark />}
+            {TIMELINE.map((t, i) => (
+              <div className="timeline-item" key={t.title}>
+                <span className={`timeline-year${t.year ? "" : " is-phase"}`}>
+                  {t.year ?? `Phase ${String(i + 1).padStart(2, "0")}`}
                 </span>
                 <div className="timeline-body">
                   <h4>{t.title}</h4>
@@ -146,25 +151,23 @@ export default async function About() {
           <SectionHeader
             num="§ 04 — Leadership"
             title="The people leading Nayokan."
-            lead="Confirmed leadership is named below. The remaining operational-lead roles are published only after individual approval."
+            lead="The people leading and advising Nayokan. Division leads are introduced here as each appointment is announced."
           />
-          <div className="leadership-grid">
+          <div className={`leadership-grid${leaders.length <= 2 ? " leadership-grid--feature" : ""}`}>
             {leaders.map((p) => (
               <article className="leader-card" key={p.id}>
                 {p.photo ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img className="leader-portrait leader-portrait--photo" src={p.photo.src} alt={p.photo.alt} width={p.photo.width} height={p.photo.height} loading="lazy" />
                 ) : (
-                  <div className="leader-portrait" data-tag="Portrait tbc">
+                  <div className="leader-portrait" aria-hidden="true">
                     {p.initials}
                   </div>
                 )}
                 <div>
-                  <div className="leader-name">
-                    {p.name}
-                    {isTbc(p.provenance, "name") && <Tbc />}
-                  </div>
+                  <div className="leader-name">{p.name}</div>
                   <div className="leader-role">{p.position}</div>
+                  {p.bio && <p className="leader-bio">{p.bio}</p>}
                 </div>
                 <div className="leader-tag">{p.division}</div>
               </article>
@@ -172,7 +175,7 @@ export default async function About() {
           </div>
           <div style={{ marginTop: 32, textAlign: "right" }}>
             <a href="/contact" className="link-inline">
-              Full leadership & governance <span className="arrow">→</span>
+              Contact Nayokan <span className="arrow">→</span>
             </a>
           </div>
         </div>

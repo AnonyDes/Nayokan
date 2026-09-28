@@ -29,14 +29,13 @@ export function RelatedStrip({
 }
 
 export function CtaBand({
-  sec,
   title,
   lede,
   primary,
   secondary,
   contact,
 }: {
-  sec: string;
+  sec?: string;
   title: ReactNode;
   lede: ReactNode;
   primary: { label: string; href: string };
@@ -48,7 +47,6 @@ export function CtaBand({
       <div className="wrap">
         <div className="cta-grid">
           <div className="cta-left">
-            <span className="meta on-dark">{sec}</span>
             <h2 className="on-dark cta-title">{title}</h2>
           </div>
           <div className="cta-right">

@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { getContentRepository } from "@/platform/content";
 import { siteUrl } from "@/platform/sites/registry";
+import { onlyConfirmed } from "@/platform/content/governance";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const repo = await getContentRepository();
-  const ventures = await repo.listVentures("startup");
+  const ventures = onlyConfirmed(await repo.listVentures("startup"), "name");
 
   return [
     ...[

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 
 export const metadata: Metadata = {
   title: "Investment Approach",
@@ -52,7 +51,6 @@ export default function VcApproach() {
     <>
       <SubHero
         sec="§ Venture Capital · Investment Approach"
-        refPath="/venture-capital/approach"
         crumbs={[
           { label: "Nayokan", href: "/" },
           { label: "Venture Capital", href: "/venture-capital" },
@@ -72,7 +70,6 @@ export default function VcApproach() {
         <div className="wrap">
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span style={{ color: "var(--muted-invert)" }}>§ 01 — Investment philosophy</span>
               <h3 style={{ color: "var(--paper)" }}>
                 Three principles.
                 <br />
@@ -94,7 +91,6 @@ export default function VcApproach() {
 
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span style={{ color: "var(--muted-invert)" }}>§ 02 — Sectors</span>
               <h3 style={{ color: "var(--paper)" }}>
                 Where we
                 <br />
@@ -115,15 +111,13 @@ export default function VcApproach() {
 
           <div className="spec-grid" style={{ alignItems: "start", marginBottom: 64 }}>
             <div className="spec-head">
-              <span style={{ color: "var(--muted-invert)" }}>§ 03 — Stage focus</span>
               <h3 style={{ color: "var(--paper)" }}>Seed to growth.</h3>
             </div>
             <div>
               <div style={{ border: "1px solid var(--line-invert)", background: "var(--navy-2)", padding: 32 }}>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }}>
+                <div className="vc-spec-row">
                   {[
                     ["Stage focus", "Seed · Growth"],
-                    ["Ticket range", "—"],
                     ["Instrument", "Flexible"],
                     ["Geography", "Cameroon · CEMAC"],
                   ].map(([k, v]) => (
@@ -131,14 +125,13 @@ export default function VcApproach() {
                       <span className="meta" style={{ color: "var(--muted-invert)" }}>{k}</span>
                       <div style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.4rem", letterSpacing: "-0.03em", color: "var(--paper)", marginTop: 6 }}>
                         {v}
-                        {k === "Ticket range" && <Tbc onDark />}
                       </div>
                     </div>
                   ))}
                 </div>
                 <p style={{ marginTop: 24, color: "var(--muted-invert)", fontSize: "0.92rem", lineHeight: 1.55, maxWidth: "64ch" }}>
                   Precise ticket ranges and instrument terms are agreed at term-sheet stage and vary
-                  by venture. Published financial figures require partner and venture consent.
+                  by venture.
                 </p>
               </div>
             </div>
@@ -146,7 +139,6 @@ export default function VcApproach() {
 
           <div className="spec-grid" style={{ alignItems: "start" }}>
             <div className="spec-head">
-              <span style={{ color: "var(--muted-invert)" }}>§ 04 — Support model</span>
               <h3 style={{ color: "var(--paper)" }}>
                 Capital
                 <br />

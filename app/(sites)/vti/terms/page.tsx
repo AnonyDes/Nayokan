@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
 import { siteUrl } from "@/platform/sites/registry";
 
 export const metadata: Metadata = {
@@ -20,7 +19,7 @@ const SECTIONS = [
   {
     h: "Content accuracy",
     paras: [
-      "Programme details, cohort dates, certification and costs are marked where they remain to be confirmed. Written confirmations from the VTI admissions team supersede website copy.",
+      "Programme details, cohort dates, certification and costs may change. Written confirmations from the VTI admissions team supersede website copy.",
     ],
   },
   {
@@ -42,10 +41,9 @@ export default function VtiTerms() {
     <>
       <SubHero
         sec="§ Legal"
-        refPath="/terms"
         crumbs={[{ label: "Nayokan", href: siteUrl("corporate", "/") }, { label: "VTI", href: "/" }, { label: "Terms" }]}
         title={<>Terms of <em>use.</em></>}
-        lede={<>The terms governing use of the Nayokan VTI website. <Tbc>working terms · pending legal review</Tbc></>}
+        lede={<>The terms governing use of the Nayokan VTI website.</>}
       />
       <section className="section">
         <div className="wrap" style={{ maxWidth: 720 }}>
@@ -57,7 +55,6 @@ export default function VtiTerms() {
               ))}
             </div>
           ))}
-          <p className="meta" style={{ marginTop: 32 }}>Last updated: <Tbc>date tbc</Tbc></p>
         </div>
       </section>
     </>

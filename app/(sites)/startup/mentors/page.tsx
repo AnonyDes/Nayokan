@@ -3,7 +3,9 @@ import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
 import { SubHero } from "@/ui/components/heroes";
-import { Tbc } from "@/ui/components/tbc";
+import { onlyConfirmed } from "@/platform/content/governance";
+import { PublishingNote } from "@/ui/components/publishing-note";
+import { MentorKinds } from "@/sites/startup/components/mentor-kinds";
 import { MentorDirectory } from "@/sites/startup/components/filters";
 
 export const metadata: Metadata = {
@@ -15,14 +17,13 @@ export const metadata: Metadata = {
 
 export default async function Mentors() {
   const repo = await getContentRepository();
-  const mentors = await repo.listMentors();
-  const preview = mentors[1] ?? mentors[0];
+  // Mentors are named only once each has approved their profile.
+  const mentors = onlyConfirmed(await repo.listMentors(), "name");
 
   return (
     <>
       <SubHero
         sec="§ Startup Centre · Mentors"
-        refPath="/startup-centre/mentors"
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -33,86 +34,25 @@ export default async function Mentors() {
             People who have <em>built</em>.
           </>
         }
-        lede="Nayokan mentors are researchers, founders, operators and investors — with lived experience in African markets. Profiles are published once individually approved; names below are placeholders."
+        lede="Nayokan mentors are researchers, founders, operators and investors — with lived experience in African markets."
       />
 
       <section className="section">
         <div className="wrap">
-          <MentorDirectory mentors={mentors} />
-
-          {/* Mentor detail preview */}
-          {preview && (
-            <div className="sub-mentor-preview" style={{ marginTop: 64 }}>
-              <div>
-                <div className="dc-portrait" style={{ width: 120, height: 120, fontSize: "1.6rem" }}>
-                  {preview.initials}
-                </div>
-                <span className="dc-status" style={{ marginTop: 16, display: "inline-block" }}>
-                  {preview.availability === "open" ? "Accepting mentees" : "Booked · next cycle"}
-                </span>
+          {mentors.length > 0 ? (
+            <MentorDirectory mentors={mentors} />
+          ) : (
+            <>
+              <MentorKinds />
+              <div style={{ marginTop: 48 }}>
+                <PublishingNote title="Mentor profiles coming soon.">
+                  <p>
+                    Ventures in the Startup Centre are matched with mentors by stage and sector. Each
+                    profile sets out what the mentor supports and the kind of venture they work with.
+                  </p>
+                </PublishingNote>
               </div>
-              <div>
-                <span className="meta">Mentor profile · preview</span>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    fontWeight: 700,
-                    fontSize: "1.6rem",
-                    letterSpacing: "-0.02em",
-                    marginTop: 8,
-                  }}
-                >
-                  {preview.name}
-                  <Tbc>tbc</Tbc>
-                </h3>
-                <div style={{ color: "var(--muted)", fontSize: "1rem", marginTop: 4 }}>
-                  {preview.role}
-                </div>
-                <p
-                  style={{
-                    marginTop: 20,
-                    color: "var(--ink)",
-                    fontSize: "0.98rem",
-                    lineHeight: 1.6,
-                    maxWidth: "56ch",
-                  }}
-                >
-                  A short paragraph in each mentor’s own words on what they support, where they are
-                  strongest, and the type of venture they are looking to work with.{" "}
-                  <Tbc>content tbc</Tbc>
-                </p>
-                <div
-                  className="sub-3col-grid"
-                  style={{
-                    marginTop: 24,
-                    paddingTop: 20,
-                    borderTop: "1px solid var(--line)",
-                  }}
-                >
-                  {[
-                    { k: "Experience", v: "—" },
-                    { k: "Sectors", v: preview.expertise.join(" · ") },
-                    { k: "Availability", v: preview.availability === "open" ? "This cycle" : "Next cycle" },
-                  ].map((f) => (
-                    <div key={f.k}>
-                      <span className="meta">{f.k}</span>
-                      <div
-                        style={{
-                          fontFamily: "var(--font-heading)",
-                          fontWeight: 700,
-                          fontSize: "1.15rem",
-                          letterSpacing: "-0.02em",
-                          marginTop: 4,
-                        }}
-                      >
-                        {f.v}
-                        {f.v === "—" && <Tbc>tbc</Tbc>}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </>
           )}
 
           {/* Become a mentor */}

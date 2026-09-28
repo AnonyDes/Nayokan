@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Mentor, Opportunity, Venture } from "@/platform/content/types";
-import { Tbc } from "@/ui/components/tbc";
+import { isUnconfirmed } from "@/platform/content/governance";
 import { MediaSlot } from "@/ui/components/media-slot";
 
 import { trackEvent } from "@/platform/analytics";
@@ -90,10 +90,7 @@ export function MentorDirectory({ mentors }: { mentors: Mentor[] }) {
             <span className={`dc-status${m.availability === "open" ? "" : " off"}`}>
               {availabilityLabel(m.availability)}
             </span>
-            <h4>
-              {m.name}
-              <Tbc>tbc</Tbc>
-            </h4>
+            <h4>{m.name}</h4>
             <div className="dc-role">{m.role}</div>
             <div className="dc-tags">
               {m.expertise.map((e) => (
@@ -224,9 +221,11 @@ export function OpportunityTable({ opportunities }: { opportunities: Opportunity
               </div>
               <span className="otag">{OPP_TYPE[o.category] ?? "Other"}</span>
               <span className="odate">
-                {o.deadline}
-                {o.provenance.unconfirmedFields?.includes("deadline") &&
-                  o.deadline !== "Rolling" && <Tbc>tbc</Tbc>}
+                {isUnconfirmed(o.provenance, "deadline") && o.deadline !== "Rolling" ? (
+                  <span className="pending-note">Date coming soon</span>
+                ) : (
+                  o.deadline
+                )}
               </span>
               <span className={`ostatus ${st.cls}`}>{st.label}</span>
               <span className="ogo">
@@ -338,10 +337,7 @@ export function PortfolioDirectory({ ventures }: { ventures: Venture[] }) {
           <article className="pf-card pf-card--media" key={v.id}>
             <MediaSlot slot="startup-portfolio" media={v.logo} ratio="16:9" variant="compact" className="pf-media" />
             <div className="pf-head">
-              <div className="pf-logo">
-                {v.code}
-                <Tbc>tbc</Tbc>
-              </div>
+              <div className="pf-logo">{v.code}</div>
               <span className="pf-status">{LISTING_LABEL[v.listingStatus]}</span>
             </div>
             <h4>{v.name}</h4>
@@ -379,7 +375,6 @@ export function PortfolioDirectory({ ventures }: { ventures: Venture[] }) {
         <div className="state-empty" style={{ marginTop: 32 }}>
           <div className="state-icon">Ø</div>
           <h4>No ventures in this sector yet.</h4>
-          <p>Portfolio entries are published only after venture consent.</p>
         </div>
       )}
     </>
