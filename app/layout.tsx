@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import { ScrollReveal } from "@/ui/components/reveal";
+import { MotionObserver } from "@/ui/motion/motion-observer";
+import { MotionStyles } from "@/ui/motion/motion-styles";
 import { PreviewLinkInterceptor } from "@/platform/sites/preview-nav";
 import "./globals.css";
 
@@ -22,7 +24,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={`${manrope.variable} ${inter.variable} ${plexMono.variable}`}>
       <body>
         <PreviewLinkInterceptor />
+        <MotionStyles />
         <ScrollReveal />
+        <MotionObserver />
         {children}
       </body>
     </html>

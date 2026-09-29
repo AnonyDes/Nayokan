@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Motion — load choreography, scroll-linked depth and micro-interactions.
+   Scroll entrances for page content live in src/ui/motion (server-rendered
+   hidden state + client observer). Everything here is pure CSS and never
+   waits for hydration. Restrained by design: fades, rises, unmasks — no
+   bounce, no spin, no scroll hijacking.
+   ========================================================================== */
+
+:root {
+  --mo-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --mo-ease-mask: cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+@keyframes mo-rise {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes mo-unmask {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes mo-settle {
+  from { scale: 1.18; }
+  to { scale: var(--mo-rest-scale, 1); }
+}
+@keyframes mo-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Hero text marked `.reveal` is always visible: without JS or with reduced
+   motion it simply renders; with motion it animates on load below. */
+:is(.hero, .world-hero, .corp-hero, .sub-hero) .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ---------- Hero entrance: crumbs, title, lede, actions, media ---------- */
+  :is(.hero, .world-hero) .reveal,
+  .corp-hero-crumbs, .corp-hero-title, .corp-hero-lede,
+  .sub-hero .crumbs, .sub-hero-body h1, .sub-hero-body .lede,
+  .ed-hero-crumbs, .ed-hero-title, .ed-hero-lede, .ed-hero-stats, .ed-hero-inner > div:first-child > :not(nav, h1, p, dl),
+  .article-hero-inner > *,
+  .world-hero-stat {
+    animation: mo-rise 900ms var(--mo-ease) both;
+    transition: none;
+  }
+
+  .corp-hero-crumbs, .sub-hero .crumbs, .ed-hero-crumbs, .article-hero-inner > :nth-child(1) { animation-delay: 60ms; }
+  :is(.hero, .world-hero) .reveal.d1, .article-hero-inner > :nth-child(2) { animation-delay: 140ms; }
+  .corp-hero-title, .sub-hero-body h1, .ed-hero-title,
+  :is(.hero, .world-hero) .reveal.d2, .article-hero-inner > :nth-child(3) { animation-delay: 200ms; }
+  .corp-hero-lede, .sub-hero-body .lede, .ed-hero-lede,
+  :is(.hero, .world-hero) .reveal.d3, .article-hero-inner > :nth-child(4) { animation-delay: 340ms; }
+  .ed-hero-stats, .ed-hero-inner > div:first-child > :not(nav, h1, p, dl),
+  :is(.hero, .world-hero) .reveal.d4 { animation-delay: 460ms; }
+  .world-hero-stat:nth-child(1) { animation-delay: 700ms; }
+  .world-hero-stat:nth-child(2) { animation-delay: 780ms; }
+  .world-hero-stat:nth-child(3) { animation-delay: 860ms; }
+
+  /* Hero photograph: unmask upward while the image settles from a zoom. */
+  .hero-figure, .world-hero-figure, .ed-hero-media .media-slot {
+    animation: mo-unmask 1300ms var(--mo-ease-mask) 180ms both;
+  }
+  .hero-figure img, .world-hero-figure img, .ed-hero-media .media-slot img {
+    animation: mo-settle 1800ms var(--mo-ease) 180ms both;
+  }
+  .hero-figure.reveal { animation: mo-unmask 1300ms var(--mo-ease-mask) 180ms both; }
+  .hero-figure-cap, .world-hero-figure figcaption, .ed-hero-fig {
+    animation: mo-rise 800ms var(--mo-ease) 1100ms both;
+  }
+
+  /* Home hero: the highlighter underline draws in after the title lands. */
+  .hero-underline::after {
+    transform-origin: left center;
+    animation: mo-draw 900ms var(--mo-ease) 900ms both;
+  }
+
+  /* ---------- Micro-interactions ---------- */
+  .btn:active, .nav-cta:active { transform: translateY(0) scale(0.98); transition-duration: 80ms; }
+}
+
+/* ---------- Scroll-linked depth (progressive enhancement) ----------
+   Browsers without scroll-driven animations keep the static layout. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Hero photographs drift slower than the page, for a sense of depth.
+       They rest slightly zoomed so the drift never exposes an edge. */
+    .hero-figure img, .world-hero-figure img, .ed-hero-media .media-slot img {
+      --mo-rest-scale: 1.1;
+      animation:
+        mo-settle 1800ms var(--mo-ease) 180ms both,
+        mo-drift linear both;
+      animation-timeline: auto, view();
+      animation-range: normal, exit 0% exit 100%;
+    }
+
+    /* The VTI photo strip counter-drifts as it passes. */
+    .vti-strip-inner > figure img {
+      scale: 1.12;
+      animation: mo-drift-soft linear both;
+      animation-timeline: view();
+    }
+
+    /* Reading progress on articles. */
+    body:has(.article-hero)::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      z-index: 101;
+      background: var(--green);
+      transform-origin: left center;
+      animation: mo-progress linear both;
+      animation-timeline: scroll(root);
+      pointer-events: none;
+    }
+  }
+}
+
+@keyframes mo-drift { from { translate: 0 0; } to { translate: 0 4%; } }
+@keyframes mo-drift-soft { from { translate: 0 -4%; } to { translate: 0 4%; } }
+@keyframes mo-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
