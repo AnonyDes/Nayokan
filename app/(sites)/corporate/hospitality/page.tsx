@@ -43,8 +43,6 @@ export default async function Hospitality() {
   return (
     <>
       <WorldHero
-        num="04"
-        world="Hospitality"
         crumbs={[
           { label: "Nayokan", href: "/" },
           { label: "Four worlds", href: "/#worlds" },

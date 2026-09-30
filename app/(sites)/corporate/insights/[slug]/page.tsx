@@ -43,7 +43,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <span style={{ opacity: 0.4 }}>/</span>
             <span style={{ color: "var(--ink)" }}>Article</span>
           </div>
-          <span className="article-cat">{article.category ? `Feature · ${article.category}` : "Feature"}</span>
           <h1 className="article-hero-title">{article.title}</h1>
           {meta.length > 0 && (
             <div className="article-hero-meta">

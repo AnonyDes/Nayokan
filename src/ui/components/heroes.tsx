@@ -74,16 +74,12 @@ export function SubHero({
 }
 
 export function WorldHero({
-  num,
-  world,
   crumbs,
   title,
   lede,
   actions,
   figure,
 }: {
-  num: string;
-  world: string;
   crumbs: Crumb[];
   title: ReactNode;
   lede: ReactNode;
@@ -101,10 +97,6 @@ export function WorldHero({
                 {c.href ? <a href={c.href}>{c.label}</a> : <span className="current">{c.label}</span>}
               </span>
             ))}
-          </div>
-          <div className="world-badge reveal d1">
-            <span className="num">{num}</span>
-            <span>World · {world}</span>
           </div>
           <h1 className="world-hero-title reveal d2">{title}</h1>
           <p className="world-hero-lede reveal d3">{lede}</p>

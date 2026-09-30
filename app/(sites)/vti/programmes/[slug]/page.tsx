@@ -118,9 +118,6 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
           </nav>
           <div className="pdx-hero-head">
             <div>
-              <span className="ed-hero-eyebrow">
-                Programme {p.code ? `${p.code} · ` : ""}Vocational Training Institute
-              </span>
               <h1 className="pdx-title">{p.name}.</h1>
             </div>
             <div>

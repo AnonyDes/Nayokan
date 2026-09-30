@@ -102,10 +102,6 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
               <span style={{ opacity: 0.4 }}>/</span>
               <span style={{ color: "var(--ink)" }}>{code}</span>
             </div>
-            <div className="world-badge">
-              <span className="num">{code.replace("C/0", "")}</span>
-              <span>Cluster · {cluster.sector}</span>
-            </div>
             <h1 className="world-hero-title" style={{ marginTop: 24 }}>
               {cluster.name}
             </h1>

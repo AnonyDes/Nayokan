@@ -63,8 +63,6 @@ export default async function VentureCapital() {
   return (
     <>
       <WorldHero
-        num="03"
-        world="Venture Capital"
         crumbs={[
           { label: "Nayokan", href: "/" },
           { label: "Four worlds", href: "/#worlds" },

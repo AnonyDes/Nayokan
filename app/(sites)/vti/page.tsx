@@ -33,8 +33,6 @@ export default async function VtiHome() {
   return (
     <>
       <WorldHero
-        num="01"
-        world="VTI"
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Four worlds", href: `${siteUrl("corporate", "/")}#worlds` },

@@ -70,9 +70,6 @@ export default async function VentureDetail({
               <span style={{ opacity: 0.4 }}>/</span>
               <span style={{ color: "var(--ink)" }}>{venture.code}</span>
             </div>
-            <span className="meta">
-              Portfolio venture {venture.code} · {venture.sector}
-            </span>
             <h1 className="world-hero-title" style={{ marginTop: 20 }}>
               {venture.name}.
             </h1>

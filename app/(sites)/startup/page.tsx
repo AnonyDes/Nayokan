@@ -99,8 +99,6 @@ export default async function StartupHome() {
   return (
     <>
       <WorldHero
-        num="02"
-        world="Startup Centre"
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Four worlds", href: `${siteUrl("corporate", "/")}#worlds` },

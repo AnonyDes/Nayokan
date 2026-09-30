@@ -71,10 +71,6 @@ export default async function PropertyDetail({ params }: { params: Promise<{ slu
               <span style={{ opacity: 0.4 }}>/</span>
               <span style={{ color: "var(--ink)" }}>{property.name}</span>
             </div>
-            <span className="meta">
-              {property.code ? `Property ${property.code.replace("P/", "")} · ` : ""}
-              {property.location ?? "Yaoundé"}
-            </span>
             <h1 className="property-detail-title">
               {property.name.split(" ").slice(0, -1).join(" ")}{" "}
               <em>{property.name.split(" ").slice(-1)}</em>

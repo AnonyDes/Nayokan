@@ -55,19 +55,15 @@ export default async function Home() {
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-left">
-            <div className="hero-meta reveal">
-              <span className="eyebrow eyebrow-dot">A Cameroonian Development Institution</span>
-              <span className="hero-year">Yaoundé · Cameroon</span>
-            </div>
-            <h1 className="hero-title reveal d1">
+            <h1 className="hero-title reveal">
               Building <em>people</em>, enterprises&nbsp;and productive systems for{" "}
               <span className="hero-underline">Cameroon.</span>
             </h1>
-            <p className="hero-lede reveal d2">
+            <p className="hero-lede reveal d1">
               Nayokan is an ecosystem of vocational training, entrepreneurship, innovation and capital
               — connecting human capability to productive enterprise across four institutional worlds.
             </p>
-            <div className="hero-actions reveal d3">
+            <div className="hero-actions reveal d2">
               <a href="/what-we-do" className="btn btn-primary">
                 Explore what we do
                 <span className="arrow" aria-hidden="true">
