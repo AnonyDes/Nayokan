@@ -12,26 +12,14 @@ export interface Crumb {
   href?: string;
 }
 
-export function Crumbs({ items, onDark = false }: { items: Crumb[]; onDark?: boolean }) {
-  return (
-    <div className={onDark ? "world-hero-crumbs" : "corp-hero-crumbs"}>
-      {items.map((c, i) => (
-        <span key={i} style={{ display: "contents" }}>
-          {i > 0 && <span className="sep">/</span>}
-          {c.href ? <a href={c.href}>{c.label}</a> : <span className="current">{c.label}</span>}
-        </span>
-      ))}
-    </div>
-  );
+export function Crumbs({ items: _items, onDark: _onDark = false }: { items?: Crumb[]; onDark?: boolean }) {
+  return null;
 }
 
-export function CorpHero({ crumbs, title, lede }: { sec?: string; crumbs: Crumb[]; title: ReactNode; lede: ReactNode }) {
+export function CorpHero({ crumbs: _crumbs, title, lede }: { sec?: string; crumbs?: Crumb[]; title: ReactNode; lede: ReactNode }) {
   return (
     <section className="corp-hero">
       <div className="corp-hero-inner">
-        <div>
-          <Crumbs items={crumbs} />
-        </div>
         <div>
           <h1 className="corp-hero-title">{title}</h1>
           <p className="corp-hero-lede">{lede}</p>
@@ -42,28 +30,18 @@ export function CorpHero({ crumbs, title, lede }: { sec?: string; crumbs: Crumb[
 }
 
 export function SubHero({
-  crumbs,
+  crumbs: _crumbs,
   title,
   lede,
 }: {
   sec?: string;
-  crumbs: Crumb[];
+  crumbs?: Crumb[];
   title: ReactNode;
   lede: ReactNode;
 }) {
   return (
     <section className="sub-hero">
       <div className="sub-hero-inner">
-        <div className="sub-hero-meta">
-          <div className="crumbs">
-            {crumbs.map((c, i) => (
-              <span key={i} style={{ display: "contents" }}>
-                {i > 0 && <span className="sep">/</span>}
-                {c.href ? <a href={c.href}>{c.label}</a> : <span className="current">{c.label}</span>}
-              </span>
-            ))}
-          </div>
-        </div>
         <div className="sub-hero-body">
           <h1>{title}</h1>
           <p className="lede">{lede}</p>
@@ -74,13 +52,13 @@ export function SubHero({
 }
 
 export function WorldHero({
-  crumbs,
+  crumbs: _crumbs,
   title,
   lede,
   actions,
   figure,
 }: {
-  crumbs: Crumb[];
+  crumbs?: Crumb[];
   title: ReactNode;
   lede: ReactNode;
   actions?: ReactNode;
@@ -90,14 +68,6 @@ export function WorldHero({
     <section className="world-hero">
       <div className="world-hero-inner">
         <div className="world-hero-left">
-          <div className="world-hero-crumbs reveal">
-            {crumbs.map((c, i) => (
-              <span key={i} style={{ display: "contents" }}>
-                {i > 0 && <span className="sep">/</span>}
-                {c.href ? <a href={c.href}>{c.label}</a> : <span className="current">{c.label}</span>}
-              </span>
-            ))}
-          </div>
           <h1 className="world-hero-title reveal d2">{title}</h1>
           <p className="world-hero-lede reveal d3">{lede}</p>
           {actions && <div className="world-hero-actions reveal d4">{actions}</div>}

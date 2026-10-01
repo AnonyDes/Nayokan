@@ -12,10 +12,61 @@ export const metadata: Metadata = {
 };
 
 const REASONS = [
-  { num: "01", title: "An operating system, not a project", desc: "Nayokan connects training, enterprise, capital and productive assets into one working system — not a series of one-off programmes." },
-  { num: "02", title: "Ecosystem alignment", desc: "Partnerships plug into our full stack — VTI, Startup Centre, VC and Hospitality — not just one division." },
-  { num: "03", title: "Institutional standards", desc: "Transparent governance, structured reporting, and honest content practices. No exaggeration, no invented figures." },
-  { num: "04", title: "Cameroon-rooted", desc: "Built in Yaoundé, for Cameroon and the CEMAC region — not imported wholesale from elsewhere." },
+  {
+    num: "01",
+    title: "An operating system,",
+    sub: "not a project",
+    desc: "Nayokan connects training, enterprise, capital and productive assets into one working system — not a series of one-off programmes.",
+    pills: ["Full-Stack System", "Unified Operations"],
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+        <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+        <line x1="6" y1="6" x2="6.01" y2="6" />
+        <line x1="6" y1="18" x2="6.01" y2="18" />
+      </svg>
+    ),
+  },
+  {
+    num: "02",
+    title: "Ecosystem",
+    sub: "alignment",
+    desc: "Partnerships plug into our full stack — VTI, Startup Centre, VC and Hospitality — not just one division.",
+    pills: ["4 Productive Worlds", "Cross-Disciplinary"],
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      </svg>
+    ),
+  },
+  {
+    num: "03",
+    title: "Institutional",
+    sub: "standards",
+    desc: "Transparent governance, structured reporting, and honest content practices. No exaggeration, no invented figures.",
+    pills: ["Audit-Grade Standards", "Zero Invented Stats"],
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <polyline points="9 12 11 14 15 10" />
+      </svg>
+    ),
+  },
+  {
+    num: "04",
+    title: "Cameroon-",
+    sub: "rooted",
+    desc: "Built in Yaoundé, for Cameroon and the CEMAC region — not imported wholesale from elsewhere.",
+    pills: ["Yaoundé HQ", "CEMAC Regional Scope"],
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="10" r="3" />
+        <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
+      </svg>
+    ),
+  },
 ];
 
 const WAYS = [
@@ -52,20 +103,61 @@ export default async function Partners() {
 
       <section className="section">
         <div className="wrap">
-          <div className="spec-grid" style={{ alignItems: "start", paddingBottom: 32, borderBottom: "1px solid var(--line)", marginBottom: 16 }}>
-            <div className="spec-head">
-              <h3>
+          <div className="spec-grid" style={{ alignItems: "start", paddingBottom: 48, borderBottom: "1px solid var(--line)", marginBottom: 24 }}>
+            <div className="reasons-sidebar">
+              <span className="reasons-kicker">
+                <span className="reasons-kicker-dot" />
+                Value Proposition
+              </span>
+              <h3 className="reasons-title">
                 Four reasons
                 <br />
-                institutions choose Nayokan.
+                institutions choose
+                <br />
+                <em>Nayokan</em>.
               </h3>
+              <p className="reasons-lead">
+                Nayokan is structured for multi-year institutional collaboration, audited governance
+                and systemic economic reach across Cameroon and the CEMAC region.
+              </p>
+              <div className="reasons-telemetry-box">
+                <div className="reasons-telemetry-item">
+                  <span className="lbl">INTEGRATED WORLDS</span>
+                  <span className="val">04 Worlds</span>
+                </div>
+                <div className="reasons-telemetry-item">
+                  <span className="lbl">REPORTING STANDARD</span>
+                  <span className="val">Audited · Verified</span>
+                </div>
+                <div className="reasons-telemetry-item">
+                  <span className="lbl">REGIONAL MANDATE</span>
+                  <span className="val">Cameroon · CEMAC</span>
+                </div>
+              </div>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 24 }}>
+            <div className="reasons-grid">
               {REASONS.map((r) => (
-                <div className="deliver-card" key={r.num}>
-                  <span className="meta">Reason {r.num}</span>
-                  <h4>{r.title}</h4>
-                  <p style={{ color: "var(--muted)", fontSize: "0.92rem" }}>{r.desc}</p>
+                <div className="reason-card" key={r.num}>
+                  <div className="reason-card-glow-bar" />
+                  <span className="reason-watermark" aria-hidden="true">{r.num}</span>
+                  <div className="reason-card-header">
+                    <span className="reason-badge">
+                      <span className="reason-dot" />
+                      REASON {r.num}
+                    </span>
+                    <div className="reason-icon-box">
+                      {r.icon}
+                    </div>
+                  </div>
+                  <h4 className="reason-title">
+                    {r.title} <em>{r.sub}</em>
+                  </h4>
+                  <p className="reason-desc">{r.desc}</p>
+                  <div className="reason-footer">
+                    {r.pills.map((pill) => (
+                      <span className="reason-pill" key={pill}>{pill}</span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -123,7 +215,7 @@ export default async function Partners() {
       </section>
 
       <section className="section" style={{ background: "var(--ink)", color: "var(--paper)", padding: "80px 0" }}>
-        <div className="wrap" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+        <div className="wrap cta-split-block">
           <div>
             <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2rem,3.2vw,3rem)", letterSpacing: "-0.04em", lineHeight: 1, color: "var(--paper)", marginTop: 16 }}>
               Begin a partnership

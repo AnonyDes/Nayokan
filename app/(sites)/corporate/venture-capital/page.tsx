@@ -87,33 +87,44 @@ export default async function VentureCapital() {
           </>
         }
         figure={
-          <div className="vc-hero-panel">
-            <div className="vc-hero-panel-head">
-              <span>Capital pathway</span>
-              <span>Fig. 03</span>
-            </div>
-            <ol className="vc-pathway">
-              {PATHWAY.map((step) => (
-                <li key={step.num}>
-                  <span className="vc-pathway-num">{step.num}</span>
-                  <span className="vc-pathway-label">{step.label}</span>
-                  <span className="vc-pathway-desc">{step.desc}</span>
-                </li>
-              ))}
-            </ol>
-            <div className="vc-hero-photo">
-              <MediaSlot slot="vc-hero" ratio="16:9" tone="navy" variant="compact" />
-            </div>
+          <div className="vc-hero-photo-wrap">
+            <MediaSlot slot="vc-hero" ratio="4:5" tone="navy" variant="compact" eager caption />
           </div>
         }
       />
 
       <WorldLocator on={[5, 6]} />
 
+      {/* CAPITAL PATHWAY */}
+      <section className="vc-pathway-section">
+        <div className="wrap">
+          <SectionHeader
+            num="§ 01 — Capital Pathway"
+            title={
+              <>
+                How capital moves
+                <br />
+                through the system.
+              </>
+            }
+            lead="Structured stages from sourcing to portfolio support. Ticket sizes and terms are aligned with productive-sector growth cycles."
+          />
+          <ol className="vc-pathway-grid">
+            {PATHWAY.map((step) => (
+              <li key={step.num} className="vc-pathway-card">
+                <span className="vc-pathway-num">{step.num}</span>
+                <h3 className="vc-pathway-label">{step.label}</h3>
+                <p className="vc-pathway-desc">{step.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section className="vc-approach" id="approach">
         <div className="wrap">
           <SectionHeader
-            num="§ 01 — Investment Approach"
+            num="§ 02 — Investment Approach"
             title={
               <>
                 Three principles.
@@ -143,7 +154,7 @@ export default async function VentureCapital() {
       <section className="vc-pipeline">
         <div className="wrap">
           <SectionHeader
-            num="§ 02 — How we invest"
+            num="§ 03 — How we invest"
             title={
               <>
                 From referral

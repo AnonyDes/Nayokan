@@ -54,6 +54,7 @@ const LAB_LAUNCH: ImageAsset = {
   alt: "Nayokan leadership and staff at the launch of the VTI computer lab in Yaoundé.",
   width: 1024,
   height: 768,
+  position: "50% 25%",
   caption: "Launch of the VTI computer lab · Yaoundé",
 };
 
@@ -62,6 +63,7 @@ const LAB_BANNER: ImageAsset = {
   alt: "Nayokan leadership at the VTI computer lab beside the Nayokan Association banner describing the VTI, Startup Centre and Venture Capital.",
   width: 1024,
   height: 768,
+  position: "50% 25%",
   caption: "Nayokan Association · VTI computer lab · Yaoundé",
 };
 

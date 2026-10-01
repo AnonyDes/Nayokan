@@ -93,7 +93,7 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
       <section className="cluster-detail-hero">
         <div className="cluster-detail-hero-inner">
           <div>
-            <div style={{ display: "flex", gap: 8, alignItems: "center", paddingBottom: 24, marginBottom: 24, borderBottom: "1px solid var(--line)", fontFamily: "var(--font-mono)", fontSize: "var(--f-meta)", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--muted)" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", paddingBottom: 24, marginBottom: 24, borderBottom: "1px solid var(--line)", fontFamily: "var(--font-mono)", fontSize: "var(--f-meta)", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--muted)" }}>
               <a href={siteUrl("corporate", "/")} style={{ color: "var(--muted)" }}>Nayokan</a>
               <span style={{ opacity: 0.4 }}>/</span>
               <a href="/" style={{ color: "var(--muted)" }}>VTI</a>
@@ -195,7 +195,7 @@ export default async function ClusterDetail({ params }: { params: Promise<{ slug
             }
             lead="Working outputs, not decorative activity."
           />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "var(--line)", border: "1px solid var(--line)" }}>
+          <div className="sub-3col-grid-responsive">
             {[
               ["Working output", "Joint contracts secured with regional buyers."],
               ["Cluster meetings", "Structured cluster sessions this year to date."],

@@ -30,7 +30,7 @@ export default function VcPartner() {
 
       <section className="section" style={{ padding: "80px 0" }}>
         <div className="wrap">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 56, alignItems: "start" }}>
+          <div className="vc-partner-grid">
             <div>
               <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2rem,3.4vw,3.2rem)", letterSpacing: "-0.04em", lineHeight: 1, marginTop: 16 }}>
                 Begin a<br />
@@ -56,7 +56,7 @@ export default function VcPartner() {
               </div>
             </div>
 
-            <div style={{ background: "var(--bone)", padding: "48px 40px" }}>
+            <div style={{ background: "var(--bone)", padding: "clamp(28px, 4vw, 48px) clamp(20px, 3.5vw, 40px)" }}>
               <VcPartnerForm />
             </div>
           </div>

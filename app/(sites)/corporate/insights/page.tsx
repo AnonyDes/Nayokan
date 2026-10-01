@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
-import { CorpHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
 import { ArticleGrid } from "@/sites/corporate/components/article-grid";
 import { CtaBand } from "@/ui/components/strips";
 
@@ -18,8 +18,7 @@ export default async function Insights() {
 
   return (
     <>
-      <CorpHero
-        sec="§ Editorial insights"
+      <EditorialHero
         crumbs={[{ label: "Nayokan", href: "/" }, { label: "Insights" }]}
         title={
           <>
@@ -29,6 +28,8 @@ export default async function Insights() {
           </>
         }
         lede="Working notes, briefings, case studies and editorial pieces on the making of productive capacity in Cameroon. Written by Nayokan and its partners."
+        slot="article-default"
+        figure="Fig. — Research and practice across the Nayokan ecosystem"
       />
       <ArticleGrid articles={articles} />
       <CtaBand

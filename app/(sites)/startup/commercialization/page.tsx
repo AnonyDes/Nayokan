@@ -136,13 +136,7 @@ export default function Commercialization() {
               {SYSTEM_LINKS.map((s) => (
                 <div
                   key={s.num}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "200px 1fr",
-                    gap: 32,
-                    padding: "20px 0",
-                    borderTop: "1px solid var(--line)",
-                  }}
+                  className="stage-num-row"
                 >
                   <span
                     style={{

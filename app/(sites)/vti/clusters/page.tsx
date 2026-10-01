@@ -41,7 +41,7 @@ export default async function VtiClusters() {
 
       <section className="section">
         <div className="wrap">
-          <div className="spec-grid" style={{ alignItems: "end", marginBottom: 48 }}>
+          <div className="spec-grid" style={{ alignItems: "start", marginBottom: 48 }}>
             <div className="spec-head">
               <h3>
                 Structured groups.
@@ -57,7 +57,7 @@ export default async function VtiClusters() {
               </p>
             </div>
             <div>
-              <div className="stage-rail" style={{ gridTemplateColumns: "repeat(3,1fr)", border: "1px solid var(--line)" }}>
+              <div className="stage-rail stage-rail--3" style={{ border: "1px solid var(--line)" }}>
                 {STEPS.map((s) => (
                   <div className="rail-step" key={s.num}>
                     <span className="rs-num">STEP {s.num}</span>
@@ -72,8 +72,8 @@ export default async function VtiClusters() {
 
           <ClusterGrid clusters={clusters} />
 
-          <div style={{ marginTop: 64, padding: "40px 32px", background: "var(--ink)", color: "var(--paper)" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+          <div style={{ marginTop: 64, padding: "clamp(24px, 4vw, 40px) clamp(16px, 4vw, 32px)", background: "var(--ink)", color: "var(--paper)" }}>
+            <div className="cta-split-block">
               <div>
                 <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.6rem", letterSpacing: "-0.025em", lineHeight: 1.1, color: "var(--paper)", marginTop: 12 }}>
                   Clusters sit between capability and markets.

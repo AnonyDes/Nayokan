@@ -40,14 +40,23 @@ export default async function Opportunities() {
         slot="startup-opportunities-hero"
       />
 
-      <section className="section ed-directory" aria-labelledby="opp-title">
+      <section className="opp-directory-section" aria-labelledby="opp-title">
         <div className="wrap">
-          <header className="section-header">
-            <div>
-              <h2 id="opp-title">Every open door, in one list.</h2>
+          <div className="opp-header">
+            <span className="opp-kicker">
+              <span className="opp-kicker-dot" />
+              Active Dispatch · Intake &amp; Calls
+            </span>
+            <div className="opp-title-row">
+              <h2 id="opp-title" className="opp-title">
+                Every open door, in one <em>live console</em>.
+              </h2>
+              <p className="opp-lede">
+                Filter by track or search by keyword. Intake status, dates and eligibility criteria
+                are synchronized in real time with the Startup Centre review board.
+              </p>
             </div>
-            <p className="lead">Filter by type or search by name. Status and deadlines are updated as each call changes.</p>
-          </header>
+          </div>
           <OpportunityTable opportunities={opportunities} />
         </div>
       </section>

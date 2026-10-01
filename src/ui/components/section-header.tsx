@@ -15,7 +15,7 @@ export function SectionHeader({
   onDark?: boolean;
 }) {
   return (
-    <header className="section-header">
+    <header className={`section-header${onDark ? " on-dark" : ""}`}>
       <div>
         <h2 className={onDark ? "on-dark" : undefined}>{title}</h2>
       </div>

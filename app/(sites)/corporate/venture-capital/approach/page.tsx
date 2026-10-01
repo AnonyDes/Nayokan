@@ -98,7 +98,7 @@ export default function VcApproach() {
               </h3>
             </div>
             <div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "var(--line)", border: "1px solid var(--line)" }}>
+              <div className="sub-3col-grid-responsive">
                 {SECTORS.map((s, i) => (
                   <div key={s} style={{ background: "var(--bone)", padding: "32px 24px" }}>
                     <div style={{ ...MONO, fontSize: "0.7rem" }}>SECTOR {String(i + 1).padStart(2, "0")}</div>
@@ -146,7 +146,7 @@ export default function VcApproach() {
               </h3>
             </div>
             <div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 24 }}>
+              <div className="sub-2col-grid-responsive">
                 {SUPPORT.map((s, i) => (
                   <div key={s.title} style={{ padding: 24, border: "1px solid var(--line)", background: "var(--bone)" }}>
                     <span className="meta" style={{ color: "var(--green-deep)" }}>Support {String(i + 1).padStart(2, "0")}</span>
@@ -161,7 +161,7 @@ export default function VcApproach() {
       </section>
 
       <section className="section" style={{ background: "var(--ink)", color: "var(--paper)", padding: "56px 0" }}>
-        <div className="wrap" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+        <div className="wrap cta-split-block">
           <div>
             <span className="meta on-dark">Related</span>
             <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "2rem", letterSpacing: "-0.04em", lineHeight: 1, color: "var(--paper)", marginTop: 16 }}>

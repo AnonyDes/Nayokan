@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
-import { SubHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
 import { onlyConfirmed } from "@/platform/content/governance";
 import { PublishingNote } from "@/ui/components/publishing-note";
 import { PortfolioDirectory } from "@/sites/startup/components/filters";
@@ -29,8 +29,7 @@ export default async function Portfolio() {
 
   return (
     <>
-      <SubHero
-        sec="§ Startup Centre · Portfolio"
+      <EditorialHero
         crumbs={[
           { label: "Nayokan", href: siteUrl("corporate", "/") },
           { label: "Startup Centre", href: "/" },
@@ -42,6 +41,12 @@ export default async function Portfolio() {
           </>
         }
         lede="A curated view of ventures currently working with the Startup Centre."
+        facts={[
+          { label: "Directory", value: "Curated" },
+          { label: "Disclosure", value: "Consent-only" },
+        ]}
+        slot="startup-portfolio"
+        figure="Fig. — A clean technology startup team in their workshop in Yaoundé"
       />
 
       <section className="section">

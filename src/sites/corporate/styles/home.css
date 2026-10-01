@@ -4,21 +4,21 @@
 
 /* ---------- HERO ---------- */
 .hero {
-  padding-top: 96px;
+  padding-top: clamp(100px, 8vw, 128px);
   border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
 .hero-inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 40px var(--gutter) 32px;
+  padding: clamp(48px, 5.5vw, 72px) var(--gutter) clamp(40px, 4.5vw, 56px);
   display: grid;
   grid-template-columns: 1.15fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: end;
+  gap: clamp(36px, 5vw, 80px);
+  align-items: center;
   min-height: calc(100vh - 96px - 60px);
 }
-.hero-left { padding-bottom: 24px; }
+.hero-left { padding-bottom: 16px; }
 .hero-meta {
   display: flex; align-items: center; justify-content: space-between;
   gap: 24px; margin-bottom: 32px;
@@ -32,12 +32,12 @@
 }
 .hero-title {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(2.4rem, 5.6vw, 5.2rem);
-  letter-spacing: -0.045em;
-  line-height: 0.98;
+  font-weight: 700;
+  font-size: clamp(2rem, 3.8vw, 3.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.14;
   color: var(--ink);
-  margin-bottom: 32px;
+  margin-bottom: clamp(24px, 3vw, 36px);
 }
 .hero-title em {
   font-style: italic;
@@ -59,15 +59,15 @@
   opacity: 0.4;
 }
 .hero-lede {
-  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
-  line-height: 1.55;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.65;
   color: var(--muted);
-  max-width: 46ch;
-  margin-bottom: 40px;
+  max-width: 48ch;
+  margin-bottom: clamp(28px, 3.5vw, 44px);
 }
 .hero-actions {
-  display: flex; gap: 12px; flex-wrap: wrap;
-  margin-bottom: 56px;
+  display: flex; gap: 16px; flex-wrap: wrap;
+  margin-bottom: clamp(32px, 4vw, 48px);
 }
 
 .hero-worlds {
@@ -572,6 +572,10 @@
 @media (max-width: 900px) {
   .impact-grid { grid-template-columns: 1fr 1fr; }
 }
+@media (max-width: 480px) {
+  .impact-grid { grid-template-columns: 1fr; }
+  .impact-cell { padding: 24px 16px 28px; min-height: auto; }
+}
 
 /* ---------- STORIES ---------- */
 .stories-grid {
@@ -604,7 +608,7 @@
 .story-featured figcaption {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  padding: 40px 32px 32px;
+  padding: clamp(24px, 4vw, 40px) clamp(16px, 4vw, 32px) clamp(20px, 4vw, 32px);
   background: linear-gradient(to top, rgba(10,10,10,0.95) 30%, rgba(10,10,10,0.6) 60%, transparent);
   display: flex; flex-direction: column; gap: 12px;
 }
@@ -648,6 +652,10 @@
 @media (max-width: 900px) {
   .stories-grid { grid-template-columns: 1fr; }
   .story-featured figure { min-height: 480px; }
+}
+@media (max-width: 480px) {
+  .story-featured figure { min-height: 0; aspect-ratio: 4 / 3; }
+  .story-small { grid-template-columns: 1fr; gap: 12px; padding: 16px; }
 }
 
 /* ---------- PARTNERS ---------- */
@@ -701,10 +709,10 @@
 }
 .cta-title {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(2.6rem, 5.4vw, 4.8rem);
-  letter-spacing: -0.04em;
-  line-height: 0.98;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   margin-top: 24px;
 }
 .cta-title em {

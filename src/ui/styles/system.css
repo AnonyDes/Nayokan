@@ -2,18 +2,20 @@
 .display, h1, h2, h3 {
   font-family: var(--font-heading);
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.02;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
-.display { font-size: var(--f-display); font-weight: 800; letter-spacing: -0.04em; line-height: 0.94; }
-.hero-type { font-family: var(--font-heading); font-weight: 800; font-size: var(--f-hero); letter-spacing: -0.035em; line-height: 0.98; }
+.display { font-size: var(--f-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1.12; }
+.hero-type { font-family: var(--font-heading); font-weight: 700; font-size: var(--f-hero); letter-spacing: -0.02em; line-height: 1.15; }
 h1 { font-size: var(--f-h1); font-weight: 700; }
 h2 { font-size: var(--f-h2); font-weight: 700; letter-spacing: -0.02em; }
 h3 { font-size: var(--f-h3); font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
 
-p { max-width: 62ch; text-wrap: pretty; }
-.lead { font-size: 1.15rem; line-height: 1.55; color: var(--muted); font-weight: 400; }
+p { max-width: min(100%, 62ch); text-wrap: pretty; }
+.lead { font-size: 1.15rem; line-height: 1.55; color: var(--muted); font-weight: 400; max-width: min(100%, 62ch); }
 
 .eyebrow, .meta {
   font-family: var(--font-mono);
@@ -81,6 +83,21 @@ p { max-width: 62ch; text-wrap: pretty; }
   transition: all var(--dur-fast) var(--easing);
   cursor: pointer;
   white-space: nowrap;
+  max-width: 100%;
+}
+@media (max-width: 640px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    word-break: break-word;
+  }
+}
+@media (max-width: 360px) {
+  .btn {
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    gap: 6px;
+  }
 }
 .btn-primary { background: var(--ink); color: var(--paper); }
 .btn-primary:hover { background: var(--green-deep); transform: translateY(-1px); }
@@ -249,6 +266,11 @@ p { max-width: 62ch; text-wrap: pretty; }
   border-bottom: 1px solid var(--line);
 }
 .section-header h2 { max-width: 20ch; }
+.section-header.on-dark { border-bottom-color: var(--line-invert); }
+.section-header.on-dark h2,
+.section-header h2.on-dark { color: var(--paper); }
+.section-header.on-dark .lead,
+.section-header .lead.on-dark { color: var(--muted-invert); }
 .section-header .meta-num.on-dark { color: var(--muted-invert); }
 .section-header .meta-num {
   font-family: var(--font-mono);

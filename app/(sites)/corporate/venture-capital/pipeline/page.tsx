@@ -59,7 +59,7 @@ export default function VcPipeline() {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, paddingTop: 32, borderTop: "1px solid var(--line)" }}>
+          <div className="sub-2col-grid-responsive" style={{ paddingTop: 32, borderTop: "1px solid var(--line)" }}>
             <div>
               <span className="meta">Governance</span>
               <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "1.4rem", letterSpacing: "-0.02em", lineHeight: 1.1, marginTop: 12 }}>
@@ -76,7 +76,7 @@ export default function VcPipeline() {
               </p>
             </div>
             <div>
-              <div style={{ background: "var(--bone)", padding: 32, border: "1px solid var(--line)" }}>
+              <div style={{ background: "var(--bone)", padding: "clamp(20px, 4vw, 32px)", border: "1px solid var(--line)" }}>
                 <span className="meta">What we publish, and when</span>
                 <dl className="vc-disclosure">
                   {DISCLOSURE.map(([k, v]) => (

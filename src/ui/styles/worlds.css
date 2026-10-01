@@ -4,8 +4,8 @@
 
 /* Shared world hero */
 .world-hero {
-  padding-top: 96px;
-  min-height: 92vh;
+  padding-top: clamp(100px, 8vw, 128px);
+  min-height: calc(100vh - 96px);
   display: flex; flex-direction: column;
   border-bottom: 1px solid var(--line);
   position: relative;
@@ -14,17 +14,17 @@
 .world-hero-inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 48px var(--gutter) 40px;
+  padding: clamp(36px, 4vw, 56px) var(--gutter) clamp(40px, 4.5vw, 64px);
   width: 100%;
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: end;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(36px, 5vw, 80px);
+  align-items: start;
 }
 .world-hero-crumbs {
   display: flex; gap: 8px; align-items: center;
-  padding-bottom: 24px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
   margin-bottom: 24px;
   font-family: var(--font-mono);
@@ -54,30 +54,31 @@
 }
 .world-hero-title {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(2.6rem, 6.4vw, 6rem);
-  letter-spacing: -0.045em;
-  line-height: 0.98;
-  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: clamp(2.1rem, 3.8vw, 3.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.14;
+  margin-top: -0.35em;
+  margin-bottom: clamp(20px, 2.5vw, 28px);
 }
 .world-hero-title em {
   font-style: italic; font-weight: 500;
 }
 .world-hero-lede {
-  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
-  line-height: 1.55;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.65;
   color: var(--muted);
-  max-width: 46ch;
-  margin-bottom: 40px;
+  max-width: 48ch;
+  margin-bottom: clamp(24px, 3vw, 36px);
 }
 .world-hero-actions {
-  display: flex; gap: 12px; flex-wrap: wrap;
+  display: flex; gap: 14px; flex-wrap: wrap;
 }
 .world-hero-right {
   display: flex; flex-direction: column;
   gap: 20px;
-  align-self: stretch;
-  justify-content: flex-end;
+  align-self: start;
+  width: 100%;
 }
 .world-hero-figure {
   aspect-ratio: 4/5;
@@ -120,6 +121,7 @@
 
 @media (max-width: 900px) {
   .world-hero-inner { grid-template-columns: 1fr; }
+  .world-hero-title { margin-top: 0; }
   .world-hero-right { margin-top: 24px; }
   .world-hero-figure { aspect-ratio: 4/3; }
 }

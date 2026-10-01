@@ -11,6 +11,8 @@ node_modules/
 /playwright/.cache
 /design-compare-output
 /brag-output
+/scripts/*.png
+/scripts/audit-results.json
 
 # next.js
 /.next/

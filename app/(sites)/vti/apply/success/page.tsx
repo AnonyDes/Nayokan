@@ -45,7 +45,7 @@ export default async function ApplySuccess({ searchParams }: { searchParams: Pro
         <div style={{ marginTop: 80, paddingTop: 40, borderTop: "1px solid var(--line)", textAlign: "left" }}>
           <span className="meta">What happens next</span>
           {NEXT_STEPS.map((s, i) => (
-            <div key={s.num} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: 20, padding: "20px 0", borderTop: "1px solid var(--line)", borderBottom: i === NEXT_STEPS.length - 1 ? "1px solid var(--line)" : undefined, marginTop: i === 0 ? 16 : 0 }}>
+            <div key={s.num} className="step-num-row" style={{ borderBottom: i === NEXT_STEPS.length - 1 ? "1px solid var(--line)" : undefined, marginTop: i === 0 ? 16 : 0 }}>
               <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.4rem", color: "var(--green-deep)", letterSpacing: "-0.03em" }}>{s.num}</span>
               <div>
                 <div style={{ fontFamily: "var(--font-heading)", fontWeight: 600, marginBottom: 4, letterSpacing: "-0.015em" }}>{s.title}</div>

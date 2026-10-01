@@ -105,17 +105,6 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
     <>
       <section className="pdx-hero">
         <div className="wrap">
-          <nav className="ed-hero-crumbs" aria-label="Breadcrumb">
-            <a href={siteUrl("corporate")}>Nayokan</a>
-            <span aria-hidden="true">/</span>
-            <a href={siteUrl("vti")}>VTI</a>
-            <span aria-hidden="true">/</span>
-            <a href={siteUrl("vti", "/programmes")}>Programmes</a>
-            <span aria-hidden="true">/</span>
-            <span className="current" aria-current="page">
-              {p.code ?? p.name}
-            </span>
-          </nav>
           <div className="pdx-hero-head">
             <div>
               <h1 className="pdx-title">{p.name}.</h1>

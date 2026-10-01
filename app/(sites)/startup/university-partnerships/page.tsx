@@ -85,17 +85,7 @@ export default async function UniversityPartnerships() {
             </div>
             <div>
               {PROVIDES.map((p) => (
-                <div
-                  key={p.num}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "80px 1fr",
-                    gap: 24,
-                    padding: "20px 0",
-                    borderTop: "1px solid var(--line)",
-                    alignItems: "baseline",
-                  }}
-                >
+                <div key={p.num} className="step-num-row">
                   <span
                     style={{
                       fontFamily: "var(--font-mono)",
@@ -155,14 +145,11 @@ export default async function UniversityPartnerships() {
           {/* Partner CTA */}
           <div
             id="partner"
+            className="cta-split-block"
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
-              padding: "56px 40px",
-              display: "grid",
-              gridTemplateColumns: "1.2fr 1fr",
-              gap: 48,
-              alignItems: "center",
+              padding: "clamp(36px, 5vw, 56px) clamp(20px, 4vw, 40px)",
             }}
           >
             <div>

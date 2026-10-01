@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
-import { CorpHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
 import { SectionHeader } from "@/ui/components/section-header";
 import { MediaSlot } from "@/ui/components/media-slot";
 import { EnquiryForm } from "@/sites/corporate/components/forms";
@@ -30,8 +30,7 @@ const NEXT_STEPS = [
 export default function Contact() {
   return (
     <>
-      <CorpHero
-        sec="§ Contact & enquiries"
+      <EditorialHero
         crumbs={[{ label: "Nayokan", href: "/" }, { label: "Contact" }]}
         title={
           <>
@@ -41,6 +40,8 @@ export default function Contact() {
           </>
         }
         lede="Choose the route that matches your enquiry and we will direct you to the right team. Anything else comes through the general form."
+        slot="contact-hero"
+        figure="Fig. — Nayokan leadership · Yaoundé"
       />
 
       <section className="contact-routes">

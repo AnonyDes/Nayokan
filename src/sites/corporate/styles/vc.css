@@ -1,6 +1,64 @@
 /* Venture Capital — same light theme as the rest of the site.
    Structure only: no navy surfaces, no invert palette. */
 
+.vc-hero-photo-wrap {
+  width: 100%;
+}
+.vc-hero-photo-wrap .media-slot {
+  width: 100%;
+  box-shadow: 0 24px 48px -20px rgba(10, 10, 10, 0.2);
+}
+
+/* Capital pathway section */
+.vc-pathway-section {
+  padding: clamp(64px, 8vw, 112px) 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.vc-pathway-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: clamp(32px, 4vw, 48px);
+}
+.vc-pathway-card {
+  background: var(--paper);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background var(--dur-fast);
+}
+.vc-pathway-card:hover { background: var(--bone); }
+.vc-pathway-card .vc-pathway-num {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+  font-weight: 600;
+}
+.vc-pathway-card .vc-pathway-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.vc-pathway-card .vc-pathway-desc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+@media (max-width: 900px) {
+  .vc-pathway-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .vc-pathway-grid { grid-template-columns: 1fr; }
+}
+
 .vc-hero-panel {
   aspect-ratio: 4/5;
   background: var(--bone);
@@ -202,7 +260,7 @@
 }
 .vc-enquiry h2 {
   color: var(--paper);
-  font-size: clamp(2.4rem, 5vw, 4.4rem); letter-spacing: -0.04em; line-height: 0.98;
+  font-size: clamp(2rem, 3.8vw, 3.6rem); letter-spacing: -0.025em; line-height: 1.15;
 }
 .vc-enquiry h2 em { font-style: italic; font-weight: 500; color: var(--green-glow); }
 .vc-enquiry-body { color: var(--muted-invert); }

@@ -14,7 +14,7 @@ export interface EditorialCrumb {
 }
 
 export function EditorialHero({
-  crumbs,
+  crumbs: _crumbs,
   title,
   lede,
   facts,
@@ -24,7 +24,7 @@ export function EditorialHero({
   tone = "light",
   children,
 }: {
-  crumbs: EditorialCrumb[];
+  crumbs?: EditorialCrumb[];
   title: ReactNode;
   lede: ReactNode;
   /** Confirmed facts only. */
@@ -39,20 +39,6 @@ export function EditorialHero({
     <section className="ed-hero">
       <div className="ed-hero-inner">
         <div>
-          <nav className="ed-hero-crumbs" aria-label="Breadcrumb">
-            {crumbs.map((c, i) => (
-              <span key={c.label} style={{ display: "contents" }}>
-                {i > 0 && <span aria-hidden="true">/</span>}
-                {c.href ? (
-                  <a href={c.href}>{c.label}</a>
-                ) : (
-                  <span className="current" aria-current="page">
-                    {c.label}
-                  </span>
-                )}
-              </span>
-            ))}
-          </nav>
           <h1 className="ed-hero-title">{title}</h1>
           <p className="ed-hero-lede">{lede}</p>
           {facts && facts.length > 0 && (

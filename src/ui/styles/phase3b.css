@@ -106,10 +106,10 @@ body.nav-open { overflow: hidden; }
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--gutter);
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: clamp(24px, 4vw, 64px);
-  align-items: end;
+  display: block;
+}
+.sub-hero-body {
+  max-width: 68ch;
 }
 .sub-hero-meta { border-right: 1px solid var(--line); padding-right: 24px; }
 .sub-hero-meta .crumbs {
@@ -145,24 +145,26 @@ body.nav-open { overflow: hidden; }
 .sub-hero-body h1 {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(2.2rem, 4.6vw, 4.2rem);
-  letter-spacing: -0.04em;
-  line-height: 1;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  letter-spacing: -0.035em;
+  line-height: 1.06;
   margin-bottom: 24px;
-  max-width: 22ch;
+  max-width: 24ch;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 .sub-hero-body h1 em { font-style: italic; font-weight: 500; }
 .sub-hero-body .lede {
-  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
   color: var(--muted);
-  max-width: 52ch;
-  line-height: 1.55;
+  max-width: 58ch;
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {
   .sub-hero-inner {
-    grid-template-columns: 1fr;
-    align-items: start;
+    display: block;
   }
   .sub-hero-meta { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 16px; }
 }
@@ -398,11 +400,17 @@ body.nav-open { overflow: hidden; }
   border-top: 1px solid var(--line);
   text-transform: uppercase;
 }
+.stage-rail--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.spec-grid .stage-rail {
+  margin-top: 0;
+}
 @media (max-width: 1100px) {
   .stage-rail { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 700px) {
-  .stage-rail { grid-template-columns: 1fr; }
+  .stage-rail, .stage-rail--3 { grid-template-columns: 1fr; }
 }
 
 /* Dark variant */
@@ -454,6 +462,10 @@ body.nav-open { overflow: hidden; }
 
 @media (max-width: 700px) {
   .form-progress { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 420px) {
+  .form-progress { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .form-progress .fp-step { padding: 8px 6px; font-size: 0.65rem; }
 }
 
 .form-block {
@@ -752,6 +764,111 @@ body.nav-open { overflow: hidden; }
   .opp-row, .opp-thead { grid-template-columns: 60px 1fr 100px; }
   .opp-row .otag, .opp-row .odate, .opp-row .ogo { display: none; }
   .opp-thead > *:nth-child(n+4) { display: none; }
+}
+@media (max-width: 480px) {
+  .opp-row, .opp-thead { grid-template-columns: 1fr auto; gap: 12px; padding: 16px 4px; }
+  .opp-row .oref, .opp-thead > *:first-child { display: none; }
+  .opp-row .ostatus { justify-self: end; }
+}
+
+/* Shared responsive split CTA blocks */
+.cta-split-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .cta-split-block {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+}
+
+/* VC Partner 2-column layout */
+.vc-partner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 56px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .vc-partner-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .vc-partner-grid > div:last-child {
+    padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 32px) !important;
+  }
+}
+
+/* Step / Stage rows */
+.stage-num-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 640px) {
+  .stage-num-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.step-num-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  align-items: baseline;
+}
+@media (max-width: 480px) {
+  .step-num-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.app-before-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 32px 0;
+}
+@media (max-width: 640px) {
+  .app-before-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.sub-2col-grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 640px) {
+  .sub-2col-grid-responsive {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.sub-3col-grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 768px) {
+  .sub-3col-grid-responsive {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =========================================================================

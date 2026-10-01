@@ -136,6 +136,12 @@
   .hosp-property, .hosp-property:nth-child(even) { grid-template-columns: 1fr; }
   .hosp-property:nth-child(even) .hosp-property-media { order: 0; }
 }
+@media (max-width: 540px) {
+  .hosp-property-meta { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+@media (max-width: 360px) {
+  .hosp-property-meta { grid-template-columns: 1fr; gap: 12px; }
+}
 
 /* Booking band */
 .hosp-booking {
@@ -152,15 +158,21 @@
 .hosp-booking h2 em { font-style: italic; font-weight: 500; color: var(--green-deep); }
 .hosp-booking-card {
   border: 1px solid var(--line);
-  padding: 40px;
+  padding: clamp(20px, 4vw, 40px);
   background: var(--bone);
 }
 .booking-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: clamp(16px, 3vw, 32px);
   padding: 20px 0;
   border-bottom: 1px solid var(--line);
+}
+@media (max-width: 540px) {
+  .booking-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 .booking-row:first-child { padding-top: 0; }
 .booking-row .meta { display: block; margin-bottom: 6px; color: var(--muted); }

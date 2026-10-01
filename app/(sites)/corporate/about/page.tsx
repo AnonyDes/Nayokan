@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
-import { CorpHero } from "@/ui/components/heroes";
+import { EditorialHero } from "@/ui/components/editorial-hero";
 import { SectionHeader } from "@/ui/components/section-header";
 import { CtaBand } from "@/ui/components/strips";
 import { onlyConfirmed } from "@/platform/content/governance";
@@ -15,12 +15,48 @@ export const metadata: Metadata = {
 };
 
 const VALUES = [
-  { num: "01", title: "Institution over improvisation.", desc: "We build systems that outlast individuals. Repeatable processes, documented governance, transparent decisions." },
-  { num: "02", title: "Evidence over exaggeration.", desc: "We only publish what we can verify. Marketing claims are held to the same evidentiary standard as reports." },
-  { num: "03", title: "People over programmes.", desc: "Programmes are the tools. Individual human capability — its formation, dignity and productive expression — is the goal." },
-  { num: "04", title: "Production over performance.", desc: "We measure ourselves by the productive activity we create in Cameroon — not by presentations, prizes or PR." },
-  { num: "05", title: "Partnership over paternalism.", desc: "We work with universities, ministries and communities as equals. Local knowledge is the starting point, not a footnote." },
-  { num: "06", title: "Long horizon over short signal.", desc: "Building a productive economy takes decades. We are structured to be here for them." },
+  {
+    num: "01",
+    lead: "Institution",
+    sub: "over improvisation.",
+    desc: "We build systems that outlast individuals. Repeatable processes, documented governance, transparent decisions.",
+    tag: "System Architecture",
+  },
+  {
+    num: "02",
+    lead: "Evidence",
+    sub: "over exaggeration.",
+    desc: "We only publish what we can verify. Marketing claims are held to the same evidentiary standard as reports.",
+    tag: "Evidentiary Standard",
+  },
+  {
+    num: "03",
+    lead: "People",
+    sub: "over programmes.",
+    desc: "Programmes are the tools. Individual human capability — its formation, dignity and productive expression — is the goal.",
+    tag: "Human Capability",
+  },
+  {
+    num: "04",
+    lead: "Production",
+    sub: "over performance.",
+    desc: "We measure ourselves by the productive activity we create in Cameroon — not by presentations, prizes or PR.",
+    tag: "Tangible Output",
+  },
+  {
+    num: "05",
+    lead: "Partnership",
+    sub: "over paternalism.",
+    desc: "We work with universities, ministries and communities as equals. Local knowledge is the starting point, not a footnote.",
+    tag: "Equality & Respect",
+  },
+  {
+    num: "06",
+    lead: "Long horizon",
+    sub: "over short signal.",
+    desc: "Building a productive economy takes decades. We are structured to be here for them.",
+    tag: "Multi-Decade Horizon",
+  },
 ];
 
 // Milestones in order. A year is shown only once it is confirmed against
@@ -40,15 +76,18 @@ export default async function About() {
 
   return (
     <>
-      <CorpHero
-        sec="§ About Nayokan"
+      <EditorialHero
         crumbs={[{ label: "Nayokan", href: "/" }, { label: "About" }]}
         title={
           <>
-            A Cameroonian institution, <em>built</em> for the long term.
+            A Cameroonian institution,
+            <br />
+            <em>built</em> for the long term.
           </>
         }
         lede="Nayokan is a development ecosystem connecting vocational training, entrepreneurship, innovation and capital — designed as one working system for building productive capacity in Cameroon."
+        slot="about-origin"
+        figure="Fig. — Nayokan leadership and founding team · Yaoundé"
       />
 
       {/* STORY */}
@@ -61,7 +100,7 @@ export default async function About() {
               institutions capable of connecting capability, production and capital in one system.
             </p>
             <div className="about-side-photo">
-              <MediaSlot slot="about-origin" ratio="4:3" caption />
+              <MediaSlot slot="about-people" ratio="4:3" caption />
             </div>
           </aside>
           <div className="two-col-body">
@@ -105,15 +144,29 @@ export default async function About() {
         <div className="wrap">
           <SectionHeader
             num="§ 02 — Values"
+            onDark
             title="What we hold to."
             lead="Six principles that shape how Nayokan operates — internally and with every partner, applicant and community we work with."
           />
           <div className="values-grid">
             {VALUES.map((v) => (
-              <div className="value" key={v.num}>
-                <span className="num">Value {v.num}</span>
-                <h4>{v.title}</h4>
-                <p>{v.desc}</p>
+              <div className="value-card" key={v.num}>
+                <div className="value-card-glow-bar" />
+                <span className="value-watermark" aria-hidden="true">{v.num}</span>
+                <div className="value-card-header">
+                  <span className="value-badge">
+                    <span className="value-dot" />
+                    Principle {v.num}
+                  </span>
+                </div>
+                <h4 className="value-title">
+                  {v.lead} <em>{v.sub}</em>
+                </h4>
+                <p className="value-desc">{v.desc}</p>
+                <div className="value-footer">
+                  <span className="value-tag">{v.tag}</span>
+                  <span className="value-arrow" aria-hidden="true">→</span>
+                </div>
               </div>
             ))}
           </div>

@@ -54,12 +54,8 @@ export default async function ApplicationSuccess({
           {NEXT_STEPS.map((s, i) => (
             <div
               key={s.num}
+              className="step-num-row"
               style={{
-                display: "grid",
-                gridTemplateColumns: "80px 1fr",
-                gap: 20,
-                padding: "20px 0",
-                borderTop: "1px solid var(--line)",
                 borderBottom: i === NEXT_STEPS.length - 1 ? "1px solid var(--line)" : undefined,
                 marginTop: i === 0 ? 16 : 0,
               }}

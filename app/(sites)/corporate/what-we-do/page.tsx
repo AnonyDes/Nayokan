@@ -51,11 +51,6 @@ export default function WhatWeDo() {
       <section className="wwd-hero">
         <div className="wwd-hero-inner">
           <div>
-            <div className="ed-hero-crumbs">
-              <a href="/">Nayokan</a>
-              <span aria-hidden="true">/</span>
-              <span className="current">What we do</span>
-            </div>
             <h1 className="ed-hero-title">
               Four worlds.
               <br />

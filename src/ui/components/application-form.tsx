@@ -92,13 +92,6 @@ export function ApplicationForm({
       <div className="appl-header">
         <div className="appl-header-inner">
           <div>
-            <div className="appl-crumbs">
-              <a href={homeHref}>{homeLabel}</a>
-              <span className="sep">/</span>
-              <a href={programmesHref}>Programmes</a>
-              <span className="sep">/</span>
-              <span className="current">Apply</span>
-            </div>
             <h1 className="appl-title">
               Application · <em style={{ fontStyle: "italic", fontWeight: 500 }}>{programmeCode}</em>
             </h1>
@@ -128,7 +121,7 @@ export function ApplicationForm({
               you can return and finish. All information is confidential and reviewed by the relevant
               Nayokan programme team.
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, margin: "32px 0" }}>
+            <div className="app-before-grid">
               <div style={{ padding: 20, border: "1px solid var(--line)", background: "var(--bone)" }}>
                 <span className="meta">You’ll need</span>
                 <ul style={{ marginTop: 12, padding: 0, listStyle: "none" }}>
@@ -325,7 +318,7 @@ export function ApplicationForm({
               <button type="button" onClick={() => go(5)} className="link-inline">
                 ← Back to edit
               </button>
-              <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+              <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
                 <span className="step-nav">Step 06 of 06</span>
                 <button type="submit" className="btn btn-accent" disabled={pending} aria-disabled={pending}>
                   {pending ? "Submitting…" : "Submit application"} {!pending && <span className="arrow">→</span>}
@@ -358,7 +351,7 @@ function StepNav({ step, onBack, onNext }: { step: number; onBack: () => void; o
       <button type="button" onClick={onBack} className="link-inline">
         ← Back
       </button>
-      <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
         <span className="step-nav">Step {String(step).padStart(2, "0")} of 06</span>
         <button type="button" onClick={onNext} className="btn btn-primary">
           Continue <span className="arrow">→</span>

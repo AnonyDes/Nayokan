@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
 import type { PublicMetric } from "@/platform/content/types";
-import { EditorialHero } from "@/ui/components/editorial-hero";
+import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
+import { MediaSlot } from "@/ui/components/media-slot";
 import { BigMetric } from "@/sites/corporate/components/metrics";
-import { CountUp } from "@/ui/components/count-up";
-import { Pending } from "@/ui/components/pending";
 import { PublishingNote } from "@/ui/components/publishing-note";
-import type { World } from "@/platform/sites/types";
+import { siteUrl } from "@/platform/sites/registry";
 
 export const metadata: Metadata = {
   title: "Impact",
@@ -17,11 +16,78 @@ export const metadata: Metadata = {
   alternates: canonical("/impact"),
 };
 
-const WORLD_CELLS: { num: string; world: World; name: string; label: string; metricKey: string }[] = [
-  { num: "01", world: "vti", name: "VTI", label: "Trainees", metricKey: "m-vti-trainees" },
-  { num: "02", world: "startup", name: "Startup Centre", label: "Ventures in pipeline", metricKey: "m-startup-pipeline" },
-  { num: "03", world: "venture_capital", name: "Venture Capital", label: "Capital deployed", metricKey: "m-vc-deployed" },
-  { num: "04", world: "hospitality", name: "Hospitality", label: "Properties operating", metricKey: "m-hosp-properties" },
+const IMPACT_DIMENSIONS = [
+  {
+    num: "01",
+    title: "Capability & Skills",
+    desc: "Vocational competence, technological literacy, and workplace readiness formed through rigorous cohort training.",
+    tag: "01 · Human Capital",
+  },
+  {
+    num: "02",
+    title: "Enterprise & Production",
+    desc: "Commercial viability, operational disciplines, and productive output from clusters and early-stage ventures.",
+    tag: "02 · Productive Capacity",
+  },
+  {
+    num: "03",
+    title: "Patient Capital",
+    desc: "Ecosystem-aligned investment instruments deployed to sustain long-term economic development in Cameroon.",
+    tag: "03 · Capital Formation",
+  },
+  {
+    num: "04",
+    title: "Productive Assets",
+    desc: "Physical infrastructure, hospitality properties, and enduring hubs that anchor economic activity.",
+    tag: "04 · Tangible Infrastructure",
+  },
+];
+
+const ECOSYSTEM_DIVISIONS = [
+  {
+    num: "01",
+    name: "Vocational Training Institute",
+    badge: "Division 01 · Capability",
+    slot: "world-vti" as const,
+    title: "Practical Vocational Excellence",
+    desc: "Developing market-ready vocational and technical capabilities across software, trades, and business operations.",
+    status: "Yaoundé Campus · Ongoing Cohorts",
+    href: siteUrl("vti", "/"),
+    linkText: "Explore VTI",
+  },
+  {
+    num: "02",
+    name: "Startup Centre",
+    badge: "Division 02 · Innovation",
+    slot: "world-startup" as const,
+    title: "Venture Incubation & Prototyping",
+    desc: "Transforming applied ideas and university research into viable commercial enterprises with defensible market traction.",
+    status: "Incubation Track · Active Pipelines",
+    href: siteUrl("startup", "/"),
+    linkText: "Explore Startup Centre",
+  },
+  {
+    num: "03",
+    name: "Venture Capital",
+    badge: "Division 03 · Capital",
+    slot: "world-vc" as const,
+    title: "Structured Patient Investment",
+    desc: "Deploying revenue-based, convertible, and equity instruments matched to real industrial and service growth cycles.",
+    status: "Ecosystem Sourcing · Capital Pathway",
+    href: "/venture-capital",
+    linkText: "Explore Venture Capital",
+  },
+  {
+    num: "04",
+    name: "Hospitality",
+    badge: "Division 04 · Productive Assets",
+    slot: "world-hospitality" as const,
+    title: "World-Class Operating Assets",
+    desc: "Building and operating premium hospitality properties that host international partners, delegations, and conferences.",
+    status: "Operating Assets · High Quality Standards",
+    href: "/hospitality",
+    linkText: "Explore Hospitality",
+  },
 ];
 
 // How a figure reaches this page. Process, not claims.
@@ -32,38 +98,113 @@ const EVIDENCE_STEPS = [
   { num: "04", title: "Published", desc: "Only then does the number appear here, with the division that reports it." },
 ];
 
-function isPublished(m: PublicMetric | undefined): m is PublicMetric & { value: number } {
-  return !!m && m.verified && m.value !== null;
-}
-
 export default async function Impact() {
   const repo = await getContentRepository();
-  const [coreMetrics, stories, worldMetrics] = await Promise.all([
+  const [coreMetrics, stories] = await Promise.all([
     repo.listMetrics({ keys: ["m-people-trained", "m-programmes", "m-enterprises", "m-partners"] }),
     repo.listStories({ site: "corporate", limit: 3 }),
-    repo.listMetrics({ keys: WORLD_CELLS.map((c) => c.metricKey) }),
   ]);
-  const worldMetric = (key: string) => worldMetrics.find((m) => m.id === key);
 
   return (
     <>
-      <EditorialHero
+      <WorldHero
         crumbs={[{ label: "Nayokan", href: "/" }, { label: "Impact" }]}
         title={
           <>
-            Evidence over <em>exaggeration.</em>
+            Evidence over
+            <br />
+            <em>exaggeration.</em>
           </>
         }
-        lede="We publish a figure only once it has been verified. Until then, each measure is named and left empty rather than estimated, and the work is shown through the people and stories behind it."
-        slot="impact-evidence"
-        figure="Fig. — Trainees at the VTI computer lab · Yaoundé"
+        lede="We measure ourselves by the productive capability created in Cameroon. Every figure published here is verified before it is recorded, and backed by the human stories of our trainees, founders and partners."
+        actions={
+          <>
+            <a href="#dimensions" className="btn btn-primary on-dark">
+              Core dimensions <span className="arrow">↓</span>
+            </a>
+            <a href="#divisions" className="btn btn-ghost on-dark">
+              Ecosystem divisions <span className="arrow">→</span>
+            </a>
+          </>
+        }
+        figure={
+          <div className="vc-hero-photo-wrap">
+            <MediaSlot slot="impact-evidence" ratio="4:5" tone="green" variant="compact" eager caption />
+          </div>
+        }
       />
+      <WorldLocator on={[1, 2, 3, 4, 5, 6]} />
 
-      {/* KEY FIGURES */}
+      {/* § 01 — CORE DIMENSIONS (HIGH CONTRAST DARK BAND) */}
+      <section id="dimensions" className="impact-dim-section">
+        <div className="wrap">
+          <SectionHeader
+            num="§ 01 — Core dimensions"
+            onDark
+            title={
+              <>
+                Four pillars of
+                <br />
+                real economic value.
+              </>
+            }
+            lead="How Nayokan evaluates productive capacity across the ecosystem."
+          />
+          <ul className="impact-dim-grid">
+            {IMPACT_DIMENSIONS.map((dim) => (
+              <li key={dim.num} className="impact-dim-card">
+                <span className="dim-num">{dim.num}</span>
+                <h3>{dim.title}</h3>
+                <p>{dim.desc}</p>
+                <span className="dim-tag">{dim.tag}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* § 02 — ECOSYSTEM DIVISIONS WITH AUTHENTIC PHOTOGRAPHY */}
+      <section id="divisions" className="impact-divisions-section">
+        <div className="wrap">
+          <SectionHeader
+            num="§ 02 — Ecosystem divisions"
+            title={
+              <>
+                How each world
+                <br />
+                contributes.
+              </>
+            }
+            lead="Direct operational accountability from vocational formation to tangible operating assets."
+          />
+          <div className="impact-divisions-grid">
+            {ECOSYSTEM_DIVISIONS.map((div) => (
+              <article key={div.num} className="impact-div-card">
+                <div className="impact-div-media">
+                  <MediaSlot slot={div.slot} fill />
+                </div>
+                <div className="impact-div-body">
+                  <span className="impact-div-badge">{div.badge}</span>
+                  <h3 className="impact-div-title">{div.title}</h3>
+                  <p className="impact-div-desc">{div.desc}</p>
+                  <div className="impact-div-status">
+                    <span>{div.status}</span>
+                    <a href={div.href}>
+                      {div.linkText} <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* § 03 — VERIFIED REPORTING STANDARDS */}
       <section className="big-metrics">
         <div className="wrap">
           <SectionHeader
-            num="§ 01 — Key figures"
+            num="§ 03 — Public reporting standards"
             title={
               <>
                 What we will
@@ -71,7 +212,7 @@ export default async function Impact() {
                 report on.
               </>
             }
-            lead="Four core measures across the ecosystem."
+            lead="Four core measures across the ecosystem. Empty until verified — never estimated."
           />
           <div className="big-metrics-grid">
             {coreMetrics.map((m, i) => (
@@ -86,50 +227,11 @@ export default async function Impact() {
         </div>
       </section>
 
-      {/* IMPACT BY WORLD */}
+      {/* § 04 — STORIES OF IMPACT */}
       <section className="section bg-bone">
         <div className="wrap">
           <SectionHeader
-            num="§ 02 — Impact by world"
-            title={
-              <>
-                How each division
-                <br />
-                contributes.
-              </>
-            }
-            lead="Each world tracks its own indicators, aligned with the Nayokan System."
-          />
-          <div className="impact-worlds">
-            {WORLD_CELLS.map((c) => {
-              const m = worldMetric(c.metricKey);
-              return (
-                <div key={c.num} className="impact-world">
-                  <span className="meta">
-                    World {c.num} · {c.name}
-                  </span>
-                  {isPublished(m) ? (
-                    <CountUp value={m.value} className="impact-world-num" />
-                  ) : (
-                    <div className="impact-world-num num-pending">
-                      <span className="impact-pending-rule" aria-hidden="true" />
-                      <Pending>Published once verified</Pending>
-                    </div>
-                  )}
-                  <div className="impact-world-label">{m?.label ?? c.label}</div>
-                  {m?.sourceLabel && <p>{m.sourceLabel}</p>}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* STORIES */}
-      <section className="section">
-        <div className="wrap">
-          <SectionHeader
-            num="§ 03 — Stories of impact"
+            num="§ 04 — Stories of impact"
             title="Behind the numbers."
             lead="Impact expressed as stories: the people, cohorts, ventures and partnerships that make up the measures."
           />
@@ -169,11 +271,11 @@ export default async function Impact() {
         </div>
       </section>
 
-      {/* EVIDENCE PROCESS + REPORTS */}
+      {/* § 05 — EVIDENCE PROCESS + REPORTS */}
       <section className="section bg-ink impact-process">
         <div className="wrap">
           <SectionHeader
-            num="§ 04 — How a figure is published"
+            num="§ 05 — Verification framework"
             onDark
             title={
               <>

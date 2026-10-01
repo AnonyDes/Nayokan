@@ -111,9 +111,9 @@
 .pd-hero .meta { color: var(--muted); }
 .pd-hero-title {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(2.4rem, 5.4vw, 4.8rem);
-  letter-spacing: -0.04em; line-height: 0.98;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  letter-spacing: -0.025em; line-height: 1.15;
   margin: 20px 0 24px;
 }
 .pd-hero-title em { font-style: italic; font-weight: 500; }
@@ -477,7 +477,7 @@
   gap: var(--s-4);
 }
 @media (max-width: 640px) {
-  .property-gallery-strip .wrap { grid-template-columns: 1fr; }
+  .property-gallery-strip .wrap { grid-template-columns: minmax(0, 1fr); }
 }
 .property-detail-body {
   padding: clamp(48px, 6vw, 96px) 0;
@@ -504,6 +504,9 @@
   border: 1px solid rgba(10,10,10,0.15);
   margin: 32px 0;
 }
+@media (max-width: 480px) {
+  .property-features { grid-template-columns: 1fr; }
+}
 .property-features > div {
   background: #F5EFE4;
   padding: 20px;
@@ -519,7 +522,7 @@
 .property-book-card {
   background: var(--paper);
   border: 1px solid rgba(10,10,10,0.15);
-  padding: 32px;
+  padding: clamp(20px, 4vw, 32px);
   position: sticky; top: 96px;
 }
 .property-book-card h4 {
@@ -544,7 +547,11 @@
   color: var(--muted);
   letter-spacing: 0;
 }
-@media (max-width: 900px) { .property-detail-body .wrap { grid-template-columns: 1fr; } .property-book-card { position: static; } }
+@media (max-width: 900px) {
+  .property-detail-body .wrap { grid-template-columns: minmax(0, 1fr); }
+  .property-detail-body .wrap > * { min-width: 0; max-width: 100%; }
+  .property-book-card { position: static; }
+}
 
 /* Portfolio detail */
 .portv-hero {

@@ -64,7 +64,7 @@ export default async function PropertyDetail({ params }: { params: Promise<{ slu
       <section className="property-detail-body">
         <div className="wrap">
           <div>
-            <div style={{ display: "flex", gap: 8, alignItems: "center", paddingBottom: 24, marginBottom: 24, borderBottom: "1px solid rgba(10,10,10,0.15)", fontFamily: "var(--font-mono)", fontSize: "var(--f-meta)", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--muted)" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", paddingBottom: 24, marginBottom: 24, borderBottom: "1px solid rgba(10,10,10,0.15)", fontFamily: "var(--font-mono)", fontSize: "var(--f-meta)", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--muted)" }}>
               <a href="/" style={{ color: "var(--muted)" }}>Nayokan</a>
               <span style={{ opacity: 0.4 }}>/</span>
               <a href="/hospitality" style={{ color: "var(--muted)" }}>Hospitality</a>
