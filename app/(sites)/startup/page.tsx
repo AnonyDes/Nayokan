@@ -119,7 +119,7 @@ function Blueprint() {
           01 · ENTRÉES R&amp;D
         </text>
         <text x="156" y="64" fontFamily="var(--font-mono, monospace)" fontSize="8.5" letterSpacing="1.5" fill="#19E639" fontWeight="600">
-          02 · MOTEUR D'INCUBATION
+          02 · MOTEUR D&apos;INCUBATION
         </text>
         <text x="345" y="64" fontFamily="var(--font-mono, monospace)" fontSize="8.5" letterSpacing="1.5" fill="#19E639" fontWeight="600">
           03 · SORTIES MARCHÉ
@@ -378,7 +378,7 @@ function Blueprint() {
         {/* 3 Telemetry Metrics */}
         {/* Metric 1 */}
         <text x="34" y="411" fontFamily="var(--font-mono, monospace)" fontSize="7" fill="rgba(255, 255, 255, 0.45)">
-          CYCLE D'ACCÉLÉRATION
+          CYCLE D&apos;ACCÉLÉRATION
         </text>
         <text x="34" y="432" fontFamily="var(--font-heading, sans-serif)" fontSize="16" fontWeight="800" fill="#FFFFFF">
           16 Semaines
@@ -418,7 +418,7 @@ function Blueprint() {
         {/* Activity Signal Bar Monitor */}
         <line x1="32" y1="468" x2="428" y2="468" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="0.8" />
         <text x="32" y="486" fontFamily="var(--font-mono, monospace)" fontSize="7" fill="rgba(255, 255, 255, 0.5)">
-          FLUX D'ACTIVITÉ EN DIRECT :
+          FLUX D&apos;ACTIVITÉ EN DIRECT :
         </text>
         <text x="428" y="486" textAnchor="end" fontFamily="var(--font-mono, monospace)" fontSize="7" fill="#19E639" fontWeight="600">
           SYNCHRONISÉ · 60 FPS

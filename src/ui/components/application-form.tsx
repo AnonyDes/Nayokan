@@ -46,8 +46,6 @@ export function ApplicationForm({
   site,
   world,
   successHref,
-  homeHref = "/",
-  homeLabel = "Nayokan",
   programmesHref = "/programmes",
   programmeOptions,
   defaultProgramme,

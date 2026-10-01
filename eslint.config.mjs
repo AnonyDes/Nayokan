@@ -32,5 +32,5 @@ export default defineConfig([
       "no-restricted-imports": ["error", { patterns: [{ group: ["@/sites/*"], message: "Shared layers must not import site code." }] }],
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "Designs/**", ".claude/**", "project (10)/**"]),
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "Designs/**", ".claude/**", "project (10)/**", "scripts/**"]),
 ]);

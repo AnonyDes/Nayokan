@@ -85,9 +85,14 @@ export function ArticleGrid({ articles }: { articles: Article[] }) {
     }
   }, [activeIndex, reelArticles.length]);
 
-  // Reset active slide index when category changes
-  useEffect(() => {
+  const [prevFilter, setPrevFilter] = useState(filter);
+  if (filter !== prevFilter) {
+    setPrevFilter(filter);
     setActiveIndex(0);
+  }
+
+  // Reset scroll position when category changes
+  useEffect(() => {
     if (trackRef.current) {
       trackRef.current.scrollTo({ left: 0, behavior: "smooth" });
     }

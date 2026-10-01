@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { getContentRepository } from "@/platform/content";
-import type { PublicMetric } from "@/platform/content/types";
 import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
 import { MediaSlot } from "@/ui/components/media-slot";

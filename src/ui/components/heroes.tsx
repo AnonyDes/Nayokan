@@ -12,11 +12,11 @@ export interface Crumb {
   href?: string;
 }
 
-export function Crumbs({ items: _items, onDark: _onDark = false }: { items?: Crumb[]; onDark?: boolean }) {
+export function Crumbs() {
   return null;
 }
 
-export function CorpHero({ crumbs: _crumbs, title, lede }: { sec?: string; crumbs?: Crumb[]; title: ReactNode; lede: ReactNode }) {
+export function CorpHero({ title, lede }: { sec?: string; crumbs?: Crumb[]; title: ReactNode; lede: ReactNode }) {
   return (
     <section className="corp-hero">
       <div className="corp-hero-inner">
@@ -30,7 +30,6 @@ export function CorpHero({ crumbs: _crumbs, title, lede }: { sec?: string; crumb
 }
 
 export function SubHero({
-  crumbs: _crumbs,
   title,
   lede,
 }: {
@@ -52,7 +51,6 @@ export function SubHero({
 }
 
 export function WorldHero({
-  crumbs: _crumbs,
   title,
   lede,
   actions,

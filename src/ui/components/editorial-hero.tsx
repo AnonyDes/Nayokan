@@ -14,7 +14,6 @@ export interface EditorialCrumb {
 }
 
 export function EditorialHero({
-  crumbs: _crumbs,
   title,
   lede,
   facts,

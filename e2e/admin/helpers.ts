@@ -53,7 +53,7 @@ export const env = loadEnv();
 export const EMAIL = env.ADMIN_TEST_EMAIL ?? "";
 export const PASSWORD = env.ADMIN_TEST_PASSWORD ?? "";
 
-function mfaSecret(pageUrl: string): string {
+function mfaSecret(): string {
   const secret = loadEnv().ADMIN_TEST_TOTP_SECRET ?? "";
   expect(secret, "TOTP secret missing — run enrol path first").not.toBe("");
   return secret;
@@ -85,7 +85,7 @@ export async function signInStaff(page: Page) {
     // Supabase may reject a TOTP code already consumed in this window (e.g. a
     // parallel spec signed in first). Retry up to twice with fresh codes.
     for (let attempt = 0; attempt < 3; attempt++) {
-      await page.fill('input[name="code"]', totp(mfaSecret(page.url())));
+      await page.fill('input[name="code"]', totp(mfaSecret()));
       await page.click('button[type="submit"]');
       // Either the dashboard, a bounce back to password login, or a visible
       // error while still on the challenge page (slow dev compile included).
