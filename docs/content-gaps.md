@@ -53,3 +53,10 @@ Nothing below may be presented publicly as fact until confirmed. Until then the 
 - Generic slot images are named after the slot in `src/ui/media/image-briefs.ts`. Per-record images use the convention `programme-<slug>`, `cluster-<slug>`, `property-<slug>`; a matching file is picked up automatically, with no code change.
 - Every illustrative image renders an "Illustrative image" badge. Real photography replaces an illustrative image by setting the slot's `asset` (or a CMS media override); the badge then disappears.
 - Do not create illustrative portraits for named or "tbc" people (mentors, leadership, portfolio founders). An AI face next to a real person's role is a fabricated fact. Those cards keep initials until real portraits exist.
+
+## VTI programme catalogue (added October 2026)
+- The six demo VTI programmes were replaced by two source-backed offerings: Local Manufacturing & Sustainable Construction, and Agro-Industrialization, Export Systems & Market Access. Every statement, its source and its publication decision is in `docs/content/vti-programmes-source-matrix.md`.
+- Both are `under_development` with applications closed. No duration, fee, intake date, entry requirement, assessment, certificate recognition or employment outcome is published.
+- Their hero images reuse existing labelled illustrations (`programme-<slug>` convention). They are not Nayokan facilities.
+- Waiting on the client: final titles (the manufacturing title is provisional), what NAMACS stands for, approved Nayokan–Gloway relationship wording, whether the MINEFOP / MINPMEESA accreditation lines and the FDA-preparation paragraph may be public, programme logistics, and real photography.
+- `scripts/vti-programmes-update.sql` mirrors the two records for Supabase. It is not applied: production renders the fixtures, and publishing in Supabase needs client approval.

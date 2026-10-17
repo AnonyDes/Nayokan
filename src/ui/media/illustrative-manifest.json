@@ -1,22 +1,4 @@
 {
-  "article-default-2": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 38726
-      },
-      {
-        "w": 800,
-        "bytes": 88784
-      },
-      {
-        "w": 1264,
-        "bytes": 182642
-      }
-    ]
-  },
   "article-default": {
     "width": 1376,
     "height": 768,
@@ -32,6 +14,24 @@
       {
         "w": 1280,
         "bytes": 127084
+      }
+    ]
+  },
+  "article-default-2": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 38726
+      },
+      {
+        "w": 800,
+        "bytes": 88784
+      },
+      {
+        "w": 1264,
+        "bytes": 182642
       }
     ]
   },
@@ -197,6 +197,24 @@
       }
     ]
   },
+  "programme-agro-industrialization-export-systems-market-access": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 18332
+      },
+      {
+        "w": 800,
+        "bytes": 36044
+      },
+      {
+        "w": 1264,
+        "bytes": 64788
+      }
+    ]
+  },
   "programme-cluster-formation-programme": {
     "width": 1264,
     "height": 848,
@@ -251,24 +269,6 @@
       }
     ]
   },
-  "programme-hospitality-operations": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 14498
-      },
-      {
-        "w": 800,
-        "bytes": 31446
-      },
-      {
-        "w": 1264,
-        "bytes": 61456
-      }
-    ]
-  },
   "programme-hospitality": {
     "width": 1264,
     "height": 848,
@@ -284,6 +284,24 @@
       {
         "w": 1264,
         "bytes": 54154
+      }
+    ]
+  },
+  "programme-hospitality-operations": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 14498
+      },
+      {
+        "w": 800,
+        "bytes": 31446
+      },
+      {
+        "w": 1264,
+        "bytes": 61456
       }
     ]
   },
@@ -320,6 +338,24 @@
       {
         "w": 1264,
         "bytes": 93626
+      }
+    ]
+  },
+  "programme-local-manufacturing-sustainable-construction": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 28554
+      },
+      {
+        "w": 800,
+        "bytes": 59808
+      },
+      {
+        "w": 1264,
+        "bytes": 112526
       }
     ]
   },
@@ -467,6 +503,24 @@
       }
     ]
   },
+  "property": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 17118
+      },
+      {
+        "w": 800,
+        "bytes": 31362
+      },
+      {
+        "w": 1264,
+        "bytes": 54154
+      }
+    ]
+  },
   "property-long-stay-residence": {
     "width": 1264,
     "height": 848,
@@ -482,6 +536,24 @@
       {
         "w": 1264,
         "bytes": 116058
+      }
+    ]
+  },
+  "property-nayokan-guesthouse": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 33978
+      },
+      {
+        "w": 800,
+        "bytes": 81658
+      },
+      {
+        "w": 1264,
+        "bytes": 171438
       }
     ]
   },
@@ -521,24 +593,6 @@
       }
     ]
   },
-  "property-nayokan-guesthouse": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 33978
-      },
-      {
-        "w": 800,
-        "bytes": 81658
-      },
-      {
-        "w": 1264,
-        "bytes": 171438
-      }
-    ]
-  },
   "property-workspace-reception": {
     "width": 1264,
     "height": 848,
@@ -554,24 +608,6 @@
       {
         "w": 1264,
         "bytes": 81998
-      }
-    ]
-  },
-  "property": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 17118
-      },
-      {
-        "w": 800,
-        "bytes": 31362
-      },
-      {
-        "w": 1264,
-        "bytes": 54154
       }
     ]
   },
@@ -647,24 +683,6 @@
       }
     ]
   },
-  "story-startup-2": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 19716
-      },
-      {
-        "w": 800,
-        "bytes": 41428
-      },
-      {
-        "w": 1264,
-        "bytes": 74864
-      }
-    ]
-  },
   "story-startup": {
     "width": 1264,
     "height": 848,
@@ -680,6 +698,24 @@
       {
         "w": 1264,
         "bytes": 81448
+      }
+    ]
+  },
+  "story-startup-2": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 19716
+      },
+      {
+        "w": 800,
+        "bytes": 41428
+      },
+      {
+        "w": 1264,
+        "bytes": 74864
       }
     ]
   },

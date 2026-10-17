@@ -224,138 +224,170 @@ export const navigation: Record<SiteId, SiteNavigation> = {
 // ---------------------------------------------------------------------------
 
 export const programmes: Programme[] = [
+  // VTI training offerings. Sourced from the Nayokan brochure and the
+  // Nayokan × Gloway presentation; see docs/content/vti-programmes-source-matrix.md.
+  // Both are in development: no intake, duration, fee or certification is
+  // published until Nayokan confirms it. The earlier six demo VTI programmes
+  // were retired (their old URLs redirect from next.config.ts).
   {
-    id: "prog-001",
+    id: "prog-vti-manufacturing-construction",
     site: "vti",
     world: "vti",
-    slug: "professional-growth-engineering",
-    code: "P/001",
-    name: "Professional Growth Engineering",
+    slug: "local-manufacturing-sustainable-construction",
+    name: "Local Manufacturing & Sustainable Construction",
     summary:
-      "Practical skills training + entrepreneurial cluster onboarding for young Cameroonian graduates.",
-    type: "Training",
-    status: "open",
-    location: "Yaoundé",
-    applicationOpen: true,
+      "Practical training across local manufacturing and durable construction: making products, working with equipment, applying quality standards and building. NAMACS is the principal structure for this field.",
+    type: "Vocational programme",
+    status: "under_development",
+    applicationOpen: false,
+    seo: {
+      title: "Local Manufacturing & Sustainable Construction",
+      description:
+        "A Nayokan VTI training field covering local manufacturing, equipment, quality and durable construction, with digital technology across the chain.",
+    },
     body: [
       { type: "heading", level: 2, text: "Overview" },
       {
         type: "paragraph",
-        text: "Professional Growth Engineering is a cornerstone VTI programme designed for young Cameroonians ready to move from general education into productive activity. It combines practical technical training with a structured cluster-onboarding pathway.",
+        text: "Local manufacturing and sustainable construction is one of the two principal fields Nayokan has set out for productive-sector training. It follows the chain from making and equipping to quality and construction, and treats digital technology as part of that chain rather than a separate subject.",
       },
       {
         type: "paragraph",
-        text: "Unlike traditional vocational programmes, Professional Growth Engineering does not end at certification. Graduates are onboarded directly into entrepreneurial clusters aligned with their skills and interests, giving them immediate access to shared tools, market access and continuing mentorship.",
+        text: "Training is offered through the Nayokan Vocational Training Institute. NAMACS is named in the Nayokan brochure as the principal structure for this field.",
       },
-      { type: "heading", level: 2, text: "Objectives" },
-      { type: "paragraph", text: "By the end of the programme, participants will:" },
+      { type: "heading", level: 2, text: "Why it matters" },
+      {
+        type: "paragraph",
+        text: "Goods made locally and structures built to last are two of the clearest places where skills turn directly into productive enterprise. Nayokan's approach is to train for the whole chain rather than a single trade, so that capability can grow into work and into enterprise.",
+      },
+      { type: "heading", level: 2, text: "Who it is for" },
+      {
+        type: "paragraph",
+        text: "The field is intended for young people and women looking for practical skills for productive work, in line with Nayokan's mission of economic transformation for youth and women. Entry requirements have not yet been published.",
+      },
+      { type: "heading", level: 2, text: "What participants learn" },
+      {
+        type: "paragraph",
+        text: "The curriculum is still being developed. The areas below describe the field, not a finished timetable.",
+      },
       {
         type: "list",
         items: [
-          "Have demonstrated competence in the practical technical modules of their track.",
-          "Understand the fundamentals of small-enterprise operations and productive routines.",
-          "Have joined an entrepreneurial cluster aligned to their skills.",
-          "Have produced at least one concrete productive output (project, prototype or first offering).",
-          "Be positioned to access downstream Nayokan support (Startup Centre, Venture Capital or Hospitality).",
+          "Manufacturing: producing goods locally.",
+          "Equipment: working with the equipment that production depends on.",
+          "Quality: checking that products and work meet a consistent standard.",
+          "Construction: building with a focus on durability.",
+          "Digital technology: applied across each stage of the chain.",
         ],
       },
-      { type: "heading", level: 2, text: "Target audience" },
+      { type: "heading", level: 2, text: "From training to enterprise" },
       {
         type: "paragraph",
-        text: "The programme is designed for young Cameroonian graduates and workers seeking a practical pathway into productive activity. Prior technical experience is not required — motivation, seriousness and intent to remain and build in Cameroon are.",
+        text: "Nayokan's ecosystem runs from competence and innovation through incubation and financing to employment and enterprise growth. Training in this field sits at the start of that route. Where a participant's work grows into an enterprise, the Nayokan Startup Centre is the route for incubation.",
       },
-      { type: "heading", level: 2, text: "Requirements" },
+      { type: "heading", level: 2, text: "Programme details" },
       {
-        type: "list",
-        items: [
-          "Cameroonian resident, 18+.",
-          "Baccalaureate or equivalent educational level.",
-          "Committed availability for the programme duration.",
-          "Written motivation submitted with application.",
-        ],
-      },
-      { type: "heading", level: 2, text: "Related opportunities" },
-      {
-        type: "paragraph",
-        text: "Graduates of Professional Growth Engineering are eligible for the Cluster Formation Programme (P/003) and, where relevant, referral into the Startup Centre commercialization pathway.",
+        type: "callout",
+        text: "Duration, schedule, fees, entry requirements and certification will be published once Nayokan confirms them. Register your interest and the VTI team will be in touch.",
       },
     ],
-    provenance: demo(),
+    provenance: confirmed(),
   },
   {
-    id: "prog-002",
+    id: "prog-vti-agro-export",
     site: "vti",
     world: "vti",
-    slug: "skills-for-industrialisation",
-    code: "P/002",
-    name: "Skills for Industrialisation",
+    slug: "agro-industrialization-export-systems-market-access",
+    name: "Agro-Industrialization, Export Systems & Market Access",
     summary:
-      "Foundational technical curriculum with entrepreneurial modules — the core VTI programme.",
-    type: "Training",
-    status: "open",
-    location: "Yaoundé",
-    applicationOpen: true,
-    provenance: demo(["applicationDeadline"]),
-  },
-  {
-    id: "prog-003",
-    site: "vti",
-    world: "vti",
-    slug: "cluster-formation-programme",
-    code: "P/003",
-    name: "Cluster Formation Programme",
-    summary:
-      "Post-training pathway into productive entrepreneurial clusters and joint enterprise creation.",
-    type: "Cluster pathway",
-    status: "upcoming",
-    location: "Yaoundé",
+      "A professional certificate that links local food processing to the systems that move products to market: packaging and quality, customs and transit, transport and logistics. Being developed by Nayokan Association with Gloway.",
+    type: "Professional certificate",
+    status: "under_development",
     applicationOpen: false,
-    provenance: demo(["applicationDeadline"]),
-  },
-  {
-    id: "prog-v004",
-    site: "vti",
-    world: "vti",
-    slug: "industry-application-certification",
-    code: "P/004",
-    name: "Industry Application Certification",
-    summary:
-      "Advanced applied module for enterprise-ready graduates. Focused on industry deployment and productive output.",
-    type: "Certification",
-    status: "upcoming",
-    location: "Yaoundé",
-    applicationOpen: false,
-    provenance: demo(["applicationDeadline", "certification"]),
-  },
-  {
-    id: "prog-v005",
-    site: "vti",
-    world: "vti",
-    slug: "agri-food-post-harvest",
-    code: "P/005",
-    name: "Agri-Food & Post-Harvest",
-    summary:
-      "Practical training in agri-processing, cold-chain and post-harvest logistics — feeding directly into productive clusters.",
-    type: "Training",
-    status: "open",
-    location: "Yaoundé",
-    applicationOpen: true,
-    provenance: demo(["certification"]),
-  },
-  {
-    id: "prog-v006",
-    site: "vti",
-    world: "vti",
-    slug: "hospitality-operations",
-    code: "P/006",
-    name: "Hospitality Operations",
-    summary:
-      "Structured training for hospitality operations — front-of-house, service excellence and productive-asset management.",
-    type: "Training",
-    status: "upcoming",
-    location: "Yaoundé",
-    applicationOpen: false,
-    provenance: demo(["applicationDeadline", "certification"]),
+    seo: {
+      title: "Agro-Industrialization, Export Systems & Market Access",
+      description:
+        "A professional certificate in development at Nayokan VTI with Gloway: food processing, packaging and quality, customs and transit, and transport and logistics.",
+    },
+    body: [
+      { type: "heading", level: 2, text: "Overview" },
+      {
+        type: "paragraph",
+        text: "Transform locally. Move efficiently. Trade competitively.",
+      },
+      {
+        type: "paragraph",
+        text: "Processing without a market is not industrialization. This professional certificate prepares food processors, trade operators and small businesses to transform products locally, move them efficiently and trade competitively, by connecting food processing to the standards, logistics and buyer requirements that decide whether a product reaches a market.",
+      },
+      {
+        type: "paragraph",
+        text: "It is being developed by Nayokan Association with Gloway, Nayokan's principal partner for agrobusiness and agro-food. It sits within the policy context of Cameroon's SND30, import substitution and agro-industrialization.",
+      },
+      { type: "heading", level: 2, text: "Why it matters" },
+      {
+        type: "paragraph",
+        text: "Cameroon needs more than local transformation. It needs transformed products that can move through standards, logistics and buyers. A processor can transform well and still fail if the product is not packaged, compliant, costed, documented and connected to buyers.",
+      },
+      {
+        type: "paragraph",
+        text: "The programme starts from market requirements and works backwards. Production is built for a market from the beginning, instead of searching for a buyer after the stock is made.",
+      },
+      { type: "heading", level: 2, text: "Who it is for" },
+      {
+        type: "paragraph",
+        text: "Food processors, trade operators and small and medium enterprises. Each module is tied to a job function, an enterprise need or a trade operation.",
+      },
+      { type: "heading", level: 2, text: "What participants learn" },
+      {
+        type: "list",
+        items: [
+          "Food processing: hygiene, preservation, standardization and value addition.",
+          "Packaging and quality: food-grade packaging, labelling, traceability and product consistency.",
+          "Customs and transit: trade documents, customs workflow and clearance coordination.",
+          "Transport and logistics: warehousing, cold chain, inland transport, freight and containers.",
+        ],
+      },
+      { type: "heading", level: 2, text: "Practical activities" },
+      {
+        type: "paragraph",
+        text: "Real Cameroonian foods become the classroom. Learners work with actual products, such as leafy vegetables like ndolé, beans and dry foods, specialty foods, and prepared or wrapped foods, so that training leads to better processing, packaging, costing and readiness. The aim is local value addition before products enter domestic or export distribution.",
+      },
+      {
+        type: "paragraph",
+        text: "The programme is also designed to introduce learners to real export workflows: receiving, inspecting, consolidating, preparing and loading goods, and sourcing, compliance, costing and shipment visibility, through Gloway's systems.",
+      },
+      { type: "heading", level: 2, text: "From certificate to market" },
+      {
+        type: "paragraph",
+        text: "The certificate is the start of a pathway from skills to market participation:",
+      },
+      {
+        type: "list",
+        ordered: true,
+        items: [
+          "Certify: complete a practical assessment.",
+          "Incubate: strengthen the enterprise and the product.",
+          "Qualify: meet supplier and product requirements.",
+          "List: eligible profiles can be considered for the Gloway supplier network.",
+          "Access: requests for quotation and supply opportunities.",
+        ],
+      },
+      {
+        type: "callout",
+        tone: "warn",
+        text: "Completing the training does not itself mean regulatory approval, supplier qualification or a guaranteed export contract. Opportunities depend on demand, quality, capacity and reliability.",
+      },
+      {
+        type: "paragraph",
+        text: "Eligible trained processors can also be supported toward export compliance onboarding, including preparation for FDA facility registration where it applies to businesses targeting the U.S. market. This is preparation support, not an approval.",
+      },
+      { type: "heading", level: 2, text: "Programme details" },
+      {
+        type: "callout",
+        text: "This programme is in development with its partners. Duration, schedule, fees, entry requirements, assessment and the recognition of the certificate will be published once confirmed. Register your interest and the VTI team will be in touch.",
+      },
+    ],
+    provenance: confirmed(),
   },
   {
     id: "prog-004",
@@ -463,7 +495,6 @@ export const clusters: Cluster[] = [
     location: "Yaoundé",
     summary: "Graduates and small enterprises collaborating around digital services and technology work.",
     statusLabel: "Forming",
-    programmeId: "prog-003",
     provenance: demo(["memberCount"]),
   },
   {
@@ -475,7 +506,6 @@ export const clusters: Cluster[] = [
     location: "Yaoundé",
     summary: "Producers and processors working together on agri-food value chains.",
     statusLabel: "Forming",
-    programmeId: "prog-003",
     provenance: demo(["memberCount"]),
   },
   {
@@ -487,7 +517,6 @@ export const clusters: Cluster[] = [
     location: "Yaoundé",
     summary: "Craft producers and small manufacturers sharing tools, orders and market access.",
     statusLabel: "Forming",
-    programmeId: "prog-003",
     provenance: demo(["memberCount"]),
   },
   {
@@ -499,7 +528,6 @@ export const clusters: Cluster[] = [
     location: "Yaoundé",
     summary: "Hospitality and services graduates — including pathways into Nayokan Hospitality operations.",
     statusLabel: "Forming",
-    programmeId: "prog-003",
     provenance: demo(["memberCount"]),
   },
   {
@@ -511,7 +539,6 @@ export const clusters: Cluster[] = [
     location: "Yaoundé",
     summary: "Community health and wellness services delivered through structured small enterprises.",
     statusLabel: "Forming",
-    programmeId: "prog-003",
     provenance: demo(["memberCount"]),
   },
   {
@@ -523,7 +550,6 @@ export const clusters: Cluster[] = [
     location: "Yaoundé",
     summary: "Creative-economy graduates building productive enterprises around cultural work.",
     statusLabel: "Forming",
-    programmeId: "prog-003",
     provenance: demo(["memberCount"]),
   },
 ];
