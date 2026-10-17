@@ -50,7 +50,7 @@ export const ROUTES = [
   // VTI (9 routes)
   { site: "vti", path: "/vti" },
   { site: "vti", path: "/vti/programmes" },
-  { site: "vti", path: "/vti/programmes/professional-growth-engineering" },
+  { site: "vti", path: "/vti/programmes/agro-industrialization-export-systems-market-access" },
   { site: "vti", path: "/vti/clusters" },
   { site: "vti", path: "/vti/clusters/digital-technology" },
   { site: "vti", path: "/vti/apply" },

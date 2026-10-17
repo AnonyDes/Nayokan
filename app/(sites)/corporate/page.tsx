@@ -23,7 +23,11 @@ export const metadata: Metadata = {
 const MARQUEE = ["Capability", "Production", "Markets", "Innovation", "Capital", "Productive Assets"];
 
 // Flagship programmes, in display order: the first leads, the rest support it.
-const FLAGSHIP = ["professional-growth-engineering", "innovation-commercialization", "cluster-formation-programme"];
+const FLAGSHIP = [
+  "agro-industrialization-export-systems-market-access",
+  "local-manufacturing-sustainable-construction",
+  "innovation-commercialization",
+];
 
 // How Nayokan works with each kind of partner. Named partners appear only
 // once a partnership is confirmed (governance.ts); until then this section
@@ -187,8 +191,8 @@ export default async function Home() {
         <div className="wrap">
           <SectionHeader
             num="§ 05 — Flagship Programmes"
-            title="Programmes currently in motion."
-            lead="A selection of programmes across the Nayokan ecosystem. Full details, dates and application windows are managed inside each division."
+            title="Programmes across the ecosystem."
+            lead="A selection of programmes across the Nayokan ecosystem. Each programme page states what is open and what is still in development."
           />
           {lead && (
             <a href={programmeHref(lead)} className="flagship-lead reveal">

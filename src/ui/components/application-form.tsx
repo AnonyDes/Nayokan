@@ -83,7 +83,7 @@ export function ApplicationForm({
 
   const selected = programmeOptions.find((p) => p.value === value("programme"));
   const programmeLabel = selected?.label ?? "—";
-  const programmeCode = selected?.label.match(/P\/\d+/)?.[0] ?? "P/—";
+  const programmeCode = selected?.label.match(/P\/\d+/)?.[0];
 
   return (
     <>
@@ -91,7 +91,13 @@ export function ApplicationForm({
         <div className="appl-header-inner">
           <div>
             <h1 className="appl-title">
-              Application · <em style={{ fontStyle: "italic", fontWeight: 500 }}>{programmeCode}</em>
+              Application
+              {programmeCode && (
+                <>
+                  {" "}
+                  · <em style={{ fontStyle: "italic", fontWeight: 500 }}>{programmeCode}</em>
+                </>
+              )}
             </h1>
           </div>
           <div className="appl-progress" role="list" aria-label="Application progress">

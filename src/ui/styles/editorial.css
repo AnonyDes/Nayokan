@@ -406,6 +406,9 @@
 .ed-card-foot .go { color: var(--ink); }
 @media (max-width: 1100px) { .ed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .ed-grid { grid-template-columns: 1fr; } }
+/* Two-programme catalogue: two wide cards instead of an unbalanced three-column row. */
+.ed-grid--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .ed-grid--pair { grid-template-columns: 1fr; } }
 
 /* ---------- Supporting editorial band ---------- */
 .ed-band { background: var(--bone); padding: clamp(64px, 8vw, 112px) 0; }
@@ -628,7 +631,7 @@
   font-size: 0.85rem; color: var(--muted);
 }
 .pdx-clusters { padding: clamp(64px, 8vw, 104px) 0; border-top: 1px solid var(--line); }
-.pdx-next { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; background: var(--line); border: 1px solid var(--line); }
+.pdx-next { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 2px; background: var(--line); border: 1px solid var(--line); }
 .pdx-next a { display: flex; flex-direction: column; gap: 8px; height: 100%; padding: var(--s-5); background: var(--paper); transition: background var(--dur) var(--easing); }
 .pdx-next a:hover { background: var(--bone); }
 .pdx-next strong { font-family: var(--font-heading); font-size: 1.15rem; letter-spacing: -0.015em; }

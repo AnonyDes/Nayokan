@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 };
 
 const PROGRAMMES: ProgrammeOption[] = [
-  { value: "p001", label: "Professional Growth Engineering (P/001)", meta: "VTI · Open · Rolling admissions" },
-  { value: "p002", label: "Skills for Industrialisation (P/002)", meta: "VTI · Open · Next cohort Sept 2026" },
   { value: "p004", label: "Innovation Commercialization (P/004)", meta: "Startup Centre · Open · Rolling" },
   { value: "p005", label: "University Research Commercialization (P/005)", meta: "Startup Centre · Open · Rolling" },
 ];
@@ -28,7 +26,7 @@ export default async function Application({
       world="corporate"
       successHref="/application/success"
       programmeOptions={PROGRAMMES}
-      defaultProgramme={programme ?? "p001"}
+      defaultProgramme={programme ?? "p004"}
     />
   );
 }

@@ -28,11 +28,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 // with invented content, so the numbering always runs without gaps.
 const SECTION_ORDER = [
   { key: "overview", title: "Overview", match: ["overview"] },
-  { key: "learn", title: "What participants learn", match: ["objectives", "what participants learn", "learning outcomes", "curriculum"] },
-  { key: "structure", title: "Programme structure", match: ["programme structure", "structure", "modules"] },
+  { key: "why", title: "Why it matters", match: ["why it matters"] },
   { key: "audience", title: "Who it is for", match: ["target audience", "who it is for", "audience"] },
+  { key: "learn", title: "What participants learn", match: ["objectives", "what participants learn", "learning outcomes", "curriculum"] },
+  { key: "practice", title: "Practical activities", match: ["practical activities", "practical work"] },
+  { key: "structure", title: "Programme structure", match: ["programme structure", "structure", "modules"] },
+  { key: "pathway", title: "From training to enterprise", match: ["from training to enterprise", "from certificate to market", "after the programme"] },
   { key: "requirements", title: "Requirements", match: ["requirements", "eligibility"] },
-  { key: "outcomes", title: "Outcomes", match: ["outcomes", "after the programme"] },
+  { key: "outcomes", title: "Outcomes", match: ["outcomes"] },
+  { key: "details", title: "Programme details", match: ["programme details"] },
 ] as const;
 
 type Section = { key: string; title: string; blocks: RichBlock[] };
@@ -77,28 +81,23 @@ function railItems(p: Programme): MetaRailItem[] {
     ? `${status.label} · deadline ${new Date(p.applicationDeadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}`
     : status.label;
   return [
+    { label: "Format", value: p.type },
     fact("Duration", p.duration, "duration"),
     fact("Location", p.location, "location"),
-    fact("Format", p.deliveryMode, "deliveryMode"),
+    fact("Delivery", p.deliveryMode, "deliveryMode"),
     fact("Certification", p.certification, "certification"),
-    { label: "Intake", value: isUnconfirmed(p.provenance, "applicationDeadline") ? status.label : intake },
+    { label: "Status", value: isUnconfirmed(p.provenance, "applicationDeadline") ? status.label : intake },
   ];
 }
 
 export default async function VtiProgrammeDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const repo = await getContentRepository();
-  const [p, allProgrammes, clusters] = await Promise.all([
-    repo.getProgramme("vti", slug),
-    repo.listProgrammes({ site: "vti" }),
-    repo.listClusters(),
-  ]);
+  const [p, allProgrammes] = await Promise.all([repo.getProgramme("vti", slug), repo.listProgrammes({ site: "vti" })]);
   if (!p) notFound();
 
   const sections = toSections(p);
   const status = programmeStatus(p);
-  const linkedClusters = clusters.filter((c) => c.programmeId === p.id);
-  const relatedClusters = (linkedClusters.length > 0 ? linkedClusters : clusters).slice(0, 3);
   const relatedProgrammes = allProgrammes.filter((x) => x.id !== p.id).slice(0, 3);
 
   return (
@@ -144,18 +143,21 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
             <aside className="pdx-aside" aria-label="Apply">
               <div className="pdx-apply">
                 <span className="meta on-dark">
-                  {p.code} · {status.label}
+                  {p.code ? `${p.code} · ` : ""}
+                  {status.label}
                 </span>
-                <h3>{p.applicationOpen ? "Ready to apply?" : "Applications open soon"}</h3>
+                <h3>{p.applicationOpen ? "Ready to apply?" : "Register your interest"}</h3>
                 <p>
-                  Applications are reviewed by the VTI team, who will contact you about next steps.
+                  {p.applicationOpen
+                    ? "Applications are reviewed by the VTI team, who will contact you about next steps."
+                    : "Intake is not open yet. Tell the VTI team you are interested and they will be in touch."}
                 </p>
                 {p.applicationOpen ? (
                   <a href={`/apply?programme=${p.slug}`} className="btn btn-accent">
-                    Apply to {p.code ?? "this programme"} <span className="arrow">→</span>
+                    Apply to this programme <span className="arrow">→</span>
                   </a>
                 ) : (
-                  <a href="/apply" className="btn btn-accent">
+                  <a href="/#apply" className="btn btn-accent">
                     Register interest <span className="arrow">→</span>
                   </a>
                 )}
@@ -174,49 +176,46 @@ export default async function VtiProgrammeDetail({ params }: { params: Promise<{
       </section>
 
       <section className="pdx-clusters">
-          <div className="wrap">
-            <header className="section-header">
-              <div>
-                <h2>Where graduates can go next.</h2>
-              </div>
-              <p className="lead">
-                VTI graduates are offered a place in an entrepreneurial cluster aligned with their
-                track, and may be referred to the Startup Centre.
-              </p>
-            </header>
-            <ul className="pdx-next">
-              {relatedClusters.map((c) => (
-                <li key={c.id}>
-                  <a href={`/clusters/${c.slug}`}>
-                    <span className="meta">Cluster {c.code ?? ""}</span>
-                    <strong>{c.name}</strong>
-                    <span>{c.sector}</span>
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a href={siteUrl("startup")}>
-                  <span className="meta">Startup Centre ↗</span>
-                  <strong>Commercialization pathway</strong>
-                  <span>For graduates with a venture to take to market</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </section>
+        <div className="wrap">
+          <header className="section-header">
+            <div>
+              <h2>Where this connects.</h2>
+            </div>
+            <p className="lead">
+              Training is the first step in Nayokan&rsquo;s ecosystem, which continues through incubation, financing and enterprise growth.
+            </p>
+          </header>
+          <ul className="pdx-next">
+            <li>
+              <a href={siteUrl("startup")}>
+                <span className="meta">Startup Centre ↗</span>
+                <strong>Incubation</strong>
+                <span>For participants whose work grows into an enterprise</span>
+              </a>
+            </li>
+            <li>
+              <a href={siteUrl("corporate", "/what-we-do")}>
+                <span className="meta">Nayokan ↗</span>
+                <strong>How the ecosystem fits together</strong>
+                <span>The four worlds and the system that connects them</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
 
       {relatedProgrammes.length > 0 && (
         <section className="pdx-related">
           <div className="wrap">
             <header className="section-header">
               <div>
-                <h2>Other VTI programmes.</h2>
+                <h2>The other VTI programme.</h2>
               </div>
               <a href="/programmes" className="link-inline">
                 All programmes <span className="arrow">→</span>
               </a>
             </header>
-            <div className="ed-grid">
+            <div className="ed-grid ed-grid--pair">
               {relatedProgrammes.map((x) => (
                 <ProgrammeCard key={x.id} programme={x} href={`/programmes/${x.slug}`} />
               ))}

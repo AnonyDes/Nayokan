@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 };
 
 const FEATURES = [
-  { num: "01", title: "Skills for industrialisation", desc: "Curriculum designed around Cameroon's productive priorities and the reality of small-enterprise operations." },
-  { num: "02", title: "Certification pathways", desc: "Each programme builds toward certification. Where a certificate is formally recognised, the programme page names the recognising body." },
-  { num: "03", title: "Entrepreneurial clusters", desc: "Graduates are grouped into clusters that share tools, market access and mentorship — turning skills into enterprises." },
-  { num: "04", title: "Pathway to production", desc: "Direct connections to Nayokan's Startup Centre, Venture Capital and Hospitality operations for graduates ready to scale." },
+  { num: "01", title: "Practical, value-chain training", desc: "Training follows a productive chain, from making or processing through quality to the market or the finished structure, with practical work at the centre." },
+  { num: "02", title: "Quality at every stage", desc: "Quality and inspection run through both fields, from production and packaging to equipment and construction." },
+  { num: "03", title: "Digital across the chain", desc: "Digital technology is treated as part of each value chain, not as a separate subject." },
+  { num: "04", title: "A route to enterprise", desc: "Training connects to Nayokan's Startup Centre for incubation and to its wider ecosystem of financing and enterprise growth." },
 ];
 
 export default async function VtiHome() {
@@ -29,6 +29,8 @@ export default async function VtiHome() {
     repo.listProgrammes({ site: "vti" }),
     repo.listClusters(),
   ]);
+
+  const openCount = programmes.filter((p) => programmeStatus(p).open).length;
 
   return (
     <>
@@ -52,7 +54,7 @@ export default async function VtiHome() {
               See programmes <span className="arrow">→</span>
             </a>
             <a href="#apply" className="btn btn-ghost">
-              Apply
+              Register interest
             </a>
           </>
         }
@@ -71,8 +73,8 @@ export default async function VtiHome() {
                 <div className="num">{String(programmes.length).padStart(2, "0")}</div>
               </div>
               <div className="world-hero-stat">
-                <span className="meta">Open now</span>
-                <div className="num">{String(programmes.filter((p) => programmeStatus(p).open).length).padStart(2, "0")}</div>
+                <span className="meta">{openCount > 0 ? "Open now" : "In development"}</span>
+                <div className="num">{String(openCount > 0 ? openCount : programmes.length).padStart(2, "0")}</div>
               </div>
               <div className="world-hero-stat">
                 <span className="meta">Clusters</span>
@@ -145,17 +147,17 @@ export default async function VtiHome() {
         <div className="wrap">
           <SectionHeader
             num="§ 02 — Programmes"
-            title="Current programmes."
-            lead="Programmes marked open are accepting applications. Every programme pairs practical training with a route into an entrepreneurial cluster."
+            title="Training offerings."
+            lead="Two fields, each tied to a productive value chain. Both are in development: register your interest and the VTI team will be in touch."
           />
           <div className="vti-prog-cards">
-            {programmes.slice(0, 3).map((p) => (
+            {programmes.map((p) => (
               <ProgrammeCard key={p.id} programme={p} href={`/programmes/${p.slug}`} />
             ))}
           </div>
           <div className="prog-footer">
             <a href="/programmes" className="link-inline">
-              All VTI programmes <span className="arrow">→</span>
+              Programme details <span className="arrow">→</span>
             </a>
           </div>
         </div>
@@ -191,7 +193,7 @@ export default async function VtiHome() {
                 become <em>productive</em>?
               </h2>
               <p className="lead on-dark" style={{ color: "var(--muted-invert)", marginTop: 24, maxWidth: "44ch" }}>
-                Applications for the next VTI cohort are managed inside the institute. Start your
+                Interest in VTI programmes is managed inside the institute. Start your
                 enquiry here — we’ll route you to the right programme lead.
               </p>
               <div style={{ marginTop: 32 }} className="cta-contact">

@@ -8,7 +8,8 @@ test.describe("vti routes", () => {
   const routes = [
     "/",
     "/programmes",
-    "/programmes/professional-growth-engineering",
+    "/programmes/agro-industrialization-export-systems-market-access",
+    "/programmes/local-manufacturing-sustainable-construction",
     "/clusters",
     "/clusters/agri-food-production",
     "/apply",
@@ -50,11 +51,74 @@ test.describe("vti routes", () => {
   });
 });
 
-test.describe("vti application flow", () => {
-  test("six-step application renders and steps forward", async ({ page }) => {
+const AGRO = "agro-industrialization-export-systems-market-access";
+const MANUFACTURING = "local-manufacturing-sustainable-construction";
+
+test.describe("vti programme catalogue", () => {
+  test("lists the two training offerings and no retired demo programmes", async ({ page }) => {
+    await go(page, "/programmes");
+    const cards = page.locator("a.ed-card");
+    await expect(cards).toHaveCount(2);
+    await expect(page.getByRole("heading", { name: "Local Manufacturing & Sustainable Construction", level: 3 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Agro-Industrialization, Export Systems & Market Access", level: 3 })).toBeVisible();
+    const text = await page.locator("main").innerText();
+    for (const retired of ["Professional Growth Engineering", "Skills for Industrialisation", "Hospitality Operations", "Industry Application Certification"]) {
+      expect(text).not.toContain(retired);
+    }
+  });
+
+  test("each card links to a working detail page", async ({ page }) => {
+    for (const slug of [AGRO, MANUFACTURING]) {
+      await go(page, "/programmes");
+      await page.locator(`a.ed-card[href="/programmes/${slug}"]`).click();
+      await expect(page).toHaveURL(new RegExp(`/programmes/${slug}$`));
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    }
+  });
+
+  test("detail pages never present unconfirmed facts as real", async ({ page }) => {
+    for (const slug of [AGRO, MANUFACTURING]) {
+      await go(page, `/programmes/${slug}`);
+      const text = await page.locator("main").innerText();
+      expect(text, slug).not.toMatch(/export station|million fcfa|guaranteed (income|contract)|\btbc\b|to be confirmed|\bdemo\b/i);
+      // No programme is open, so there is no apply button, only interest registration.
+      await expect(page.getByRole("link", { name: /^Apply to/ })).toHaveCount(0);
+      await expect(page.getByRole("link", { name: /Register interest/ }).first()).toBeVisible();
+    }
+  });
+
+  test("the agro-industrialization page states that training is not a guarantee", async ({ page }) => {
+    await go(page, `/programmes/${AGRO}`);
+    await expect(page.getByText(/does not itself mean regulatory approval/i)).toBeVisible();
+  });
+
+  test("retired programme URLs redirect instead of 404ing", async ({ request, baseURL }) => {
+    const host = new URL(baseURL!).host;
+    const ip = `http://127.0.0.1:${host.split(":")[1]}`;
+    const get = (path: string) => request.get(`${ip}${path}`, { headers: { host }, maxRedirects: 0 });
+    const retired = await get("/programmes/professional-growth-engineering");
+    expect(retired.status()).toBe(308);
+    expect(retired.headers()["location"]).toBe("/programmes");
+    const agri = await get("/programmes/agri-food-post-harvest");
+    expect(agri.status()).toBe(308);
+    expect(agri.headers()["location"]).toBe(`/programmes/${AGRO}`);
+  });
+});
+
+test.describe("vti interest and application", () => {
+  test("apply explains that applications are not open and points to the enquiry form", async ({ page }) => {
     await go(page, "/apply");
-    await expect(page.getByRole("region", { name: "Step 1 — Getting started" })).toBeVisible();
-    await page.getByRole("button", { name: /Begin application/i }).click();
-    await expect(page.getByRole("region", { name: "Step 2 — About you" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/not open yet/i);
+    await page.getByRole("link", { name: /Register interest/ }).click();
+    await expect(page).toHaveURL(/\/#apply$/);
+  });
+
+  test("the enquiry form offers exactly the two current programmes", async ({ page }) => {
+    await go(page, "/");
+    const options = await page.locator("#fp option:not([disabled])").allInnerTexts();
+    expect(options).toEqual([
+      "Local Manufacturing & Sustainable Construction",
+      "Agro-Industrialization, Export Systems & Market Access",
+    ]);
   });
 });
