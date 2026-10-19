@@ -1,5 +1,16 @@
 # Parallel workstreams
 
+## Current workspace — 19 October 2026
+
+At the owner's request, active development is consolidated in `D:\Nayokan`.
+The former `Nayokan-sites`, `Nayokan-data` and `Nayokan-admin` worktrees are
+retired after preserving their branches and local configuration. Their file
+ownership table below remains architectural guidance; it no longer requires
+separate working directories. Do not recreate those worktrees by default.
+Local configuration backups remain under the ignored `.local-backups/` folder.
+
+## Historical parallel setup
+
 The build is split into three workstreams that run at the same time in separate Claude sessions, each in its own git worktree and branch. This document is the contract between them. Read it before touching files outside your area.
 
 Integration branch: `develop` (created from the Phase 0/1 foundation). Each workstream merges into `develop` through a PR when a slice is done and green. Rebase on `develop` often.

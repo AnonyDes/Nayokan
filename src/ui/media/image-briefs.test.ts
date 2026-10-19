@@ -127,10 +127,10 @@ describe("illustrative image weight", () => {
 });
 
 describe("named illustrative images", () => {
-  test("VTI programmes resolve their own generated photo, not the generic slot fallback", () => {
+  test("VTI programmes resolve the updated training illustration", () => {
     const img = getNamedIllustrative("programme-local-manufacturing-sustainable-construction", "alt text goes here");
     expect(img).toBeDefined();
-    expect(img!.src).toContain("programme-local-manufacturing-sustainable-construction");
+    expect(img!.src).toContain("city-training");
     expect(img!.srcSet).toBeDefined();
   });
 

@@ -5,8 +5,9 @@
 // ratio, so the layout never changes.
 //
 // Rules (docs/architecture/ux-refinement-2026-09.md §0, §9):
-//   - Only real Nayokan photography may be used as an asset. No stock, no
-//     generated images, no photos from one context captioned as another.
+//   - Only real Nayokan photography may be used as an authentic asset.
+//     Conceptual generated images belong in `illustrative` and are visibly
+//     labelled; they never identify a real person, partner or Nayokan facility.
 //   - The only approved photographs today are the nine taken at the launch of
 //     the VTI computer lab in Yaoundé (public/assets/photos/nayokan-0*.jpg).
 
@@ -124,12 +125,12 @@ const briefs = {
     ratio: "16:9",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/world-startup.jpg",
-      alt: "Cameroonian student founders testing a hardware prototype on a workbench with a mentor in Yaoundé.",
+      src: "/assets/photos/illustrative/startup-programme-hero.jpg",
+      alt: "Illustration of an entrepreneur presenting venture progress to a group of mentors in a contemporary workspace.",
       width: 1792,
       height: 1024,
       isIllustrative: true,
-      caption: "Startup Centre · Prototyping workshop",
+      caption: "Startup Centre · Venture development",
     },
   },
   "world-vc": {
@@ -140,12 +141,12 @@ const briefs = {
     ratio: "16:9",
     treatment: `${DOCUMENTARY} Cooler grade to sit on deep green.`,
     illustrative: {
-      src: "/assets/photos/illustrative/world-vc.jpg",
-      alt: "A founder and investment analysts reviewing an operating enterprise in Cameroon.",
+      src: "/assets/photos/illustrative/city-capital.jpg",
+      alt: "Illustration of a founder and investment colleagues reviewing a business in a contemporary city office.",
       width: 1792,
       height: 1024,
       isIllustrative: true,
-      caption: "Venture Capital · Enterprise site review",
+      caption: "Venture Capital · Investment readiness",
     },
   },
   "world-hospitality": {
@@ -172,8 +173,8 @@ const briefs = {
     ratio: "3:2",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/programme-vti.jpg",
-      alt: "Vocational trainees working with tools and equipment in a practical workshop in Yaoundé.",
+      src: "/assets/photos/illustrative/city-training.jpg",
+      alt: "Illustration of an instructor guiding two trainees through an electronics prototype in a modern technical studio.",
       width: 1536,
       height: 1024,
       isIllustrative: true,
@@ -202,8 +203,8 @@ const briefs = {
     ratio: "3:2",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/programme-vc.jpg",
-      alt: "Investment review meeting between an entrepreneur and investment analysts in Yaoundé.",
+      src: "/assets/photos/illustrative/city-capital.jpg",
+      alt: "Illustration of an entrepreneur and investment colleagues discussing business plans in a city office.",
       width: 1536,
       height: 1024,
       isIllustrative: true,
@@ -261,8 +262,8 @@ const briefs = {
     ratio: "4:3",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/vti-clusters-hero.jpg",
-      alt: "Artisanal production cluster members manufacturing interlocking earth blocks in Cameroon.",
+      src: "/assets/photos/illustrative/city-training.jpg",
+      alt: "Illustration of practical collaboration around a prototype in a contemporary technical training studio.",
       width: 1365,
       height: 1024,
       isIllustrative: true,
@@ -276,8 +277,8 @@ const briefs = {
     ratio: "16:9",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/cluster-detail.jpg",
-      alt: "Members of an artisanal cluster crafting woodwork and fabrication products in Cameroon.",
+      src: "/assets/photos/illustrative/city-training.jpg",
+      alt: "Illustration of a practical technical training session with organized tools and prototype equipment.",
       width: 1792,
       height: 1024,
       isIllustrative: true,
@@ -308,8 +309,8 @@ const briefs = {
     ratio: "16:9",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/startup-commercialization.jpg",
-      alt: "An entrepreneur demonstrating a hardware product prototype to a customer in Yaoundé.",
+      src: "/assets/photos/illustrative/city-training.jpg",
+      alt: "Illustration of a team reviewing a working electronics prototype in a modern development studio.",
       width: 1792,
       height: 1024,
       isIllustrative: true,
@@ -359,8 +360,8 @@ const briefs = {
     ratio: "4:3",
     treatment: `${DOCUMENTARY} Cool grade for navy pages.`,
     illustrative: {
-      src: "/assets/photos/illustrative/vc-hero.jpg",
-      alt: "A productive enterprise manufacturing building materials in Cameroon.",
+      src: "/assets/photos/illustrative/city-capital.jpg",
+      alt: "Illustration of a founder meeting investment professionals in a bright contemporary office.",
       width: 1365,
       height: 1024,
       isIllustrative: true,
@@ -407,8 +408,8 @@ const briefs = {
     ratio: "3:2",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/story-startup.jpg",
-      alt: "The founder team in their workshop developing early-stage technology in Yaoundé.",
+      src: "/assets/photos/illustrative/startup-programme-hero.jpg",
+      alt: "Illustration of an entrepreneur discussing venture development with mentors in a contemporary workspace.",
       width: 1536,
       height: 1024,
       isIllustrative: true,
@@ -458,8 +459,8 @@ const briefs = {
     ratio: "16:9",
     treatment: DOCUMENTARY,
     illustrative: {
-      src: "/assets/photos/illustrative/article-default.jpg",
-      alt: "Artisans and technicians working on fabrication inside a cooperative workshop.",
+      src: "/assets/photos/illustrative/city-training.jpg",
+      alt: "Illustration of hands-on learning and prototype development in a contemporary technical studio.",
       width: 1792,
       height: 1024,
       isIllustrative: true,
@@ -515,15 +516,22 @@ export function hasIllustrativeVariants(name: string): boolean {
   return name in MANIFEST;
 }
 
+const RECORD_ILLUSTRATIONS: Record<string, string> = {
+  "programme-local-manufacturing-sustainable-construction": "city-training",
+  "programme-agro-industrialization-export-systems-market-access": "city-food",
+  "programme-seed-ticket-programme": "city-capital",
+  "programme-growth-co-investment-vehicle": "city-capital",
+  "cluster-agri-food-production": "city-food",
+  "cluster-digital-technology": "city-training",
+};
+
 /**
- * Per-record illustrative image, by convention: drop `<name>.jpg` into
- * art-source/illustrative, run `npm run images:optimize`, and the matching
- * record picks it up with no code change. Names:
- *   programme-<slug>   (VTI, Startup, VC and Hospitality programmes)
- *   cluster-<slug>     property-<slug>, property-<slug>-2, property-<slug>-3
- * Returns undefined when no file exists, so the slot's generic image applies.
+ * Resolves the curated replacement or the record's own image. Unmapped names
+ * follow programme-<slug>, cluster-<slug> and property-<slug> conventions.
+ * Returns undefined when no image exists, allowing the generic slot fallback.
  */
 export function getNamedIllustrative(name: string, alt: string): ImageAsset | undefined {
+  name = RECORD_ILLUSTRATIONS[name] ?? name;
   if (!hasIllustrativeVariants(name)) return undefined;
   return resolveIllustrative({
     src: `${ILLUSTRATIVE_PREFIX}${name}.jpg`,

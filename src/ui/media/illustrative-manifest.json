@@ -1,4 +1,22 @@
 {
+  "article-default-2": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 38726
+      },
+      {
+        "w": 800,
+        "bytes": 88784
+      },
+      {
+        "w": 1264,
+        "bytes": 182642
+      }
+    ]
+  },
   "article-default": {
     "width": 1376,
     "height": 768,
@@ -17,21 +35,57 @@
       }
     ]
   },
-  "article-default-2": {
-    "width": 1264,
-    "height": 848,
+  "city-capital": {
+    "width": 1536,
+    "height": 1024,
     "variants": [
       {
         "w": 480,
-        "bytes": 38726
+        "bytes": 18996
       },
       {
         "w": 800,
-        "bytes": 88784
+        "bytes": 36800
       },
       {
-        "w": 1264,
-        "bytes": 182642
+        "w": 1280,
+        "bytes": 66366
+      }
+    ]
+  },
+  "city-food": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 28084
+      },
+      {
+        "w": 800,
+        "bytes": 55472
+      },
+      {
+        "w": 1280,
+        "bytes": 101810
+      }
+    ]
+  },
+  "city-training": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 26678
+      },
+      {
+        "w": 800,
+        "bytes": 53530
+      },
+      {
+        "w": 1280,
+        "bytes": 98598
       }
     ]
   },
@@ -269,24 +323,6 @@
       }
     ]
   },
-  "programme-hospitality": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 17118
-      },
-      {
-        "w": 800,
-        "bytes": 31362
-      },
-      {
-        "w": 1264,
-        "bytes": 54154
-      }
-    ]
-  },
   "programme-hospitality-operations": {
     "width": 1264,
     "height": 848,
@@ -302,6 +338,24 @@
       {
         "w": 1264,
         "bytes": 61456
+      }
+    ]
+  },
+  "programme-hospitality": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 17118
+      },
+      {
+        "w": 800,
+        "bytes": 31362
+      },
+      {
+        "w": 1264,
+        "bytes": 54154
       }
     ]
   },
@@ -503,24 +557,6 @@
       }
     ]
   },
-  "property": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 17118
-      },
-      {
-        "w": 800,
-        "bytes": 31362
-      },
-      {
-        "w": 1264,
-        "bytes": 54154
-      }
-    ]
-  },
   "property-long-stay-residence": {
     "width": 1264,
     "height": 848,
@@ -536,24 +572,6 @@
       {
         "w": 1264,
         "bytes": 116058
-      }
-    ]
-  },
-  "property-nayokan-guesthouse": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 33978
-      },
-      {
-        "w": 800,
-        "bytes": 81658
-      },
-      {
-        "w": 1264,
-        "bytes": 171438
       }
     ]
   },
@@ -593,6 +611,24 @@
       }
     ]
   },
+  "property-nayokan-guesthouse": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 33978
+      },
+      {
+        "w": 800,
+        "bytes": 81658
+      },
+      {
+        "w": 1264,
+        "bytes": 171438
+      }
+    ]
+  },
   "property-workspace-reception": {
     "width": 1264,
     "height": 848,
@@ -608,6 +644,24 @@
       {
         "w": 1264,
         "bytes": 81998
+      }
+    ]
+  },
+  "property": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 17118
+      },
+      {
+        "w": 800,
+        "bytes": 31362
+      },
+      {
+        "w": 1264,
+        "bytes": 54154
       }
     ]
   },
@@ -683,24 +737,6 @@
       }
     ]
   },
-  "story-startup": {
-    "width": 1264,
-    "height": 848,
-    "variants": [
-      {
-        "w": 480,
-        "bytes": 19958
-      },
-      {
-        "w": 800,
-        "bytes": 42372
-      },
-      {
-        "w": 1264,
-        "bytes": 81448
-      }
-    ]
-  },
   "story-startup-2": {
     "width": 1264,
     "height": 848,
@@ -716,6 +752,24 @@
       {
         "w": 1264,
         "bytes": 74864
+      }
+    ]
+  },
+  "story-startup": {
+    "width": 1264,
+    "height": 848,
+    "variants": [
+      {
+        "w": 480,
+        "bytes": 19958
+      },
+      {
+        "w": 800,
+        "bytes": 42372
+      },
+      {
+        "w": 1264,
+        "bytes": 81448
       }
     ]
   },

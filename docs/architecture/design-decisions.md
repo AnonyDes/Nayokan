@@ -8,6 +8,6 @@ Where the design package conflicts with itself or with the brief, these rules ap
 4. **Nayokan System.** Desktop: sticky horizontal progression as in `system-scroll.js`, with an IntersectionObserver gate. Mobile (<900px): vertical stepper with a small step indicator (mobile.html R/02). Reduced motion: static list of all six stages, no scroll-driven movement.
 5. **Count-up** runs only when the metric is verified, never under reduced motion, and the final value is always in the HTML.
 6. **Language toggle** is rendered; FR is marked "coming soon" until translated content exists. When FR ships, `<html lang>` is set per route.
-7. **Navigation.** Corporate: the design nav (What we do · VTI ↗ · Startup Centre ↗ · Venture Capital · Hospitality · Impact · Insights · About) + Contact CTA. VTI and Startup navs are derived from their designed pages and flagged for confirmation (see readiness report §5).
+7. **Navigation.** Corporate: What we do · Venture Capital · Impact · Insights · About + Contact CTA. VTI, Startup Centre and Hospitality are introduced through What We Do, following the owner's October 2026 feedback. VTI and Startup navs are derived from their designed pages and flagged for confirmation (see readiness report §5).
 8. **Unrendered template text** in `handoff.html`, `states.html` and `data-model.html` is a prototype bug, not content.
 9. **Illustrations** (Startup blueprint SVG, VC data panel, Hospitality arches) are ported as components; the VC panel shows no numbers until real, verified data exists.

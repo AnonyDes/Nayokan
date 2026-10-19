@@ -1,5 +1,6 @@
 import { siteUrl } from "./registry";
 import type { SiteId } from "./types";
+import { STARTUP_CENTRE_COPY } from "@/platform/content/worlds";
 
 // The public sitemap page's structure: the section pages of all three sites,
 // grouped for a human reader. This is deliberately curated, not generated —
@@ -74,7 +75,7 @@ export function buildSiteMap(): SiteMapGroup[] {
       heading: "Startup Centre",
       world: "startup",
       links: [
-        { label: "Startup Centre home", href: siteUrl("startup", "/"), desc: "Where research becomes enterprise" },
+        { label: "Startup Centre home", href: siteUrl("startup", "/"), desc: STARTUP_CENTRE_COPY.positioning },
         { label: "Programme", href: siteUrl("startup", "/programme") },
         { label: "Commercialization pathway", href: siteUrl("startup", "/commercialization") },
         { label: "University partnerships", href: siteUrl("startup", "/university-partnerships") },

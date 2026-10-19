@@ -38,7 +38,7 @@ const WORLD_MEDIA: Record<WorldEntry["world"], { main: ImageSlotId; inset?: Imag
 // Audience routes: who should go where. Destinations only; no claims.
 const ROUTES = [
   { who: "Young people and workers seeking practical skills", where: "Vocational Training Institute", href: siteUrl("vti", "/programmes"), world: "vti" as const },
-  { who: "University researchers, students and innovators", where: "Startup Centre", href: siteUrl("startup", "/programme"), world: "startup" as const },
+  { who: "Researchers, entrepreneurs, independent innovators and companies seeking innovation partners", where: "Startup Centre", href: siteUrl("startup", "/programme"), world: "startup" as const },
   { who: "Founders building productive enterprises", where: "Venture Capital", href: "/venture-capital/partner" },
   { who: "Institutions, funders and corporate partners", where: "Partner with Nayokan", href: "/partners" },
   { who: "Guests, visiting partners and delegations", where: "Hospitality", href: "/hospitality/properties" },

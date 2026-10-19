@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["**/*.test.ts", "**/*.test.tsx"],
-    exclude: ["**/*.rls.test.ts", "node_modules/**", ".next/**", "Designs/**", ".claude/**", "e2e/**"],
+    exclude: ["**/*.rls.test.ts", "node_modules/**", ".next/**", "Designs/**", ".claude/**", ".local-backups/**", "e2e/**"],
   },
   resolve: {
     alias: {

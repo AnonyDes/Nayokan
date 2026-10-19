@@ -135,12 +135,12 @@ test.describe("corporate chrome + a11y", () => {
 });
 
 test.describe("ecosystem gateway", () => {
-  test("corporate navigation has no VTI or Startup Centre tabs", async ({ page }) => {
+  test("corporate navigation introduces VTI, Startup and Hospitality through What We Do", async ({ page }) => {
     await go(page, "/");
     const labels = (await page.locator("header .nav-links a").allInnerTexts()).map((t) => t.trim());
-    expect(labels).toEqual(["What we do", "Venture Capital", "Hospitality", "Impact", "Insights", "About"]);
+    expect(labels).toEqual(["What we do", "Venture Capital", "Impact", "Insights", "About"]);
     await expect(page.locator("header .nav-cta")).toHaveText("Contact");
-    for (const label of labels) expect(label).not.toMatch(/VTI|Startup/i);
+    for (const label of labels) expect(label).not.toMatch(/VTI|Startup|Hospitality/i);
   });
 
   test("What We Do explains each world before its contextual CTA", async ({ page }) => {

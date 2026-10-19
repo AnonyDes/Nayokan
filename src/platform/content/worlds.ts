@@ -42,6 +42,28 @@ export interface WorldEntry {
   slot: "world-vti" | "world-startup" | "world-vc" | "world-hospitality";
 }
 
+export const STARTUP_CENTRE_COPY = {
+  positioning: "Where innovation becomes enterprise.",
+  description: "Research, founder-led ideas and corporate innovation challenges turned into market-ready ventures.",
+  whatItIs:
+    "The Nayokan Startup Centre helps researchers, entrepreneurs, innovators and companies transform promising ideas and real-world problems into validated, scalable ventures.",
+  why:
+    "Innovative ideas often fail to reach the market. The Centre provides a structured pathway to design, validate, commercialize and scale solutions.",
+  audience:
+    "Researchers, students, independent innovators, early-stage founders, universities and companies seeking innovation partners.",
+  systemFit:
+    "The Centre turns research, founder-led ideas and corporate innovation challenges into market-ready ventures. Ventures ready to grow move on to Nayokan Venture Capital.",
+  stages: "Stages 02–04 · Innovation, Validation, Commercialization",
+  offers: [
+    "University research commercialization",
+    "Startup creation and venture building",
+    "Corporate open-innovation programmes",
+    "Business-model and market validation",
+    "Mentorship and commercialization support",
+    "Funding opportunities and innovation calls",
+  ],
+};
+
 export const WORLDS_DIRECTORY: WorldEntry[] = [
   {
     num: "01",
@@ -78,24 +100,7 @@ export const WORLDS_DIRECTORY: WorldEntry[] = [
     anchor: "startup",
     name: "Startup Centre",
     shortName: "Startup Centre",
-    positioning: "Where research becomes enterprise.",
-    description:
-      "University innovation, commercialization and venture creation. Where research becomes enterprise.",
-    whatItIs:
-      "The Nayokan Startup Centre connects university innovation, entrepreneurship and commercialization, moving ideas from research through validation into ventures with real market traction.",
-    why:
-      "Promising research and ideas too often stop at the prototype. The Centre gives them a structured commercialization pathway: model, validate, commercialize, scale.",
-    audience: "University researchers, students, innovators and early-stage founders.",
-    offers: [
-      "University innovation partnerships",
-      "Commercialization programme",
-      "Venture building and market validation",
-      "Mentorship",
-      "Opportunities and calls",
-    ],
-    systemFit:
-      "The Centre turns innovation into enterprise and connects it to markets. Ventures ready to grow move on to Nayokan Venture Capital.",
-    stages: "Stages 02–04 · Production, Markets, Innovation",
+    ...STARTUP_CENTRE_COPY,
     destination: { site: "startup", path: "/", label: "startup.nayokan.org" },
     crossSite: true,
     cta: "Explore Startup Centre",

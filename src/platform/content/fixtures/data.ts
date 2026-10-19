@@ -128,11 +128,9 @@ export const navigation: Record<SiteId, SiteNavigation> = {
   corporate: {
     site: "corporate",
     primary: [
-      // VTI and the Startup Centre are introduced on What We Do, which links
-      // on to their dedicated sites. They are never standalone corporate tabs.
+      // VTI, Startup Centre and Hospitality are introduced through What We Do.
       { id: "n-wwd", label: "What we do", href: "/what-we-do" },
       { id: "n-vc", label: "Venture Capital", href: "/venture-capital" },
-      { id: "n-h", label: "Hospitality", href: "/hospitality" },
       { id: "n-impact", label: "Impact", href: "/impact" },
       { id: "n-insights", label: "Insights", href: "/insights" },
       { id: "n-about", label: "About", href: "/about" },

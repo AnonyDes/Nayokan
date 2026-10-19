@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { canonical } from "@/platform/seo/site-metadata";
 import { siteUrl } from "@/platform/sites/registry";
 import { getContentRepository } from "@/platform/content";
+import { STARTUP_CENTRE_COPY } from "@/platform/content/worlds";
 import { WorldHero, WorldLocator } from "@/ui/components/heroes";
 import { SectionHeader } from "@/ui/components/section-header";
 import { onlyConfirmed } from "@/platform/content/governance";
@@ -12,13 +13,12 @@ import { RelatedStrip, WORLD_LINKS } from "@/ui/components/strips";
 
 export const metadata: Metadata = {
   title: "Startup Centre",
-  description:
-    "The Nayokan Startup Centre connects university innovation, entrepreneurship and commercialization — moving ideas from research through validation into ventures with real market traction.",
+  description: STARTUP_CENTRE_COPY.whatItIs,
   alternates: canonical("/"),
 };
 
 const PIPELINE = [
-  { num: "01", title: "Idea / Research", desc: "Original research, academic outputs and technology ideas that show productive potential — sourced from universities and independent innovators.", tag: "Universities · Innovators" },
+  { num: "01", title: "Ideas & challenges", desc: "Research, founder-led ideas and corporate innovation challenges with productive potential — from researchers, entrepreneurs, independent innovators and companies.", tag: "Researchers · Founders · Companies" },
   { num: "02", title: "Model", desc: "Business-model design, value proposition, unit economics and initial venture architecture — done with Nayokan mentors.", tag: "Mentorship · Framework" },
   { num: "03", title: "Validate", desc: "Market validation, pilot customers, technical feasibility and first-revenue evidence — before capital deployment.", tag: "Pilots · Customers" },
   { num: "04", title: "Commercialize", desc: "Structured go-to-market — the industry-application-focused programme, with partners for distribution and adoption.", tag: "Programme · Partners" },
@@ -481,12 +481,12 @@ export default async function StartupHome() {
         ]}
         title={
           <>
-            Where <em>research</em>
+            Where <em>innovation</em>
             <br />
             becomes enterprise.
           </>
         }
-        lede="The Nayokan Startup Centre connects university innovation, entrepreneurship and commercialization — moving ideas from research through validation into ventures with real market traction."
+        lede={STARTUP_CENTRE_COPY.whatItIs}
         actions={
           <>
             <a href="#pipeline" className="btn btn-primary">
