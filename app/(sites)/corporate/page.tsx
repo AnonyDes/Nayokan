@@ -14,13 +14,13 @@ import { programmeHref } from "@/sites/corporate/programme-href";
 import { getNamedIllustrative } from "@/ui/media/image-briefs";
 
 export const metadata: Metadata = {
-  title: "Nayokan — Building people, enterprises and productive systems for Cameroon.",
+  title: "Nayokan — Training and business support in Cameroon",
   description:
-    "Nayokan is a Cameroonian development institution building people, enterprises and productive systems — through vocational training, a startup centre, venture capital and productive hospitality assets.",
+    "Find practical training, support for your business idea, and ways to partner with Nayokan in Cameroon.",
   alternates: canonical("/"),
 };
 
-const MARQUEE = ["Capability", "Production", "Markets", "Innovation", "Capital", "Productive Assets"];
+const TOPICS = ["Skills", "Production", "Markets", "Innovation", "Funding", "Hospitality"];
 
 // Flagship programmes, in display order: the first leads, the rest support it.
 const FLAGSHIP = [
@@ -33,10 +33,10 @@ const FLAGSHIP = [
 // once a partnership is confirmed (governance.ts); until then this section
 // describes the relationships Nayokan builds, never who it has them with.
 const PARTNER_KINDS: { category: Partner["category"]; label: string; desc: string }[] = [
-  { category: "university", label: "Universities & research", desc: "Research commercialization, student innovation and shared frameworks for IP." },
-  { category: "government", label: "Ministries & public sector", desc: "Vocational standards, enterprise policy and national skills priorities." },
-  { category: "development", label: "Development partners", desc: "Programme co-design, funding and evidence of impact." },
-  { category: "corporate", label: "Corporate & private sector", desc: "Industry placements, market access and co-investment." },
+  { category: "university", label: "Universities & research", desc: "Help students and researchers turn ideas into products." },
+  { category: "government", label: "Ministries & public sector", desc: "Align training with national skills priorities." },
+  { category: "development", label: "Development partners", desc: "Design, fund and evaluate programmes together." },
+  { category: "corporate", label: "Businesses", desc: "Offer work placements, help businesses reach customers and invest together." },
 ];
 
 export default async function Home() {
@@ -60,22 +60,25 @@ export default async function Home() {
         <div className="hero-inner">
           <div className="hero-left">
             <h1 className="hero-title reveal">
-              Building <em>people</em>, enterprises&nbsp;and productive systems for{" "}
+              Helping people turn <em>skills</em> into jobs and businesses in{" "}
               <span className="hero-underline">Cameroon.</span>
             </h1>
             <p className="hero-lede reveal d1">
-              Nayokan is an ecosystem of vocational training, entrepreneurship, innovation and capital
-              — connecting human capability to productive enterprise across four institutional worlds.
+              Nayokan offers hands-on training and helps people develop business ideas. We welcome
+              universities, employers and investors who want to support that work.
             </p>
             <div className="hero-actions reveal d2">
-              <a href="/what-we-do" className="btn btn-primary">
-                Explore what we do
+              <a href="/what-we-do#training" className="btn btn-primary">
+                Find training
                 <span className="arrow" aria-hidden="true">
                   →
                 </span>
               </a>
+              <a href="/what-we-do#startup-support" className="btn btn-ghost">
+                Get startup support
+              </a>
               <a href="/partners" className="btn btn-ghost">
-                Partner with Nayokan
+                Partner with us
               </a>
             </div>
           </div>
@@ -89,15 +92,8 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="hero-marquee hero-marquee--wrap" aria-hidden="true">
-          <div className="marquee-track">
-            {[...MARQUEE, ...MARQUEE].map((m, i) => (
-              <span key={i}>
-                {m}
-                <span aria-hidden="true"> · </span>
-              </span>
-            ))}
-          </div>
+        <div className="hero-topics" aria-hidden="true">
+          {TOPICS.map((topic) => <span key={topic}>{topic}</span>)}
         </div>
       </section>
 
@@ -107,12 +103,12 @@ export default async function Home() {
           <div className="about-intro-grid">
             <div className="about-intro-copy">
               <h2 className="about-intro-title reveal">
-                A Cameroonian development institution building the whole chain, not one link.
+                From learning a skill to growing a business.
               </h2>
               <p className="about-intro-lede reveal d1">
-                Nayokan brings vocational training, a startup centre, venture capital and productive
-                hospitality assets under one institution, so that people, enterprises and capital
-                grow together rather than in isolated programmes.
+                Learn a practical skill at the Vocational Training Institute or test a business idea
+                at the Startup Centre. Venture Capital helps businesses prepare for investment, and
+                Hospitality welcomes visitors and partners.
               </p>
               <dl className="about-intro-facts reveal d2">
                 <div>
@@ -148,9 +144,8 @@ export default async function Home() {
             <div className="idea-right">
               <p className="idea-statement reveal">
                 <span className="idea-quote">“</span>
-                Skills alone are not enough. Isolated programmes are not enough. Lasting economic value
-                is created when capability, production, markets, innovation, capital and productive
-                assets are connected into <em>one working system.</em>
+                Practical skills can lead to work and new businesses. Training, business advice and
+                access to customers and funding help people <em>take the next step.</em>
               </p>
               <div className="idea-attrib reveal d1">
                 <span className="rule" style={{ width: 48 }} />
@@ -176,7 +171,7 @@ export default async function Home() {
                 Four distinct worlds.
               </>
             }
-            lead="Each world has its own character and its own front door, and all four share the same institutional standards and the same productive system."
+            lead="Meet the four parts of Nayokan and see how each one can help."
           />
           <FourWorlds />
           <div className="worlds-anchor-foot">
@@ -191,8 +186,8 @@ export default async function Home() {
         <div className="wrap">
           <SectionHeader
             num="§ 05 — Flagship Programmes"
-            title="Programmes across the ecosystem."
-            lead="A selection of programmes across the Nayokan ecosystem. Each programme page states what is open and what is still in development."
+            title="Training and startup programmes."
+            lead="See what each programme covers and whether you can apply."
           />
           {lead && (
             <a href={programmeHref(lead)} className="flagship-lead reveal">
@@ -258,8 +253,8 @@ export default async function Home() {
         <div className="wrap">
           <SectionHeader
             num="§ 07 — Stories"
-            title="Ideas becoming enterprises."
-            lead="The Nayokan ecosystem in practice — the people, ventures and moments that connect capability to production."
+            title="People and stories from Nayokan."
+            lead="See inside the training centre and learn more about the work behind our programmes."
           />
           <div className="stories-grid">
             {stories[0] && (
@@ -300,10 +295,9 @@ export default async function Home() {
         <div className="wrap">
           <div className="partners-inner">
             <div className="partners-head">
-              <h2>Institutional partners across the ecosystem.</h2>
+              <h2>Work with Nayokan.</h2>
               <p className="lead">
-                Universities, ministries, development organisations and the private sector: long-term
-                institutional partnership is how the system scales.
+                Universities, government, development organisations and businesses can partner with us.
               </p>
             </div>
             <div className="partners-body">

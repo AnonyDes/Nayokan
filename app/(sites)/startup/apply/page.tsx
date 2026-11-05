@@ -23,10 +23,10 @@ export default function StartupApply() {
         ]}
         title={
           <>
-            An <em>institutional</em> application.
+            Apply for <em>startup support.</em>
           </>
         }
-        lede="The Startup Centre application is a serious document. Take your time and submit when your venture is genuinely ready to enter the commercialization pathway. Applications are reviewed monthly."
+        lede="Tell us about yourself, the problem you want to solve and how far you’ve come with your idea."
       />
 
       <section className="section" id="form-region">

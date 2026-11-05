@@ -2,6 +2,7 @@
    Warmer accents, uses real photography prominently */
 
 .site-vti .world-hero { background: var(--paper); }
+.site-vti :is(#programmes, #apply) { scroll-margin-top: 88px; }
 .site-vti .world-badge { border-color: var(--green-deep); color: var(--green-deep); }
 .site-vti .world-hero-title em { color: var(--green-deep); }
 

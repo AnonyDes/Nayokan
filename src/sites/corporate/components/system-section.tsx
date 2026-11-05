@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { NAYOKAN_STAGES } from "@/platform/content/worlds";
 
 // Nayokan System — signature sticky horizontal scroll section.
 // Direct port of Designs/scripts/system-scroll.js: the outer section is
@@ -9,45 +10,6 @@ import { useEffect, useRef } from "react";
 // On <=900px or prefers-reduced-motion the CSS renders a static vertical
 // list and this effect does nothing (JS no-ops when .system-stage-wrap is
 // not sticky).
-const STAGES = [
-  {
-    num: "01",
-    title: "Build Capability",
-    desc: "Develop practical skills, entrepreneurial capacity and productive knowledge — the foundation of any productive system.",
-    tag: "Vocational Training Institute",
-  },
-  {
-    num: "02",
-    title: "Organize Production",
-    desc: "Convert capability into productive activity through clusters, enterprises and structured production.",
-    tag: "VTI · Startup Centre",
-  },
-  {
-    num: "03",
-    title: "Create Demand",
-    desc: "Connect production to real markets, customers and demand pathways — locally and beyond.",
-    tag: "Startup Centre · Hospitality",
-  },
-  {
-    num: "04",
-    title: "Commercialize Innovation",
-    desc: "Move research, ideas and innovation toward validated products, ventures and adoption at scale.",
-    tag: "Startup Centre",
-  },
-  {
-    num: "05",
-    title: "Mobilize Capital",
-    desc: "Create pathways to investment readiness, funding and financial resources for enterprises with growth potential.",
-    tag: "Venture Capital",
-  },
-  {
-    num: "06",
-    title: "Build Productive Assets",
-    desc: "Develop long-term productive infrastructure — properties, hospitality assets, and platforms of enduring value.",
-    tag: "Hospitality",
-  },
-];
-
 export function SystemSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -123,12 +85,11 @@ export function SystemSection() {
       <div className="system-header wrap">
         <div>
           <h2 className="on-dark" style={{ marginTop: 16 }}>
-            Six stages. One connected pathway.
+            How the pieces fit together.
           </h2>
         </div>
         <p className="on-dark" style={{ color: "var(--muted-invert)", maxWidth: "44ch" }}>
-          Nayokan is designed as a system — each stage feeds the next, and each division operates at one
-          or more points along the pathway.
+          Nayokan connects training, business support, investment and hospitality in six stages.
         </p>
       </div>
 
@@ -138,7 +99,7 @@ export function SystemSection() {
         </div>
         <div className="system-viewport">
           <div className="system-track" ref={trackRef}>
-            {STAGES.map((s) => (
+            {NAYOKAN_STAGES.map((s) => (
               <article className="system-stage" key={s.num}>
                 <div className="stage-num">{s.num}</div>
                 <h3 className="stage-title">{s.title}</h3>

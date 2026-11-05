@@ -17,6 +17,24 @@
       }
     ]
   },
+  "lenora-ebule": {
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "w": 320,
+        "bytes": 12788
+      },
+      {
+        "w": 640,
+        "bytes": 35340
+      },
+      {
+        "w": 960,
+        "bytes": 64662
+      }
+    ]
+  },
   "yogo-melo": {
     "width": 1200,
     "height": 1600,

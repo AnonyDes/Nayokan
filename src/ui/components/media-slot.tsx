@@ -57,17 +57,14 @@ export function MediaSlot({
           src={image.src}
           srcSet={image.srcSet}
           sizes={image.srcSet ? sizes ?? defaultSizes(fill, variant) : undefined}
-          alt={image.alt}
+          alt={image.isIllustrative && !/^illustrat/i.test(image.alt) ? `Illustration: ${image.alt}` : image.alt}
           width={image.width}
           height={image.height}
           loading={eager ? "eager" : "lazy"}
           decoding="async"
           style={image.position ? { objectPosition: image.position } : undefined}
         />
-        {image.isIllustrative && (
-          <span className="media-slot-badge media-slot-badge--illustrative">Illustrative image</span>
-        )}
-        {caption && image.caption && <figcaption className="media-slot-cap">{image.caption}</figcaption>}
+        {caption && image.caption && !image.isIllustrative && <figcaption className="media-slot-cap">{image.caption}</figcaption>}
       </figure>
     );
   }

@@ -135,6 +135,25 @@ test.describe("corporate chrome + a11y", () => {
 });
 
 test.describe("ecosystem gateway", () => {
+  test("prospective students can reach the training enquiry from the home hero", async ({ page }) => {
+    await go(page, "/");
+    const findTraining = page.getByRole("link", { name: "Find training" });
+    await expect(findTraining).toBeInViewport();
+    await findTraining.click();
+    await expect(page).toHaveURL(/\/what-we-do#training$/);
+
+    const howToJoin = page.getByRole("link", { name: /How to join VTI/ });
+    await expect(howToJoin).toBeInViewport();
+    await howToJoin.click();
+    await expect(page).toHaveURL(/vti\.nayokan\.localhost:\d+\/apply$/);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("not open yet");
+    const register = page.getByRole("link", { name: "Register interest" });
+    await expect(register).toBeInViewport();
+    await register.click();
+    await expect(page).toHaveURL(/vti\.nayokan\.localhost:\d+\/#apply$/);
+    await expect(page.locator("#apply form")).toBeVisible();
+  });
+
   test("corporate navigation introduces VTI, Startup and Hospitality through What We Do", async ({ page }) => {
     await go(page, "/");
     const labels = (await page.locator("header .nav-links a").allInnerTexts()).map((t) => t.trim());

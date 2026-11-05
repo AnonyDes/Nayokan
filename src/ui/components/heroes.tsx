@@ -32,11 +32,13 @@ export function CorpHero({ title, lede }: { sec?: string; crumbs?: Crumb[]; titl
 export function SubHero({
   title,
   lede,
+  actions,
 }: {
   sec?: string;
   crumbs?: Crumb[];
   title: ReactNode;
   lede: ReactNode;
+  actions?: ReactNode;
 }) {
   return (
     <section className="sub-hero">
@@ -44,6 +46,7 @@ export function SubHero({
         <div className="sub-hero-body">
           <h1>{title}</h1>
           <p className="lede">{lede}</p>
+          {actions && <div className="sub-hero-actions">{actions}</div>}
         </div>
       </div>
     </section>
@@ -78,7 +81,7 @@ export function WorldHero({
   );
 }
 
-const SYSTEM_STAGES = ["Capability", "Production", "Markets", "Innovation", "Capital", "Assets"];
+const SYSTEM_STAGES = ["Skills", "Production", "Customers", "Ideas", "Funding", "Places"];
 
 export function WorldLocator({ on }: { on: number[] }) {
   return (

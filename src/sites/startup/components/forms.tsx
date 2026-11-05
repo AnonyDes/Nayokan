@@ -299,21 +299,21 @@ export function StartupApplicationForm() {
           <h2 style={{ marginTop: 8 }}>Permissions before we finish.</h2>
           <p className="helper">All standard. You can withdraw consent at any time by writing to us.</p>
           <div className="check-row">
-            <input type="checkbox" id="sa-review" name="consentReview" checked={value("consentReview") === "on"} onChange={(e) => set("consentReview", e.target.checked ? "on" : "")} />
+            <input type="checkbox" id="sa-review" name="consentReview" required={step === 6} checked={value("consentReview") === "on"} onChange={(e) => set("consentReview", e.target.checked ? "on" : "")} />
             <label htmlFor="sa-review">
               I agree that Nayokan may review this submission with its selection panel.
               <small>Reviewed under Nayokan governance protocol; no external disclosure without your consent.</small>
             </label>
           </div>
           <div className="check-row">
-            <input type="checkbox" id="sa-contact" name="consentContact" checked={value("consentContact") === "on"} onChange={(e) => set("consentContact", e.target.checked ? "on" : "")} />
+            <input type="checkbox" id="sa-contact" name="consentContact" required={step === 6} checked={value("consentContact") === "on"} onChange={(e) => set("consentContact", e.target.checked ? "on" : "")} />
             <label htmlFor="sa-contact">
               I agree that Nayokan may contact me about this application and related opportunities.
               <small>You can withdraw consent at any time by writing to the Startup Centre team.</small>
             </label>
           </div>
           <div className="check-row">
-            <input type="checkbox" id="sa-truth" name="confirmAccurate" checked={value("confirmAccurate") === "on"} onChange={(e) => set("confirmAccurate", e.target.checked ? "on" : "")} />
+            <input type="checkbox" id="sa-truth" name="confirmAccurate" required={step === 6} checked={value("confirmAccurate") === "on"} onChange={(e) => set("confirmAccurate", e.target.checked ? "on" : "")} />
             <label htmlFor="sa-truth">I confirm the information provided is accurate to the best of my knowledge.</label>
           </div>
           {(fieldErr(state, "consentReview") || fieldErr(state, "consentContact") || fieldErr(state, "confirmAccurate")) && (

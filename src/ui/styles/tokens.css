@@ -29,7 +29,7 @@
   --line-invert: rgba(255, 255, 255, 0.14);
   --line-invert-strong: rgba(255, 255, 255, 0.4);
   --muted: rgba(10, 10, 10, 0.6);
-  --muted-invert: rgba(255, 255, 255, 0.62);
+  --muted-invert: #c4c4c4;
 
   /* Fonts (next/font variables set in app/layout.tsx). */
   --font-heading: var(--font-manrope), "Manrope", sans-serif;

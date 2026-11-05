@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 };
 
 const FEATURES = [
-  { num: "01", title: "Practical, value-chain training", desc: "Training follows a productive chain, from making or processing through quality to the market or the finished structure, with practical work at the centre." },
-  { num: "02", title: "Quality at every stage", desc: "Quality and inspection run through both fields, from production and packaging to equipment and construction." },
-  { num: "03", title: "Digital across the chain", desc: "Digital technology is treated as part of each value chain, not as a separate subject." },
-  { num: "04", title: "A route to enterprise", desc: "Training connects to Nayokan's Startup Centre for incubation and to its wider ecosystem of financing and enterprise growth." },
+  { num: "01", title: "Learn by doing", desc: "Practise making or processing products and see how they reach customers." },
+  { num: "02", title: "Check quality at every step", desc: "Learn to check materials, equipment and finished work." },
+  { num: "03", title: "Use digital tools", desc: "Use technology as part of the work you learn to do." },
+  { num: "04", title: "Build a business", desc: "Explore support for your business idea at Nayokan’s Startup Centre." },
 ];
 
 export default async function VtiHome() {
@@ -42,19 +42,21 @@ export default async function VtiHome() {
         ]}
         title={
           <>
-            Practical skills.
-            <br />
-            <em>Productive</em> people.
+            Learn <em>practical skills</em> for work and business.
           </>
         }
-        lede="The Nayokan Vocational Training Institute develops the foundation of every productive system — practical, employable capability, delivered through a hands-on curriculum built around entrepreneurial clusters."
+        lede={
+          openCount > 0
+            ? "Explore hands-on training at Nayokan’s Vocational Training Institute and see which programmes are open."
+            : "Explore hands-on training at Nayokan’s Vocational Training Institute. Applications are closed. You can register your interest now."
+        }
         actions={
           <>
             <a href="#programmes" className="btn btn-primary">
-              See programmes <span className="arrow">→</span>
+              View training programmes <span className="arrow" aria-hidden="true">→</span>
             </a>
-            <a href="#apply" className="btn btn-ghost">
-              Register interest
+            <a href="/apply" className="btn btn-ghost">
+              How to join
             </a>
           </>
         }
@@ -96,8 +98,8 @@ export default async function VtiHome() {
           </figure>
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/photos/nayokan-01.jpg" alt="Nayokan leadership and staff at the launch of the VTI computer lab." />
-            <figcaption>002 · Computer lab launch</figcaption>
+            <img src="/assets/photos/nayokan-01.jpg" alt="Trainees at their workstations with Nayokan staff at the front of the room." />
+            <figcaption>002 · At the workstations</figcaption>
           </figure>
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -111,14 +113,8 @@ export default async function VtiHome() {
         <div className="wrap">
           <SectionHeader
             num="§ 01 — Approach"
-            title={
-              <>
-                A practical
-                <br />
-                curriculum, delivered.
-              </>
-            }
-            lead="VTI graduates are not only knowledgeable but capable — trained to create impactful job solutions and to leverage their skills into productive enterprise."
+            title="What you’ll learn."
+            lead="Build skills you can use at work or in a business of your own."
           />
           <div className="feature-grid">
             <div className="feature-body">
@@ -147,8 +143,8 @@ export default async function VtiHome() {
         <div className="wrap">
           <SectionHeader
             num="§ 02 — Programmes"
-            title="Training offerings."
-            lead="Two fields, each tied to a productive value chain. Both are in development: register your interest and the VTI team will be in touch."
+            title="Training programmes."
+            lead="Choose a programme to see what it covers and whether you can apply."
           />
           <div className="vti-prog-cards">
             {programmes.map((p) => (
@@ -188,13 +184,10 @@ export default async function VtiHome() {
           <div className="apply-grid">
             <div>
               <h2 className="on-dark" style={{ marginTop: 16 }}>
-                Ready to
-                <br />
-                become <em>productive</em>?
+                Register your <em>interest.</em>
               </h2>
               <p className="lead on-dark" style={{ color: "var(--muted-invert)", marginTop: 24, maxWidth: "44ch" }}>
-                Interest in VTI programmes is managed inside the institute. Start your
-                enquiry here — we’ll route you to the right programme lead.
+                Choose a programme and leave your contact details so the VTI team can follow up.
               </p>
               <div style={{ marginTop: 32 }} className="cta-contact">
                 <div>

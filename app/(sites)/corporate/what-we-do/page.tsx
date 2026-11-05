@@ -4,7 +4,7 @@ import { siteUrl } from "@/platform/sites/registry";
 import { SectionHeader } from "@/ui/components/section-header";
 import { CtaBand } from "@/ui/components/strips";
 import { MediaSlot } from "@/ui/components/media-slot";
-import { WORLDS_DIRECTORY, worldHref, type WorldEntry } from "@/platform/content/worlds";
+import { NAYOKAN_STAGES, WORLDS_DIRECTORY, worldHref, type WorldEntry } from "@/platform/content/worlds";
 import type { ImageSlotId } from "@/ui/media/image-briefs";
 
 export const metadata: Metadata = {
@@ -18,15 +18,6 @@ export const metadata: Metadata = {
 // to VTI or the Startup Centre directly: visitors meet each world here first,
 // understand what it is, then choose to enter its dedicated site.
 
-const STAGES = [
-  { num: "01", title: "Capability", desc: "Practical skills, entrepreneurial capacity and applied knowledge: the base of any productive economy.", who: "VTI" },
-  { num: "02", title: "Production", desc: "Clusters and small enterprises that turn capability into organised, productive activity.", who: "VTI · Startup Centre" },
-  { num: "03", title: "Markets", desc: "Access to customers, distribution and demand, locally and beyond, including hosting visitors and partners.", who: "Startup Centre · Hospitality" },
-  { num: "04", title: "Innovation", desc: "Ideas and research moved through validation into commercial products with real market traction.", who: "Startup Centre" },
-  { num: "05", title: "Capital", desc: "Patient, ecosystem-aligned capital for ventures with productive potential.", who: "Venture Capital" },
-  { num: "06", title: "Productive Assets", desc: "Long-term physical and operational assets, such as hospitality, that generate lasting value.", who: "Hospitality" },
-];
-
 // Main image per world, plus a documentary inset where genuine photography exists.
 const WORLD_MEDIA: Record<WorldEntry["world"], { main: ImageSlotId; inset?: ImageSlotId }> = {
   vti: { main: "programme-vti", inset: "world-vti" },
@@ -37,8 +28,8 @@ const WORLD_MEDIA: Record<WorldEntry["world"], { main: ImageSlotId; inset?: Imag
 
 // Audience routes: who should go where. Destinations only; no claims.
 const ROUTES = [
-  { who: "Young people and workers seeking practical skills", where: "Vocational Training Institute", href: siteUrl("vti", "/programmes"), world: "vti" as const },
-  { who: "Researchers, entrepreneurs, independent innovators and companies seeking innovation partners", where: "Startup Centre", href: siteUrl("startup", "/programme"), world: "startup" as const },
+  { id: "training", who: "I want to learn practical skills", where: "How to join VTI", href: siteUrl("vti", "/apply"), world: "vti" as const },
+  { id: "startup-support", who: "I have a business idea or a project", where: "Visit the Startup Centre", href: siteUrl("startup"), world: "startup" as const },
   { who: "Founders building productive enterprises", where: "Venture Capital", href: "/venture-capital/partner" },
   { who: "Institutions, funders and corporate partners", where: "Partner with Nayokan", href: "/partners" },
   { who: "Guests, visiting partners and delegations", where: "Hospitality", href: "/hospitality/properties" },
@@ -52,15 +43,11 @@ export default function WhatWeDo() {
         <div className="wwd-hero-inner">
           <div>
             <h1 className="ed-hero-title">
-              Four worlds.
-              <br />
-              <em>One productive</em> ecosystem.
+              How <em>Nayokan</em> can help.
             </h1>
             <p className="ed-hero-lede">
-              Nayokan is one institution working across the whole chain: it builds skills, turns them
-              into production, connects enterprises to markets and innovation, mobilises capital and
-              builds lasting productive assets. Four worlds carry that work, and each one hands on
-              to the next.
+              Learn a skill, get help with a business idea, or work with us to support people and
+              businesses in Cameroon.
             </p>
           </div>
           <nav className="wwd-index" aria-label="The four worlds on this page">
@@ -80,58 +67,13 @@ export default function WhatWeDo() {
         </div>
       </section>
 
-      {/* THE NAYOKAN SYSTEM */}
-      <section className="wwd-system" aria-labelledby="wwd-system-title">
-        <div className="wrap">
-          <header className="wwd-system-head">
-            <h2 id="wwd-system-title">
-              Capability <span aria-hidden="true">→</span> Production <span aria-hidden="true">→</span> Markets{" "}
-              <span aria-hidden="true">→</span> Innovation <span aria-hidden="true">→</span> Capital{" "}
-              <span aria-hidden="true">→</span> <em>Productive Assets.</em>
-            </h2>
-            <p>
-              The pathway is linear on paper and cyclical in practice. Each stage feeds the next, and
-              productive assets close the loop by resourcing further capability. Every world works at
-              one or more of these stages.
-            </p>
-          </header>
-          <ol className="wwd-stages">
-            {STAGES.map((s) => (
-              <li key={s.num} className="wwd-stage">
-                <span className="wwd-stage-num">{s.num}</span>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-                <span className="wwd-stage-who">{s.who}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* THE FOUR WORLDS */}
-      <section className="wwd-worlds-intro" aria-labelledby="wwd-worlds-title">
-        <div className="wrap">
-          <SectionHeader
-            num="§ 02 — The four worlds"
-            title={<span id="wwd-worlds-title">What each world is, and where it leads.</span>}
-            lead="VTI and the Startup Centre each have their own dedicated Nayokan site. Venture Capital and Hospitality are part of nayokan.org. All four share one institution and one system."
-          />
-        </div>
-      </section>
-      {WORLDS_DIRECTORY.map((w, i) => (
-        <WorldSection key={w.world} world={w} flip={i % 2 === 1} />
-      ))}
-
-      {/* AUDIENCE ROUTES */}
-      <section className="ed-band">
+      <section className="ed-band" aria-labelledby="wwd-start-title">
         <div className="wrap">
           <div className="ed-band-inner">
-            <div>
-              <h2>Find the part of Nayokan that is for you.</h2>
-            </div>
+            <h2 id="wwd-start-title">Where would you like to start?</h2>
             <ul className="wwd-routes">
               {ROUTES.map((r) => (
-                <li key={r.where}>
+                <li key={r.where} id={r.id}>
                   <a href={r.href} data-world-transition={r.world}>
                     <span className="wwd-routes-who">{r.who}</span>
                     <span className="wwd-routes-where">
@@ -144,6 +86,43 @@ export default function WhatWeDo() {
           </div>
         </div>
       </section>
+
+      {/* THE NAYOKAN SYSTEM */}
+      <section className="wwd-system" aria-labelledby="wwd-system-title">
+        <div className="wrap">
+          <header className="wwd-system-head">
+            <h2 id="wwd-system-title">
+              From learning a skill to <em>growing a business.</em>
+            </h2>
+            <p>
+              Here’s how training, business support, investment and hospitality work together.
+            </p>
+          </header>
+          <ol className="wwd-stages">
+            {NAYOKAN_STAGES.map((s) => (
+              <li key={s.num} className="wwd-stage">
+                <span className="wwd-stage-num">{s.num}</span>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+                <span className="wwd-stage-who">{s.tag}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* THE FOUR WORLDS */}
+      <section className="wwd-worlds-intro" aria-labelledby="wwd-worlds-title">
+        <div className="wrap">
+          <SectionHeader
+            num="§ 02 — The four worlds"
+            title={<span id="wwd-worlds-title">The four parts of Nayokan.</span>}
+          />
+        </div>
+      </section>
+      {WORLDS_DIRECTORY.map((w, i) => (
+        <WorldSection key={w.world} world={w} flip={i % 2 === 1} />
+      ))}
 
       <CtaBand
         sec="§ 04 — Enter the system"

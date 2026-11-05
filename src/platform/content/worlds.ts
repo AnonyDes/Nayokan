@@ -2,6 +2,15 @@ import type { World } from "./types";
 import { siteUrl } from "@/platform/sites/registry";
 import type { SiteId } from "@/platform/sites/types";
 
+export const NAYOKAN_STAGES = [
+  { num: "01", title: "Learn practical skills", desc: "Build skills you can use at work or in your own business.", tag: "Vocational Training Institute" },
+  { num: "02", title: "Make products and offer services", desc: "Work with others to put your skills to use.", tag: "VTI · Startup Centre" },
+  { num: "03", title: "Find customers", desc: "Reach people in Cameroon and beyond.", tag: "Startup Centre · Hospitality" },
+  { num: "04", title: "Test new ideas", desc: "Turn promising ideas into products people can use.", tag: "Startup Centre" },
+  { num: "05", title: "Prepare for funding", desc: "Get your business ready for investment.", tag: "Venture Capital" },
+  { num: "06", title: "Create places to work and stay", desc: "Manage spaces that support local business and welcome visitors.", tag: "Hospitality" },
+];
+
 // The four Nayokan worlds as presented on the corporate site: the home Four
 // Worlds section and the What We Do ecosystem gateway. Institutional
 // structure, like the Nayokan System, is static configuration (handoff I/02).
@@ -43,24 +52,24 @@ export interface WorldEntry {
 }
 
 export const STARTUP_CENTRE_COPY = {
-  positioning: "Where innovation becomes enterprise.",
-  description: "Research, founder-led ideas and corporate innovation challenges turned into market-ready ventures.",
+  positioning: "Help for your next business idea.",
+  description: "Test an idea, build a product and prepare to reach customers.",
   whatItIs:
-    "The Nayokan Startup Centre helps researchers, entrepreneurs, innovators and companies transform promising ideas and real-world problems into validated, scalable ventures.",
+    "We help founders, researchers and companies test ideas, build products and find customers.",
   why:
-    "Innovative ideas often fail to reach the market. The Centre provides a structured pathway to design, validate, commercialize and scale solutions.",
+    "The Centre helps you find out whether your idea solves a problem people will pay to fix.",
   audience:
     "Researchers, students, independent innovators, early-stage founders, universities and companies seeking innovation partners.",
   systemFit:
-    "The Centre turns research, founder-led ideas and corporate innovation challenges into market-ready ventures. Ventures ready to grow move on to Nayokan Venture Capital.",
-  stages: "Stages 02–04 · Innovation, Validation, Commercialization",
+    "The Centre helps teams get ready to sell. Businesses ready to grow can explore investment through Nayokan Venture Capital.",
+  stages: "Stages 02–04 · Make products, find customers, test ideas",
   offers: [
-    "University research commercialization",
-    "Startup creation and venture building",
-    "Corporate open-innovation programmes",
-    "Business-model and market validation",
-    "Mentorship and commercialization support",
-    "Funding opportunities and innovation calls",
+    "Help turning research into products",
+    "Support for starting a business",
+    "Programmes for companies with a problem to solve",
+    "Help testing ideas with customers",
+    "Mentoring and support to bring products to market",
+    "Funding opportunities and calls for ideas",
   ],
 };
 
@@ -71,23 +80,22 @@ export const WORLDS_DIRECTORY: WorldEntry[] = [
     anchor: "vti",
     name: "Vocational Training Institute",
     shortName: "VTI",
-    positioning: "Practical skills. Productive people.",
+    positioning: "Learn practical skills for work and business.",
     description:
-      "Practical skills, certification and entrepreneurial clusters: the foundation of productive capability.",
+      "Hands-on training for people who want to learn a skill for work or business.",
     whatItIs:
-      "The Nayokan Vocational Training Institute develops practical, employable capability through a hands-on curriculum built around entrepreneurial clusters. Trainees learn by doing: in workshops, labs and production settings, not only in classrooms.",
+      "The Vocational Training Institute helps people learn by doing, with practice in workshops and labs.",
     why:
-      "Skills alone are not enough. VTI graduates are trained to be capable as well as knowledgeable: to create job solutions and turn their skills into productive enterprise.",
-    audience: "Young Cameroonians, school leavers and workers who want practical, employable skills.",
+      "The training helps people build skills they can use at work or in a business of their own.",
+    audience: "Young Cameroonians, school leavers and workers who want to learn practical skills.",
     offers: [
-      "Practical, workshop-based training",
-      "Certification pathways",
-      "Entrepreneurial clusters",
-      "Production-oriented learning",
+      "Hands-on training",
+      "Practice with digital tools",
+      "Support for groups of trainees and small businesses working together",
     ],
     systemFit:
-      "VTI is where the system starts. It builds capability, then organises graduates into clusters that turn skills into production.",
-    stages: "Stages 01–02 · Capability, Production",
+      "Training helps people build skills they can put to work in local businesses.",
+    stages: "Stages 01–02 · Learn skills and make products",
     destination: { site: "vti", path: "/", label: "vti.nayokan.org" },
     crossSite: true,
     cta: "Explore VTI",
@@ -119,7 +127,7 @@ export const WORLDS_DIRECTORY: WorldEntry[] = [
     whatItIs:
       "Nayokan Venture Capital provides structured capital pathways for Cameroonian enterprises with productive potential, sourced from within the ecosystem and from selected institutional partnerships.",
     why:
-      "Capital works best when it arrives with capability. Nayokan VC is designed to invest alongside training, mentorship, market access and productive assets, never in isolation.",
+      "Funding can help a business grow when it comes with training, mentoring and help finding customers.",
     audience:
       "Founders of productive enterprises, and institutional investors, development finance partners and co-investors.",
     offers: [
@@ -130,7 +138,7 @@ export const WORLDS_DIRECTORY: WorldEntry[] = [
     ],
     systemFit:
       "Venture Capital mobilises capital for enterprises that come through the clusters and the Startup Centre, closing the gap between a validated venture and a growing one.",
-    stages: "Stage 05 · Capital",
+    stages: "Stage 05 · Prepare for funding",
     destination: { site: "corporate", path: "/venture-capital", label: "nayokan.org/venture-capital" },
     crossSite: false,
     cta: "Explore Venture Capital",
@@ -143,18 +151,18 @@ export const WORLDS_DIRECTORY: WorldEntry[] = [
     anchor: "hospitality",
     name: "Hospitality",
     shortName: "Hospitality",
-    positioning: "Hospitality as productive infrastructure.",
+    positioning: "Places to stay and meet.",
     description:
-      "Refined guesthouses and long-term productive assets: hospitality as economic infrastructure.",
+      "Guesthouses and spaces for visiting guests and partners.",
     whatItIs:
-      "Nayokan Hospitality treats guesthouses and properties as productive assets: economic infrastructure rather than decoration, run to institutional standards.",
+      "Nayokan Hospitality focuses on places for visitors and partners to stay or meet.",
     why:
       "A well-run guesthouse anchors an ecosystem. It hosts visitors, investors, researchers and partners, and returns value to Nayokan's wider work.",
     audience: "Visiting partners and delegations, researchers, investors and long-stay guests.",
-    offers: ["Guesthouse stays", "Long-stay accommodation", "Meeting and reception space", "Productive-asset development"],
+    offers: ["Guesthouse stays", "Long-stay accommodation", "Meeting and reception space", "Property development"],
     systemFit:
-      "Hospitality creates demand by hosting the people the ecosystem works with, and builds the long-term productive assets that close the loop.",
-    stages: "Stages 03 · 06 · Markets, Productive Assets",
+      "Hospitality helps Nayokan host visitors and partners and gives them space to work together.",
+    stages: "Stages 03 and 06 · Find customers and create places to work and stay",
     destination: { site: "corporate", path: "/hospitality", label: "nayokan.org/hospitality" },
     crossSite: false,
     cta: "Explore Hospitality",

@@ -26,7 +26,6 @@
   letter-spacing: -0.04em;
   text-wrap: balance;
 }
-.wwd-system-head h2 span { color: var(--green); font-weight: 500; }
 .wwd-system-head h2 em { font-style: italic; color: var(--green-glow); }
 .wwd-system-head p { color: var(--muted-invert); font-size: 1rem; line-height: 1.6; max-width: 44ch; }
 
@@ -51,7 +50,7 @@
   font-size: clamp(2rem, 3.2vw, 3rem);
   letter-spacing: -0.05em;
   line-height: 0.9;
-  color: var(--green);
+  color: var(--green-glow);
 }
 .wwd-stage h3 {
   font-family: var(--font-heading);
@@ -1035,11 +1034,6 @@
 }
 .spec-grid .publishing-note, .feature-body .publishing-note { grid-template-columns: 1fr; padding-top: 0; border-top: 0; }
 .spec-grid .publishing-note-actions { grid-column: 1; }
-
-/* ---------- Home hero on small screens: statement first, then the image ---------- */
-@media (max-width: 960px) {
-  .hero-right { order: 0; margin: 32px 0 0; }
-}
 
 /* ---------- Sitemap (human-facing index) ---------- */
 .sitemap-page { padding-top: clamp(24px, 3vw, 40px); }

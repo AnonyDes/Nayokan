@@ -45,7 +45,7 @@ const PRACTICE: { slot: "startup-programme-hero" | "startup-commercialization" |
 // Living commercialization schematic: shows how innovation enters, circulates and exits.
 function Blueprint() {
   return (
-    <div className="startup-blueprint" aria-label="Schéma animé du circuit de valorisation Nayokan Startup Centre">
+    <div className="startup-blueprint" role="img" aria-label="How the Startup Centre helps teams develop and test ideas, reach customers and prepare for investment">
       <div className="blueprint-corners">
         <span />
         <span />
@@ -481,16 +481,17 @@ export default async function StartupHome() {
         ]}
         title={
           <>
-            Where <em>innovation</em>
-            <br />
-            becomes enterprise.
+            Turn your <em>idea</em> into a business.
           </>
         }
         lede={STARTUP_CENTRE_COPY.whatItIs}
         actions={
           <>
-            <a href="#pipeline" className="btn btn-primary">
-              See the pipeline <span className="arrow">→</span>
+            <a href="/apply" className="btn btn-primary">
+              Apply for startup support <span className="arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="/programme" className="btn btn-ghost">
+              See how it works
             </a>
             <a href="#universities" className="btn btn-ghost">
               Universities

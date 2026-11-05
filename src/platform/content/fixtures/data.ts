@@ -936,38 +936,33 @@ export const articles: Article[] = [
     ...article(
       "art-010",
       "training-lab-day-one",
-      "The training lab in operation — day one.",
-      "First cohort onboarding session inside the VTI computer lab in Yaoundé.",
+      "Inside the Nayokan training lab.",
+      "See trainees at their workstations during the launch of Nayokan’s computer lab in Yaoundé.",
       "VTI Note",
       "vti",
       "VTI Editorial",
       "2026-09-05",
-      5,
+      1,
     ),
     cover: photo(
       "m-art-010",
       "nayokan-08.jpg",
       "Trainees at the Nayokan VTI computer lab.",
-      "Fig. 001 — VTI trainees during the first digital skills module.",
+      "Trainees at the VTI computer lab in Yaoundé.",
     ),
     body: [
       {
         type: "paragraph",
-        text: "The computers were powered on at 08:30 in Yaoundé, marking day one of practical instruction for the first VTI cohort. Forty workstations, fully connected, dedicated to technical skills and digital workflow routines.",
+        text: "These photos show trainees at their computers during the launch of the Nayokan Vocational Training Institute’s lab in Yaoundé.",
       },
       {
-        type: "paragraph",
-        text: "The objective of the first week is immersion: establishing coding standards, collaborative version control, and problem decomposition. Trainees work in paired stations designed to encourage direct peer review and technical dialogue.",
-      },
-      { type: "quote", text: "Theory becomes capability only when hands touch the tools." },
-      { type: "heading", level: 2, text: "Curriculum architecture" },
-      {
-        type: "paragraph",
-        text: "The digital curriculum is built backwards from the needs of small productive enterprises and tech ventures across Central Africa. Rather than abstract computer literacy, participants build real-world software modules, automation tools, and web-based business infrastructure from day one.",
-      },
-      {
-        type: "paragraph",
-        text: "By month three, these trainees will begin integrating directly with entrepreneurial clusters, contributing working digital assets to active local businesses.",
+        type: "image",
+        media: photo(
+          "m-art-010b",
+          "nayokan-01.jpg",
+          "Trainees at their workstations with Nayokan staff at the front of the room.",
+          "Inside the computer lab during the launch.",
+        ),
       },
     ],
   },
@@ -1101,6 +1096,17 @@ export const articles: Article[] = [
 
 export const stories: Story[] = [
   {
+    id: "story-002",
+    site: "corporate",
+    world: "vti",
+    slug: "training-lab-day-one",
+    title: "Inside the Nayokan training lab.",
+    excerpt: "See trainees at their workstations during the launch of Nayokan’s computer lab in Yaoundé.",
+    type: "cohort",
+    cover: photo("m-story-002", "nayokan-01.jpg", "Trainees at their workstations with Nayokan staff at the front of the room."),
+    provenance: confirmed(),
+  },
+  {
     id: "story-001",
     site: "corporate",
     world: "vti",
@@ -1110,17 +1116,6 @@ export const stories: Story[] = [
       "A documentary look at the launch of VTI and the first cohort of trainees to walk through its doors.",
     type: "cohort",
     cover: photo("m-story-001", "nayokan-06.jpg", "Nayokan leadership and staff at the launch of the VTI computer lab, Yaoundé."),
-    provenance: demo(),
-  },
-  {
-    id: "story-002",
-    site: "corporate",
-    world: "vti",
-    slug: "training-lab-day-one",
-    title: "The training lab in operation — day one.",
-    excerpt: "First cohort onboarding session inside the VTI computer lab.",
-    type: "beneficiary",
-    cover: photo("m-story-002", "nayokan-08.jpg", "Trainees in a session at the Nayokan VTI computer lab, Yaoundé."),
     provenance: demo(),
   },
   {
@@ -1178,10 +1173,8 @@ export const partners: Partner[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// People (about.html leadership). Two entries below are real, named
-// individuals confirmed directly by Nayokan (name, role and photo supplied
-// by the site owner) — not demo content, and not placeholders. The
-// remaining operational-lead roles are still withheld pending approval.
+// People (about.html leadership). Named entries and their photos are supplied
+// by Nayokan. Operational-lead roles are withheld pending approval.
 // ---------------------------------------------------------------------------
 
 export const people: Person[] = [
@@ -1203,6 +1196,16 @@ export const people: Person[] = [
     division: "Governance",
     bio: "Associate at McKinsey & Company, previously in Sales Strategy at Kenvue. MBA from Rotman, Master of Engineering from the University of Waterloo, and BEng from the University of Sheffield. Based in Toronto; bilingual in English and French.",
     photo: getPersonPhoto("kanjo", "Portrait of Kanjo, Board Member and Advisor to Nayokan."),
+    provenance: confirmed(),
+  },
+  {
+    id: "ppl-board-lenora-ebule",
+    name: "Lenora Ebule",
+    initials: "LE",
+    position: "Board Member / Advisor",
+    division: "Governance",
+    bio: "Lenora is the founder and principal consultant of Gelden Consulting. She has over 20 years of experience helping Fortune 500 companies, startups and growing businesses improve how they operate. She helps entrepreneurs put the right processes and systems in place to turn ideas into businesses that can grow. She holds an MBA in Global Business Strategy and Operations and a bachelor’s degree in Finance and Accounting. She is a certified Lean Six Sigma Black Belt.",
+    photo: getPersonPhoto("lenora-ebule", "Portrait of Lenora Ebule."),
     provenance: confirmed(),
   },
   {

@@ -40,7 +40,12 @@ export default async function VtiApply({
               Applications are <em>not open yet</em>.
             </>
           }
-          lede="The VTI programmes are in development. Register your interest and the VTI team will be in touch when an intake is announced."
+          lede="Leave your contact details so the VTI team can follow up when applications open."
+          actions={
+            <a href="/#apply" className="btn btn-primary">
+              Register interest <span className="arrow" aria-hidden="true">→</span>
+            </a>
+          }
         />
         <section className="section">
           <div className="wrap">
@@ -55,11 +60,6 @@ export default async function VtiApply({
                 </li>
               ))}
             </ul>
-            <p style={{ marginTop: 40 }}>
-              <a href="/#apply" className="btn btn-primary">
-                Register interest <span className="arrow">→</span>
-              </a>
-            </p>
           </div>
         </section>
       </>

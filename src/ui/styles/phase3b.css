@@ -91,7 +91,6 @@ body.nav-open { overflow: hidden; }
 }
 
 /* Small refinement — hero year wrap on small screens */
-.hero-marquee--wrap .marquee-track { animation-play-state: running; }
 
 /* =========================================================================
    PHASE 3B — shared sub-page hero framework
@@ -155,6 +154,7 @@ body.nav-open { overflow: hidden; }
   hyphens: none;
 }
 .sub-hero-body h1 em { font-style: italic; font-weight: 500; }
+.sub-hero-actions { margin-top: var(--s-5); }
 .sub-hero-body .lede {
   font-size: clamp(1.05rem, 1.4vw, 1.22rem);
   color: var(--muted);

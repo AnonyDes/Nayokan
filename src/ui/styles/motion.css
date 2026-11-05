@@ -12,7 +12,7 @@
 }
 
 @keyframes mo-rise {
-  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
   to { opacity: 1; transform: none; }
 }
 @keyframes mo-unmask {
@@ -20,7 +20,7 @@
   to { clip-path: inset(0 0 0 0); }
 }
 @keyframes mo-settle {
-  from { scale: 1.18; }
+  from { scale: 1.12; }
   to { scale: var(--mo-rest-scale, 1); }
 }
 @keyframes mo-draw {
@@ -43,38 +43,40 @@
   .ed-hero-crumbs, .ed-hero-title, .ed-hero-lede, .ed-hero-stats, .ed-hero-inner > div:first-child > :not(nav, h1, p, dl),
   .article-hero-inner > *,
   .world-hero-stat {
-    animation: mo-rise 900ms var(--mo-ease) both;
+    animation: mo-rise 500ms var(--mo-ease) both;
     transition: none;
   }
 
   .corp-hero-crumbs, .sub-hero .crumbs, .ed-hero-crumbs, .article-hero-inner > :nth-child(1) { animation-delay: 60ms; }
-  :is(.hero, .world-hero) .reveal.d1, .article-hero-inner > :nth-child(2) { animation-delay: 140ms; }
+  :is(.hero, .world-hero) .reveal.d1, .article-hero-inner > :nth-child(2) { animation-delay: 80ms; }
   .corp-hero-title, .sub-hero-body h1, .ed-hero-title,
-  :is(.hero, .world-hero) .reveal.d2, .article-hero-inner > :nth-child(3) { animation-delay: 200ms; }
+  :is(.hero, .world-hero) .reveal.d2, .article-hero-inner > :nth-child(3) { animation-delay: 120ms; }
   .corp-hero-lede, .sub-hero-body .lede, .ed-hero-lede,
-  :is(.hero, .world-hero) .reveal.d3, .article-hero-inner > :nth-child(4) { animation-delay: 340ms; }
+  :is(.hero, .world-hero) .reveal.d3, .article-hero-inner > :nth-child(4) { animation-delay: 160ms; }
   .ed-hero-stats, .ed-hero-inner > div:first-child > :not(nav, h1, p, dl),
-  :is(.hero, .world-hero) .reveal.d4 { animation-delay: 460ms; }
-  .world-hero-stat:nth-child(1) { animation-delay: 700ms; }
-  .world-hero-stat:nth-child(2) { animation-delay: 780ms; }
-  .world-hero-stat:nth-child(3) { animation-delay: 860ms; }
+  :is(.hero, .world-hero) .reveal.d4 { animation-delay: 200ms; }
+  .world-hero-stat:nth-child(1) { animation-delay: 240ms; }
+  .world-hero-stat:nth-child(2) { animation-delay: 280ms; }
+  .world-hero-stat:nth-child(3) { animation-delay: 320ms; }
+  :is(.hero-actions, .world-hero-actions, .ed-hero-inner > div:first-child > .ed-hero-actions):focus-within {
+    animation: none;
+  }
 
   /* Hero photograph: unmask upward while the image settles from a zoom. */
-  .hero-figure, .world-hero-figure, .ed-hero-media .media-slot {
-    animation: mo-unmask 1300ms var(--mo-ease-mask) 180ms both;
+  .hero-figure.reveal, .world-hero-figure, .ed-hero-media .media-slot {
+    animation: mo-unmask 650ms var(--mo-ease-mask) 60ms both;
   }
   .hero-figure img, .world-hero-figure img, .ed-hero-media .media-slot img {
-    animation: mo-settle 1800ms var(--mo-ease) 180ms both;
+    animation: mo-settle 800ms var(--mo-ease) 60ms both;
   }
-  .hero-figure.reveal { animation: mo-unmask 1300ms var(--mo-ease-mask) 180ms both; }
-  .hero-figure-cap, .world-hero-figure figcaption, .ed-hero-fig {
-    animation: mo-rise 800ms var(--mo-ease) 1100ms both;
+  .hero-figure-cap, .world-hero-figure figcaption {
+    animation: mo-rise 420ms var(--mo-ease) 360ms both;
   }
 
   /* Home hero: the highlighter underline draws in after the title lands. */
   .hero-underline::after {
     transform-origin: left center;
-    animation: mo-draw 900ms var(--mo-ease) 900ms both;
+    animation: mo-draw 500ms var(--mo-ease) 320ms both;
   }
 
   /* ---------- Micro-interactions ---------- */
@@ -85,22 +87,22 @@
    Browsers without scroll-driven animations keep the static layout. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    /* Hero photographs drift slower than the page, for a sense of depth.
-       They rest slightly zoomed so the drift never exposes an edge. */
-    .hero-figure img, .world-hero-figure img, .ed-hero-media .media-slot img {
-      --mo-rest-scale: 1.1;
-      animation:
-        mo-settle 1800ms var(--mo-ease) 180ms both,
-        mo-drift linear both;
-      animation-timeline: auto, view();
-      animation-range: normal, exit 0% exit 100%;
-    }
+    @media (min-width: 901px) {
+      /* Keep scroll-linked photo motion on larger screens. */
+      .hero-figure img, .world-hero-figure img, .ed-hero-media .media-slot img {
+        --mo-rest-scale: 1.1;
+        animation:
+          mo-settle 800ms var(--mo-ease) 60ms both,
+          mo-drift linear both;
+        animation-timeline: auto, view();
+        animation-range: normal, exit 0% exit 100%;
+      }
 
-    /* The VTI photo strip counter-drifts as it passes. */
-    .vti-strip-inner > figure img {
-      scale: 1.12;
-      animation: mo-drift-soft linear both;
-      animation-timeline: view();
+      .vti-strip-inner > figure img {
+        scale: 1.12;
+        animation: mo-drift-soft linear both;
+        animation-timeline: view();
+      }
     }
 
     /* Reading progress on articles. */

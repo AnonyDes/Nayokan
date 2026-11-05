@@ -403,7 +403,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.06em;
 }
-.cohorts-meta-item .lbl { color: rgba(255, 255, 255, 0.5); }
+.cohorts-meta-item .lbl { color: var(--muted-invert); }
 .cohorts-meta-item .val { color: var(--green-glow); font-weight: 600; }
 
 /* The 4 Cohort Cards Grid */
@@ -501,7 +501,7 @@
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--muted-invert);
   text-transform: uppercase;
 }
 
@@ -557,7 +557,7 @@
   color: var(--green-glow);
 }
 .cohort-card-footer .arrow {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--muted-invert);
   transition: transform var(--dur-fast), color var(--dur-fast);
 }
 .cohort-card:hover .cohort-card-footer .arrow {
@@ -977,7 +977,7 @@
 }
 
 .milestone-card.milestone-card-final .milestone-month-tag {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--muted-invert);
 }
 
 .milestone-card.milestone-card-final .milestone-track-tag {
@@ -1003,7 +1003,7 @@
 }
 
 .milestone-card.milestone-card-final .milestone-deliverables-title {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--muted-invert);
 }
 
 .milestone-card.milestone-card-final .milestone-deliverables-list li {
@@ -1019,7 +1019,7 @@
 }
 
 .milestone-card.milestone-card-final .milestone-gate-row .gate-lbl {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--muted-invert);
 }
 
 .milestone-card.milestone-card-final .milestone-gate-row .gate-val {
@@ -1427,7 +1427,7 @@
 }
 
 .opp-directory-section .filter-bar .fb-label {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--muted-invert);
 }
 
 .opp-directory-section .chip {
@@ -1446,7 +1446,7 @@
   box-shadow: 0 0 12px rgba(25, 230, 57, 0.2);
 }
 .opp-directory-section .chip .count {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--muted-invert);
 }
 .opp-directory-section .chip.on .count {
   color: var(--green-glow);
@@ -1467,7 +1467,7 @@
 }
 
 .opp-directory-section .chip-clear {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--muted-invert);
 }
 .opp-directory-section .chip-clear:hover {
   color: var(--green-glow);
@@ -1492,7 +1492,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--muted-invert);
   position: relative;
   z-index: 2;
 }
@@ -1552,7 +1552,7 @@
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--muted-invert);
   margin-top: 4px;
   line-height: 1.45;
 }
@@ -1578,7 +1578,7 @@
 }
 
 .opp-directory-section .opp-row .odate .pending-note {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--muted-invert);
   font-style: italic;
 }
 
@@ -1619,7 +1619,7 @@
 }
 
 .opp-directory-section .opp-row .ostatus.closed {
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--muted-invert);
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -1679,7 +1679,7 @@
   color: #FFFFFF;
 }
 .opp-directory-section .state-empty p {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--muted-invert);
 }
 
 /* Responsive */

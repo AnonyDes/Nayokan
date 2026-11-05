@@ -86,6 +86,6 @@ test.describe("startup journeys", () => {
       await page.getByRole("button", { name: /Continue to Step/i }).click();
     }
     await page.getByRole("button", { name: /Submit application/i }).click();
-    await expect(page.getByText(/consent|confirm/i).last()).toBeVisible();
+    await expect(page.getByRole("checkbox", { name: /may review this submission/ })).toBeFocused();
   });
 });

@@ -33,13 +33,19 @@ export default async function VtiProgrammes() {
         ]}
         title={
           <>
-            Two fields, <em>one chain</em>.
+            Find a <em>training programme</em>.
           </>
         }
-        lede="Two training offerings, each tied to a productive value chain: local manufacturing and sustainable construction, and agro-industrialization with export systems and market access."
+        lede="Explore courses in construction, manufacturing, food processing and exporting."
         slot="vti-programmes-hero"
         figure="Fig. — Session in the VTI computer lab · Yaoundé"
-      />
+      >
+        <div className="ed-hero-actions">
+          <a href="/apply" className="btn btn-primary">
+            How to join <span className="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </EditorialHero>
 
       <section className="section ed-directory">
         <div className="wrap">

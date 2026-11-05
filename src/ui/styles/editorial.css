@@ -29,23 +29,6 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.media-slot-badge {
-  position: absolute;
-  top: var(--s-2);
-  right: var(--s-2);
-  padding: 3px 7px;
-  background: rgba(10, 10, 10, 0.68);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  color: var(--paper);
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  z-index: 2;
-  pointer-events: none;
-}
 
 /* Placeholder: deliberate, art-directed, obviously not a photograph. */
 .media-slot--placeholder {
@@ -329,6 +312,7 @@
 }
 .ed-hero-title em { font-style: italic; font-weight: 500; }
 .ed-hero-lede { margin-top: var(--s-5); max-width: 52ch; font-size: clamp(1rem, 1.25vw, 1.15rem); color: var(--muted); line-height: 1.6; }
+.ed-hero-actions { margin-top: var(--s-5); }
 .ed-hero-stats {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: var(--s-7); border-top: 1px solid var(--line);
@@ -346,6 +330,7 @@
 @media (max-width: 899px) {
   .ed-hero-inner { grid-template-columns: 1fr; }
   .ed-hero-media { order: -1; }
+  .ed-hero:has(.ed-hero-actions) .ed-hero-media { order: 0; }
   .ed-hero-title { margin-top: 0; }
   .ed-hero { padding-top: 96px; }
 }
@@ -586,12 +571,13 @@
 .wwd-index-dest { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); }
 .wwd-worlds { padding-top: clamp(48px, 6vw, 88px); padding-bottom: clamp(64px, 8vw, 112px); }
 .wwd-routes { list-style: none; border-top: 1px solid var(--line-strong); }
+.wwd-routes li[id] { scroll-margin-top: 96px; }
 .wwd-routes a {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-4); align-items: baseline;
   padding: var(--s-5) 0; border-bottom: 1px solid var(--line);
 }
 .wwd-routes-who { color: var(--muted); }
-.wwd-routes-where { font-family: var(--font-heading); font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+.wwd-routes-where { font-family: var(--font-heading); font-weight: 600; letter-spacing: -0.01em; }
 .wwd-routes a:hover .wwd-routes-where { color: var(--green-deep); }
 @media (max-width: 899px) {
   .wwd-hero-inner { grid-template-columns: 1fr; }

@@ -6,8 +6,8 @@
 //
 // Rules (docs/architecture/ux-refinement-2026-09.md §0, §9):
 //   - Only real Nayokan photography may be used as an authentic asset.
-//     Conceptual generated images belong in `illustrative` and are visibly
-//     labelled; they never identify a real person, partner or Nayokan facility.
+//     Conceptual generated images belong in `illustrative` and are identified
+//     in alt text. They never identify a real person, partner or Nayokan facility.
 //   - The only approved photographs today are the nine taken at the launch of
 //     the VTI computer lab in Yaoundé (public/assets/photos/nayokan-0*.jpg).
 
