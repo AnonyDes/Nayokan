@@ -25,6 +25,10 @@ const SRC = "art-source/people";
 const OUT = "public/assets/photos/people";
 const WIDTHS = [320, 640, 960];
 const QUALITY = 82;
+const QUALITY_OVERRIDES = {
+  // Keep the largest portrait under the 100 KiB asset budget.
+  "ryan-tebo": { 960: 72 },
+};
 const CANVAS = { width: 1200, height: 1600 }; // 3:4
 
 const FOCUS = {
@@ -45,7 +49,8 @@ for (const file of (await readdir(SRC)).filter((f) => /\.(jpe?g|png|webp)$/i.tes
   const variants = [];
   for (const w of WIDTHS) {
     const out = path.join(OUT, `${name}-${w}.webp`);
-    const info = await cropped.clone().resize({ width: w }).webp({ quality: QUALITY, effort: 5 }).toFile(out);
+    const quality = QUALITY_OVERRIDES[name]?.[w] ?? QUALITY;
+    const info = await cropped.clone().resize({ width: w }).webp({ quality, effort: 5 }).toFile(out);
     variants.push({ w, bytes: info.size });
   }
   manifest[name] = { width: CANVAS.width, height: CANVAS.height, variants };

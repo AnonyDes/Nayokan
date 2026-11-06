@@ -35,6 +35,24 @@
       }
     ]
   },
+  "ryan-tebo": {
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "w": 320,
+        "bytes": 20042
+      },
+      {
+        "w": 640,
+        "bytes": 73542
+      },
+      {
+        "w": 960,
+        "bytes": 100294
+      }
+    ]
+  },
   "yogo-melo": {
     "width": 1200,
     "height": 1600,

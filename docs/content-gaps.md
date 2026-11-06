@@ -4,7 +4,7 @@ Nothing below may be presented publicly as fact until confirmed. Until then the 
 
 ## Institution
 - Current registration number and date (the association was declared in Cameroon in April 2015 per the Architecture Spec; the designs' "EST. 2019" was removed and the About timeline years 2019/2022/2024/2025 are unconfirmed).
-- Current office holders and leadership bios/photos (Prof. Uphie Chinje; Dr Ryan Tebo's formal role is unconfirmed).
+- Current office holders and leadership bios/photos (including Prof. Uphie Chinje).
 - Postal address, phone, routing emails (`admissions@`, `partners@`, `ir@`, `media@`, `innovators@`, `hospitality@nayokan.org` are placeholders).
 - Office hours (design shows Mon–Fri 08:00–18:00 WAT, unconfirmed).
 - Privacy policy, terms, cookie notice, data-retention policy.

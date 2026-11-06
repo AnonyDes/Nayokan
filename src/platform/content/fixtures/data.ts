@@ -1209,6 +1209,16 @@ export const people: Person[] = [
     provenance: confirmed(),
   },
   {
+    id: "ppl-board-ryan-tebo",
+    name: "Dr. Ryan Tebo",
+    initials: "RT",
+    position: "Board Member",
+    division: "Governance",
+    bio: "Dr. Ryan Tebo is a technology professional, researcher, and leader with expertise in enterprise data infrastructure, artificial intelligence, and IT consulting. He holds a Doctor of Business Administration (DBA) and an MBA. His research focuses on how organizations use AI to make decisions. He is passionate about using technology, data, and leadership to help businesses innovate and improve how they work.",
+    photo: getPersonPhoto("ryan-tebo", "Portrait of Dr. Ryan Tebo."),
+    provenance: confirmed(),
+  },
+  {
     id: "ppl-founder",
     name: "Founder / President",
     initials: "FN",
