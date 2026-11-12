@@ -8,7 +8,7 @@ import { getPersonPhoto, getPersonSrcSet } from "./people";
 // badge, no generic placeholder fallback.
 
 describe("confirmed people photos", () => {
-  test.each(["kanjo", "lenora-ebule", "ryan-tebo", "yogo-melo"])("%s has a photo on disk in every generated width", (slug) => {
+  test.each(["kanjo", "lenora-ebule", "ryan-tebo", "yogo-melo", "uphie-chinje"])("%s has a photo on disk in every generated width", (slug) => {
     const img = getPersonPhoto(slug, "alt text");
     expect(img).toBeDefined();
     expect(existsSync(path.join(process.cwd(), "public", img!.src))).toBe(true);
