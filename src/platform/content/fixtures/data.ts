@@ -1179,6 +1179,16 @@ export const partners: Partner[] = [
 
 export const people: Person[] = [
   {
+    id: "ppl-board-uphie-chinje",
+    name: "Prof. Uphie Chinje",
+    initials: "UC",
+    position: "Board Member / Advisor",
+    division: "Governance",
+    bio: "Materials Engineer educated at Imperial College of Science and Technology, University of London, UK. Former Director of the Local Materials Promotion Authority (MIPROMALO) and Rector of the University of Ngaoundéré. She advocates for an education system that develops practical skills to support Cameroon's industrialisation and development by Cameroonians.",
+    photo: getPersonPhoto("uphie-chinje", "Portrait of Prof. Uphie Chinje."),
+    provenance: confirmed(),
+  },
+  {
     id: "ppl-cofounder-yogo-melo",
     name: "Yogo Melo",
     initials: "YM",
