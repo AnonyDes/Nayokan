@@ -19,7 +19,10 @@ export function getPersonPhoto(slug: string, alt: string): MediaRef | undefined 
   const entry = MANIFEST[slug];
   if (!entry) return undefined;
   const url = (w: number) => `${PREFIX}${slug}-${w}.webp`;
-  const fallback = entry.variants.find((v) => v.w >= 640) ?? entry.variants[entry.variants.length - 1];
+  // Use the largest available rendition so portraits stay sharp on high-density screens.
+  const fallback = entry.variants.reduce((largest, variant) =>
+    variant.w > largest.w ? variant : largest,
+  );
   return {
     id: `person-${slug}`,
     src: url(fallback.w),
